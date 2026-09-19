@@ -1,0 +1,94 @@
+.previewPage {
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 3rem);
+}
+
+.previewHeader {
+  max-width: 48rem;
+  margin-bottom: 1.25rem;
+}
+
+.previewHeader p:last-child {
+  color: var(--text-muted);
+}
+
+.previewBadge {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  color: #ffffff;
+  background: var(--danger);
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: center;
+  min-height: 34rem;
+  padding: clamp(1.25rem, 5vw, 4rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.copy h1 {
+  max-width: 13ch;
+  margin-bottom: 1rem;
+  font-size: clamp(2.4rem, 7vw, 5rem);
+}
+
+.copy > p:not(.kicker) {
+  max-width: 44rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.kicker {
+  color: var(--accent-strong);
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.artPlaceholder {
+  display: grid;
+  min-height: 24rem;
+  place-items: center;
+  align-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  border: 1px dashed var(--accent);
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, #eadbff, #d8f1e2);
+  text-align: center;
+}
+
+.artPlaceholder span {
+  font-size: 4rem;
+}
+
+.counter {
+  margin-top: 1rem;
+}
+
+.counter p {
+  margin-bottom: 0;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .artPlaceholder {
+    min-height: 17rem;
+  }
+}

@@ -1,0 +1,105 @@
+"use client";
+
+import { useState } from "react";
+import { careFixtures, petFixtures } from "@/fixtures/ui-fixtures";
+import { Card } from "@/components/ui/Card";
+import { CarePanel } from "./CarePanel";
+import { PetScene } from "./PetScene";
+import styles from "./pet.module.css";
+
+type PetFixtureKey = keyof typeof petFixtures;
+type CareFixtureKey = keyof typeof careFixtures;
+
+export function PetPreview() {
+  const [petKey, setPetKey] = useState<PetFixtureKey>("hatchling");
+  const [careKey, setCareKey] = useState<CareFixtureKey>("ready");
+  const [celebrate, setCelebrate] = useState(false);
+  const [careCount, setCareCount] = useState(0);
+  const [connectCount, setConnectCount] = useState(0);
+  const [switchCount, setSwitchCount] = useState(0);
+
+  return (
+    <main className={styles.previewPage}>
+      <header className={styles.previewHeader}>
+        <p className={styles.previewBadge}>UI preview — fictional data</p>
+        <h1>Pet component preview</h1>
+        <p>
+          Select fixture inputs explicitly. Counters only confirm that a
+          callback fired; they do not represent transactions or progress.
+        </p>
+      </header>
+
+      <Card className={styles.controls} aria-label="Pet preview controls">
+        <label>
+          Pet stage fixture
+          <select
+            value={petKey}
+            onChange={(event) =>
+              setPetKey(event.target.value as PetFixtureKey)
+            }
+          >
+            {Object.keys(petFixtures).map((key) => (
+              <option key={key} value={key}>
+                {key}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Care-action fixture
+          <select
+            value={careKey}
+            onChange={(event) =>
+              setCareKey(event.target.value as CareFixtureKey)
+            }
+          >
+            {Object.keys(careFixtures).map((key) => (
+              <option key={key} value={key}>
+                {key}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className={styles.checkbox}>
+          <input
+            type="checkbox"
+            checked={celebrate}
+            onChange={(event) => setCelebrate(event.target.checked)}
+          />
+          Show confirmed-success celebration
+        </label>
+      </Card>
+
+      <div className={styles.previewGrid}>
+        <PetScene pet={petFixtures[petKey]} celebrate={celebrate} />
+        <CarePanel
+          pet={petFixtures[petKey]}
+          action={careFixtures[careKey]}
+          onCare={() => setCareCount((count) => count + 1)}
+          onConnect={() => setConnectCount((count) => count + 1)}
+          onSwitchNetwork={() => setSwitchCount((count) => count + 1)}
+        />
+      </div>
+
+      <Card className={styles.counters} aria-label="Callback counters">
+        <h2>Local callback counters</h2>
+        <dl>
+          <div>
+            <dt>onCare</dt>
+            <dd>{careCount}</dd>
+          </div>
+          <div>
+            <dt>onConnect</dt>
+            <dd>{connectCount}</dd>
+          </div>
+          <div>
+            <dt>onSwitchNetwork</dt>
+            <dd>{switchCount}</dd>
+          </div>
+        </dl>
+      </Card>
+    </main>
+  );
+}

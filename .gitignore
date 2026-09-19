@@ -1,0 +1,25 @@
+# Dependencies and build products
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+# Environment files and signing material; commit only placeholder examples
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.keystore
+keystore/
+keystores/
+# Contract build products and dependencies (Deston chooses tooling first)
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+# Editor/OS files and logs
+.DS_Store
+Thumbs.db
+*.log
