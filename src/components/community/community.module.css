@@ -1,0 +1,83 @@
+.previewPage {
+  width: min(100%, 52rem);
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 3rem);
+}
+
+.previewHeader {
+  margin-bottom: 1.25rem;
+}
+
+.previewHeader p:last-child {
+  color: var(--text-muted);
+}
+
+.previewBadge {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  color: #ffffff;
+  background: var(--danger);
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.controls {
+  margin-bottom: 1rem;
+}
+
+.controls label {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.controls select {
+  min-height: 2.75rem;
+  padding: 0.5rem 2rem 0.5rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.kicker {
+  color: var(--accent-strong);
+  font-weight: 850;
+}
+
+.total {
+  font-size: 1.2rem;
+}
+
+.progressTrack {
+  height: 0.9rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-muted);
+}
+
+.progressFill {
+  display: block;
+  width: var(--community-progress);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+
+.target {
+  margin: 0.65rem 0 0;
+  color: var(--text-muted);
+}
+
+.unknown {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.error {
+  color: var(--danger);
+  font-weight: 800;
+}
