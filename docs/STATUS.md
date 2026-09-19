@@ -6,7 +6,7 @@ Deston updates this file after reviewed merges.
 | Item | Status |
 |---|---|
 | Team roles and prompt packs | Prepared |
-| Hosted GitHub repository | Public repository created at `Chi944/memepet`; no code pushed |
+| Hosted GitHub repository | Public `Chi944/memepet`; L0 review branch pushed |
 | Repository invitations | Not sent |
 | Deston / Kym / Larm ChatGPT conversations | Not created |
 | Application scaffold | Implemented locally on `chore/l0-foundation`; review pending |
@@ -17,15 +17,15 @@ Deston updates this file after reviewed merges.
 
 ## Next task per person
 
-Deston: review the uncommitted L0 baseline before authorizing commit or push.
+Deston: review `chore/l0-foundation` and merge it when approved.
 Kym: create own project chat; prepare pet-stage asset requirements; A1 after reviewed L0.
 Larm: create own project chat; prepare landing copy and QA checklist; B1 after reviewed L0.
 
 ## Latest merged baseline
 
-- Branch / commit: `chore/l0-foundation`; baseline commit pending review
+- Branch / commit: `chore/l0-foundation` / `1d3a050`
 - App start instructions: `npm ci`, then `npm run dev`
-- Known blockers: uncommitted/unpushed baseline awaiting lead review
+- Known blockers: none for local L0 review; merge is pending Deston's decision
 
 ## Handoff template
 

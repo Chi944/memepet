@@ -12,16 +12,16 @@ the agreed component shells. It does **not** implement adoption, live care,
 persistence, wallet integration, contracts, deployment, or production pet artwork.
 
 The public hosted repository exists at
-[Chi944/memepet](https://github.com/Chi944/memepet). The current L0 work remains
-uncommitted and unpushed for lead review.
+[Chi944/memepet](https://github.com/Chi944/memepet). The verified L0 baseline is
+published on `chore/l0-foundation` for lead review; it has not been merged.
 
 ## First steps
 
-1. Deston reviews and publishes the L0 baseline.
+1. Deston reviews the L0 feature branch and merges it when approved.
 2. Invite Kym and Larm to the repository and to the existing **OKX Hackathon**
    ChatGPT project. Each invitation is separate.
 3. Each person creates their own project chat using [Chat setup](docs/CHAT_SETUP.md).
-4. Only after Deston reviews and publishes L0, Kym starts **A1**, and Larm starts
+4. Only after Deston reviews and merges L0, Kym starts **A1**, and Larm starts
    **B1**.
 
 ## Team boundaries
