@@ -9,9 +9,9 @@
 - Package manager: npm 11.19.x (`packageManager` pins 11.19.0).
 - Environment variables: none required for L0 or its previews.
 - Current branch: `chore/l0-foundation`.
-- Baseline commit: pending Deston's review; no commit has been created.
-- Hosted repository: public `https://github.com/Chi944/memepet`; currently
-  empty because commit and push were not authorized.
+- Baseline commit: `1d3a050` (`chore: establish L0 foundation`).
+- Hosted repository: public `https://github.com/Chi944/memepet`.
+- Published review branch: `chore/l0-foundation`; not merged.
 
 ## Install and run
 
