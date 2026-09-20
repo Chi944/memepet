@@ -265,6 +265,13 @@ forge create --root contracts src/PetRegistry.sol:PetRegistry \
 cp .env.example .env.local   # set the deployed address, then restart npm run dev
 ```
 
+### Public hosting (Vercel)
+
+The app can be hosted with `DEPLOYMENT.status` still `"not-deployed"` so the
+submission has a live link before the contract address exists. See
+[`docs/deploy/VERCEL.md`](docs/deploy/VERCEL.md). X Layer testnet contract
+steps (simulate / human broadcast / record): [`docs/deploy/XLAYER_TESTNET.md`](docs/deploy/XLAYER_TESTNET.md).
+
 ---
 
 ## ✅ Running the checks

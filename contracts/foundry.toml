@@ -7,3 +7,22 @@ solc = "0.8.24"
 optimizer = true
 optimizer_runs = 200
 fs_permissions = [{ access = "read", path = "./" }]
+
+# Official X Layer testnet RPC (OKX network-information docs, retrieved 20 Sep 2026):
+#   https://testrpc.xlayer.tech/terigon
+# Set XLAYER_TESTNET_RPC_URL before forge commands that use --rpc-url xlayer_testnet.
+# Alternate public RPC from the same docs: https://xlayertestrpc.okx.com/terigon
+[rpc_endpoints]
+xlayer_testnet = "${XLAYER_TESTNET_RPC_URL}"
+
+# Contract verification is OPTIONAL and skipped by default.
+# Do not add an [etherscan] table here: an unset OKLINK_API_KEY would make
+# Foundry config brittle, and this project deliberately avoids requiring an
+# OKX/OKLink account for day-to-day forge script / test / simulate work.
+#
+# If you later choose to verify on OKLink (needs your own API key), run
+# forge verify-contract with CLI flags only — never commit the key:
+#   --verifier oklink
+#   --verifier-url https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET
+#   --verifier-api-key <your-key-not-committed>
+# See docs/deploy/XLAYER_TESTNET.md.
