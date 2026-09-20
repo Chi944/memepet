@@ -3,17 +3,29 @@ import { describe, expect, it } from "vitest";
 import { petFixtures } from "@/fixtures/ui-fixtures";
 import { PetScene } from "./PetScene";
 
+const hatchlingWithoutArt = {
+  ...petFixtures.hatchling,
+  artSrc: null,
+};
+
 describe("PetScene", () => {
-  it("renders supplied hatchling details and an accessible art placeholder", () => {
-    render(<PetScene pet={petFixtures.hatchling} celebrate={false} />);
+  it("renders an accessible placeholder when art is missing", () => {
+    render(<PetScene pet={hatchlingWithoutArt} celebrate={false} />);
 
     expect(screen.getByRole("heading", { name: "Mochi" })).toBeInTheDocument();
     expect(screen.getByText("Stage: Hatchling")).toBeInTheDocument();
-    expect(screen.getByText("10 growth points")).toBeInTheDocument();
     expect(
       screen.getByRole("img", { name: "Mochi artwork placeholder" }),
     ).toBeInTheDocument();
-    expect(screen.queryByText("broken")).not.toBeInTheDocument();
+  });
+
+  it("renders supplied hatchling art and details", () => {
+    render(<PetScene pet={petFixtures.hatchling} celebrate={false} />);
+
+    expect(
+      screen.getByRole("img", { name: "Mochi, the hatchling pet" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("10 growth points")).toBeInTheDocument();
   });
 
   it("shows a final-stage message instead of a progress ratio", () => {

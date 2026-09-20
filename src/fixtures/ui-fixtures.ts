@@ -1,6 +1,4 @@
-/** FICTIONAL UI DATA. Preview/test imports only. Never a live-read fallback.
- * No artwork files are bundled. Null artSrc intentionally triggers a placeholder.
- */
+/** FICTIONAL UI DATA. Preview/test imports only. Never a live-read fallback. */
 import type {
   CareActionState,
   CommunityViewModel,
@@ -14,7 +12,7 @@ export const petFixtures = {
     stage: "hatchling",
     growthPoints: 10,
     nextStageAt: 20,
-    artSrc: null,
+    artSrc: "/pets/hatchling.png",
     dataMode: "fixture",
   },
   buddy: {
@@ -23,7 +21,7 @@ export const petFixtures = {
     stage: "buddy",
     growthPoints: 20,
     nextStageAt: 50,
-    artSrc: null,
+    artSrc: "/pets/buddy.png",
     dataMode: "fixture",
   },
   guardian: {
@@ -32,7 +30,7 @@ export const petFixtures = {
     stage: "guardian",
     growthPoints: 50,
     nextStageAt: null,
-    artSrc: null,
+    artSrc: "/pets/guardian.png",
     dataMode: "fixture",
   },
 } as const satisfies Record<string, PetViewModel>;
