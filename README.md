@@ -5,20 +5,9 @@
 A three-person hackathon project: the lead owns integration, Teammate A owns pet
 presentation, and Teammate B owns the landing/community UI, QA, and demonstration.
 
-## Status — read this first
+## How to run
 
-The shared app runs locally. Developer previews use fictional data. Live adoption,
-wallet connection, confirmed care, and production artwork are **not** implemented.
-
-Stable code lives on `main` (L0 baseline). Lead work continues on feature branches
-such as `feat/l1-pet-registry`. Do not treat a feature branch as the default
-teammate starting point until the lead merges it.
-
-Hosted repository: [Chi944/memepet](https://github.com/Chi944/memepet).
-
-See [STATUS](docs/STATUS.md) for what is built and who should do what next.
-
-## Start here
+Need Node 24.19.x and npm 11.19.x.
 
 ```bash
 git clone https://github.com/Chi944/memepet.git
@@ -28,25 +17,37 @@ npm ci
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open `http://localhost:3000`. Stop the server with `Ctrl+C`.
 
-| Role | Open this preview | First task | Branch |
-|---|---|---|---|
-| Teammate A | `/dev/pet` | Polish `PetScene` / generate stage art | `feat/a1-pet-scene` |
-| Teammate B | `/dev/landing` | Polish `LandingHero` | `feat/b1-landing-hero` |
-| Lead | contracts and shared app | L1 registry, then L2 integration | `feat/l1-pet-registry` |
+| Page | What it is |
+|---|---|
+| `http://localhost:3000` | Landing + community panel. Community totals stay unknown until a live contract exists. |
+| `http://localhost:3000/pet` | Honest pet home. Live adopt/care is not connected. |
+| `http://localhost:3000/dev/pet` | Fictional pet UI. No wallet needed. |
+| `http://localhost:3000/dev/landing` | Fictional landing UI. |
+| `http://localhost:3000/dev/community` | Fictional community states. |
 
-Artwork prompts: [pet-assets](docs/pet-assets.md). Setup: [DEV_SETUP](docs/DEV_SETUP.md).
-Ownership: [OWNERSHIP](docs/OWNERSHIP.md).
+Checks:
+
+```bash
+npm run typecheck
+npm run lint
+npm test
+npm run build
+```
+
+`/dev/*` returns HTTP 404 in `npm run start` production mode.
+
+## Status
+
+Mochi stage art, pet/landing/community presentation, and a local `PetRegistry`
+are in the repo. Wallet connection, a deployed contract, and live confirmed care
+are **not** implemented. See [STATUS](docs/STATUS.md).
+
+Hosted repository: [Chi944/memepet](https://github.com/Chi944/memepet).
 
 ## Product scope
 
 One community, one pet, three visual stages, adoption, daily care, confirmed persistent
 progress, and a shared community counter. No new token, trading, deposits, token
 approvals, NFT marketplace, or AI chatbot. See [the brief](docs/PROJECT_BRIEF.md).
-
-## Security and release
-
-Never commit signing credentials, seed phrases, private keys, or secret environment files.
-No deployment is authorized by this starter. No software license or third-party artwork
-rights are asserted here.
