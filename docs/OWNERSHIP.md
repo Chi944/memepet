@@ -14,8 +14,15 @@ Task-level allowlists can be narrower than this table. Ownership is a coordinati
 ## Stable component exports
 
 - A: `PetScene`, `CarePanel`, and `PetPreview` in `src/components/pet/`.
-- B: `LandingHero`, `LandingPreview` in `src/components/landing/`; `CommunityPanel`, `CommunityPreview` in `src/components/community/`.
-- Lead: working component shells and routes before A/B start. A/B fill in their shells without changing exported prop types.
+- B: `LandingHero`, `LandingPreview`, `HowItWorks` in `src/components/landing/`; `CommunityPanel`, `CommunityPreview` in `src/components/community/`.
+- Lead: working component shells and routes before A/B start, plus shared UI
+  (`Button`, `Card`, `Badge`, `DataModeBadge`, `AppShell`) in
+  `src/components/ui/`. A/B fill in their shells without changing exported
+  prop types.
+
+`HowItWorks` was added by the lead in B's folder while B had not started. It
+takes a single `connected: boolean` prop and is rendered by the lead-owned
+home route. B owns it from now on.
 
 Use `src/types/view-models.ts` for component inputs. The lead supplies named fixtures in `src/fixtures/ui-fixtures.ts`. Teammates read these files but do not change them without approval. Components can import other approved components for composition; they cannot edit another owner's files.
 
