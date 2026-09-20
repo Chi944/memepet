@@ -55,6 +55,10 @@ contract PetRegistry {
             revert NoPet();
         }
 
+        // Casting to uint64 is safe: block.timestamp / 86400 is the UTC day
+        // index, about 21,050 today. uint64 holds ~1.8e19, so truncation is
+        // unreachable for any timestamp this chain can produce.
+        // forge-lint: disable-next-line(unsafe-typecast)
         uint64 utcDay = uint64(block.timestamp / SECONDS_PER_UTC_DAY);
 
         // Reject only a second care within the same UTC day. careCount is the
