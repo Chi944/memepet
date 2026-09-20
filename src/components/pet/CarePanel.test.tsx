@@ -69,4 +69,44 @@ describe("CarePanel", () => {
     fireEvent.click(screen.getByRole("button", { name: "Pending confirmation" }));
     expect(onCare).not.toHaveBeenCalled();
   });
+
+  it("shows the supplied error and retries through onCare", () => {
+    const onCare = vi.fn();
+
+    render(
+      <CarePanel
+        pet={petFixtures.hatchling}
+        action={careFixtures.rejected}
+        onCare={onCare}
+        onConnect={() => undefined}
+        onSwitchNetwork={() => undefined}
+      />,
+    );
+
+    expect(
+      screen.getByText(
+        "You declined the wallet request. No progress was awarded.",
+      ),
+    ).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Try care again" }));
+    expect(onCare).toHaveBeenCalledTimes(1);
+  });
+
+  it("shows final-stage progress text from parent props", () => {
+    render(
+      <CarePanel
+        pet={petFixtures.guardian}
+        action={careFixtures.ready}
+        onCare={() => undefined}
+        onConnect={() => undefined}
+        onSwitchNetwork={() => undefined}
+      />,
+    );
+
+    expect(
+      screen.getByText(
+        "Final stage. Displayed growth is 50 points from the parent.",
+      ),
+    ).toBeInTheDocument();
+  });
 });

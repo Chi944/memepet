@@ -73,6 +73,14 @@ h3 {
   padding: clamp(1rem, 4vw, 3rem);
 }
 
+.home-screen {
+  display: grid;
+  gap: 1.25rem;
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 3rem);
+}
+
 .home-card {
   width: min(100%, 46rem);
 }
