@@ -120,7 +120,7 @@ The `/dev` layout calls `notFound()` in production before returning preview
 children. Hiding links is not the gate. The production home page contains no
 preview links (`grep` count 0) and still explains why care totals are unknown.
 
-`npm run test:contracts` — **passed: 9 tests, 0 failed** (forge 1.8.3).
+`npm run test:contracts` — **passed: 13 tests, 0 failed** (forge 1.8.3).
 
 Foundry was already installed at `%USERPROFILE%\.foundry\bin` but that
 directory was not on PATH, so `forge` appeared to be missing. Adding it to the
@@ -138,7 +138,7 @@ Automated:
 - `npm run lint` — passed.
 - `npm test` — passed: 7 files, 29 tests (includes map-pet + care-action-machine).
 - `npm run build` — passed.
-- `npm run test:contracts` — passed: 9/9.
+- `npm run test:contracts` — passed: 13/13 (after merging care-guard fixes).
 
 Anvil (existing node on 8545, forge 1.8.3):
 
