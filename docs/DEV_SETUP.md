@@ -101,9 +101,15 @@ The `/dev` layout calls `notFound()` in production before returning preview
 children. Hiding links is not the gate. The production home page contains no
 preview links (`grep` count 0) and still explains why care totals are unknown.
 
-`npm run test:contracts` — **not run.** Foundry (`forge`) is not installed on
-the machine used for this pass, so the Solidity tests were neither run nor
-verified here.
+`npm run test:contracts` — **passed: 9 tests, 0 failed** (forge 1.8.3).
+
+Foundry was already installed at `%USERPROFILE%\.foundry\bin` but that
+directory was not on PATH, so `forge` appeared to be missing. Adding it to the
+persistent user PATH fixed it; no reinstall was needed. If `forge` is not found
+in a new shell, check PATH before reinstalling.
+
+`anvil` was smoke-tested on port 8545 and responded with chain id 31337. It is
+available for the local-node work in L2 slice 1.
 
 Browser checks were run with Playwright at 390px and 1280px, in light and
 dark colour schemes:
