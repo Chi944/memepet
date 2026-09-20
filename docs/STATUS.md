@@ -39,6 +39,40 @@ critical path; everything else is polish.**
 | Automated checks | typecheck, lint, 20 tests, build — all passing |
 | Contract tests | Not run on the lead machine (Foundry not installed) |
 
+## Team access — blocker
+
+Checked against the GitHub API on 20 September 2026:
+
+| Person | Repository access | Contributions so far |
+|---|---|---|
+| Lead (`Chi944`) | admin | PRs #1, #2, #3 |
+| Teammate B (`larmyh`) | write | none |
+| Teammate A | **none, and no pending invitation** | none |
+
+**Teammate A cannot push a branch or open a pull request.** Invite them via
+Settings → Collaborators → Add people before assigning A1. Every pull request
+in this repository so far was authored by the lead; neither teammate has
+contributed a commit yet, so no teammate has confirmed they can run the
+baseline.
+
+Stale branch `chore/l0-foundation` is still on origin after L0 merged; delete
+it once nothing references it.
+
+## Delivery gates
+
+From the agreed plan. A pass is not done until its required result is true.
+
+| Pass | Lead | Teammate A | Teammate B | Required result |
+|---|---|---|---|---|
+| Foundation | Shared app, interfaces, previews, checks | Art direction and first assets | Product copy and test scenarios | Everyone can run the same app |
+| First working slice | Contract tests and adoption integration | Pet scene | Landing hero | Real adoption survives refresh |
+| Core loop | Care transaction and live-state mapping | Care states and evolution presentation | Community panel | Confirmed care updates personal and shared progress |
+| Testing | Integration failures and edge cases | Assigned visual fixes | Independent testing and bug reports | No unresolved blocker in the core journey |
+| Release | Final configuration and deployment | Release-build visual checks | Accurate demo and submission package | Clean-browser demonstration works |
+
+Current position: **Foundation is built but not confirmed** — no teammate has
+run it. The first working slice has not started, because nothing is deployed.
+
 ## Built
 
 - Shared app shell, types, fixtures, previews
