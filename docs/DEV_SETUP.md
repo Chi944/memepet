@@ -7,9 +7,12 @@
 - Supported Node: 24.19.x (`.nvmrc` pins 24.19.0; package engines require
   Node 24.15 or newer within major 24).
 - Package manager: npm 11.19.x (`packageManager` pins 11.19.0).
-- Environment variables: none required for L0 or its previews.
-- Current branch: `main` for teammates. Lead UI work is on `feat/product-ui-surfaces`.
-- Baseline commit: merged L1 on `main`.
+- Environment variables: none required for L0/L1 or their previews. L2 slice 1
+  local Anvil verification uses the public `NEXT_PUBLIC_MEMEPET_*` keys listed
+  in `.env.example` (never private keys).
+- Current branch: `main` for teammates. Lead L2 wallet/adopt work ships from
+  `feat/l2-wallet-adopt`.
+- Baseline commit: merged L1 + product UI on `main`.
 - Hosted repository: `https://github.com/Chi944/memepet`.
 
 ## Install and run
@@ -66,6 +69,22 @@ Every preview displays **UI preview — fictional data** and uses only
 These previews require no wallet, RPC endpoint, API key, private key, backend,
 or external service.
 
+## Local Anvil (L2 slice 1)
+
+Committed `src/lib/deployment.ts` stays `not-deployed` until an authorized
+network address is recorded. For local verification only:
+
+1. Start Anvil: `anvil` (chain id 31337, RPC `http://127.0.0.1:8545`).
+2. Deploy: from `contracts/`,
+   `forge create src/PetRegistry.sol:PetRegistry --rpc-url http://127.0.0.1:8545 --private-key <anvil-account-key> --broadcast`.
+3. Copy `.env.example` to `.env.local`, set `NEXT_PUBLIC_MEMEPET_*` to the Anvil
+   values and the printed registry address, then restart `npm run dev`
+   (rebuild if using `npm run build` / `npm run start` — public env is baked
+   into the client bundle at build time).
+4. Open `/pet`, connect an injected wallet on chain 31337, adopt, refresh.
+
+Do not commit `.env.local` or any private key.
+
 ## Actual verification
 
 ### L0 baseline (20 September 2026, Node 24.19.0, npm 11.19.0)
@@ -110,6 +129,27 @@ in a new shell, check PATH before reinstalling.
 
 `anvil` was smoke-tested on port 8545 and responded with chain id 31337. It is
 available for the local-node work in L2 slice 1.
+
+### L2 slice 1 — wallet + adopt (20 September 2026)
+
+Automated:
+
+- `npm run typecheck` — passed.
+- `npm run lint` — passed.
+- `npm test` — passed: 7 files, 29 tests (includes map-pet + care-action-machine).
+- `npm run build` — passed.
+- `npm run test:contracts` — passed: 9/9.
+
+Anvil (existing node on 8545, forge 1.8.3):
+
+- Deployed `PetRegistry` to `0x5FbDB2315678afecb367f032d93F642f64180aa3`
+  (local only; not committed into `deployment.ts`).
+- `petOf` before adopt: `exists=false`.
+- `adopt(1)` receipt status success.
+- `petOf` after adopt: `exists=true`, communityId=1, careCount=0.
+
+Browser wallet connect/adopt/refresh against MetaMask was not automated in this
+pass; use the Local Anvil steps above for that journey.
 
 Browser checks were run with Playwright at 390px and 1280px, in light and
 dark colour schemes:
