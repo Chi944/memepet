@@ -3,12 +3,17 @@ import type { Metadata } from "next";
 import { AppShell } from "@/components/ui/AppShell";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import { isRegistryConfigured } from "@/lib/deployment";
+import {
+  deploymentLabel,
+  getActiveDeployment,
+  isRegistryConfigured,
+} from "@/lib/deployment";
 import {
   BUDDY_AT,
   GROWTH_POINTS_PER_CARE,
   GUARDIAN_AT,
 } from "@/lib/pet-progress";
+import { PetLiveClient } from "./pet-live-client";
 
 export const metadata: Metadata = {
   title: "Pet home",
@@ -16,7 +21,16 @@ export const metadata: Metadata = {
 
 export default function PetHomePage() {
   const isDevelopment = process.env.NODE_ENV === "development";
-  const configured = isRegistryConfigured();
+  const deployment = getActiveDeployment();
+  const configured = isRegistryConfigured(deployment);
+
+  if (configured) {
+    return (
+      <AppShell>
+        <PetLiveClient />
+      </AppShell>
+    );
+  }
 
   return (
     <AppShell>
@@ -29,11 +43,10 @@ export default function PetHomePage() {
         <h1>No pet can be adopted here yet.</h1>
         <p className="lede">
           Adoption, daily care, and confirmed progress all read from a deployed
-          registry contract. {configured
-            ? "That contract is configured but wallet connection is not wired up in this build."
-            : "No registry is connected in this build."}{" "}
-          Rather than show a placeholder pet, this page shows nothing — a
-          fictional pet here would be indistinguishable from a real one.
+          registry contract. No registry is connected in this build (
+          {deploymentLabel(deployment)}). Rather than show a placeholder pet,
+          this page shows nothing — a fictional pet here would be
+          indistinguishable from a real one.
         </p>
 
         <div className="pet-gate-rules">
