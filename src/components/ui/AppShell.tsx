@@ -1,6 +1,10 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { DEPLOYMENT, deploymentLabel, isRegistryConfigured } from "@/lib/deployment";
+import {
+  deploymentLabel,
+  getActiveDeployment,
+  isRegistryConfigured,
+} from "@/lib/deployment";
 import { Badge } from "./Badge";
 
 type AppShellProps = {
@@ -11,7 +15,8 @@ type AppShellProps = {
 
 /** Page frame: wordmark, honest environment chip, content, footer. */
 export function AppShell({ children, actions }: AppShellProps) {
-  const configured = isRegistryConfigured();
+  const deployment = getActiveDeployment();
+  const configured = isRegistryConfigured(deployment);
 
   return (
     <div className="app-shell">
@@ -24,7 +29,7 @@ export function AppShell({ children, actions }: AppShellProps) {
         </Link>
         <div className="app-bar-meta">
           <Badge tone={configured ? "live" : "unknown"}>
-            {deploymentLabel()}
+            {deploymentLabel(deployment)}
           </Badge>
           {actions}
         </div>
@@ -38,9 +43,9 @@ export function AppShell({ children, actions }: AppShellProps) {
           transfers, and no rewards with financial value.
         </p>
         <p>
-          {DEPLOYMENT.status === "not-deployed"
+          {deployment.status === "not-deployed"
             ? "Contract not deployed in this build."
-            : `Registry on ${DEPLOYMENT.networkName}.`}
+            : `Registry on ${deployment.networkName}.`}
         </p>
       </footer>
     </div>

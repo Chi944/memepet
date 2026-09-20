@@ -31,14 +31,14 @@ critical path; everything else is polish.**
 | Application | Next.js app: landing, pet home, `/dev/*` previews |
 | Design system | Tokens, dark mode, provenance badges, app shell |
 | Pet artwork | Hatchling, Buddy, Guardian in `public/pets/` |
-| Pet registry contract | Written and unit-tested locally; **not deployed** |
-| Wallet / live care | **Not implemented** |
-| X Layer deployment | **None** |
+| Pet registry contract | Written and unit-tested; Anvil-verified locally; **not on X Layer** |
+| Wallet / adopt (L2 slice 1) | Implemented on `feat/l2-wallet-adopt` (env-gated) |
+| Live care + community read | **Not implemented** (slice 2) |
+| X Layer deployment | **None** — no address committed in `deployment.ts` |
 | Live product link | **None** |
 | Demo video | **None** |
-| Automated checks | typecheck, lint, 20 tests, build — all passing |
+| Automated checks | typecheck, lint, 29 tests, build — all passing |
 | Contract tests | Foundry 1.8.3 installed; 13/13 passing |
-
 ## Team access — blocker
 
 Checked against the GitHub API on 20 September 2026:
@@ -70,16 +70,19 @@ From the agreed plan. A pass is not done until its required result is true.
 | Testing | Integration failures and edge cases | Assigned visual fixes | Independent testing and bug reports | No unresolved blocker in the core journey |
 | Release | Final configuration and deployment | Release-build visual checks | Accurate demo and submission package | Clean-browser demonstration works |
 
-Current position: **Foundation is built but not confirmed** — no teammate has
-run it. The first working slice has not started, because nothing is deployed.
+Current position: **L2 slice 1 (wallet connect + adopt + re-read) is built.**
+Committed `DEPLOYMENT` remains `not-deployed`. Local Anvil verification uses
+`NEXT_PUBLIC_MEMEPET_*` only (see `.env.example`). No X Layer address yet.
 
 ## Built
 
 - Shared app shell, types, fixtures, previews
 - Landing hero, how-it-works steps, community panel with honest unknown states
 - Pet scene, stage trail and care-state panel
-- `/pet` route that refuses to show a fictional pet as live state
-- `src/lib/deployment.ts` — the single place a verified address will go
+- `/pet` gate when no registry; live client when env/config provides one
+- `src/lib/deployment.ts` — sole address source; env override for Anvil only
+- Wallet + PetRegistry hooks (viem / EIP-1193): connect, switch, adopt with
+  receipt + re-read before success; no care loop yet
 
 ## Next
 
@@ -89,15 +92,13 @@ See `docs/AUDIT_2026-09-20.md` for the full finding list.
 1. Get an authorized X Layer testnet deploy of `PetRegistry` and record the
    verified network name, address and explorer URL in `src/lib/deployment.ts`.
    Do not invent an address.
-2. L2 slice 1: wallet connect, adopt, read back the pet, survive refresh.
-3. L2 slice 2: care plus community reads, all the failure states, no growth
+2. L2 slice 2: care plus community reads, all the failure states, no growth
    before a confirmed receipt.
-4. Deploy the app somewhere public and put the URL in `NEXT_PUBLIC_SITE_URL`.
-5. The two contract findings (unchecked increments, dead sentinel guard) are
+3. Deploy the app somewhere public and put the URL in `NEXT_PUBLIC_SITE_URL`.
+4. The two contract findings (unchecked increments, dead sentinel guard) are
    fixed. `care()` costs about 633 more gas; re-read the diff before deploying,
    because the deployed bytecode changed.
-6. Foundry 1.8.3 is installed and `npm run test:contracts` passes 13/13.
-   `anvil` is available for the local-node work in L2 slice 1.
+5. Foundry 1.8.3 is installed and `npm run test:contracts` passes 13/13.
 
 **Teammate A** — pet experience, `src/components/pet/**`:
 1. Review `/dev/pet` at 390px and desktop against the new tokens. The lead has
