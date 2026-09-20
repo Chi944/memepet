@@ -1,5 +1,5 @@
 ## Owner and task
-Name: Deston / Kym / Larm
+Role: Lead / Teammate A / Teammate B
 Task:
 
 ## Delivered behavior
@@ -20,4 +20,4 @@ Attach a screenshot or recording for UI work. Remove secrets and personal data.
 - Changed files are inside my task boundary:
 - Shared changes or dependencies requested:
 - Known limitations / blockers:
-- Integration needed from Deston:
+- Integration needed from the lead:

@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
+    "test:contracts": "forge test --root contracts",
     "build": "next build",
     "start": "next start"
   },

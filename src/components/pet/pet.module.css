@@ -107,8 +107,14 @@
   font-size: 4rem;
 }
 
+.idle {
+  animation: idle-bob 3.6s ease-in-out infinite;
+}
+
 .celebrating {
-  animation: celebration-pulse 900ms ease-in-out infinite alternate;
+  animation:
+    idle-bob 3.6s ease-in-out infinite,
+    celebration-pulse 900ms ease-in-out infinite alternate;
 }
 
 .celebration {
@@ -220,6 +226,15 @@
   font-weight: 850;
 }
 
+@keyframes idle-bob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-6px);
+  }
+}
+
 @keyframes celebration-pulse {
   from {
     box-shadow: inset 0 0 0 0 rgb(112 71 168 / 0%);
@@ -240,6 +255,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .idle,
   .celebrating {
     animation: none;
   }

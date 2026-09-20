@@ -16,6 +16,6 @@ project proposals. Platform setup procedures are based on the following primary 
 - GitHub CLI — gh repo create:
   https://cli.github.com/manual/gh_repo_create
 
-GitHub login Chi944 was returned by the connected account tool. The role names Kym and
-Larm were supplied by Deston, not resolved to platform identities. No new hosted resources
-were created. Instructions are not a guarantee of the same UI on every plan or device.
+The hosted repository is `https://github.com/Chi944/memepet`. Role labels in this
+repository are Lead, Teammate A, and Teammate B; they are not GitHub usernames.
+Instructions are not a guarantee of the same UI on every plan or device.

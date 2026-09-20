@@ -1,4 +1,4 @@
-# Kym (Teammate A) — pet experience
+# Teammate A — pet experience
 
 ## Your job
 
