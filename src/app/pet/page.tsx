@@ -1,13 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { AppShell } from "@/components/ui/AppShell";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import {
-  deploymentLabel,
-  getActiveDeployment,
-  isRegistryConfigured,
-} from "@/lib/deployment";
+import { getActiveDeployment, isRegistryConfigured } from "@/lib/deployment";
 import {
   BUDDY_AT,
   GROWTH_POINTS_PER_CARE,
@@ -43,10 +40,9 @@ export default function PetHomePage() {
         <h1>No pet can be adopted here yet.</h1>
         <p className="lede">
           Adoption, daily care, and confirmed progress all read from a deployed
-          registry contract. No registry is connected in this build (
-          {deploymentLabel(deployment)}). Rather than show a placeholder pet,
-          this page shows nothing — a fictional pet here would be
-          indistinguishable from a real one.
+          registry contract, and none is connected in this build. Rather than
+          show a placeholder pet, this page shows nothing — a fictional pet
+          here would be indistinguishable from a real one.
         </p>
 
         <div className="pet-gate-rules">
@@ -66,6 +62,31 @@ export default function PetHomePage() {
               or failed transaction awards nothing.
             </li>
           </ul>
+        </div>
+
+        <div className="pet-gate-stages">
+          <p className="pet-gate-stages-label">What you will grow</p>
+          <ol className="pet-gate-stage-list">
+            <li>
+              <Image src="/pets/hatchling.png" alt="" width={160} height={160} sizes="96px" />
+              <strong>Hatchling</strong>
+              <span>0 points</span>
+            </li>
+            <li>
+              <Image src="/pets/buddy.png" alt="" width={160} height={160} sizes="96px" />
+              <strong>Buddy</strong>
+              <span>{BUDDY_AT} points</span>
+            </li>
+            <li>
+              <Image src="/pets/guardian.png" alt="" width={160} height={160} sizes="96px" />
+              <strong>Guardian</strong>
+              <span>{GUARDIAN_AT} points</span>
+            </li>
+          </ol>
+          <p className="pet-gate-stages-note">
+            Illustration of the three stages. This is not a pet and carries no
+            live state.
+          </p>
         </div>
 
         <div className="pet-gate-actions">

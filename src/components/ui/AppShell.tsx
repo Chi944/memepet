@@ -20,6 +20,9 @@ export function AppShell({ children, actions }: AppShellProps) {
 
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <header className="app-bar">
         <Link className="wordmark" href="/">
           <span className="wordmark-glyph" aria-hidden="true">
@@ -35,7 +38,7 @@ export function AppShell({ children, actions }: AppShellProps) {
         </div>
       </header>
 
-      <main className="app-main">{children}</main>
+      <main className="app-main" id="main" tabIndex={-1}>{children}</main>
 
       <footer className="app-footer">
         <p>
