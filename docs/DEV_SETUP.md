@@ -8,10 +8,9 @@
   Node 24.15 or newer within major 24).
 - Package manager: npm 11.19.x (`packageManager` pins 11.19.0).
 - Environment variables: none required for L0 or its previews.
-- Current branch: `feat/l1-pet-registry` for lead work. Teammates should start from `main`.
-- Baseline commit: L0 on `main` after it is published from `chore/l0-foundation`.
-- Hosted repository: public `https://github.com/Chi944/memepet`.
-- Published review branch: `chore/l0-foundation`; not merged.
+- Current branch: `main` for teammates. Lead UI work is on `feat/product-ui-surfaces`.
+- Baseline commit: merged L1 on `main`.
+- Hosted repository: `https://github.com/Chi944/memepet`.
 
 ## Install and run
 

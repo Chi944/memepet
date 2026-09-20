@@ -17,5 +17,11 @@ describe("LandingHero", () => {
     fireEvent.click(screen.getByRole("button", { name: "Meet your pet" }));
 
     expect(onGetStarted).toHaveBeenCalledTimes(1);
+    expect(
+      screen.getByRole("img", { name: "Mochi, the MemePet hatchling mascot" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Adopt a meme-community mascot/i),
+    ).toBeInTheDocument();
   });
 });
