@@ -37,7 +37,7 @@ critical path; everything else is polish.**
 | Live product link | **None** |
 | Demo video | **None** |
 | Automated checks | typecheck, lint, 20 tests, build — all passing |
-| Contract tests | Foundry 1.8.3 installed; 9/9 passing |
+| Contract tests | Foundry 1.8.3 installed; 13/13 passing |
 
 ## Team access — blocker
 
@@ -93,9 +93,10 @@ See `docs/AUDIT_2026-09-20.md` for the full finding list.
 3. L2 slice 2: care plus community reads, all the failure states, no growth
    before a confirmed receipt.
 4. Deploy the app somewhere public and put the URL in `NEXT_PUBLIC_SITE_URL`.
-5. Decide the two contract findings (unchecked increments, dead sentinel
-   guard) before the deploy, because they are cheaper to fix now than after.
-6. Foundry 1.8.3 is installed and `npm run test:contracts` passes 9/9.
+5. The two contract findings (unchecked increments, dead sentinel guard) are
+   fixed. `care()` costs about 633 more gas; re-read the diff before deploying,
+   because the deployed bytecode changed.
+6. Foundry 1.8.3 is installed and `npm run test:contracts` passes 13/13.
    `anvil` is available for the local-node work in L2 slice 1.
 
 **Teammate A** — pet experience, `src/components/pet/**`:
