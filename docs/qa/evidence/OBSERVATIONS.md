@@ -85,14 +85,28 @@ Nothing here was broadcast to X Layer. Signature flows were **not** exercised.
 
 ## Bugs found (not silently fixed)
 
-### B1 — Mobile hero / how-it-works text clipping at 390px
+### B1 — Mobile text clipping at 390px — **WITHDRAWN, not a defect**
 
-- **Where:** Landing surfaces (`src/components/landing/**` — Teammate B).
-- **Repro:** Open `/` at width 390 (see `home-light-390.png`).
-- **Observed:** Hero headline and supporting copy visually truncate mid-word
-  inside the card (e.g. “Adopt the… Grow the…”). How-it-works titles also
-  clip.
-- **Action:** Reported only. No edit under teammate paths in this PR.
+- **Original report:** hero headline and how-it-works titles appeared to
+  truncate mid-word at 390px, per `home-light-390.png`.
+- **Re-checked against the live deployment** (https://memepet.vercel.app) at
+  390px and 320px, light and dark:
+  - `document.documentElement.scrollWidth === clientWidth` — no horizontal
+    overflow.
+  - A sweep of every element for `getBoundingClientRect().right > viewport`
+    and for clipped `scrollWidth` returned **zero** offenders.
+  - The headline wraps cleanly across three lines, each ending on a word
+    boundary, with the full text present.
+- **Cause of the false positive:** `home-light-390.png` is a 390px-wide crop
+  of a page still rendered at desktop width — the viewport resize had not
+  applied when the screenshot was taken. In that image the hero art is absent
+  from the top of the page and the card begins ~70px inset, both of which are
+  desktop-layout behaviour; at a true 390px the art stacks above the copy.
+  Every element is sliced at the same right edge, which is the signature of a
+  crop rather than of CSS clipping.
+- **Action:** no code change. When capturing mobile evidence, set the viewport
+  and confirm it applied before screenshotting; a full-page capture at the
+  wrong viewport looks exactly like a layout bug.
 
 No defects found in `src/lib`, `src/hooks`, or `src/app` that blocked the
 non-signature checks above; no lead-owned code fixes in this PR.
