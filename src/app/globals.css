@@ -507,3 +507,93 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- skip link ---------- */
+
+.skip-link {
+  position: absolute;
+  left: 50%;
+  z-index: 50;
+  padding: 0.6rem 1.1rem;
+  transform: translate(-50%, -150%);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  color: #ffffff;
+  background: var(--action);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 140ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+}
+
+.app-main:focus {
+  outline: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .skip-link {
+    color: #1a1029;
+  }
+}
+
+/* ---------- pet gate stage strip ---------- */
+
+.pet-gate-stages {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-warm);
+}
+
+.pet-gate-stages-label {
+  margin-bottom: 0.85rem;
+  color: var(--action);
+  font-family: var(--font-mono-stack);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pet-gate-stage-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0 0 0.85rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pet-gate-stage-list li {
+  display: grid;
+  justify-items: center;
+  gap: 0.2rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  text-align: center;
+}
+
+.pet-gate-stage-list img {
+  width: clamp(3.5rem, 12vw, 6rem);
+  height: auto;
+}
+
+.pet-gate-stage-list strong {
+  font-family: var(--font-display-stack);
+  font-size: 0.95rem;
+}
+
+.pet-gate-stage-list span {
+  color: var(--ink-faint);
+  font-family: var(--font-mono-stack);
+  font-size: 0.72rem;
+}
+
+.pet-gate-stages-note {
+  margin: 0;
+  color: var(--ink-faint);
+  font-size: var(--step--1);
+}
