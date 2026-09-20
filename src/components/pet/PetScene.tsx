@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { PetSceneProps, PetStage } from "@/types/view-models";
+import { DataModeBadge } from "@/components/ui/Badge";
 import styles from "./pet.module.css";
 
 const STAGE_LABEL: Record<PetStage, string> = {
@@ -8,6 +9,8 @@ const STAGE_LABEL: Record<PetStage, string> = {
   buddy: "Buddy",
   guardian: "Guardian",
 };
+
+const STAGE_ORDER: readonly PetStage[] = ["hatchling", "buddy", "guardian"];
 
 function getProgress(growthPoints: number, nextStageAt: number | null) {
   if (nextStageAt === null) {
@@ -31,31 +34,39 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
     typeof progress === "number"
       ? ({ "--pet-progress": `${progress}%` } as CSSProperties)
       : undefined;
+  const currentIndex = STAGE_ORDER.indexOf(pet.stage);
+  const nextStageLabel =
+    currentIndex >= 0 && currentIndex < STAGE_ORDER.length - 1
+      ? STAGE_LABEL[STAGE_ORDER[currentIndex + 1]]
+      : null;
 
   return (
     <section className={styles.scene} aria-labelledby="pet-name">
       <div
-        className={`${styles.artFrame} ${styles.idle} ${celebrate ? styles.celebrating : ""}`}
+        className={`${styles.artFrame} ${celebrate ? styles.celebrating : ""}`.trim()}
       >
-        {pet.artSrc ? (
-          <Image
-            className={styles.art}
-            src={pet.artSrc}
-            alt={`${pet.displayName}, the ${pet.stage} pet`}
-            width={480}
-            height={480}
-            priority
-          />
-        ) : (
-          <div
-            className={styles.placeholder}
-            role="img"
-            aria-label={`${pet.displayName} artwork placeholder`}
-          >
-            <span aria-hidden="true">✦</span>
-            <strong>Pet artwork coming soon</strong>
-          </div>
-        )}
+        <div className={`${styles.artInner} ${styles.idle}`}>
+          {pet.artSrc ? (
+            <Image
+              className={styles.art}
+              src={pet.artSrc}
+              alt={`${pet.displayName}, the ${pet.stage} pet`}
+              width={480}
+              height={480}
+              sizes="(max-width: 760px) 80vw, 28rem"
+              priority
+            />
+          ) : (
+            <div
+              className={styles.placeholder}
+              role="img"
+              aria-label={`${pet.displayName} artwork placeholder`}
+            >
+              <span aria-hidden="true">✦</span>
+              <strong>Pet artwork coming soon</strong>
+            </div>
+          )}
+        </div>
         {celebrate ? (
           <span className={styles.celebration} aria-label="Celebration active">
             Confirmed celebration
@@ -64,10 +75,36 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
       </div>
 
       <div className={styles.sceneDetails}>
-        <p className={styles.kicker}>{pet.communityName}</p>
+        <div className={styles.sceneHead}>
+          <p className={styles.kicker}>{pet.communityName}</p>
+          <DataModeBadge mode={pet.dataMode} />
+        </div>
         <h2 id="pet-name">{pet.displayName}</h2>
+
+        <ol className={styles.stageTrail} aria-label="Growth stages">
+          {STAGE_ORDER.map((stage) => {
+            const index = STAGE_ORDER.indexOf(stage);
+            const state =
+              index < currentIndex
+                ? styles.stagePast
+                : index === currentIndex
+                  ? styles.stageCurrent
+                  : styles.stageFuture;
+
+            return (
+              <li key={stage} className={state}>
+                {STAGE_LABEL[stage]}
+                {index === currentIndex ? (
+                  <span className={styles.srOnly}> (current stage)</span>
+                ) : null}
+              </li>
+            );
+          })}
+        </ol>
+
         <p className={styles.stageLabel}>Stage: {STAGE_LABEL[pet.stage]}</p>
-        <p>{pet.growthPoints} growth points</p>
+        {/* Single text node: co-located tests match this exact string. */}
+        <p className={styles.growth}>{pet.growthPoints} growth points</p>
 
         {progress === null ? (
           <p className={styles.finalStage}>
@@ -85,7 +122,10 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
             >
               <span className={styles.progressFill} style={progressStyle} />
             </div>
-            <p>{pet.nextStageAt} points needed for the next stage.</p>
+            <p className={styles.progressCaption}>
+              {pet.growthPoints} of {pet.nextStageAt} points
+              {nextStageLabel ? ` toward ${nextStageLabel}` : ""}.
+            </p>
           </div>
         ) : (
           <p className={styles.unavailable}>Next-stage target unavailable.</p>

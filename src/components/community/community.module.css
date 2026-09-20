@@ -1,5 +1,7 @@
+/* ---------- developer preview chrome ---------- */
+
 .previewPage {
-  width: min(100%, 52rem);
+  width: min(100%, 54rem);
   margin: 0 auto;
   padding: clamp(1rem, 4vw, 3rem);
 }
@@ -9,18 +11,21 @@
 }
 
 .previewHeader p:last-child {
-  color: var(--text-muted);
+  color: var(--ink-soft);
 }
 
 .previewBadge {
   display: inline-block;
   margin-bottom: 0.75rem;
-  padding: 0.35rem 0.65rem;
+  padding: 0.3rem 0.7rem;
   border-radius: 999px;
   color: #ffffff;
-  background: var(--danger);
-  font-size: 0.8rem;
-  font-weight: 850;
+  background: #9c1f35;
+  font-family: var(--font-mono-stack);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .controls {
@@ -30,33 +35,70 @@
 .controls label {
   display: grid;
   gap: 0.4rem;
-  color: var(--text-muted);
+  color: var(--ink-soft);
   font-weight: 700;
 }
 
 .controls select {
   min-height: 2.75rem;
   padding: 0.5rem 2rem 0.5rem 0.7rem;
-  border: 1px solid var(--border);
-  border-radius: 0.65rem;
-  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
   background: var(--surface);
 }
 
+/* ---------- panel ---------- */
+
+.panel > * + * {
+  margin-top: 0.7rem;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.head p {
+  margin: 0;
+}
+
 .kicker {
-  color: var(--accent-strong);
-  font-weight: 850;
+  color: var(--action);
+  font-family: var(--font-mono-stack);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .total {
-  font-size: 1.2rem;
+  font-family: var(--font-mono-stack);
+  font-size: var(--step-1);
+}
+
+.total strong {
+  font-family: var(--font-display-stack);
+  font-size: var(--step-3);
+  line-height: 1;
+}
+
+/* ---------- tracks ---------- */
+
+.progressTrack,
+.trackUnknown,
+.trackPending {
+  height: 0.95rem;
+  overflow: hidden;
+  border-radius: 999px;
 }
 
 .progressTrack {
-  height: 0.9rem;
-  overflow: hidden;
-  border-radius: 999px;
-  background: var(--surface-muted);
+  background: var(--surface-sunken);
+  box-shadow: inset 0 0 0 1px var(--line);
 }
 
 .progressFill {
@@ -64,20 +106,57 @@
   width: var(--community-progress);
   height: 100%;
   border-radius: inherit;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--action), var(--clay));
 }
 
-.target {
-  margin: 0.65rem 0 0;
-  color: var(--text-muted);
+.progressAchieved .progressFill {
+  background: linear-gradient(90deg, var(--live), var(--action));
+}
+
+/* Unknown is hatched, so it can never be mistaken for an empty (zero) bar.
+   The stripes must stay clearly visible; a faint hatch reads as "zero". */
+.trackUnknown {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--line-strong) 0 5px,
+    var(--surface) 5px 11px
+  );
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+.trackPending {
+  background: linear-gradient(
+    90deg,
+    var(--surface-sunken) 0%,
+    var(--action-wash) 45%,
+    var(--surface-sunken) 90%
+  );
+  background-size: 220% 100%;
+  box-shadow: inset 0 0 0 1px var(--line);
+  animation: community-sweep 1.4s linear infinite;
+}
+
+@keyframes community-sweep {
+  from {
+    background-position: 120% 0;
+  }
+  to {
+    background-position: -120% 0;
+  }
+}
+
+.target,
+.note {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
 }
 
 .unknown {
-  color: var(--text-muted);
+  color: var(--unknown);
   font-weight: 700;
 }
 
 .error {
-  color: var(--danger);
-  font-weight: 800;
+  color: var(--alert);
+  font-weight: 700;
 }
