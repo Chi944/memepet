@@ -151,6 +151,28 @@ Anvil (existing node on 8545, forge 1.8.3):
 Browser wallet connect/adopt/refresh against MetaMask was not automated in this
 pass; use the Local Anvil steps above for that journey.
 
+### L2 slice 2 — care + community (20 September 2026)
+
+Automated:
+
+- `npm run typecheck` — passed.
+- `npm run lint` — passed.
+- `npm test` — passed: 9 files, 39 tests (adds care-cooldown + map-community).
+- `npm run build` — passed.
+- `npm run test:contracts` — passed: 13/13.
+
+Anvil (local-only registry `0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0`):
+
+- `adopt` → `care` → `petOf` careCount=1; `communityStats(1)` = 1.
+- Second `care` same UTC day reverts (`AlreadyCaredToday` / custom error).
+- `cast rpc evm_increaseTime 86400` + `evm_mine` → second successful `care`;
+  careCount=2; `communityStats(1)` = 2.
+- `communityStats(99)` reverts `InvalidCommunity` (UI maps to unknown, not 0).
+
+Not exercised in this pass (needs MetaMask): wallet signature rejection, and
+switching accounts mid-session in the browser. Cache keys invalidate on
+account/chain change in code.
+
 Browser checks were run with Playwright at 390px and 1280px, in light and
 dark colour schemes:
 

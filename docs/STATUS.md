@@ -32,12 +32,12 @@ critical path; everything else is polish.**
 | Design system | Tokens, dark mode, provenance badges, app shell |
 | Pet artwork | Hatchling, Buddy, Guardian in `public/pets/` |
 | Pet registry contract | Written and unit-tested; Anvil-verified locally; **not on X Layer** |
-| Wallet / adopt (L2 slice 1) | Implemented on `feat/l2-wallet-adopt` (env-gated) |
-| Live care + community read | **Not implemented** (slice 2) |
+| Wallet / adopt (L2 slice 1) | Merged on `main` (env-gated) |
+| Care + community read (L2 slice 2) | In progress on `feat/l2-care-loop` |
 | X Layer deployment | **None** — no address committed in `deployment.ts` |
 | Live product link | **None** |
 | Demo video | **None** |
-| Automated checks | typecheck, lint, 29 tests, build — all passing |
+| Automated checks | typecheck, lint, 39 tests, build — all passing |
 | Contract tests | Foundry 1.8.3 installed; 13/13 passing |
 ## Team access — blocker
 
@@ -70,7 +70,7 @@ From the agreed plan. A pass is not done until its required result is true.
 | Testing | Integration failures and edge cases | Assigned visual fixes | Independent testing and bug reports | No unresolved blocker in the core journey |
 | Release | Final configuration and deployment | Release-build visual checks | Accurate demo and submission package | Clean-browser demonstration works |
 
-Current position: **L2 slice 1 (wallet connect + adopt + re-read) is built.**
+Current position: **L2 slice 2 (care + community read) is on `feat/l2-care-loop`.**
 Committed `DEPLOYMENT` remains `not-deployed`. Local Anvil verification uses
 `NEXT_PUBLIC_MEMEPET_*` only (see `.env.example`). No X Layer address yet.
 
@@ -81,8 +81,10 @@ Committed `DEPLOYMENT` remains `not-deployed`. Local Anvil verification uses
 - Pet scene, stage trail and care-state panel
 - `/pet` gate when no registry; live client when env/config provides one
 - `src/lib/deployment.ts` — sole address source; env override for Anvil only
-- Wallet + PetRegistry hooks (viem / EIP-1193): connect, switch, adopt with
-  receipt + re-read before success; no care loop yet
+- Wallet + PetRegistry hooks: connect, switch, adopt, **care** with receipt +
+  re-read; UTC-day cooldown prediction; stage-cross celebration only
+- Community `communityStats` read on home (and pet status); InvalidCommunity →
+  unknown (`null`), never zero
 
 ## Next
 
@@ -92,13 +94,13 @@ See `docs/AUDIT_2026-09-20.md` for the full finding list.
 1. Get an authorized X Layer testnet deploy of `PetRegistry` and record the
    verified network name, address and explorer URL in `src/lib/deployment.ts`.
    Do not invent an address.
-2. L2 slice 2: care plus community reads, all the failure states, no growth
-   before a confirmed receipt.
-3. Deploy the app somewhere public and put the URL in `NEXT_PUBLIC_SITE_URL`.
-4. The two contract findings (unchecked increments, dead sentinel guard) are
+2. Deploy the app somewhere public and put the URL in `NEXT_PUBLIC_SITE_URL`.
+3. The two contract findings (unchecked increments, dead sentinel guard) are
    fixed. `care()` costs about 633 more gas; re-read the diff before deploying,
    because the deployed bytecode changed.
-5. Foundry 1.8.3 is installed and `npm run test:contracts` passes 13/13.
+4. Foundry 1.8.3 is installed and `npm run test:contracts` passes 13/13.
+5. Open finding 1 remains: `communityStats` still reverts for bad ids — the L2
+   read layer maps that to unknown.
 
 **Teammate A** — pet experience, `src/components/pet/**`:
 1. Review `/dev/pet` at 390px and desktop against the new tokens. The lead has

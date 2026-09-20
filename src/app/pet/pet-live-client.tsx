@@ -1,11 +1,12 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { CarePanel } from "@/components/pet/CarePanel";
 import { PetScene } from "@/components/pet/PetScene";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { useCommunityStats } from "@/hooks/useCommunityStats";
 import { usePetRegistry } from "@/hooks/usePetRegistry";
 import { useWallet } from "@/hooks/useWallet";
 import { resolveCareActionState } from "@/lib/care-action-machine";
@@ -29,6 +30,31 @@ export function PetLiveClient() {
     wrongChain: wallet.wrongChain,
     createWalletClient: wallet.createBrowserWalletClient,
   });
+  const community = useCommunityStats({
+    deployment: wallet.deployment,
+    address: wallet.address,
+    wrongChain: wallet.wrongChain,
+  });
+
+  const dismissTx = registry.dismissTx;
+  const refreshCommunity = community.refresh;
+  const txKind = registry.txKind;
+  const txPhase = registry.txPhase;
+
+  useEffect(() => {
+    if (txPhase !== "success") {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      dismissTx();
+      if (txKind === "care") {
+        refreshCommunity();
+      }
+    }, 1600);
+
+    return () => window.clearTimeout(timer);
+  }, [dismissTx, refreshCommunity, txKind, txPhase]);
 
   const action = useMemo(
     () =>
@@ -46,18 +72,20 @@ export function PetLiveClient() {
                 : "idle",
         readErrorMessage: registry.readErrorMessage ?? undefined,
         hasPet: registry.hasPet,
-        txPhase: registry.adoptPhase,
+        txPhase: registry.txPhase,
         transactionHash: registry.transactionHash,
         txErrorMessage: registry.txErrorMessage ?? undefined,
-        careEnabled: false,
+        careEnabled: true,
+        cooldownAvailableAtIso: registry.cooldownAvailableAtIso,
       }),
     [
-      registry.adoptPhase,
+      registry.cooldownAvailableAtIso,
       registry.hasPet,
       registry.readErrorMessage,
       registry.readStatus,
       registry.transactionHash,
       registry.txErrorMessage,
+      registry.txPhase,
       wallet.address,
       wallet.installed,
       wallet.wrongChain,
@@ -65,7 +93,7 @@ export function PetLiveClient() {
   );
 
   const displayPet = registry.pet ?? PLACEHOLDER_PET;
-  const celebrate = registry.adoptPhase === "success" && registry.hasPet;
+  const celebrate = registry.celebrateStageUp;
 
   return (
     <div className="pet-live">
@@ -77,9 +105,9 @@ export function PetLiveClient() {
           </Badge>
         </div>
         <p className="lede">
-          Wallet reads and adoption talk to the configured registry. Progress
-          appears only after a confirmed receipt and a successful re-read.
-          Daily care is not enabled in this slice.
+          Wallet reads, adoption, and daily care talk to the configured
+          registry. Growth and community totals update only after a confirmed
+          receipt and a successful re-read.
         </p>
         <dl className="pet-live-meta">
           <div>
@@ -112,6 +140,16 @@ export function PetLiveClient() {
                   : registry.hasPet
                     ? "Adopted"
                     : "None yet"}
+            </dd>
+          </div>
+          <div>
+            <dt>Community cares</dt>
+            <dd>
+              {community.community.isLoading
+                ? "Reading…"
+                : community.community.totalCareActions === null
+                  ? "Unknown"
+                  : String(community.community.totalCareActions)}
             </dd>
           </div>
         </dl>
@@ -151,7 +189,7 @@ export function PetLiveClient() {
           <CarePanel
             pet={registry.pet}
             action={action}
-            onCare={() => undefined}
+            onCare={() => void registry.care()}
             onConnect={() => void wallet.connect()}
             onSwitchNetwork={() => void wallet.switchNetwork()}
           />
@@ -161,7 +199,7 @@ export function PetLiveClient() {
           <CarePanel
             pet={displayPet}
             action={action}
-            onCare={() => undefined}
+            onCare={() => void registry.care()}
             onConnect={() => void wallet.connect()}
             onSwitchNetwork={() => void wallet.switchNetwork()}
           />
