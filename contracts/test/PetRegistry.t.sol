@@ -123,4 +123,75 @@ contract PetRegistryTest is Test {
         vm.expectRevert(PetRegistry.InvalidCommunity.selector);
         registry.communityStats(99);
     }
+
+    /// The daily guard keys off careCount, not off lastCareDay being non-zero.
+    /// A pet that has never cared must be allowed to care at any timestamp,
+    /// including the first second of a UTC day.
+    function test_care_allowsFirstCareAtExactUtcMidnight() public {
+        vm.warp(MIDNIGHT);
+
+        vm.prank(ownerA);
+        registry.adopt(1);
+        vm.prank(ownerA);
+        registry.care();
+
+        (, , uint32 careCount, uint64 lastCareDay) = registry.petOf(ownerA);
+        assertEq(careCount, 1);
+        assertEq(lastCareDay, uint64(MIDNIGHT / DAY));
+        assertEq(registry.communityStats(1), 1);
+    }
+
+    /// The last second of the same UTC day is still the same day.
+    function test_care_rejectsDuplicateAtLastSecondOfSameDay() public {
+        vm.warp(MIDNIGHT);
+
+        vm.prank(ownerA);
+        registry.adopt(1);
+        vm.prank(ownerA);
+        registry.care();
+
+        vm.warp(MIDNIGHT + 1 days - 1);
+        vm.prank(ownerA);
+        vm.expectRevert(PetRegistry.AlreadyCaredToday.selector);
+        registry.care();
+
+        (, , uint32 careCount, ) = registry.petOf(ownerA);
+        assertEq(careCount, 1);
+        assertEq(registry.communityStats(1), 1);
+    }
+
+    /// One second later is a new UTC day and must be allowed.
+    function test_care_allowsCareOneSecondIntoNextUtcDay() public {
+        vm.warp(MIDNIGHT);
+
+        vm.prank(ownerA);
+        registry.adopt(1);
+        vm.prank(ownerA);
+        registry.care();
+
+        vm.warp(MIDNIGHT + 1 days);
+        vm.prank(ownerA);
+        registry.care();
+
+        (, , uint32 careCount, uint64 lastCareDay) = registry.petOf(ownerA);
+        assertEq(careCount, 2);
+        assertEq(lastCareDay, uint64((MIDNIGHT + 1 days) / DAY));
+        assertEq(registry.communityStats(1), 2);
+    }
+
+    /// A missed day is not penalised and does not break the guard.
+    function test_care_allowsCareAfterSkippingDays() public {
+        vm.prank(ownerA);
+        registry.adopt(1);
+        vm.prank(ownerA);
+        registry.care();
+
+        vm.warp(MIDNIGHT + 30 days + 6 hours);
+        vm.prank(ownerA);
+        registry.care();
+
+        (, , uint32 careCount, ) = registry.petOf(ownerA);
+        assertEq(careCount, 2);
+        assertEq(registry.communityStats(1), 2);
+    }
 }

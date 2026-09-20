@@ -38,8 +38,7 @@ critical path; everything else is polish.**
 | Live product link | **None** |
 | Demo video | **None** |
 | Automated checks | typecheck, lint, 29 tests, build — all passing |
-| Contract tests | Foundry 1.8.3 installed; 9/9 passing |
-
+| Contract tests | Foundry 1.8.3 installed; 13/13 passing |
 ## Team access — blocker
 
 Checked against the GitHub API on 20 September 2026:
@@ -96,9 +95,10 @@ See `docs/AUDIT_2026-09-20.md` for the full finding list.
 2. L2 slice 2: care plus community reads, all the failure states, no growth
    before a confirmed receipt.
 3. Deploy the app somewhere public and put the URL in `NEXT_PUBLIC_SITE_URL`.
-4. Decide the two contract findings (unchecked increments, dead sentinel
-   guard) before the deploy, because they are cheaper to fix now than after.
-5. Foundry 1.8.3 is installed and `npm run test:contracts` passes 9/9.
+4. The two contract findings (unchecked increments, dead sentinel guard) are
+   fixed. `care()` costs about 633 more gas; re-read the diff before deploying,
+   because the deployed bytecode changed.
+5. Foundry 1.8.3 is installed and `npm run test:contracts` passes 13/13.
 
 **Teammate A** — pet experience, `src/components/pet/**`:
 1. Review `/dev/pet` at 390px and desktop against the new tokens. The lead has

@@ -57,14 +57,20 @@ contract PetRegistry {
 
         uint64 utcDay = uint64(block.timestamp / SECONDS_PER_UTC_DAY);
 
-        if (pet.lastCareDay != 0 && pet.lastCareDay == utcDay) {
+        // Reject only a second care within the same UTC day. careCount is the
+        // explicit "has ever cared" test: reading it is free because it shares
+        // a storage slot with lastCareDay. The previous `lastCareDay != 0`
+        // form relied on utcDay never being 0, which is true only because
+        // block.timestamp is past 1970, so the guard could never fire.
+        if (pet.careCount != 0 && pet.lastCareDay == utcDay) {
             revert AlreadyCaredToday();
         }
 
-        unchecked {
-            pet.careCount += 1;
-            communityCareTotals[pet.communityId] += 1;
-        }
+        // Checked arithmetic. Overflow is unreachable at one care per day, but
+        // AGENTS.md requires checked, bounded storage types and the added cost
+        // is negligible next to the storage writes below.
+        pet.careCount += 1;
+        communityCareTotals[pet.communityId] += 1;
 
         pet.lastCareDay = utcDay;
 
