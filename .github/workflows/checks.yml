@@ -1,0 +1,85 @@
+name: Checks
+
+# Runs the same commands documented in docs/DEV_SETUP.md. If a command here
+# drifts from that file, the file is wrong — fix it rather than weakening this.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  app:
+    name: App (typecheck, lint, test, build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      # next/font downloads faces at build time, so this step needs network.
+      - name: Build
+        run: npm run build
+
+      - name: Verify /dev previews are absent from the production build
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3000 &
+          for i in $(seq 1 30); do
+            if curl -fsS -o /dev/null http://127.0.0.1:3000/; then break; fi
+            sleep 2
+          done
+          fail=0
+          for path in /dev/pet /dev/landing /dev/community; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "http://127.0.0.1:3000$path")
+            echo "$path -> $code"
+            if [ "$code" != "404" ]; then
+              echo "::error::$path returned $code in a production build; it must be 404"
+              fail=1
+            fi
+          done
+          home=$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:3000/)
+          echo "/ -> $home"
+          [ "$home" = "200" ] || { echo "::error::/ returned $home"; fail=1; }
+          exit $fail
+
+  contracts:
+    name: Contracts (forge test)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      # contracts/lib is gitignored and forge-std was installed with --no-git,
+      # so the dependency is not in the repository and must be fetched here.
+      - name: Install forge-std
+        run: forge install foundry-rs/forge-std --no-git
+        working-directory: contracts
+
+      - name: Run contract tests
+        run: forge test -vv
+        working-directory: contracts
