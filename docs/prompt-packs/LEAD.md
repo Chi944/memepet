@@ -1,4 +1,4 @@
-# Deston — technical lead prompt pack
+# Lead — technical lead prompt pack
 
 Run one task at a time in the approved shared repository. These prompts describe work to perform; none of it has already been implemented by this kit. The lead is the integration owner, not simply a third feature developer.
 

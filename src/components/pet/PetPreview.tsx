@@ -38,11 +38,9 @@ export function PetPreview() {
               setPetKey(event.target.value as PetFixtureKey)
             }
           >
-            {Object.keys(petFixtures).map((key) => (
-              <option key={key} value={key}>
-                {key}
-              </option>
-            ))}
+            <option value="hatchling">Hatchling</option>
+            <option value="buddy">Buddy</option>
+            <option value="guardian">Guardian</option>
           </select>
         </label>
 
@@ -54,11 +52,16 @@ export function PetPreview() {
               setCareKey(event.target.value as CareFixtureKey)
             }
           >
-            {Object.keys(careFixtures).map((key) => (
-              <option key={key} value={key}>
-                {key}
-              </option>
-            ))}
+            <option value="ready">Ready</option>
+            <option value="needsWallet">Needs wallet</option>
+            <option value="wrongNetwork">Wrong network</option>
+            <option value="cooldown">Cooldown</option>
+            <option value="awaitingSignature">Awaiting signature</option>
+            <option value="submitting">Submitting</option>
+            <option value="pending">Pending</option>
+            <option value="success">Success</option>
+            <option value="rejected">Rejected</option>
+            <option value="unavailable">Unavailable</option>
           </select>
         </label>
 

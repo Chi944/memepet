@@ -1,7 +1,13 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import type { PetSceneProps } from "@/types/view-models";
+import type { PetSceneProps, PetStage } from "@/types/view-models";
 import styles from "./pet.module.css";
+
+const STAGE_LABEL: Record<PetStage, string> = {
+  hatchling: "Hatchling",
+  buddy: "Buddy",
+  guardian: "Guardian",
+};
 
 function getProgress(growthPoints: number, nextStageAt: number | null) {
   if (nextStageAt === null) {
@@ -29,7 +35,7 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
   return (
     <section className={styles.scene} aria-labelledby="pet-name">
       <div
-        className={`${styles.artFrame} ${celebrate ? styles.celebrating : ""}`}
+        className={`${styles.artFrame} ${styles.idle} ${celebrate ? styles.celebrating : ""}`}
       >
         {pet.artSrc ? (
           <Image
@@ -60,11 +66,13 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
       <div className={styles.sceneDetails}>
         <p className={styles.kicker}>{pet.communityName}</p>
         <h2 id="pet-name">{pet.displayName}</h2>
-        <p className={styles.stageLabel}>Stage: {pet.stage}</p>
+        <p className={styles.stageLabel}>Stage: {STAGE_LABEL[pet.stage]}</p>
         <p>{pet.growthPoints} growth points</p>
 
         {progress === null ? (
-          <p className={styles.finalStage}>Guardian is the final stage.</p>
+          <p className={styles.finalStage}>
+            {STAGE_LABEL[pet.stage]} is the final stage.
+          </p>
         ) : typeof progress === "number" ? (
           <div className={styles.progressGroup}>
             <div

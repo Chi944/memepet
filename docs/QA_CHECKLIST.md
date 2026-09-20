@@ -42,7 +42,7 @@ Duplicate adoption; invalid community; care without a pet; first care after adop
 
 ## Release gate
 
-Every core blocker is fixed or the feature is removed honestly. The lead checks the final commit and environment. Larm (Teammate B) checks the demo claims and public links. Kym (Teammate A) checks the actual release visuals. Nobody describes the prototype as audited, bot-proof or production-safe merely because tests pass.
+Every core blocker is fixed or the feature is removed honestly. The lead checks the final commit and environment. Teammate B checks the demo claims and public links. Teammate A checks the actual release visuals. Nobody describes the prototype as audited, bot-proof or production-safe merely because tests pass.
 
 ## Demo evidence
 

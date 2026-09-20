@@ -1,64 +1,34 @@
-# Create the hosted repository — Deston
+# Create the hosted repository — lead
 
-## What has and has not happened
+## Current status
 
-The connected GitHub account was confirmed as `Chi944`. The installed repository search
-returned no accessible MemePet match. That is not proof that the name is globally free
-or absent from repositories this connection cannot access.
-The available GitHub tools in the preparation chat were read-only. No hosted repository
-or GitHub invitations were created.
+The public hosted repository exists at `https://github.com/Chi944/memepet`.
+The verified L0 baseline is on `chore/l0-foundation`. Collaborator invitations
+are still the lead's responsibility and have not been recorded as sent.
 
-## Browser path (no command line needed)
+## If you need to recreate or inspect the repository
 
-1. Sign in to the intended GitHub account. Open **+ → New repository**.
-2. Set owner **Chi944**, name **memepet**, visibility **Private**, description
+1. Sign in to the GitHub account that should own the project. Open **+ → New repository**.
+2. Set the repository name **memepet**, choose visibility, and use the description
    **MemePet — X Layer meme-community companion app.**
-3. Leave automatic README, .gitignore, and license initialization off, because this
-   starter supplies initial files. Create the repository. If the name is already taken
-   in this account, inspect that repository rather than deleting or overwriting it.
-4. Extract `MemePet_Starter_Repo.zip`. Inside it, open the `memepet` folder.
-5. On GitHub's empty repository page choose the option to upload existing files.
-   Upload the **contents of the inner memepet folder**, not the ZIP or its outer wrapper.
-   README.md, AGENTS.md, and CLAUDE.md must appear at the repository root.
-   Preserve subfolders. Include hidden `.gitignore`, `.gitattributes`, and `.github`.
-   Enable hidden-file display in your file manager or add any omitted dotfiles through
-   GitHub's create-file interface. Never upload a local `.git` directory.
-6. Commit the initial files with **chore: initialize MemePet team starter**.
-   This first bootstrap commit is the exception to the feature-branch rule; subsequent
-   work uses reviewed pull requests.
-7. Open **Settings → Collaborators → Add people**. Invite Kym and Larm using their actual
-   GitHub usernames or verified emails. They must accept. Their names in this kit do
-   not identify GitHub accounts.
-8. In ChatGPT's GitHub app settings, authorize this new private repository if the
-   connection is restricted to selected repositories. Each teammate uses their own
-   account/connection when needed; sharing a project is not a transfer of GitHub access.
+3. Leave automatic README, .gitignore, and license initialization off if the local
+   starter already supplies those files. If the name is already taken in this account,
+   inspect that repository rather than deleting or overwriting it.
+4. Preserve README.md, AGENTS.md, and CLAUDE.md at the repository root, including hidden
+   `.gitignore`, `.gitattributes`, and `.github`. Never upload a local `.git` directory.
+5. Open **Settings → Collaborators → Add people**. Invite Teammate A and Teammate B using
+   their actual GitHub usernames or verified emails. They must accept. Role labels in
+   this kit do not identify GitHub accounts.
+6. In ChatGPT's GitHub app settings, authorize this repository if the connection is
+   restricted to selected repositories. Each teammate uses their own account/connection
+   when needed; sharing a project is not a transfer of GitHub access.
 
 ## Initial local development
 
-Clone the created repository in your chosen editor. Deston runs L0 first; Kym and Larm
-can read their packs and prepare copy/art until a verified baseline is merged.
+Clone the repository in your chosen editor. The lead runs L0 first; Teammate A and
+Teammate B can read their packs and prepare copy/art until a verified baseline is merged.
 Each person uses their own checkout and task branch. Do not copy a teammate's `.env` or
 share a signing wallet.
-
-## Optional local coding-agent publishing prompt
-
-Use this only instead of the browser creation/upload path, in a local tool with terminal
-access, with the extracted folder open:
-
-> Create and publish this starter as a PRIVATE GitHub repository named Chi944/memepet.
-> First inspect this folder without reading secret files. Check that GitHub CLI is
-> installed and already authenticated to Chi944, and check whether the destination
-> exists. Do not request or print access tokens. If tooling/authentication is missing,
-> stop and explain the official setup steps. If the repository already exists, do not
-> overwrite it. With the correct account and a new destination, initialize Git on main
-> if needed, inspect and commit only these starter files using my configured author
-> identity, and use gh repo create with private visibility, this source folder, an
-> origin remote, and push. Do not force-push or add collaborators. This prompt authorizes
-> that initial private repository creation and push only, not public publication,
-> deployment, or deletion. Verify the remote URL, private visibility, and pushed commit;
-> report actual results. Do not claim success from a local commit alone.
-
-This optional prompt has not been executed. Browser setup is the simplest default.
 
 ## Sources
 
