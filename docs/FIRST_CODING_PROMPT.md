@@ -1,13 +1,13 @@
-# Deston's first coding-agent message — L0 only
+# Lead's first coding-agent message — L0 only
 
 Paste this into one coding agent, with the repository folder open.
 This prompt is for building the local baseline, not creating a second app elsewhere.
 
 ---
 
-I am Deston, lead for MemePet. Work on L0 only, on branch chore/l0-foundation.
+I am the technical lead for MemePet. Work on L0 only, on branch chore/l0-foundation.
 Read AGENTS.md, docs/PROJECT_BRIEF.md, docs/OWNERSHIP.md, docs/DEV_SETUP.md,
-docs/prompt-packs/DESTON.md, src/types/view-models.ts, and src/fixtures/ui-fixtures.ts.
+docs/prompt-packs/LEAD.md, src/types/view-models.ts, and src/fixtures/ui-fixtures.ts.
 Inspect this repository first. It may contain only starter instructions and proposed
 types, not an application. Do not overwrite an existing app or uncommitted work.
 
@@ -39,5 +39,5 @@ Do not add blockchain packages, contracts, wallet connection, a database, paymen
 a token, API integrations, sharing infrastructure, or deployments in L0.
 
 Return changed files, actual checks, preview instructions, remaining blockers, and a
-small handoff telling Kym how to start A1 and Larm how to start B1. Do not automatically
-merge, push, or deploy. I will review the result first.
+small handoff telling Teammate A how to start A1 and Teammate B how to start B1. Do not
+automatically merge, push, or deploy. I will review the result first.

@@ -4,10 +4,10 @@ Lead must confirm these paths against the actual app before delegation. Changes 
 
 | Owner | Editable area |
 |---|---|
-| Deston (lead) | `contracts/**`, `src/app/**`, `src/hooks/**`, `src/lib/**`, `src/types/**`, `src/fixtures/**`, `src/components/ui/**`, global styles, repository configuration, packages/lockfile, CI/deployment, shared specification docs |
-| Kym (Teammate A) | `src/components/pet/**`, `public/pets/**`, `docs/pet-assets.md`; tests co-located in that component folder |
-| Larm (Teammate B) | `src/components/landing/**`, `src/components/community/**`, `docs/qa/**`, `docs/demo/**`; tests co-located in those component folders |
-| Larm (Teammate B), only after stretch approval | `src/components/profile/**`; lead still owns public routes/data |
+| Lead | `contracts/**`, `src/app/**`, `src/hooks/**`, `src/lib/**`, `src/types/**`, `src/fixtures/**`, `src/components/ui/**`, global styles, repository configuration, packages/lockfile, CI/deployment, shared specification docs |
+| Teammate A | `src/components/pet/**`, `public/pets/**`, `docs/pet-assets.md`; tests co-located in that component folder |
+| Teammate B | `src/components/landing/**`, `src/components/community/**`, `docs/qa/**`, `docs/demo/**`; tests co-located in those component folders |
+| Teammate B, only after stretch approval | `src/components/profile/**`; lead still owns public routes/data |
 
 Task-level allowlists can be narrower than this table. Ownership is a coordination agreement, not a technical permission system. Everyone reviews their diff and the lead reviews every merge.
 

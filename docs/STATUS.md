@@ -1,31 +1,42 @@
 # Shared status
 
-Prepared: 19 September 2026. Preparation status, not verified development progress.
-Deston updates this file after reviewed merges.
+Updated: 20 September 2026.
+
+The lead updates this file after reviewed merges. Role labels are Lead, Teammate A,
+and Teammate B.
 
 | Item | Status |
 |---|---|
-| Team roles and prompt packs | Prepared |
-| Hosted GitHub repository | Public `Chi944/memepet`; L0 review branch pushed |
-| Repository invitations | Not sent |
-| Deston / Kym / Larm ChatGPT conversations | Not created |
-| Application scaffold | Implemented locally on `chore/l0-foundation`; review pending |
-| L0 foundation checks | Install, typecheck, lint, test, build, production 404, and browser checks passed |
-| Confirmed community token | Not selected/verified |
-| Smart contract | Not implemented |
+| Hosted GitHub repository | `Chi944/memepet` |
+| Stable default branch | `main` |
+| Application scaffold | Runnable Next.js app with wallet-free `/dev/*` previews |
+| Pet artwork | Hatchling, Buddy, and Guardian stills accepted into `public/pets/` |
+| Pet registry contract | Local `PetRegistry` with Foundry tests; not deployed |
+| Progress mapper | `src/lib/pet-progress.ts` |
+| Landing / community polish | Shells only; Teammate B still owns B1 and B2 |
+| Wallet / live reads | Not implemented |
 | Deployment | None |
+| Confirmed community token | Not selected/verified |
 
-## Next task per person
+## Built by the lead
 
-Deston: review `chore/l0-foundation` and merge it when approved.
-Kym: create own project chat; prepare pet-stage asset requirements; A1 after reviewed L0.
-Larm: create own project chat; prepare landing copy and QA checklist; B1 after reviewed L0.
+- Shared Next.js app, previews, types, fixtures
+- `PetRegistry` and display mapper
+- PetScene polish and stage artwork in `/dev/pet`
+- Honest `/pet` route that does not pretend the live loop exists
 
-## Latest merged baseline
+Live adoption, wallet connection, and confirmed on-chain progress are **not** built.
 
-- Branch / commit: `chore/l0-foundation` / `1d3a050`
-- App start instructions: `npm ci`, then `npm run dev`
-- Known blockers: none for local L0 review; merge is pending Deston's decision
+## Next task per role
+
+Lead: L2 wallet and contract integration, only after an authorized testnet deploy.
+Teammate A: inspect `/dev/pet` stage art, then A2 care-panel polish if needed.
+Teammate B: start **B1** on `feat/b1-landing-hero` using `/dev/landing`.
+
+## Latest stable baseline
+
+- App start: `npm ci`, then `npm run dev`
+- Known blockers: no deployed contract; no wallet connection; no authorized testnet
 
 ## Handoff template
 

@@ -8,8 +8,8 @@
   Node 24.15 or newer within major 24).
 - Package manager: npm 11.19.x (`packageManager` pins 11.19.0).
 - Environment variables: none required for L0 or its previews.
-- Current branch: `chore/l0-foundation`.
-- Baseline commit: `1d3a050` (`chore: establish L0 foundation`).
+- Current branch: `feat/l1-pet-registry` for lead work. Teammates should start from `main`.
+- Baseline commit: L0 on `main` after it is published from `chore/l0-foundation`.
 - Hosted repository: public `https://github.com/Chi944/memepet`.
 - Published review branch: `chore/l0-foundation`; not merged.
 
@@ -35,8 +35,14 @@ npm run start
 ```
 
 `npm test` uses `vitest run`, so it exits after one non-interactive run.
-No contract test command exists in L0 because contracts and contract tooling are
-explicitly outside this task.
+Contract tests use Foundry (`forge` 1.8.3). Install Foundry, then:
+
+```bash
+cd contracts
+forge install foundry-rs/forge-std --no-commit --no-git
+cd ..
+npm run test:contracts
+```
 
 ## Wallet-free UI previews
 
@@ -118,34 +124,34 @@ the application or preview routes; adding approved branding is optional polish.
 
 ## Ownership after L0
 
-- Kym owns `src/components/pet/**`, `public/pets/**`, and
+- Teammate A owns `src/components/pet/**`, `public/pets/**`, and
   `docs/pet-assets.md`.
-- Larm owns `src/components/landing/**`, `src/components/community/**`,
+- Teammate B owns `src/components/landing/**`, `src/components/community/**`,
   `docs/qa/**`, and `docs/demo/**`.
-- Deston owns routes, shared UI, types, fixtures, packages, global styles,
+- The lead owns routes, shared UI, types, fixtures, packages, global styles,
   integration, contracts, and deployment.
 
 Teammates should not independently edit routes, shared types, shared fixtures,
 shared UI, global styles, package files, or build configuration.
 
-## Kym — start A1 only
+## Teammate A — pet work
 
-After Deston reviews and publishes the baseline:
+Start from `main`:
 
-1. Clone the repository and run `npm ci`, then `npm run dev`.
+1. Clone the repository, run `npm ci`, then `npm run dev`.
 2. Open `http://localhost:3000/dev/pet`.
-3. Create branch `feat/a1-pet-scene`.
-4. Improve only `PetScene` and `PetPreview` within the A1 allowlist, using the
-   existing `PetSceneProps`.
-5. Run the documented checks, inspect 390px and desktop layouts, and submit the
-   branch or pull request to Deston with screenshots and actual results.
+3. The lead already added PetScene stage labels, idle motion, reduced-motion
+   handling, placeholders, and tests. Do not rebuild that from scratch.
+4. Generate the three stage images using the prompts in `docs/pet-assets.md`.
+   Paste the PNGs back to the lead. Do not invent filenames in fixtures.
+5. After approved files are in `public/pets/`, continue A3 polish on
+   `feat/a3-pet-art`.
 
-Do not change care logic, routes, fixtures, types, packages, wallet code, or
-global styles. Kym has not yet confirmed running this baseline.
+Do not change routes, fixtures, types, packages, wallet code, or global styles.
 
-## Larm — start B1 only
+## Teammate B — start B1 only
 
-After Deston reviews and publishes the baseline:
+Start from `main`:
 
 1. Clone the repository and run `npm ci`, then `npm run dev`.
 2. Open `http://localhost:3000/dev/landing`.
@@ -153,7 +159,7 @@ After Deston reviews and publishes the baseline:
 4. Improve only `LandingHero` and `LandingPreview` within the B1 allowlist,
    keeping the existing `LandingHeroProps`.
 5. Run the documented checks, inspect 390px and desktop layouts, and submit the
-   branch or pull request to Deston with screenshots and actual results.
+   branch or pull request to the lead with screenshots and actual results.
 
 Do not change routes, fixtures, types, packages, wallet code, contracts, or
-global styles. Larm has not yet confirmed running this baseline.
+global styles. Teammate B has not yet confirmed running this baseline.
