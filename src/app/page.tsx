@@ -16,9 +16,9 @@ export default function Home() {
         <p className="eyebrow">MemePet development foundation</p>
         <h1>One shared application, ready for interface work.</h1>
         <p className="lede">
-          This baseline provides stable component inputs and wallet-free local
-          previews. Live adoption, care, persistence, and community data are
-          not implemented in L0.
+          This baseline provides stable component inputs, approved Mochi stage
+          art, and wallet-free local previews. Live adoption, care, persistence,
+          and community data are not implemented yet.
         </p>
 
         {isDevelopment ? (
