@@ -1,8 +1,8 @@
 # MemePet — shared team context
 
-Prepared for Deston, Kym, and Larm. This is a specification and prompt kit, not a completed app.
+Prepared for the lead, Teammate A, and Teammate B. This is a specification and prompt kit, not a completed app.
 
-The proposed repository is Chi944/memepet; creation is not confirmed. Start with Deston L0.
+The hosted repository is Chi944/memepet. Start with lead L0.
 
 
 ---
@@ -56,10 +56,10 @@ Lead must confirm these paths against the actual app before delegation. Changes 
 
 | Owner | Editable area |
 |---|---|
-| Deston (lead) | `contracts/**`, `src/app/**`, `src/hooks/**`, `src/lib/**`, `src/types/**`, `src/fixtures/**`, `src/components/ui/**`, global styles, repository configuration, packages/lockfile, CI/deployment, shared specification docs |
-| Kym (Teammate A) | `src/components/pet/**`, `public/pets/**`, `docs/pet-assets.md`; tests co-located in that component folder |
-| Larm (Teammate B) | `src/components/landing/**`, `src/components/community/**`, `docs/qa/**`, `docs/demo/**`; tests co-located in those component folders |
-| Larm (Teammate B), only after stretch approval | `src/components/profile/**`; lead still owns public routes/data |
+| Lead | `contracts/**`, `src/app/**`, `src/hooks/**`, `src/lib/**`, `src/types/**`, `src/fixtures/**`, `src/components/ui/**`, global styles, repository configuration, packages/lockfile, CI/deployment, shared specification docs |
+| Teammate A | `src/components/pet/**`, `public/pets/**`, `docs/pet-assets.md`; tests co-located in that component folder |
+| Teammate B | `src/components/landing/**`, `src/components/community/**`, `docs/qa/**`, `docs/demo/**`; tests co-located in those component folders |
+| Teammate B, only after stretch approval | `src/components/profile/**`; lead still owns public routes/data |
 
 Task-level allowlists can be narrower than this table. Ownership is a coordination agreement, not a technical permission system. Everyone reviews their diff and the lead reviews every merge.
 
@@ -90,9 +90,9 @@ Check for a clean working tree before updating from main. Do not let an agent di
 
 ---
 
-## Included source: docs/prompt-packs/DESTON.md
+## Included source: docs/prompt-packs/LEAD.md
 
-# Deston — technical lead prompt pack
+# Lead — technical lead prompt pack
 
 Run one task at a time in the approved shared repository. These prompts describe work to perform; none of it has already been implemented by this kit. The lead is the integration owner, not simply a third feature developer.
 
@@ -153,9 +153,9 @@ Integrate a small working slice as soon as it is reviewable. Keep at most one im
 
 ---
 
-## Included source: docs/prompt-packs/KYM.md
+## Included source: docs/prompt-packs/TEAMMATE-A.md
 
-# Kym (Teammate A) — pet experience
+# Teammate A — pet experience
 
 ## Your job
 
@@ -216,9 +216,9 @@ Task ID and branch; what works; what you tested yourself; screenshots; actual ch
 
 ---
 
-## Included source: docs/prompt-packs/LARM.md
+## Included source: docs/prompt-packs/TEAMMATE-B.md
 
-# Larm (Teammate B) — community interface, testing and demo
+# Teammate B — community interface, testing and demo
 
 ## Your job
 

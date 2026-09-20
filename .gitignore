@@ -15,10 +15,11 @@ coverage/
 *.keystore
 keystore/
 keystores/
-# Contract build products and dependencies (Deston chooses tooling first)
+# Contract build products and dependencies
 contracts/out/
 contracts/cache/
 contracts/broadcast/
+contracts/lib/
 # Editor/OS files and logs
 .DS_Store
 Thumbs.db

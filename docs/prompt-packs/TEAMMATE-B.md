@@ -1,4 +1,4 @@
-# Larm (Teammate B) — community interface, testing and demo
+# Teammate B — community interface, testing and demo
 
 ## Your job
 
