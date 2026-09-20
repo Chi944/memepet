@@ -99,6 +99,11 @@ export function CarePanel({
     <Card aria-labelledby="care-heading" className={styles.carePanel}>
       <p className={styles.kicker}>Daily care presentation</p>
       <h2 id="care-heading">Care for your pet</h2>
+      <p>
+        {pet.nextStageAt === null
+          ? `Final stage. Displayed growth is ${pet.growthPoints} points from the parent.`
+          : `${pet.growthPoints} growth points. Next stage at ${pet.nextStageAt}.`}
+      </p>
       <div className={styles.actionContent}>{content}</div>
     </Card>
   );
