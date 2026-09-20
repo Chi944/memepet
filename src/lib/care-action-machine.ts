@@ -17,8 +17,13 @@ export type LivePetControllerInput = {
     | "rejected";
   readonly transactionHash?: string;
   readonly txErrorMessage?: string;
-  /** Slice 1: care is not live yet. */
+  /** When false, care remains unavailable even if a pet exists. */
   readonly careEnabled: boolean;
+  /**
+   * ISO instant care becomes available again, or null/undefined when ready.
+   * Derived from lastCareDay + UTC-day rule — never from a failed submit.
+   */
+  readonly cooldownAvailableAtIso?: string | null;
 };
 
 /**
@@ -100,7 +105,14 @@ export function resolveCareActionState(
   if (!input.careEnabled) {
     return {
       kind: "unavailable",
-      message: "Daily care is not enabled in this build (L2 slice 2).",
+      message: "Daily care is not enabled in this build.",
+    };
+  }
+
+  if (input.cooldownAvailableAtIso) {
+    return {
+      kind: "cooldown",
+      availableAtIso: input.cooldownAvailableAtIso,
     };
   }
 

@@ -8,7 +8,7 @@ const base = {
   readStatus: "idle" as const,
   hasPet: true,
   txPhase: "idle" as const,
-  careEnabled: false,
+  careEnabled: true,
 };
 
 describe("resolveCareActionState", () => {
@@ -62,10 +62,26 @@ describe("resolveCareActionState", () => {
     });
   });
 
-  it("keeps care unavailable in slice 1 after a pet exists", () => {
-    expect(resolveCareActionState(base)).toEqual({
+  it("returns ready when care is enabled and there is no cooldown", () => {
+    expect(resolveCareActionState(base)).toEqual({ kind: "ready" });
+  });
+
+  it("predicts cooldown from availableAtIso without submitting", () => {
+    expect(
+      resolveCareActionState({
+        ...base,
+        cooldownAvailableAtIso: "2030-01-02T00:00:00.000Z",
+      }),
+    ).toEqual({
+      kind: "cooldown",
+      availableAtIso: "2030-01-02T00:00:00.000Z",
+    });
+  });
+
+  it("keeps care unavailable when careEnabled is false", () => {
+    expect(resolveCareActionState({ ...base, careEnabled: false })).toEqual({
       kind: "unavailable",
-      message: "Daily care is not enabled in this build (L2 slice 2).",
+      message: "Daily care is not enabled in this build.",
     });
   });
 

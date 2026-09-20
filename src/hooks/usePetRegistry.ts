@@ -8,16 +8,17 @@ import {
   type Hash,
   type WalletClient,
 } from "viem";
+import { careCooldownAvailableAtIso } from "@/lib/care-cooldown";
 import { APPROVED_COMMUNITY_ID } from "@/lib/pet-progress";
 import { mapPetOfToViewModel } from "@/lib/map-pet";
 import { petRegistryAbi, type PetOfResult } from "@/lib/pet-registry-abi";
 import type { Deployment } from "@/lib/deployment";
 import { chainFromDeployment } from "@/lib/chains";
-import type { PetViewModel } from "@/types/view-models";
+import type { PetStage, PetViewModel } from "@/types/view-models";
 
 export type PetReadStatus = "idle" | "loading" | "ready" | "error";
 
-export type AdoptPhase =
+export type TxPhase =
   | "idle"
   | "awaiting-signature"
   | "submitting"
@@ -49,6 +50,17 @@ const emptySnapshot: PetSnapshot = {
   rawPet: null,
 };
 
+function isUserRejection(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error);
+  return (
+    /user rejected|denied|rejected the request/i.test(message) ||
+    (typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      Number((error as { code: number }).code) === 4001)
+  );
+}
+
 export function usePetRegistry({
   deployment,
   address,
@@ -58,18 +70,24 @@ export function usePetRegistry({
   const cacheKey = `${address ?? "none"}:${deployment.chainId ?? "none"}:${deployment.registryAddress ?? "none"}:${wrongChain ? "wrong" : "ok"}`;
   const [activeKey, setActiveKey] = useState(cacheKey);
   const [snapshot, setSnapshot] = useState<PetSnapshot>(emptySnapshot);
-  const [adoptPhase, setAdoptPhase] = useState<AdoptPhase>("idle");
+  const [txPhase, setTxPhase] = useState<TxPhase>("idle");
+  const [txKind, setTxKind] = useState<"idle" | "adopt" | "care">("idle");
   const [transactionHash, setTransactionHash] = useState<string | undefined>();
   const [txErrorMessage, setTxErrorMessage] = useState<string | null>(null);
   const [refreshToken, setRefreshToken] = useState(0);
+  const [celebrateStageUp, setCelebrateStageUp] = useState(false);
+  const [nowMs, setNowMs] = useState(() => Date.now());
   const submitLock = useRef(false);
+  const stageBeforeCare = useRef<PetStage | null>(null);
 
   if (activeKey !== cacheKey) {
     setActiveKey(cacheKey);
     setSnapshot(emptySnapshot);
-    setAdoptPhase("idle");
+    setTxPhase("idle");
+    setTxKind("idle");
     setTransactionHash(undefined);
     setTxErrorMessage(null);
+    setCelebrateStageUp(false);
   }
 
   const chain = chainFromDeployment(deployment);
@@ -77,7 +95,15 @@ export function usePetRegistry({
 
   useEffect(() => {
     submitLock.current = false;
+    stageBeforeCare.current = null;
   }, [cacheKey]);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setNowMs(Date.now());
+    }, 30_000);
+    return () => window.clearInterval(id);
+  }, []);
 
   useEffect(() => {
     if (!address || !registryAddress || !chain || wrongChain) {
@@ -147,98 +173,196 @@ export function usePetRegistry({
     wrongChain,
   ]);
 
-  const readPet = useCallback(async () => {
+  const cooldownAvailableAtIso =
+    snapshot.rawPet && snapshot.rawPet.exists
+      ? careCooldownAvailableAtIso({
+          careCount: Number(snapshot.rawPet.careCount),
+          lastCareDay: snapshot.rawPet.lastCareDay,
+          nowMs,
+        })
+      : null;
+
+  const refreshPet = useCallback(async () => {
     setRefreshToken((value) => value + 1);
   }, []);
 
-  const adopt = useCallback(async () => {
-    if (submitLock.current) {
-      return;
-    }
-
-    if (!address || !registryAddress || !chain || wrongChain) {
-      return;
-    }
-
-    const walletClient = createWalletClient();
-    if (!walletClient) {
-      setAdoptPhase("error");
-      setTxErrorMessage("Wallet client is unavailable.");
-      return;
-    }
-
-    submitLock.current = true;
-    setTxErrorMessage(null);
+  const dismissTx = useCallback(() => {
+    setTxPhase("idle");
+    setTxKind("idle");
     setTransactionHash(undefined);
-    setAdoptPhase("awaiting-signature");
+    setTxErrorMessage(null);
+  }, []);
 
-    try {
-      const publicClient = createPublicClient({
-        chain,
-        transport: http(deployment.rpcUrl ?? undefined),
-      });
-
-      const hash = (await walletClient.writeContract({
-        address: registryAddress,
-        abi: petRegistryAbi,
-        functionName: "adopt",
-        args: [APPROVED_COMMUNITY_ID],
-        account: address,
-        chain,
-      })) as Hash;
-
-      setTransactionHash(hash);
-      setAdoptPhase("pending");
-
-      const receipt = await publicClient.waitForTransactionReceipt({ hash });
-
-      if (receipt.status !== "success") {
-        setAdoptPhase("error");
-        setTxErrorMessage(
-          "The adoption transaction reverted. No pet was created.",
-        );
-        submitLock.current = false;
+  const runWrite = useCallback(
+    async (kind: "adopt" | "care") => {
+      if (submitLock.current) {
         return;
       }
 
-      setRefreshToken((value) => value + 1);
-      setAdoptPhase("success");
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      const rejected =
-        /user rejected|denied|rejected the request/i.test(message) ||
-        (typeof error === "object" &&
-          error !== null &&
-          "code" in error &&
-          Number((error as { code: number }).code) === 4001);
-
-      if (rejected) {
-        setAdoptPhase("rejected");
-        setTxErrorMessage(
-          "You declined the wallet request. No progress was awarded.",
-        );
-      } else {
-        setAdoptPhase("error");
-        setTxErrorMessage(
-          message || "Adoption failed. No progress was awarded.",
-        );
+      if (!address || !registryAddress || !chain || wrongChain) {
+        return;
       }
-    } finally {
-      submitLock.current = false;
-    }
-  }, [
-    address,
-    chain,
-    createWalletClient,
-    deployment.rpcUrl,
-    registryAddress,
-    wrongChain,
-  ]);
+
+      if (kind === "care" && cooldownAvailableAtIso) {
+        setTxKind("care");
+        setTxPhase("error");
+        setTxErrorMessage(
+          `Care is available again at ${cooldownAvailableAtIso} (UTC). No transaction was sent.`,
+        );
+        return;
+      }
+
+      const walletClient = createWalletClient();
+      if (!walletClient) {
+        setTxKind(kind);
+        setTxPhase("error");
+        setTxErrorMessage("Wallet client is unavailable.");
+        return;
+      }
+
+      submitLock.current = true;
+      setCelebrateStageUp(false);
+      setTxErrorMessage(null);
+      setTransactionHash(undefined);
+      setTxKind(kind);
+      setTxPhase("awaiting-signature");
+
+      if (kind === "care") {
+        stageBeforeCare.current = snapshot.pet?.stage ?? null;
+      } else {
+        stageBeforeCare.current = null;
+      }
+
+      try {
+        const publicClient = createPublicClient({
+          chain,
+          transport: http(deployment.rpcUrl ?? undefined),
+        });
+
+        const hash = (await walletClient.writeContract(
+          kind === "adopt"
+            ? {
+                address: registryAddress,
+                abi: petRegistryAbi,
+                functionName: "adopt",
+                args: [APPROVED_COMMUNITY_ID],
+                account: address,
+                chain,
+              }
+            : {
+                address: registryAddress,
+                abi: petRegistryAbi,
+                functionName: "care",
+                account: address,
+                chain,
+              },
+        )) as Hash;
+
+        setTransactionHash(hash);
+        setTxPhase("pending");
+
+        const receipt = await publicClient.waitForTransactionReceipt({ hash });
+
+        if (receipt.status !== "success") {
+          setTxPhase("error");
+          setTxErrorMessage(
+            kind === "adopt"
+              ? "The adoption transaction reverted. No pet was created."
+              : "The care transaction reverted. No progress was awarded.",
+          );
+          submitLock.current = false;
+          return;
+        }
+
+        // Re-read before treating the write as success. A hash alone is not enough.
+        const result = await publicClient.readContract({
+          address: registryAddress,
+          abi: petRegistryAbi,
+          functionName: "petOf",
+          args: [address],
+        });
+
+        const mappedRaw: PetOfResult = {
+          exists: result[0],
+          communityId: result[1],
+          careCount: result[2],
+          lastCareDay: result[3],
+        };
+        const mapped = mapPetOfToViewModel(mappedRaw);
+
+        setSnapshot({
+          readStatus: "ready",
+          readErrorMessage: null,
+          rawPet: mappedRaw,
+          hasPet: mapped.kind === "pet",
+          pet: mapped.kind === "pet" ? mapped.pet : null,
+        });
+        setNowMs(Date.now());
+
+        if (
+          kind === "care" &&
+          mapped.kind === "pet" &&
+          stageBeforeCare.current !== null &&
+          mapped.pet.stage !== stageBeforeCare.current
+        ) {
+          setCelebrateStageUp(true);
+        }
+
+        setTxPhase("success");
+        setRefreshToken((value) => value + 1);
+      } catch (error) {
+        if (isUserRejection(error)) {
+          setTxPhase("rejected");
+          setTxErrorMessage(
+            "You declined the wallet request. No progress was awarded.",
+          );
+        } else {
+          const message = error instanceof Error ? error.message : String(error);
+          setTxPhase("error");
+          setTxErrorMessage(
+            message ||
+              (kind === "adopt"
+                ? "Adoption failed. No progress was awarded."
+                : "Care failed. No progress was awarded."),
+          );
+        }
+      } finally {
+        submitLock.current = false;
+      }
+    },
+    [
+      address,
+      chain,
+      cooldownAvailableAtIso,
+      createWalletClient,
+      deployment.rpcUrl,
+      registryAddress,
+      snapshot.pet?.stage,
+      wrongChain,
+    ],
+  );
+
+  const adopt = useCallback(async () => {
+    await runWrite("adopt");
+  }, [runWrite]);
+
+  const care = useCallback(async () => {
+    await runWrite("care");
+  }, [runWrite]);
 
   const readStatusForUi: PetReadStatus =
-    address && registryAddress && chain && !wrongChain && snapshot.readStatus === "idle"
+    address &&
+    registryAddress &&
+    chain &&
+    !wrongChain &&
+    snapshot.readStatus === "idle"
       ? "loading"
       : snapshot.readStatus;
+
+  const isSubmitting =
+    txPhase === "awaiting-signature" ||
+    txPhase === "submitting" ||
+    txPhase === "pending";
 
   return {
     readStatus: readStatusForUi,
@@ -246,14 +370,17 @@ export function usePetRegistry({
     pet: snapshot.pet,
     hasPet: snapshot.hasPet,
     rawPet: snapshot.rawPet,
-    adoptPhase,
+    txPhase,
+    txKind,
     transactionHash,
     txErrorMessage,
+    cooldownAvailableAtIso,
+    celebrateStageUp,
     adopt,
-    refreshPet: readPet,
-    isSubmitting:
-      adoptPhase === "awaiting-signature" ||
-      adoptPhase === "submitting" ||
-      adoptPhase === "pending",
+    care,
+    dismissTx,
+    refreshPet,
+    isSubmitting,
+    adoptPhase: txPhase,
   };
 }
