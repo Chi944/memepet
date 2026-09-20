@@ -1,6 +1,7 @@
 "use client";
 
-import type { CarePanelProps } from "@/types/view-models";
+import type { CarePanelProps, CareActionState } from "@/types/view-models";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import styles from "./pet.module.css";
@@ -23,6 +24,32 @@ function formatAvailability(value: string) {
   }).format(date);
 }
 
+/** One short status word per state, so the panel always says what it is doing. */
+function statusChip(action: CareActionState) {
+  switch (action.kind) {
+    case "ready":
+      return { tone: "live" as const, label: "Ready" };
+    case "needs-wallet":
+      return { tone: "unknown" as const, label: "Not connected" };
+    case "wrong-network":
+      return { tone: "preview" as const, label: "Wrong network" };
+    case "cooldown":
+      return { tone: "neutral" as const, label: "Done today" };
+    case "awaiting-signature":
+      return { tone: "neutral" as const, label: "In your wallet" };
+    case "submitting":
+      return { tone: "neutral" as const, label: "Submitting" };
+    case "pending":
+      return { tone: "neutral" as const, label: "Pending" };
+    case "success":
+      return { tone: "live" as const, label: "Confirmed" };
+    case "error":
+      return { tone: "preview" as const, label: "Not awarded" };
+    case "unavailable":
+      return { tone: "unknown" as const, label: "Unavailable" };
+  }
+}
+
 export function CarePanel({
   pet,
   action,
@@ -30,23 +57,44 @@ export function CarePanel({
   onConnect,
   onSwitchNetwork,
 }: CarePanelProps) {
+  const status = statusChip(action);
   let content: React.ReactNode;
 
   switch (action.kind) {
     case "ready":
-      content = <Button onClick={onCare}>Care for {pet.displayName}</Button>;
+      content = (
+        <Button size="lg" onClick={onCare}>
+          Care for {pet.displayName}
+        </Button>
+      );
       break;
     case "needs-wallet":
-      content = <Button onClick={onConnect}>Connect wallet</Button>;
+      content = (
+        <>
+          <p>Connect a wallet to adopt and care for a pet.</p>
+          <Button size="lg" onClick={onConnect}>
+            Connect wallet
+          </Button>
+        </>
+      );
       break;
     case "wrong-network":
-      content = <Button onClick={onSwitchNetwork}>Switch network</Button>;
+      content = (
+        <>
+          <p>Your wallet is on a different network than the registry.</p>
+          <Button size="lg" onClick={onSwitchNetwork}>
+            Switch network
+          </Button>
+        </>
+      );
       break;
     case "cooldown":
       content = (
         <>
           <p>Care is available again at {formatAvailability(action.availableAtIso)}.</p>
-          <Button disabled>Care unavailable</Button>
+          <Button size="lg" disabled>
+            Care unavailable
+          </Button>
         </>
       );
       break;
@@ -54,7 +102,9 @@ export function CarePanel({
       content = (
         <>
           <p>Waiting for wallet approval. No progress has been awarded.</p>
-          <Button disabled>Awaiting signature</Button>
+          <Button size="lg" disabled>
+            Awaiting signature
+          </Button>
         </>
       );
       break;
@@ -62,7 +112,9 @@ export function CarePanel({
       content = (
         <>
           <p>Submitting the care action. Progress is not confirmed yet.</p>
-          <Button disabled>Submitting</Button>
+          <Button size="lg" disabled>
+            Submitting
+          </Button>
         </>
       );
       break;
@@ -71,7 +123,9 @@ export function CarePanel({
         <>
           <p>Transaction pending. No progress has been awarded yet.</p>
           <code className={styles.hash}>{action.transactionHash}</code>
-          <Button disabled>Pending confirmation</Button>
+          <Button size="lg" disabled>
+            Pending confirmation
+          </Button>
         </>
       );
       break;
@@ -86,7 +140,9 @@ export function CarePanel({
       content = (
         <>
           <p className={styles.error}>{action.message}</p>
-          <Button onClick={onCare}>Try care again</Button>
+          <Button size="lg" onClick={onCare}>
+            Try care again
+          </Button>
         </>
       );
       break;
@@ -96,15 +152,24 @@ export function CarePanel({
   }
 
   return (
-    <Card aria-labelledby="care-heading" className={styles.carePanel}>
-      <p className={styles.kicker}>Daily care presentation</p>
+    <Card
+      surface="warm"
+      aria-labelledby="care-heading"
+      className={styles.carePanel}
+    >
+      <div className={styles.careHead}>
+        <p className={styles.kicker}>Daily care</p>
+        <Badge tone={status.tone}>{status.label}</Badge>
+      </div>
       <h2 id="care-heading">Care for your pet</h2>
-      <p>
+      <p className={styles.careSummary}>
         {pet.nextStageAt === null
           ? `Final stage. Displayed growth is ${pet.growthPoints} points from the parent.`
           : `${pet.growthPoints} growth points. Next stage at ${pet.nextStageAt}.`}
       </p>
-      <div className={styles.actionContent}>{content}</div>
+      <div className={styles.actionContent} aria-live="polite">
+        {content}
+      </div>
     </Card>
   );
 }

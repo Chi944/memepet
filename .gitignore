@@ -20,6 +20,8 @@ contracts/out/
 contracts/cache/
 contracts/broadcast/
 contracts/lib/
+# Local screenshot/debug output from browser tooling
+.playwright-mcp/
 # Editor/OS files and logs
 .DS_Store
 Thumbs.db

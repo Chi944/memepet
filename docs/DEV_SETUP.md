@@ -66,42 +66,65 @@ Every preview displays **UI preview — fictional data** and uses only
 These previews require no wallet, RPC endpoint, API key, private key, backend,
 or external service.
 
-## Actual L0 verification
+## Actual verification
 
-Run on 20 September 2026 using Node 24.19.0 and npm 11.19.0:
+### L0 baseline (20 September 2026, Node 24.19.0, npm 11.19.0)
 
 - `npm ci` — passed; installed 439 packages from `package-lock.json`.
 - `npm run typecheck` — passed with no TypeScript errors.
 - `npm run lint` — passed with no ESLint findings.
-- `npm test` — passed: 1 test file and 1 test.
-- `npm run build` — passed; Next.js production build compiled and generated all
-  routes successfully.
+- `npm test` — passed.
+- `npm run build` — passed.
 - `npm run start -- --hostname 127.0.0.1 --port 3100` — started successfully.
+
+### Design and audit pass (20 September 2026, same toolchain)
+
+Re-run after the UI/UX pass on the same day:
+
+- `npm run typecheck` — passed, exit 0, no output.
+- `npm run lint` — passed, exit 0, no findings.
+- `npm test` — passed: 5 test files, 20 tests.
+- `npm run build` — passed; routes `/`, `/_not-found`, `/dev/*`, `/icon.svg`,
+  `/pet` generated.
+- `npm run start -- --hostname 127.0.0.1 --port 3200` — started successfully.
 
 The production server returned:
 
 - `/` — HTTP 200
+- `/pet` — HTTP 200
+- `/icon.svg` — HTTP 200
 - `/dev/pet` — HTTP 404
 - `/dev/landing` — HTTP 404
 - `/dev/community` — HTTP 404
 
 The `/dev` layout calls `notFound()` in production before returning preview
-children. Hiding links is not the gate.
+children. Hiding links is not the gate. The production home page contains no
+preview links (`grep` count 0) and still explains why care totals are unknown.
 
-Browser checks were run with Playwright at approximately 390px and 1280px:
+`npm run test:contracts` — **not run.** Foundry (`forge`) is not installed on
+the machine used for this pass, so the Solidity tests were neither run nor
+verified here.
 
-- Pet preview: stage and care-state selectors rendered; Guardian showed the
-  final-stage message; the care callback counter increased without changing
+Browser checks were run with Playwright at 390px and 1280px, in light and
+dark colour schemes:
+
+- Home: hero, how-it-works steps and community panel rendered; at 390px
+  `document.documentElement.scrollWidth` equalled `clientWidth` (375), so there
+  is no horizontal overflow.
+- Pet home (`/pet`): renders the not-live explanation plus the rules it will
+  enforce, and offers a route back to the overview.
+- Pet preview: stage and care-state selectors rendered; the stage trail marks
+  the current stage; the care callback counter increased without changing
   growth.
-- Landing preview: responsive hero rendered and **Meet your pet** increased
-  only the local callback counter.
-- Community preview: all selector choices were available; Unknown target
-  omitted percentage progress; Achieved displayed 24 actions toward a
-  20-action target with the visual bar capped.
-- Intentional accessible placeholders rendered for missing mascot art.
+- Community preview: Achieved displayed 24 actions toward a 20-action target
+  with the visual bar capped; Unknown target omitted percentage progress and
+  showed the hatched indeterminate track instead of an empty bar.
+- Console on the production home page: 0 errors and 0 warnings.
 
-The browser requested `/favicon.ico`, which returned 404. This does not affect
-the application or preview routes; adding approved branding is optional polish.
+The earlier `/favicon.ico` 404 is fixed by `src/app/icon.svg`, which Next.js
+serves and links as `<link rel="icon" … type="image/svg+xml">`. A direct
+request to `/favicon.ico` still 404s, which is expected when an SVG icon is
+declared.
 
 ## Known setup messages
 

@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { CommunityPanelProps } from "@/types/view-models";
 import { Card } from "@/components/ui/Card";
+import { DataModeBadge } from "@/components/ui/Badge";
 import styles from "./community.module.css";
 
 export function CommunityPanel({ community }: CommunityPanelProps) {
@@ -15,31 +16,47 @@ export function CommunityPanel({ community }: CommunityPanelProps) {
 
   if (community.isLoading) {
     return (
-      <Card aria-live="polite" aria-busy="true">
-        <p className={styles.kicker}>Community habitat</p>
+      <Card className={styles.panel} aria-live="polite" aria-busy="true">
+        <header className={styles.head}>
+          <p className={styles.kicker}>Community habitat</p>
+          <DataModeBadge mode={community.dataMode} isKnown={false} />
+        </header>
         <h2>{community.name}</h2>
         <p>Loading community progress…</p>
+        <div className={styles.trackPending} aria-hidden="true" />
       </Card>
     );
   }
 
   if (community.errorMessage) {
     return (
-      <Card role="status">
-        <p className={styles.kicker}>Community habitat</p>
+      <Card className={styles.panel} role="status">
+        <header className={styles.head}>
+          <p className={styles.kicker}>Community habitat</p>
+          <DataModeBadge mode={community.dataMode} isKnown={false} />
+        </header>
         <h2>{community.name}</h2>
         <p className={styles.error}>{community.errorMessage}</p>
         <p>Live progress is unavailable; no fictional total is shown.</p>
+        <div className={styles.trackUnknown} aria-hidden="true" />
       </Card>
     );
   }
 
   if (!knownTotal) {
     return (
-      <Card>
-        <p className={styles.kicker}>Community habitat</p>
+      <Card className={styles.panel}>
+        <header className={styles.head}>
+          <p className={styles.kicker}>Community habitat</p>
+          <DataModeBadge mode={community.dataMode} isKnown={false} />
+        </header>
         <h2>{community.name}</h2>
         <p className={styles.unknown}>Care actions: Unknown</p>
+        {/* Hatched, never an empty fill: unknown must not look like zero. */}
+        <div className={styles.trackUnknown} aria-hidden="true" />
+        <p className={styles.note}>
+          A count appears here once a registry read succeeds.
+        </p>
       </Card>
     );
   }
@@ -52,23 +69,30 @@ export function CommunityPanel({ community }: CommunityPanelProps) {
     percentage === null
       ? undefined
       : ({ "--community-progress": `${percentage}%` } as CSSProperties);
+  const achieved = target !== null && total >= target;
 
   return (
-    <Card>
-      <p className={styles.kicker}>Community habitat</p>
+    <Card className={styles.panel}>
+      <header className={styles.head}>
+        <p className={styles.kicker}>Community habitat</p>
+        <DataModeBadge mode={community.dataMode} />
+      </header>
       <h2>{community.name}</h2>
       <p className={styles.total}>
         Care actions: <strong>{total}</strong>
       </p>
 
       {target === null ? (
-        <p className={styles.unknown}>
-          Milestone target unavailable. No percentage can be calculated.
-        </p>
+        <>
+          <div className={styles.trackUnknown} aria-hidden="true" />
+          <p className={styles.unknown}>
+            Milestone target unavailable. No percentage can be calculated.
+          </p>
+        </>
       ) : (
         <>
           <div
-            className={styles.progressTrack}
+            className={`${styles.progressTrack} ${achieved ? styles.progressAchieved : ""}`.trim()}
             role="progressbar"
             aria-label="Community milestone progress"
             aria-valuemin={0}
@@ -80,7 +104,7 @@ export function CommunityPanel({ community }: CommunityPanelProps) {
           </div>
           <p className={styles.target}>
             Target: {target} care actions
-            {total >= target ? " — milestone achieved" : ""}
+            {achieved ? " — milestone achieved" : ""}
           </p>
         </>
       )}

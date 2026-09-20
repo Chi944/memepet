@@ -1,55 +1,165 @@
+/* ---------- button ---------- */
+
 .button {
-  min-height: 2.75rem;
-  padding: 0.7rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   border: 1px solid transparent;
   border-radius: 999px;
   cursor: pointer;
-  font-weight: 800;
+  font-family: var(--font-display-stack);
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  text-align: center;
+  text-decoration: none;
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
+    box-shadow 160ms ease,
     transform 160ms ease;
+}
+
+.size-md {
+  min-height: 2.75rem;
+  padding: 0.6rem 1.15rem;
+  font-size: var(--step-0);
+}
+
+.size-lg {
+  min-height: 3.25rem;
+  padding: 0.75rem 1.75rem;
+  font-size: var(--step-1);
 }
 
 .button:hover:not(:disabled) {
   transform: translateY(-1px);
 }
 
+.button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
 .button:disabled {
   cursor: not-allowed;
-  opacity: 0.62;
+  opacity: 0.55;
+  transform: none;
 }
 
 .primary {
   color: #ffffff;
-  background: var(--accent);
+  background: var(--action);
+  box-shadow: 0 8px 20px rgb(109 63 208 / 28%);
 }
 
 .primary:hover:not(:disabled) {
-  background: var(--accent-strong);
+  background: var(--action-press);
 }
 
 .secondary {
-  color: var(--accent-strong);
-  border-color: var(--border);
+  color: var(--action);
+  border-color: var(--line-strong);
   background: var(--surface);
 }
 
 .secondary:hover:not(:disabled) {
-  border-color: var(--accent);
-  background: var(--surface-muted);
+  border-color: var(--action);
+  background: var(--action-wash);
 }
+
+.quiet {
+  color: var(--ink-soft);
+  background: transparent;
+}
+
+.quiet:hover:not(:disabled) {
+  color: var(--ink);
+  background: var(--surface-sunken);
+}
+
+/* Dark mode: a saturated shadow under a light violet button reads as a smudge. */
+@media (prefers-color-scheme: dark) {
+  .primary {
+    color: #1a1029;
+    box-shadow: none;
+  }
+}
+
+/* ---------- card ---------- */
 
 .card {
-  padding: clamp(1.15rem, 4vw, 2rem);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: var(--shadow);
+  padding: clamp(1.15rem, 3.5vw, 1.9rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .button {
-    transition: none;
-  }
+.card-plain {
+  background: var(--surface);
+}
+
+.card-warm {
+  background: var(--surface-warm);
+}
+
+.card-sunken {
+  background: var(--surface-sunken);
+  box-shadow: none;
+}
+
+/* ---------- provenance badge ---------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-mono-stack);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badge::before {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: currentcolor;
+  content: "";
+}
+
+.badge-live {
+  color: var(--live);
+  border-color: var(--live);
+  background: var(--live-wash);
+}
+
+.badge-preview {
+  color: var(--alert);
+  border-color: var(--alert);
+  background: var(--alert-wash);
+}
+
+.badge-unknown {
+  color: var(--unknown);
+  border-color: var(--line-strong);
+  background: var(--unknown-wash);
+}
+
+.badge-unknown::before {
+  background: repeating-linear-gradient(
+    45deg,
+    currentcolor 0 2px,
+    transparent 2px 4px
+  );
+}
+
+.badge-neutral {
+  color: var(--ink-soft);
+  border-color: var(--line);
+  background: var(--surface-sunken);
 }
