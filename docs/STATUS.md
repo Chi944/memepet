@@ -37,7 +37,7 @@ critical path; everything else is polish.**
 | Live product link | **None** |
 | Demo video | **None** |
 | Automated checks | typecheck, lint, 20 tests, build — all passing |
-| Contract tests | Not run on the lead machine (Foundry not installed) |
+| Contract tests | Foundry 1.8.3 installed; 9/9 passing |
 
 ## Team access — blocker
 
@@ -95,7 +95,8 @@ See `docs/AUDIT_2026-09-20.md` for the full finding list.
 4. Deploy the app somewhere public and put the URL in `NEXT_PUBLIC_SITE_URL`.
 5. Decide the two contract findings (unchecked increments, dead sentinel
    guard) before the deploy, because they are cheaper to fix now than after.
-6. Install Foundry or mark `npm run test:contracts` as lead-only.
+6. Foundry 1.8.3 is installed and `npm run test:contracts` passes 9/9.
+   `anvil` is available for the local-node work in L2 slice 1.
 
 **Teammate A** — pet experience, `src/components/pet/**`:
 1. Review `/dev/pet` at 390px and desktop against the new tokens. The lead has
