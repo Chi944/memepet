@@ -49,6 +49,9 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
           {pet.artSrc ? (
             <Image
               className={styles.art}
+              data-stage-art={
+                pet.artSrc === `/pets/${pet.stage}.png` ? pet.stage : undefined
+              }
               src={pet.artSrc}
               alt={`${pet.displayName}, the ${pet.stage} pet`}
               width={480}

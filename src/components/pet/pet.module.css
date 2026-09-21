@@ -109,6 +109,18 @@
   filter: drop-shadow(0 14px 22px rgb(45 27 66 / 18%));
 }
 
+/* Align approved PNG silhouettes to Hatchling's height, centre and feet.
+ * Keep the source canvases intact; custom art keeps its supplied framing.
+ * Measurements and source bounds are recorded in docs/pet-assets.md.
+ */
+.art[data-stage-art="buddy"] {
+  transform: translate(-0.542044%, 0.257739%) scale(0.907168);
+}
+
+.art[data-stage-art="guardian"] {
+  transform: translate(-1.519782%, 1.07018%) scale(0.818664);
+}
+
 .placeholder {
   display: grid;
   max-width: 15rem;
@@ -132,6 +144,13 @@
 
 .celebrating {
   animation: celebration-pulse 900ms ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .idle,
+  .celebrating {
+    animation: none;
+  }
 }
 
 .celebration {
