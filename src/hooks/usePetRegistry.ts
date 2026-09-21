@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   type Address,
   createPublicClient,
@@ -90,10 +90,17 @@ export function usePetRegistry({
     setCelebrateStageUp(false);
   }
 
-  const chain = chainFromDeployment(deployment);
+  // chainFromDeployment builds a fresh object for any chain id outside X Layer,
+  // and this value is an effect dependency: an unstable identity re-fires the
+  // read on every render. getActiveDeployment is now cached, so this is stable.
+  const chain = useMemo(() => chainFromDeployment(deployment), [deployment]);
   const registryAddress = deployment.registryAddress as Address | null;
 
+  // Read during async writes to detect a wallet/chain switch mid-flight.
+  const cacheKeyRef = useRef(cacheKey);
+
   useEffect(() => {
+    cacheKeyRef.current = cacheKey;
     submitLock.current = false;
     stageBeforeCare.current = null;
   }, [cacheKey]);
@@ -220,6 +227,8 @@ export function usePetRegistry({
         return;
       }
 
+      const keyAtStart = cacheKeyRef.current;
+
       submitLock.current = true;
       setCelebrateStageUp(false);
       setTxErrorMessage(null);
@@ -274,13 +283,42 @@ export function usePetRegistry({
           return;
         }
 
+        // The wallet or chain changed while this write was in flight: the
+        // result belongs to the previous identity and must not be shown.
+        if (cacheKeyRef.current !== keyAtStart) {
+          return;
+        }
+
         // Re-read before treating the write as success. A hash alone is not enough.
-        const result = await publicClient.readContract({
-          address: registryAddress,
-          abi: petRegistryAbi,
-          functionName: "petOf",
-          args: [address],
-        });
+        let result;
+        try {
+          result = await publicClient.readContract({
+            address: registryAddress,
+            abi: petRegistryAbi,
+            functionName: "petOf",
+            args: [address],
+          });
+        } catch {
+          // The receipt already confirmed success, so the write DID land. Say
+          // so, and mark the display as stale rather than claiming failure.
+          if (cacheKeyRef.current !== keyAtStart) {
+            return;
+          }
+          setSnapshot((previous) => ({
+            ...previous,
+            readStatus: "error",
+            readErrorMessage:
+              kind === "adopt"
+                ? "Adoption confirmed on chain, but refreshing the pet failed. The displayed state may be out of date."
+                : "Care confirmed on chain, but refreshing the pet failed. The displayed progress may be out of date.",
+          }));
+          setTxPhase("success");
+          return;
+        }
+
+        if (cacheKeyRef.current !== keyAtStart) {
+          return;
+        }
 
         const mappedRaw: PetOfResult = {
           exists: result[0],
@@ -311,6 +349,10 @@ export function usePetRegistry({
         setTxPhase("success");
         setRefreshToken((value) => value + 1);
       } catch (error) {
+        if (cacheKeyRef.current !== keyAtStart) {
+          return;
+        }
+
         if (isUserRejection(error)) {
           setTxPhase("rejected");
           setTxErrorMessage(

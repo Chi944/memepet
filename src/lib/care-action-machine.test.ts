@@ -42,7 +42,7 @@ describe("resolveCareActionState", () => {
     ).toEqual({ kind: "pending", transactionHash: "0xabc" });
   });
 
-  it("maps rejection and read failure to error without fixture fallback", () => {
+  it("maps rejection and read failure without fixture fallback", () => {
     expect(
       resolveCareActionState({
         ...base,
@@ -50,6 +50,9 @@ describe("resolveCareActionState", () => {
       }),
     ).toMatchObject({ kind: "error" });
 
+    // A failed read is "unavailable", not "error": the "error" kind renders an
+    // enabled retry that submits a real care write, and after a failed read
+    // neither the pet nor the cooldown is known.
     expect(
       resolveCareActionState({
         ...base,
@@ -57,7 +60,7 @@ describe("resolveCareActionState", () => {
         readErrorMessage: "Pet data could not be loaded.",
       }),
     ).toEqual({
-      kind: "error",
+      kind: "unavailable",
       message: "Pet data could not be loaded.",
     });
   });

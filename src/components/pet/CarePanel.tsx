@@ -64,7 +64,7 @@ export function CarePanel({
     case "ready":
       content = (
         <Button size="lg" onClick={onCare}>
-          Care for {pet.displayName}
+          {pet ? `Care for ${pet.displayName}` : "Care for your pet"}
         </Button>
       );
       break;
@@ -162,11 +162,13 @@ export function CarePanel({
         <Badge tone={status.tone}>{status.label}</Badge>
       </div>
       <h2 id="care-heading">Care for your pet</h2>
-      <p className={styles.careSummary}>
-        {pet.nextStageAt === null
-          ? `Final stage. Displayed growth is ${pet.growthPoints} points from the parent.`
-          : `${pet.growthPoints} growth points. Next stage at ${pet.nextStageAt}.`}
-      </p>
+      {pet ? (
+        <p className={styles.careSummary}>
+          {pet.nextStageAt === null
+            ? `Final stage. Displayed growth is ${pet.growthPoints} points from the parent.`
+            : `${pet.growthPoints} growth points. Next stage at ${pet.nextStageAt}.`}
+        </p>
+      ) : null}
       <div className={styles.actionContent} aria-live="polite">
         {content}
       </div>

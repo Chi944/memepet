@@ -15,6 +15,8 @@ export type LivePetControllerInput = {
     | "success"
     | "error"
     | "rejected";
+  /** Which write produced txPhase. An adopt receipt must not read as a confirmed care. */
+  readonly txKind?: "idle" | "adopt" | "care";
   readonly transactionHash?: string;
   readonly txErrorMessage?: string;
   /** When false, care remains unavailable even if a pet exists. */
@@ -75,7 +77,9 @@ export function resolveCareActionState(
     };
   }
 
-  if (input.txPhase === "success") {
+  // A confirmed adoption is not a confirmed care: fall through to the normal
+  // read/cooldown logic so the panel offers the first care instead.
+  if (input.txPhase === "success" && input.txKind !== "adopt") {
     return { kind: "success" };
   }
 
@@ -86,9 +90,12 @@ export function resolveCareActionState(
     };
   }
 
+  // A failed read is "unavailable", not "error": we do not know whether a pet
+  // exists or whether the daily cooldown is active, so care must not be
+  // offered. The "error" kind renders an enabled retry that submits a write.
   if (input.readStatus === "error") {
     return {
-      kind: "error",
+      kind: "unavailable",
       message:
         input.readErrorMessage ??
         "Pet data could not be loaded. No preview data is shown.",
