@@ -1,5 +1,12 @@
 # Vercel hosting prep (no contract required)
 
+> **Status, 21 September 2026:** hosted at https://memepet.vercel.app and the
+> X Layer testnet registry is committed in `src/lib/deployment.ts`, so no
+> `NEXT_PUBLIC_MEMEPET_*` variables are needed on Vercel. `NEXT_PUBLIC_SITE_URL`
+> is optional: `metadataBase` falls back to `VERCEL_PROJECT_PRODUCTION_URL`.
+> The rest of this file records how the site was hosted before the contract
+> existed.
+
 The hackathon asks for a live product link. The app can be hosted while
 `src/lib/deployment.ts` stays `status: "not-deployed"`. Visitors see the
 honest “no registry connected” pet gate and unknown community totals until

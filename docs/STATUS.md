@@ -1,6 +1,6 @@
 # Shared status
 
-Updated: 20 September 2026.
+Updated: 21 September 2026.
 
 ## Hackathon deadline
 
@@ -19,8 +19,8 @@ public repository with a clear README, a 2–4 minute demo video of the working
 product, a live product or test-environment link, and the guideline
 declaration.
 
-**Five days remain and the X Layer deployment has not happened. That is the
-critical path; everything else is polish.**
+**The X Layer deployment is done (21 September).** The critical path is now
+manual wallet QA against the live contract, then the demo video.
 
 ## Current state
 
@@ -31,32 +31,27 @@ critical path; everything else is polish.**
 | Application | Next.js app: landing, pet home, `/dev/*` previews |
 | Design system | Tokens, dark mode, provenance badges, app shell |
 | Pet artwork | Hatchling, Buddy, Guardian in `public/pets/` |
-| Pet registry contract | Written and unit-tested; Anvil-verified locally; **not on X Layer** |
+| Pet registry contract | **Live on X Layer testnet** `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`, block 41543244, bytecode verified against `main` |
 | Wallet / adopt (L2 slice 1) | Merged on `main` (env-gated) |
-| Care + community read (L2 slice 2) | In progress on `feat/l2-care-loop` |
-| X Layer deployment | **None** — no address committed in `deployment.ts` |
-| Live product link | **None** |
+| Care + community read (L2 slice 2) | Merged on `main` (PR #9) |
+| X Layer deployment | ✅ Testnet, committed in `deployment.ts` |
+| Live product link | ✅ https://memepet.vercel.app |
 | Demo video | **None** |
 | Automated checks | typecheck, lint, 39 tests, build — all passing |
 | Contract tests | Foundry 1.8.3 installed; 13/13 passing |
-## Team access — blocker
+## Team access
 
-Checked against the GitHub API on 20 September 2026:
+Checked against the GitHub API on 21 September 2026:
 
-| Person | Repository access | Contributions so far |
+| Person | Repository access | Commits on `main` |
 |---|---|---|
-| Lead (`Chi944`) | admin | PRs #1, #2, #3 |
-| Teammate B (`larmyh`) | write | none |
-| Teammate A | **none, and no pending invitation** | none |
+| Lead (`Chi944`) | admin | 35 |
+| Teammate B (`larmyh`) | write | 0 |
+| Teammate A (`kloo007`) | **invitation still pending** | 0 |
 
-**Teammate A cannot push a branch or open a pull request.** Invite them via
-Settings → Collaborators → Add people before assigning A1. Every pull request
-in this repository so far was authored by the lead; neither teammate has
-contributed a commit yet, so no teammate has confirmed they can run the
-baseline.
-
-Stale branch `chore/l0-foundation` is still on origin after L0 merged; delete
-it once nothing references it.
+Teammate A cannot push until the invitation is accepted. Neither teammate has
+yet confirmed the baseline runs. Their next steps are in
+`docs/prompt-packs/TEAMMATE-A-NEXT.md` and `TEAMMATE-B-NEXT.md`.
 
 ## Delivery gates
 
@@ -70,9 +65,10 @@ From the agreed plan. A pass is not done until its required result is true.
 | Testing | Integration failures and edge cases | Assigned visual fixes | Independent testing and bug reports | No unresolved blocker in the core journey |
 | Release | Final configuration and deployment | Release-build visual checks | Accurate demo and submission package | Clean-browser demonstration works |
 
-Current position: **L2 slice 2 (care + community read) is on `feat/l2-care-loop`.**
-Committed `DEPLOYMENT` remains `not-deployed`. Local Anvil verification uses
-`NEXT_PUBLIC_MEMEPET_*` only (see `.env.example`). No X Layer address yet.
+Current position: **the core loop is deployed and live.** The contract is on
+X Layer testnet and the hosted app reads it. What remains is the Testing gate —
+exercising the wallet-signature states by hand — and the Release gate: the demo
+video and submission.
 
 ## Built
 
@@ -91,16 +87,16 @@ Committed `DEPLOYMENT` remains `not-deployed`. Local Anvil verification uses
 See `docs/AUDIT_2026-09-20.md` for the full finding list.
 
 **Lead** — owns the critical path:
-1. Get an authorized X Layer testnet deploy of `PetRegistry` and record the
-   verified network name, address and explorer URL in `src/lib/deployment.ts`.
-   Do not invent an address.
-2. Deploy the app somewhere public and put the URL in `NEXT_PUBLIC_SITE_URL`.
-3. The two contract findings (unchecked increments, dead sentinel guard) are
-   fixed. `care()` costs about 633 more gas; re-read the diff before deploying,
-   because the deployed bytecode changed.
-4. Foundry 1.8.3 is installed and `npm run test:contracts` passes 13/13.
-5. Open finding 1 remains: `communityStats` still reverts for bad ids — the L2
-   read layer maps that to unknown.
+1. Done: `PetRegistry` deployed to X Layer testnet and recorded in
+   `src/lib/deployment.ts`; bytecode verified against `main`. See
+   `docs/deploy/XLAYER_TESTNET.md` → Recorded result.
+2. Done: hosted at https://memepet.vercel.app.
+3. Run one full wallet journey against the live contract yourself before
+   Teammate B does — connect, adopt, refresh, care — so any integration bug
+   surfaces now rather than during recording.
+4. Record the 2–4 minute demo video once B3 has passed.
+5. Open finding: `communityStats` reverts for bad ids — the read layer maps
+   that to unknown, which is verified in unit tests and on chain.
 
 **Teammate A** — pet experience, `src/components/pet/**`:
 1. Review `/dev/pet` at 390px and desktop against the new tokens. The lead has
