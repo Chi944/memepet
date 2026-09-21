@@ -30,15 +30,26 @@ export interface Deployment {
   readonly currencySymbol: string | null;
 }
 
-/** Committed defaults: no invented address. */
+/**
+ * Verified X Layer testnet deployment, recorded 21 September 2026.
+ *
+ * Every value below was confirmed on chain, not copied from tool output:
+ *   - deployment tx 0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9
+ *     receipt status 0x1, block 41543244, 354926 gas
+ *   - `cast code` at this address equals `forge inspect PetRegistry
+ *     deployedBytecode` from main byte for byte, including CBOR metadata
+ *   - APPROVED_COMMUNITY_ID() == 1, communityStats(1) == 0 at deploy,
+ *     communityStats(99) reverts InvalidCommunity
+ * Network values are from the official OKX X Layer network-information page.
+ */
 export const DEPLOYMENT: Deployment = {
-  status: "not-deployed",
-  networkName: null,
-  registryAddress: null,
-  explorerBaseUrl: null,
-  chainId: null,
-  rpcUrl: null,
-  currencySymbol: null,
+  status: "testnet",
+  networkName: "X Layer testnet",
+  registryAddress: "0xe844152262D243a7B90F6e07FF7A67F1d7FeD216",
+  explorerBaseUrl: "https://www.okx.com/web3/explorer/xlayer-test",
+  chainId: 1952,
+  rpcUrl: "https://testrpc.xlayer.tech/terigon",
+  currencySymbol: "OKB",
 };
 
 function readEnvOverride(): Deployment | null {

@@ -89,3 +89,88 @@ was withdrawn** — it was a screenshot artefact, not a layout bug. See
 Task ID, branch, what works, what you tested yourself, screenshots, actual
 check results, remaining limitations. Be able to explain which props
 `PetScene` receives and which callback the Care button invokes.
+
+---
+
+# Stretch — only after A3 is merged
+
+Added 21 September 2026. The contract is now **live on X Layer testnet and
+frozen**: its deployed bytecode is verified identical to `main`. Nothing below
+touches the contract, a route, a shared type, or a dependency.
+
+**Hard cut-off: 24 September, 12:00 UTC.** Anything not merged with green CI by
+then is dropped, so the 25th is kept for the video and the submission. Stop at
+the end of any task if the clock is close — a finished A4 beats a half-finished
+A4 and A5.
+
+## A4 — the evolution moment (do this first)
+
+**Allowed:** `src/components/pet/**` only. Branch: `feat/a4-evolution-moment`.
+
+**Why it matters:** the stage-up — Hatchling becoming Buddy — is the single most
+filmable beat in the demo, and right now it is only a pulse and a small badge.
+The committed scope includes "one evolution moment", so this is completing
+scope, not adding it.
+
+### Prompt
+
+> Read AGENTS.md, docs/PROJECT_BRIEF.md and src/components/pet/PetScene.tsx.
+> Implement A4 only, inside src/components/pet/**.
+>
+> PetScene already receives a `celebrate` boolean. The lead's code sets it to
+> true ONLY after a confirmed care moves the pet across a stage threshold —
+> never on submission. Design a stage-up reveal driven entirely by that
+> existing prop. Do not add a prop, change PetSceneProps, or decide yourself
+> when to celebrate.
+>
+> Make it feel like the pet grew: for example a brief glow or burst behind the
+> art, the new stage name announced, and the stage trail advancing. Keep it
+> under about 1.5 seconds and tasteful — it must not obscure the growth points
+> or the care button.
+>
+> With reduced motion enabled, show a static announcement instead of any
+> motion. Announce the stage change to screen readers with an aria-live region.
+>
+> Use CSS only; add no animation library. Update the co-located tests: the
+> announcement renders when celebrate is true, does not when it is false, and
+> reduced motion still shows the text. Show every state in /dev/pet using the
+> existing "Show confirmed-success celebration" toggle.
+>
+> Run npm run typecheck, lint, test and build. Report actual results and give
+> me a short screen recording of the reveal at desktop and at 390px.
+
+**You check:** it reads as growth, not as an error or a notification; it never
+fires unless the toggle is on; reduced motion shows text with no movement.
+
+## A5 — share-card artwork
+
+**Allowed:** `public/pets/share/**` and `docs/pet-assets.md`. Branch:
+`feat/a5-share-art`.
+
+**Why it matters:** the site's link preview currently uses the square 1024px
+mascot, but the card format is 1200x630, so X, Discord and Telegram crop it.
+The lead will generate a proper share image per pet in code; you supply the art
+it sits on.
+
+### Prompt
+
+> Produce three share-card backgrounds, one per stage, saved as
+> public/pets/share/hatchling.png, buddy.png and guardian.png, each exactly
+> 1200x630.
+>
+> Place the existing stage art — do not redraw the mascot — on the right
+> ~45% of the canvas, using the same lilac-to-mint background as the app.
+> Leave the left ~55% clear and calm: the lead's code will render the pet's
+> name, stage and growth points there in text. Put no text in the image
+> itself, because baked-in text cannot be kept accurate.
+>
+> Keep each file under 300 KB. Record dimensions, source and licence position
+> in docs/pet-assets.md. Do not add token logos, tickers or claimed rights.
+
+**You check:** the pet is not cropped at 1200x630; the left side is empty enough
+for two lines of large text; all three share one layout so they read as a set.
+
+## Handoff for stretch tasks
+
+Same as A3, plus: tell the lead A5 is ready so it can be wired into the share
+image.

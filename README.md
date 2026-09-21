@@ -27,9 +27,9 @@ Progression is earned by showing up — not by spending.
 | **Event** | OKX Dev Day 2026 |
 | **Track** | Build a Market — meme applications |
 | **Team** | 3 people: lead (integration + contract), Teammate A (pet experience), Teammate B (community UI, QA, demo) |
-| **Live demo** | ⏳ *Not deployed yet — see [Honest status](#-honest-status)* |
+| **Live demo** | [memepet.vercel.app](https://memepet.vercel.app) |
 | **Demo video** | ⏳ *Not recorded yet* |
-| **Contract** | ⏳ *Not deployed to X Layer yet. No address is invented anywhere in this repo.* |
+| **Contract** | [`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`](https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216) on X Layer testnet (chain 1952) |
 | **Repository** | [github.com/Chi944/memepet](https://github.com/Chi944/memepet) |
 
 > We would rather show you an empty box than a fake one. Every placeholder above
@@ -97,9 +97,9 @@ rather than the pitch. Anything not finished says so.
 | Design system, dark mode, mobile (390px) | ✅ On `main` |
 | `PetRegistry` contract + 13 unit tests | ✅ On `main` |
 | Wallet connect → adopt → read back → survive refresh | ✅ On `main`, verified on local Anvil |
-| Daily care transaction + live community read | 🔨 In review, not yet merged |
-| Deployed to X Layer testnet | ❌ Not yet |
-| Public live link | ❌ Not yet |
+| Daily care transaction + live community read | ✅ On `main` |
+| Deployed to X Layer testnet | ✅ Block 41,543,244 — bytecode verified identical to `main` |
+| Public live link | ✅ [memepet.vercel.app](https://memepet.vercel.app) |
 | Demo video | ❌ Not yet |
 
 **A design principle you can check in the code:** the UI never shows a number it
@@ -180,10 +180,10 @@ progress.**
 ```
 
 `src/lib/deployment.ts` is the **single source of truth** for what is deployed.
-It ships as `status: "not-deployed"` with every field `null`, and is overridden
-only by validated `NEXT_PUBLIC_MEMEPET_*` environment variables. There is no
-placeholder address anywhere in the repository — by design, so that a fake
-address can never reach a demo.
+It records the X Layer testnet deployment with every value confirmed on chain,
+and can be overridden only by validated `NEXT_PUBLIC_MEMEPET_*` environment
+variables for local work. Before the deploy it held `null` everywhere rather
+than a placeholder — by design, so that a fake address could never reach a demo.
 
 ### Built with
 
@@ -204,7 +204,7 @@ address can never reach a demo.
 
 | Network | Chain ID | Address | Explorer |
 |---|---|---|---|
-| X Layer testnet | 1952 | ⏳ *not deployed* | — |
+| X Layer testnet | 1952 | [`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`](https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216) | [deploy tx](https://www.okx.com/web3/explorer/xlayer-test/tx/0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9) |
 | X Layer mainnet | 196 | *not planned for this submission* | — |
 
 Network parameters are taken from the
@@ -267,8 +267,8 @@ cp .env.example .env.local   # set the deployed address, then restart npm run de
 
 ### Public hosting (Vercel)
 
-The app can be hosted with `DEPLOYMENT.status` still `"not-deployed"` so the
-submission has a live link before the contract address exists. See
+The app is hosted on Vercel at [memepet.vercel.app](https://memepet.vercel.app)
+and reads the X Layer testnet registry directly. See
 [`docs/deploy/VERCEL.md`](docs/deploy/VERCEL.md). X Layer testnet contract
 steps (simulate / human broadcast / record): [`docs/deploy/XLAYER_TESTNET.md`](docs/deploy/XLAYER_TESTNET.md).
 
@@ -337,10 +337,11 @@ redeploying the contract during the final days.
 Recorded honestly; the full list lives in
 [`docs/AUDIT_2026-09-20.md`](docs/AUDIT_2026-09-20.md).
 
-- **Not yet deployed to X Layer.** Everything on-chain has been verified against
-  a local Anvil node, which proves the logic but says nothing about real network
-  behaviour, gas, or how a wallet surfaces a revert.
-- **The care loop is not merged to `main` yet** at the time of writing.
+- **Deployed to X Layer testnet, not mainnet.** Testnet OKB has no value, which
+  is deliberate: nothing in MemePet should ever cost a user real money.
+- The contract is not source-verified on the explorer. Verification needs an
+  OKLink API key tied to an OKX account; instead, the deployed bytecode was
+  compared against `main` and matches byte for byte, including metadata.
 - `communityStats()` reverts for an unapproved community id. The read layer must
   map that revert to *unknown*, never to `0`.
 - Browser-level wallet states — rejecting a signature in MetaMask, switching
@@ -352,8 +353,8 @@ Recorded honestly; the full list lives in
 
 ## 🔭 Roadmap
 
-Immediate, before submission: deploy to X Layer testnet, merge the care loop,
-publish a live link, record the demo, and run manual QA against the deployed app.
+Immediate, before submission: run the manual wallet walkthrough against the
+deployed contract and record the demo video.
 
 Beyond the hackathon: multiple communities, accessory saving, public pet profile
 pages, and a read-only holder indicator. All are listed as stretch scope in the

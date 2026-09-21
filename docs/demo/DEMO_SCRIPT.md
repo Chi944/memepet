@@ -1,14 +1,16 @@
 # Demo script — OKX Dev Day 2026 submission
 
-Status when drafted: **21 September 2026**. Deadline: **25 September 2026,
+Drafted **21 September 2026**; deployment references updated **22 September 2026**. Deadline: **25 September 2026,
 23:59 UTC** (`docs/STATUS.md`).
 
 This is a script to run and record, not a record of something already run.
-As of drafting, no wallet-signature walkthrough row in
-`docs/qa/BROWSER_WALKTHROUGH.md` has been executed, and no X Layer deployment
-exists (`docs/STATUS.md` → "X Layer deployment: None"). **Do not record this
-script until both are true, and update the ⏳ markers below with real
-evidence before submitting.**
+The contract and public app are deployed: X Layer testnet (chain 1952),
+`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`, and
+https://memepet.vercel.app. These facts come from `docs/STATUS.md` and the
+recorded result in `docs/deploy/XLAYER_TESTNET.md`; this update did not repeat
+on-chain verification. **Recording still requires the real wallet walkthrough
+in `docs/qa/BROWSER_WALKTHROUGH.md` and the checks below.** Update remaining
+⏳ markers with observed evidence before submitting.
 
 Target length: 2–4 minutes — **verify the organizer's exact required length
 before recording**; this script is written to be trimmable (see cut points).
@@ -17,7 +19,7 @@ before recording**; this script is written to be trimmable (see cut points).
 
 ## 0. Before recording — preconditions
 
-- [ ] `PetRegistry` is deployed to the **declared X Layer test environment**
+- [x] `PetRegistry` is deployed to the **declared X Layer test environment**
       (not Anvil) and the address is committed in `src/lib/deployment.ts` —
       never an invented address.
 - [ ] `NEXT_PUBLIC_SITE_URL` points at a public, reachable deployment.
@@ -34,20 +36,20 @@ If any box above is unchecked, this is a rehearsal, not the submission take.
 
 ## 1. The problem (≈20s)
 
-> "Meme communities are almost entirely transactional — the only way to
-> belong is to buy and hold a token. MemePet gives a community a shared
+> "Meme communities are almost entirely transactional — participation often
+> revolves around buying and holding tokens. MemePet gives a community a shared
 > mascot, and every wallet its own pet, earned by showing up, not spending."
 
 *(Cut point: trim to one sentence if under time pressure.)*
 
 ## 2. Connect and adopt (≈40s)
 
-- Open the **live public URL** (⏳ fill in once deployed) in a clean browser
+- Open the **live public URL** (https://memepet.vercel.app) in a clean browser
   — no dev tools, no pre-filled state.
 - Click **Connect wallet**, approve in the prepared demo wallet.
 - Click **Adopt pet**, approve the signature.
-- Narrate while it confirms: "This is one transaction, no token, no
-  approval — just a wallet-linked adoption record."
+- Narrate while it confirms: "This is one transaction with testnet gas, no token purchase or
+  token-spending approval — just a wallet-linked adoption record."
 - Show the pet appear **only after** the receipt confirms and the UI
   re-reads the chain (not immediately on signing).
 

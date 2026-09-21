@@ -70,7 +70,23 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: foundry-rs/foundry-toolchain@v1
+      # GitHub Releases intermittently returns 504 for the Foundry download,
+      # which fails the job before a single test runs. Retry once after a
+      # pause instead of reporting an infrastructure blip as a failing suite.
+      - name: Install Foundry
+        id: foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        continue-on-error: true
+        with:
+          version: stable
+
+      - name: Wait before retrying the Foundry install
+        if: steps.foundry.outcome == 'failure'
+        run: sleep 45
+
+      - name: Install Foundry (retry)
+        if: steps.foundry.outcome == 'failure'
+        uses: foundry-rs/foundry-toolchain@v1
         with:
           version: stable
 

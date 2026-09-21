@@ -1,7 +1,8 @@
 # Submission notes — draft
 
 Drafted 21 September 2026, from `docs/STATUS.md` and `docs/qa/evidence/OBSERVATIONS.md`
-only. Every ⏳ item below is unverified and must be filled with a real value —
+with deployment references updated 22 September 2026 from the recorded result
+in `docs/deploy/XLAYER_TESTNET.md`. Every ⏳ item below is unverified and must be filled with a real value —
 never a placeholder left in — before this is submitted.
 
 ## Team and track
@@ -28,15 +29,16 @@ progression is earned by participation, not purchase.
 | Team info and track | Ready — see above | this doc |
 | Project summary | Draft ready — see above | this doc |
 | Public repository with clear README | Done | `README.md` |
-| 2–4 minute demo video | ⏳ Not recorded — blocked on X Layer deploy | `docs/demo/DEMO_SCRIPT.md` |
-| Live product / test-environment link | ⏳ None yet | `docs/STATUS.md` |
+| 2–4 minute demo video | ⏳ Not recorded — awaiting real wallet QA and recording | `docs/demo/DEMO_SCRIPT.md` |
+| Live product / test-environment link | https://memepet.vercel.app — final clean-browser check pending | `docs/STATUS.md` |
 | Guideline declaration | ⏳ Not drafted here — organizer-specific, lead to source the exact required wording | — |
 
 ## What is actually confirmed working (and how)
 
 Grounded only in `docs/qa/evidence/OBSERVATIONS.md` (automated, non-signature
 Playwright checks against a **local Anvil** deployment, 20 September 2026)
-and merged PRs. Nothing below is a claim about X Layer.
+and merged PRs. The checks in this section are historical local evidence, separate from the
+recorded X Layer deployment below.
 
 - Landing page, how-it-works, and a **live** (not fixture) community
   "Care actions" counter render correctly at desktop and mobile, light and
@@ -48,17 +50,32 @@ and merged PRs. Nothing below is a claim about X Layer.
   chain is wrong.
 - An `InvalidCommunity` revert from `communityStats` correctly renders as
   **Unknown**, not a fabricated zero.
-- 39 automated tests, typecheck, lint and build pass (`docs/STATUS.md`).
+- The 21 September status records 39 automated tests plus passing typecheck,
+  lint and build; these are historical results, not a new run by this document.
 - The `PetRegistry` contract has 13/13 passing Foundry tests, Anvil-verified.
+
+## Recorded X Layer deployment
+
+`docs/deploy/XLAYER_TESTNET.md` records the 21 September deployment:
+
+- Network: X Layer testnet, chain ID `1952`.
+- Contract: `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`.
+- Deploy transaction: `0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9`.
+- Block: `41543244`; successful receipt; runtime bytecode matched `main`.
+- Public app: https://memepet.vercel.app.
+- Explorer source verification was not performed. Bytecode comparison and
+  explorer verification are different checks.
+
+This documentation update did not repeat those checks. The deployment
+transaction is not evidence of a successful user adoption or care transaction.
 
 ## What is explicitly NOT yet confirmed
 
 - **No real wallet-signature flow has been exercised.** Every row in
   `docs/qa/BROWSER_WALKTHROUGH.md` (connect, adopt, reject, refresh, care,
   cooldown, day-advance, account switch, counter increment) is blank.
-- **No X Layer deployment exists.** `src/lib/deployment.ts` has no committed
-  X Layer address (`docs/STATUS.md`).
-- **No public live link and no demo video exist yet.**
+- **No demo video is recorded in the project status.** The public link exists;
+  the final clean-browser link-check remains pending.
 - The 390px "text clipping" bug originally logged as B1 was investigated and
   withdrawn as a capture artefact, not a real defect — see
   `docs/qa/evidence/OBSERVATIONS.md` for the reproduction of the false
@@ -73,8 +90,8 @@ state whether it came from:
    (state the network name and address), or
 2. The local Anvil verification session recorded in
    `docs/qa/evidence/OBSERVATIONS.md` (address
-   `0x0165878A594ca255338adfa4d48449f69242Eb8F`, never broadcast, not a
-   deployed address, do not present it as one), or
+   `0x0165878A594ca255338adfa4d48449f69242Eb8F`, local Anvil deployment only; never present it as a
+   public X Layer deployment), or
 3. A `/dev/*` fixture preview (explicitly label as fictional preview data).
 
 Do not present (2) or (3) as evidence of (1).
@@ -100,9 +117,8 @@ Do not present (2) or (3) as evidence of (1).
 - [ ] The specific X Layer network (mainnet vs. the correct testnet) the
       "Build a Market" track requires, and that the deployed address and
       `src/lib/deployment.ts` agree with official X Layer documentation.
-- [ ] That the deployed `PetRegistry` bytecode matches the reviewed source
-      (the contract changed after the care-guard fix; re-diff before
-      deploying, per `docs/STATUS.md`).
+- [x] The recorded deployment bytecode matches the reviewed source, per
+      `docs/deploy/XLAYER_TESTNET.md`. Recheck if the submitted source changes.
 - [ ] That the public URL, once live, passes the clean-browser link-check in
       `docs/demo/DEMO_SCRIPT.md`.
 - [ ] That no team member's personal wallet address or an unfunded/test-only
@@ -110,11 +126,9 @@ Do not present (2) or (3) as evidence of (1).
 
 ## Open items blocking a real submission (see `docs/STATUS.md` for owners)
 
-1. X Layer testnet deployment of `PetRegistry` with a verified, committed
-   address — lead, critical path.
-2. Public deployment of the app with `NEXT_PUBLIC_SITE_URL` set — lead.
-3. A completed, real run of `docs/qa/BROWSER_WALKTHROUGH.md` against that
-   deployment — Teammate B, once (1) and (2) land.
-4. Recording of `docs/demo/DEMO_SCRIPT.md` against the live deployment —
-   Teammate B.
-5. Sourcing the organizer's exact submission requirements — lead.
+1. A completed, real run of `docs/qa/BROWSER_WALKTHROUGH.md` against the
+   deployed X Layer testnet contract — Teammate B / lead.
+2. Recording of `docs/demo/DEMO_SCRIPT.md` against the live deployment —
+   Teammate B, after wallet QA passes.
+3. Final clean-browser verification of the live product and video links — lead.
+4. Verification of the organizer's exact submission requirements — lead.
