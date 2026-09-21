@@ -127,3 +127,97 @@ viewport, not a CSS bug. The live site has no horizontal overflow at 390px or
 Task ID, branch, screenshots or observed evidence, actual check results, known
 problems, and a clear request when blocked. For bugs: environment,
 reproduction steps, expected and actual result, sanitised console output.
+
+---
+
+# Update — 21 September 2026: the contract is live
+
+The contract is deployed on X Layer testnet at
+`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216` and https://memepet.vercel.app
+reads it. B3 can now be run **against the live contract**, which is the real
+test. Your #16 worksheet is merged; #17 needs a rebase — see the review comment.
+
+Order of work:
+
+1. Rebase #17 and update the stale "no deployment / no live link" facts.
+2. **B3 against the live site** — the priority. Use a throwaway wallet funded
+   from the X Layer testnet faucet, never a wallet holding real funds.
+3. Only then, the stretch tasks below.
+
+---
+
+# Stretch — only after B3 has actually been run
+
+The contract is frozen: nothing below changes it, a route, or a dependency.
+
+**Hard cut-off: 24 September, 12:00 UTC.** Anything not merged with green CI by
+then is dropped, so the 25th is kept for the video and the submission.
+
+## B6 — real user tests (do this first; no code)
+
+**Allowed:** `docs/qa/**`. Branch: `docs/b6-user-tests`.
+
+**Why it matters:** "user value" is an explicit judging criterion, and so far
+the only people who have used MemePet built it. Three real people who have
+never seen it are worth more than any feature.
+
+### Prompt
+
+> Help me run a short usability test of MemePet with three people who have
+> not seen it. Write docs/qa/USER_TESTS.md with: a one-paragraph consent script
+> I read aloud before starting; a single task ("adopt a pet and care for it");
+> the rule that I do not help unless they are completely stuck; and a table
+> per participant with first confusion, where they got stuck, what they said,
+> and whether they completed the task.
+>
+> Record participants as P1, P2, P3 only — no names, no wallet addresses, no
+> screenshots of their wallets. Do not invent results; every field stays blank
+> until a real session fills it. Separate what I observed from what they said.
+>
+> Finish with the three changes that would most help a new user, each linked
+> to the observation that motivated it.
+
+**You check:** consent was asked before each session; nothing is invented; the
+recommendations trace back to something a participant actually did.
+
+## B5 — public pet card
+
+**Allowed:** `src/components/profile/**` — **approved as of today**. Branch:
+`feat/b5-public-pet-card`.
+
+**Why it matters:** a shareable page for each pet is on the brief's stretch
+list, and it gives the demo something to share.
+
+The prop contract already exists — the lead added `PublicPetCardProps` to
+`src/types/view-models.ts`. Read it; do not change it.
+
+### Prompt
+
+> Read AGENTS.md, docs/OWNERSHIP.md, src/types/view-models.ts and
+> src/components/pet/PetScene.tsx. Implement B5 only, inside
+> src/components/profile/**.
+>
+> Build `PublicPetCard` using `PublicPetCardProps` exactly as defined. It shows
+> the pet's art, name, stage, growth points and the stage trail, plus the
+> owner's shortened address as a link to explorerUrl when it is not null.
+> Reuse PetScene or the shared Card and Badge rather than restyling from
+> scratch. Render the DataModeBadge from pet.dataMode, so a preview can never
+> be mistaken for a live pet.
+>
+> The card only displays what it is given. It must not fetch, connect a wallet,
+> read the chain, or show a Care button — a visitor viewing someone else's pet
+> cannot care for it.
+>
+> Also build `PublicPetCardPreview` for a /dev preview the lead will wire up,
+> using the existing petFixtures, visibly labelled "UI preview — fictional data".
+>
+> Add co-located tests: the owner link appears only when explorerUrl is set,
+> the preview badge appears for fixture data, and no Care button renders.
+> Run npm run typecheck, lint, test and build and report actual results.
+
+**You check:** it works at 390px; there is no way to act on someone else's pet;
+fixture data is visibly labelled.
+
+## Handoff for stretch tasks
+
+Same as B3, plus: tell the lead when B5 is merged so the route can be wired.
