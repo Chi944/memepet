@@ -1,7 +1,7 @@
 # X Layer testnet — PetRegistry deploy runbook
 
 Local Anvil work is separate. This document is for **X Layer testnet only**.
-Nothing here invents a contract address. Replace every `TODO_*` after a real
+Nothing here invents a contract address. Every value below was recorded from a real
 broadcast that you run yourself.
 
 **Never** put a seed phrase or private key in a file, in this doc, or on a
@@ -101,9 +101,9 @@ not enough):
 
 | Field | Value |
 |---|---|
-| Contract address | `TODO_REGISTRY_ADDRESS` |
-| Transaction hash | `TODO_TX_HASH` |
-| Block number | `TODO_BLOCK_NUMBER` |
+| Contract address | `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216` |
+| Transaction hash | `0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9` |
+| Block number | `41543244` |
 
 `contracts/broadcast/` is gitignored. Do not commit broadcast artifacts.
 
@@ -111,12 +111,12 @@ not enough):
 
 ## Phase C — after you hand over B4 values (agent / lead)
 
-Replace `TODO_*` with the values from Phase B. Do not invent them.
+These are the values recorded from the Phase B broadcast.
 
 ### C1. Bytecode match (BLOCKER if runtime code differs beyond CBOR)
 
 ```bash
-cast code TODO_REGISTRY_ADDRESS --rpc-url https://testrpc.xlayer.tech/terigon
+cast code 0xe844152262D243a7B90F6e07FF7A67F1d7FeD216 --rpc-url https://testrpc.xlayer.tech/terigon
 forge inspect PetRegistry deployedBytecode --root contracts
 ```
 
@@ -130,10 +130,10 @@ Compare the on-chain code to local `deployedBytecode`.
 ### C2. Live reads
 
 ```bash
-cast call TODO_REGISTRY_ADDRESS "APPROVED_COMMUNITY_ID()(uint32)" \
+cast call 0xe844152262D243a7B90F6e07FF7A67F1d7FeD216 "APPROVED_COMMUNITY_ID()(uint32)" \
   --rpc-url https://testrpc.xlayer.tech/terigon
 
-cast call TODO_REGISTRY_ADDRESS "communityStats(uint32)(uint64)" 1 \
+cast call 0xe844152262D243a7B90F6e07FF7A67F1d7FeD216 "communityStats(uint32)(uint64)" 1 \
   --rpc-url https://testrpc.xlayer.tech/terigon
 ```
 
@@ -151,14 +151,14 @@ fields map as follows — every value must be verified or remain `null`:
 |---|---|
 | `status` | `"testnet"` |
 | `networkName` | `"X Layer testnet"` |
-| `registryAddress` | `TODO_REGISTRY_ADDRESS` |
+| `registryAddress` | `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216` |
 | `explorerBaseUrl` | `"https://www.okx.com/web3/explorer/xlayer-test"` |
 | `chainId` | `1952` |
 | `rpcUrl` | `"https://testrpc.xlayer.tech/terigon"` |
 | `currencySymbol` | `"OKB"` |
 
-Until then, committed defaults stay `status: "not-deployed"` with nulls.
-Local overrides may use `NEXT_PUBLIC_MEMEPET_*` without committing an address.
+These values are now committed in `src/lib/deployment.ts`.
+Local overrides may still use `NEXT_PUBLIC_MEMEPET_*` without committing an address.
 
 ### C4. Automated checks
 
@@ -180,7 +180,7 @@ Needs an OKLink API key tied to an OKX account. **This project does not
 require it.** If you later opt in:
 
 ```bash
-forge verify-contract TODO_REGISTRY_ADDRESS src/PetRegistry.sol:PetRegistry \
+forge verify-contract 0xe844152262D243a7B90F6e07FF7A67F1d7FeD216 src/PetRegistry.sol:PetRegistry \
   --chain 1952 \
   --verifier oklink \
   --verifier-url https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET \
@@ -202,3 +202,28 @@ match result, and whether explorer verification was skipped.
 
 - App hosting (independent of contract): `docs/deploy/VERCEL.md`
 - Env templates: `.env.example`
+
+
+---
+
+## Recorded result — 21 September 2026
+
+Deployed from a throwaway keystore wallet created with `cast wallet new`,
+funded from the X Layer faucet. The private key was never displayed or shared.
+
+| Check | Result |
+|---|---|
+| Deployer | `0x2ec8471290793FeB64792861Ce3102d291ce1CA1` |
+| Contract | `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216` |
+| Deploy tx | `0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9` |
+| Block | `41543244` |
+| Receipt status | `0x1` (read from the chain, not from forge's report) |
+| Gas used | 354,926 at 0.02 gwei |
+| Bytecode | `cast code` equals `forge inspect PetRegistry deployedBytecode` from `main` **byte for byte, including CBOR metadata** |
+| `APPROVED_COMMUNITY_ID()` | `1` |
+| `communityStats(1)` | `0` — a confirmed zero, not unknown |
+| `communityStats(99)` | reverts `InvalidCommunity`, as audited |
+| `petOf(deployer)` | `exists = false` |
+| Explorer verification | Not done — needs an OKX-linked OKLink API key. The bytecode match above is the stronger guarantee that this is the repository's source. |
+
+Explorer: https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216
