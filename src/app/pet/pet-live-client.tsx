@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { CarePanel } from "@/components/pet/CarePanel";
 import { PetScene } from "@/components/pet/PetScene";
 import { Badge } from "@/components/ui/Badge";
@@ -10,6 +11,7 @@ import { useCommunityStats } from "@/hooks/useCommunityStats";
 import { usePetRegistry } from "@/hooks/usePetRegistry";
 import { useWallet } from "@/hooks/useWallet";
 import { resolveCareActionState } from "@/lib/care-action-machine";
+import { publicPetPath } from "@/lib/public-pet";
 import type { PetViewModel } from "@/types/view-models";
 
 const PLACEHOLDER_PET: PetViewModel = {
@@ -178,6 +180,9 @@ export function PetLiveClient() {
             </Button>
           ) : null}
         </div>
+        {wallet.address && registry.hasPet ? (
+          <SharePetLink path={publicPetPath(wallet.address)} />
+        ) : null}
         {wallet.errorMessage ? (
           <p className="pet-live-error">{wallet.errorMessage}</p>
         ) : null}
@@ -205,6 +210,34 @@ export function PetLiveClient() {
           />
         </div>
       )}
+    </div>
+  );
+}
+
+function SharePetLink({ path }: { readonly path: string }) {
+  const [copied, setCopied] = useState(false);
+
+  async function copyLink() {
+    const url = `${window.location.origin}${path}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  }
+
+  return (
+    <div className="share-pet">
+      <Link className="link-button" href={path}>
+        Share your pet
+      </Link>
+      <Button tone="secondary" onClick={() => void copyLink()}>
+        {copied ? "Link copied" : "Copy link"}
+      </Button>
+      <p className="share-pet-note">
+        Opens a public read-only page. Nothing is posted for you.
+      </p>
     </div>
   );
 }
