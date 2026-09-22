@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { petFixtures } from "@/fixtures/ui-fixtures";
 import { PetScene } from "./PetScene";
 
@@ -9,6 +9,38 @@ const hatchlingWithoutArt = {
 };
 
 describe("PetScene", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  it("announces the confirmed new stage and advances the trail", () => {
+    const { rerender } = render(<PetScene pet={petFixtures.hatchling} celebrate={false} />);
+    const announcement = screen.getByRole("status");
+    expect(announcement).toBeEmptyDOMElement();
+    rerender(<PetScene pet={petFixtures.buddy} celebrate />);
+    expect(screen.getByRole("status")).toBe(announcement);
+    expect(announcement).toHaveTextContent("Mochi grew into Buddy!");
+    expect(announcement).toHaveAttribute("aria-live", "polite");
+    expect(screen.getByText("Buddy").closest("li")).toHaveAttribute("aria-current", "step");
+    expect(screen.getByText("Hatchling").closest("li")).not.toHaveAttribute("aria-current");
+    expect(screen.getByText("20 growth points")).toBeVisible();
+    rerender(<PetScene pet={petFixtures.buddy} celebrate={false} />);
+    expect(announcement).toBeEmptyDOMElement();
+  });
+
+  it("does not infer a celebration from a stage change", () => {
+    const { rerender } = render(<PetScene pet={petFixtures.hatchling} celebrate={false} />);
+    rerender(<PetScene pet={petFixtures.guardian} celebrate={false} />);
+    expect(screen.getByRole("status")).toBeEmptyDOMElement();
+    expect(screen.queryByText(/grew into/)).not.toBeInTheDocument();
+  });
+
+  it("keeps the announcement when reduced motion is requested", () => {
+    vi.stubGlobal("matchMedia", vi.fn().mockReturnValue({ matches: true, media: "(prefers-reduced-motion: reduce)" }));
+    render(<PetScene pet={petFixtures.guardian} celebrate />);
+    expect(screen.getByRole("status")).toHaveTextContent("Mochi grew into Guardian!");
+    // CSS disables motion; this DOM check ensures the announcement is unconditional.
+    expect(screen.getByText("Mochi grew into Guardian!")).toBeVisible();
+  });
+
   it("renders an accessible placeholder when art is missing", () => {
     render(<PetScene pet={hatchlingWithoutArt} celebrate={false} />);
 

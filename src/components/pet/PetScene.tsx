@@ -41,10 +41,12 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
       : null;
 
   return (
-    <section className={styles.scene} aria-labelledby="pet-name">
-      <div
-        className={`${styles.artFrame} ${celebrate ? styles.celebrating : ""}`.trim()}
-      >
+    <section
+      className={`${styles.scene} ${celebrate ? styles.celebrating : ""}`.trim()}
+      aria-labelledby="pet-name"
+    >
+      <div className={styles.artFrame}>
+        {celebrate ? <span className={styles.evolutionGlow} aria-hidden="true" /> : null}
         <div className={styles.artInner}>
           {pet.artSrc ? (
             <Image
@@ -70,11 +72,6 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
             </div>
           )}
         </div>
-        {celebrate ? (
-          <span className={styles.celebration} aria-label="Celebration active">
-            Care confirmed
-          </span>
-        ) : null}
       </div>
 
       <div className={styles.sceneDetails}>
@@ -83,6 +80,13 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
           <DataModeBadge mode={pet.dataMode} />
         </div>
         <h2 id="pet-name">{pet.displayName}</h2>
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {celebrate ? (
+            <p className={styles.celebration}>
+              {pet.displayName} grew into {STAGE_LABEL[pet.stage]}!
+            </p>
+          ) : null}
+        </div>
 
         <ol className={styles.stageTrail} aria-label="Growth stages">
           {STAGE_ORDER.map((stage) => {
@@ -95,7 +99,7 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
                   : styles.stageFuture;
 
             return (
-              <li key={stage} className={state}>
+              <li key={stage} className={state} aria-current={index === currentIndex ? "step" : undefined}>
                 {STAGE_LABEL[stage]}
                 {index === currentIndex ? (
                   <span className={styles.srOnly}> (current stage)</span>
