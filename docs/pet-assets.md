@@ -139,3 +139,21 @@ remain for integration testing after the lead wires these files in.
 
 The permission and licence position above applies unchanged to these derivatives.
 No new rights, exclusive ownership, or third-party clearance is claimed.
+
+### A5 share-image integration — 23 September 2026
+
+The site and public-pet Open Graph routes now render these backgrounds at their
+native 1200×630 ratio, with dynamic text at x=64..604. Their Twitter-image routes
+reuse the same renderers. A shared server-rendered card layout uses dark text
+on the lilac-to-mint field. The public card selects artwork only for a successful
+pet read and overlays the actual name, stage, growth points and owner label.
+No-pet, failed-read and unconfigured states remain text-only. Missing background
+files also retain the text; the square stage image is no longer used as a
+full-canvas fallback.
+
+Actual PNGs from Next.js ImageResponse were rendered and visually inspected for
+the site, all three stages, and a read-error state. They retain the full mascot
+and clear text separation. Regression tests cover stage selection, dynamic
+values, non-pet states, invalid addresses, missing artwork and PNG dimensions.
+The visual examples use explicitly supplied sample details, not live-chain
+receipts. External social-platform cache refresh and cropping remain untested.
