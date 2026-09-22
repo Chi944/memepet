@@ -1,130 +1,115 @@
-# Submission notes — draft
+# Submission notes — verified facts and open items
 
-Updated **22 September 2026**. Facts here come from `docs/STATUS.md`,
-`docs/qa/evidence/OBSERVATIONS.md` and `src/lib/deployment.ts`. Every ⏳ item
-is still unverified and must be filled with a real value — never a placeholder
-left in — before this is submitted.
+Updated **22 September 2026**. Working draft, not a submitted entry. Keep every **UNVERIFIED** field visible until actual evidence replaces it. Never turn a planned action into a result.
 
-## Team and track
+## Organizer requirements
 
-| | |
+The [official OKX Dev Day builder kit](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit), updated 18 September and checked on 22 September, specifies **25 September 2026, 23:59 UTC** as the deadline (**26 September, 07:59 Singapore**) and a **2–4 minute video** showing a working integration. Contract addresses and technical links are among the requested materials.
+
+Build a Market requires X Layer integration and a meme or another listed ecosystem component. Our intended route is a meme application; acceptance of this precise implementation is **UNVERIFIED**. The accessible kit does **not specify mainnet versus testnet** for this case. Testnet eligibility remains **UNVERIFIED**, not implicitly accepted.
+
+The [actual submission form](https://docs.google.com/forms/d/e/1FAIpQLScoFQsVBvoatzVyi0XqdLwP_rfhrhUqiMP4O1jkjJgIFp3mFA/viewform) was inspected in the existing Chrome session without entering data. **Page 1 of 3** verifies these required fields:
+
+- Team name; team size (1–4); members' exact full names matching IDs.
+- Track (Build a Market / Build a Company); participation route (In-Person on 7 October 2026 / Remote); number attending the finale (0–4).
+- Project name; summary covering product, intended user and core integration.
+- Repository link (public or access granted, with README); public demo-video link (2–4 minutes); product link (live/deploy/test environment, or explanation plus video section).
+- New project versus pre-existing codebase choice.
+
+An optional 1:1 team display picture accepts an image up to 10 MB. **Pages 2–3, the exact declaration and any additional constraints remain UNVERIFIED** because advancing requires answers not yet supplied. No form was filled or submitted. Do not invent declaration wording.
+
+## Entry details
+
+| Field | Verified value or explicit placeholder |
 |---|---|
-| Event | OKX Dev Day 2026 |
-| Track | Build a Market — meme applications |
-| Team | Lead (integration + contract), Teammate A (pet experience), Teammate B (community UI, QA, demo) |
-| Repository | https://github.com/Chi944/memepet (public) |
+| Event / product | OKX Dev Day 2026 / MemePet |
+| Track | Intended: Build a Market, meme application; precise eligibility **UNVERIFIED** |
+| Team size / display names | Three people; user confirmed **Deston, Kym, Larm** |
+| Team name | **UNVERIFIED — TEAM_NAME** |
+| Exact full names matching IDs / final roles | **UNVERIFIED — FORM_ROSTER**; display names are not assumed to be ID names |
+| Participation route / finale attendance count | **UNVERIFIED — IN_PERSON_OR_REMOTE / ATTENDEE_COUNT** |
+| New project / pre-existing codebase selection | **UNVERIFIED — PROJECT_ORIGIN_FORM_SELECTION** |
+| Repository | [Chi944/memepet](https://github.com/Chi944/memepet), visibility **PUBLIC** verified; repeat logged-out access check at submission |
+| Live app | [memepet.vercel.app](https://memepet.vercel.app); read-only checks recorded, wallet journey blocked |
+| Network | X Layer testnet, chain **1952**, configured gas currency **OKB** |
+| Registry | **`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`** |
+| Verified application deployment | Main application revision **`35186b5`**, production rollout confirmed 22 September; recheck the exact recording revision |
+| Deployment transaction | **`0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9`**, block **41543244**; receipt success/bytecode match recorded in `src/lib/deployment.ts` |
+| Final submission commit / deployed revision | **UNVERIFIED — FINAL_COMMIT_AND_DEPLOYMENT** |
+| Testnet acceptance | **UNVERIFIED — ORGANIZER_TESTNET_ELIGIBILITY** |
+| Guideline declaration | **UNVERIFIED — EXACT_FORM_DECLARATION** |
+| Demo video | **UNVERIFIED — VIDEO_URL**; not recorded/exported yet |
 
-## Project summary (draft — reuse or trim from README)
+Deployment transaction evidence is not adoption/care evidence. Bytecode comparison is distinct from explorer source verification.
 
-MemePet is a meme-community companion app on X Layer. A wallet adopts a
-shared community's mascot, performs one non-financial "care" action per UTC
-day, and watches its pet evolve through three stages while contributing to a
-shared community counter. There is no token, no staking, no marketplace —
-progression is earned by participation, not purchase.
+## Project summary — factual draft
 
-## Submission checklist (from `docs/STATUS.md` hackathon requirements)
+MemePet is a meme-community companion prototype on X Layer testnet. Its registry stores one pet per wallet and permits one care action per UTC day. The interface derives ten growth points per recorded care, with Hatchling, Buddy and Guardian stages, and reads a shared community care counter. The prototype supports one community and one mascot. There is no MemePet token, token purchase, staking, marketplace or financial reward. Transactions still require network gas. The complete browser wallet journey remains unverified.
 
-| Item | Status | Source |
+After genuine wallet verification, replace the final sentence with the specific observed journey and evidence references, not a blanket production-readiness claim.
+
+## Evidence by environment
+
+| Source | What it establishes | What it does not establish |
 |---|---|---|
-| Team info and track | Ready — see above | this doc |
-| Project summary | Draft ready — see above | this doc |
-| Public repository with clear README | Done | `README.md` |
-| 2–4 minute demo video | ⏳ Not recorded. No longer blocked on the deploy — now gated only on running the wallet walkthrough | `docs/demo/DEMO_SCRIPT.md` |
-| Live product / test-environment link | ✅ https://memepet.vercel.app | `docs/STATUS.md` |
-| Deployed contract | ✅ `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`, X Layer testnet (chain 1952) | `src/lib/deployment.ts` |
-| Guideline declaration | ⏳ Not drafted here — organizer-specific, lead to source the exact required wording | — |
+| [Live X Layer observations, 22 Sep](../qa/evidence/LIVE_XLAYER_OBSERVATIONS.md) | Public site reads chain 1952; community cares were 0 at capture; one RPC read per page load; `/dev/pet` returned 404; mobile/console checks recorded | Any signed transaction or adopted-pet persistence |
+| [Current preparation evidence, 22 Sep](../qa/evidence/OKX_PREP_2026-09-22.md) | Real Chrome Connect attempt reported no injected wallet; supplied address has no pet and a readable testnet balance; form page 1 inspected | Successful wallet connection, signing authority, adoption, care or form submission |
+| [Local Anvil observations, 20 Sep](../qa/evidence/OBSERVATIONS.md) | Local rendering, read-only states, mocked wrong-chain and controlled failed-read states | X Layer transactions or genuine wallet rejection/account switching |
+| [Development setup history](../DEV_SETUP.md) | Historical automated and unlocked local-node checks, with dates | Current prep-branch checks or browser-wallet success |
 
-## What is actually confirmed working (and how)
+A zero community **care** count is not a count of adopted pets, users or wallets. It cannot establish zero adopters. Historical reports describe their capture, not current merge/deployment status.
 
-Grounded in `docs/qa/evidence/OBSERVATIONS.md` (automated, non-signature
-Playwright checks against a **local Anvil** deployment, 20 September 2026) and
-merged PRs. The rendering behaviour below was observed on Anvil, not on
-X Layer — the contract being live does not retroactively make these X Layer
-observations.
+## Integration and current checks
 
-- Landing page, how-it-works, and a **live** (not fixture) community
-  "Care actions" counter render correctly at desktop and mobile, light and
-  dark, against local Anvil.
-- `/pet` correctly shows a "Connect wallet / Not installed" state with no
-  wallet present.
-- A simulated wrong-chain wallet correctly shows a "Switch network" state,
-  and the community counter correctly shows **Unknown** (not `0`) when the
-  chain is wrong.
-- An `InvalidCommunity` revert from `communityStats` correctly renders as
-  **Unknown**, not a fabricated zero.
-- 39 automated tests, typecheck, lint and build pass (`docs/STATUS.md`).
-- The `PetRegistry` contract has 13/13 passing Foundry tests, Anvil-verified.
+The public-pet branch reached `main` through **PR #21**, with a badge follow-up in **PR #27**. **PR #22** is now merged as `0f32601`, retaining the public share feature and integration safeguards from `13298d9`. **PR #26** is merged as `35186b5`, adding security headers and two event tests. Its production deployment succeeded and was checked on 22 September. **[PR #28](https://github.com/Chi944/memepet/pull/28)** contains the recording pack and updated evidence. The earlier [preview for `8a88f4b`](https://memepet-21qy9t1rs-chi944s-projects.vercel.app) remains historical evidence.
 
-## What is explicitly NOT yet confirmed
+Real Chrome inspection of this final-code preview confirmed the heading, no fabricated growth, a read-only community total of 0, no captured `/pet` error logs, and 404 pages for `/dev/pet`, `/dev/landing` and `/dev/community`. Clicking Connect wallet again returned **No injected wallet was found**. This is a preview rendering check, not a wallet pass. Logged-out preview access is unverified.
 
-- **No real wallet-signature flow has been exercised.** Every row in
-  `docs/qa/BROWSER_WALKTHROUGH.md` (connect, adopt, reject, refresh, care,
-  cooldown, day-advance, account switch, counter increment) is blank.
-- **Nothing has been exercised against the live X Layer contract.** The
-  deployment and the public site both exist, but every claim in the section
-  above was observed on local Anvil. No one has confirmed the live site
-  performs an adoption or a care.
-- **No demo video exists yet.**
-- The 390px "text clipping" bug originally logged as B1 was investigated and
-  withdrawn as a capture artefact, not a real defect — see
-  `docs/qa/evidence/OBSERVATIONS.md` for the reproduction of the false
-  positive, so it should not be re-reported without new evidence.
+| Current prep-branch command | Actual result |
+|---|---|
+| `npm run typecheck` | **PASS**, exit 0 |
+| `npm run lint` | **PASS**, exit 0 |
+| `npm test` | **PASS**, 73/73 tests across 15 files |
+| `npm run build` | **PASS**, exit 0 |
+| `npm run test:contracts` | **PASS**, 15/15 tests after PR #26 (previously 13) |
+| Local final production HTTP smoke | **NOT RUN** — automatic approval review rejected starting the production server on `127.0.0.1:3300` (“blocked by policy”) |
+| GitHub CI at `8a88f4b` | **PASS** — [run 35688426933](https://github.com/Chi944/memepet/actions/runs/35688426933), including app/contract jobs, clean install and the production `/dev/*` smoke step |
+| Real browser wallet walkthrough | **BLOCKED — no injected wallet; no wallet action passed** |
 
-## Prepared wallet / fixture disclosure
+These current results were executed and reported by the lead in this preparation task. See [current evidence](../qa/evidence/OKX_PREP_2026-09-22.md) for the command record. Automated checks and browser checks are separate.
 
-Any transaction, address or screenshot used in the final submission must
-state whether it came from:
+After PRs #22/#26 merged, production `/` and `/pet` returned 200, and `/dev/pet`, `/dev/landing`, `/dev/community` and `/pet/not-an-address` returned 404. All four configured security headers were present. Real Chrome showed the corrected heading, no fabricated growth and a community count of 0; captured `/pet` error logs were empty. Connect still returned **No injected wallet was found**. These are final application rendering checks; no wallet action passed.
 
-1. A real signed transaction on X Layer testnet (chain 1952, registry
-   `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`) — state the transaction hash
-   and link it to the OKX explorer, or
-2. The local Anvil verification session recorded in
-   `docs/qa/evidence/OBSERVATIONS.md` (address
-   `0x0165878A594ca255338adfa4d48449f69242Eb8F`, never broadcast, not a
-   deployed address, do not present it as one), or
-3. A `/dev/*` fixture preview (explicitly label as fictional preview data).
+Contract verification now distinguishes code from metadata: deployed bytes match historical contract source `587ceb054d35dd4b7c04a8dd580dcab3b743b30b` exactly. PR #26's SPDX comment changes the compiler metadata, so current full compiled bytecode is **not identical** to deployed bytecode. The 1,344-byte executable runtime, ABI and storage layout are unchanged and were verified to match. No contract was redeployed. See [release evidence](../qa/evidence/OKX_PREP_2026-09-22.md#merge-completion-and-production-follow-up).
 
-Do not present (2) or (3) as evidence of (1).
+## Wallet and transaction evidence
 
-## Limitations to disclose, not omit
+The user supplied public address **`0x2ec8471290793FeB64792861Ce3102d291ce1CA1`**. A read-only X Layer testnet query returned `petOf.exists = false` and balance **199985802959290148 wei**, approximately **0.1999858 OKB**, on 22 September. Its public page rendered no pet. These reads do not connect a wallet, prove control of it or authorize a signature by themselves.
 
-- Single community and mascot only for this submission; no multi-community,
-  marketplace, breeding, trading, or social feed
-  (`docs/PROJECT_BRIEF.md` — out of scope).
-- No missed-day penalty by design.
-- AI-assisted code review in this repository is not a security audit and
-  does not guarantee mainnet safety (`docs/prompt-packs/LEAD.md`, L1
-  acceptance note).
-- `communityStats` reverts for any id outside the approved, fixed community
-  configuration; this is mapped to "unknown" in the UI rather than fixed at
-  the contract level for this submission.
+| Required value / check | Status |
+|---|---|
+| Demo-wallet provenance, preparation and recording disclosure | **UNVERIFIED — PREPARED_DEMO_WALLET_DISCLOSURE** |
+| Gas budget sufficient for the actual requested transactions | Balance read above is verified; transaction gas budget **UNVERIFIED** |
+| Real connection approval | **BLOCKED — no injected wallet** |
+| Rejected adoption, no pet/growth created | **NOT RUN** |
+| Adoption hash + successful receipt + pet read-back | **UNVERIFIED — ADOPT_TX_AND_RECEIPT** |
+| Care hash + successful receipt + before/after values | **UNVERIFIED — CARE_TX_AND_RECEIPT** |
+| Refresh restores same pet | **NOT RUN** |
+| Same-day cooldown / UTC label | **NOT RUN** |
+| Account switch removes old pet | **NOT RUN** |
+| Community before → after for confirmed care | **UNVERIFIED — COMMUNITY_BEFORE_AFTER** |
+| Public pet route for the supplied address | `/pet/0x2ec8471290793FeB64792861Ce3102d291ce1CA1` read-only **no-pet** state observed; pet-bearing state **UNVERIFIED** |
+| Real next-UTC-day care on X Layer | **NOT RUN**; local time travel cannot establish it |
 
-## Facts the lead must verify before this is submitted
+Use a human-prepared throwaway wallet for capture. When verified, disclose it as a team-prepared demo wallet, not an organic user. Never request or record seed phrases/private keys. For real transactions, retain network, registry, public address, full hash, successful receipt, UTC time and before/after values. Verify explorer links before publishing them. Keep Anvil and fictional preview evidence separately labelled.
 
-- [ ] Exact organizer requirements: submission form fields, required video
-      length, and guideline-declaration wording — none of this was sourced
-      here and none should be guessed.
-- [ ] The specific X Layer network (mainnet vs. the correct testnet) the
-      "Build a Market" track requires, and that the deployed address and
-      `src/lib/deployment.ts` agree with official X Layer documentation.
-- [x] That the deployed `PetRegistry` bytecode matches the reviewed source —
-      the lead recorded `cast code` matching `forge inspect PetRegistry
-      deployedBytecode` byte for byte, including CBOR metadata.
-- [ ] That https://memepet.vercel.app passes the clean-browser link-check in
-      `docs/demo/DEMO_SCRIPT.md`.
-- [ ] That no team member's personal wallet address or an unfunded/test-only
-      key is presented as a "real user" in the video or notes.
+## Recording and submission gates
 
-## Open items blocking a real submission (see `docs/STATUS.md` for owners)
+1. Publish and verify the reviewed app revision; finish the real [wallet walkthrough](../qa/BROWSER_WALKTHROUGH.md). Preserve failures/unrun rows honestly.
+2. Confirm form roster, team name, participation route, attendance, project-origin answer, eligibility and exact declaration. No submission has occurred.
+3. Record the [combined script](DEMO_SCRIPT.md) and individual scripts. Preserve continuous genuine screen footage for the core journey.
+4. Share source recordings in Codex for editing using [EDITOR_HANDOFF.md](EDITOR_HANDOFF.md). The final video does not yet exist.
+5. Review the 2–4 minute render and [recording checklist](RECORDING_CHECKLIST.md), upload it, then check playback while logged out.
+6. Recheck public app/repo/video/technical links and complete the form before the UTC deadline.
 
-1. ~~X Layer testnet deployment~~ — **done 21 September**, registry
-   `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216` on chain 1952.
-2. ~~Public deployment of the app~~ — **done**, https://memepet.vercel.app.
-3. **A completed, real run of `docs/qa/BROWSER_WALKTHROUGH.md` against the
-   live contract — Teammate B. This is now the critical path.** All nine rows
-   are still blank, so nobody has confirmed an adoption or a care works
-   outside local Anvil. Use a throwaway wallet funded from the X Layer testnet
-   faucet, never one holding real funds.
-4. Recording of `docs/demo/DEMO_SCRIPT.md` against the live deployment —
-   Teammate B, after (3).
-5. Sourcing the organizer's exact submission requirements — lead.
+Keep these limitations visible: one community/mascot, **testnet**, no security audit, no verified organic usage metrics, and remaining failed/unrun browser steps. The historical mobile-clipping finding was withdrawn as a capture artefact; it is not an outstanding verified defect.

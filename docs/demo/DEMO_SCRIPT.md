@@ -1,148 +1,101 @@
-# Demo script — OKX Dev Day 2026 submission
+# MemePet — three-person demo script
 
-Updated **22 September 2026**. Deadline: **25 September 2026, 23:59 UTC**
-(`docs/STATUS.md`).
+Updated **22 September 2026**. Target **3:15**, within the organizer's **2–4 minute** requirement. Deadline: **25 September 2026, 23:59 UTC / 26 September, 07:59 Singapore**. [Official builder kit](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit).
 
-This is a script to run and record, not a record of something already run.
+**Script ready; wallet demonstration blocked.** Real Chrome reached “Not installed” and “No injected wallet was found.” No wallet connection approval, adoption or care was performed. Success lines below are **CONDITIONAL — UNVERIFIED**, not results. The application fixes from PRs #22 and #26 are now deployed; the real signing walkthrough is still required.
 
-**The contract is live.** `PetRegistry` is deployed on X Layer testnet at
-`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216` (chain id 1952) and
-https://memepet.vercel.app reads it. The deployment blocker is cleared.
+The recording pack is tracked in [PR #28](https://github.com/Chi944/memepet/pull/28).
+Production [pet home](https://memepet.vercel.app/pet), application revision
+`35186b5`, was checked after PRs #22/#26 merged: the correct heading and honest
+empty state render, and development routes return 404. The same real wallet
+connection attempt remained blocked. See the [release evidence](../qa/evidence/OKX_PREP_2026-09-22.md#merge-completion-and-production-follow-up).
 
-**One precondition remains:** no wallet-signature row in
-`docs/qa/BROWSER_WALKTHROUGH.md` has been executed yet — all nine are still
-blank. Record this script only after that walkthrough has been run for real
-against the live contract, so the take is a demonstration of something known
-to work rather than a first attempt on camera.
+## Speakers and recording pack
 
-Target length: 2–4 minutes — **verify the organizer's exact required length
-before recording**; this script is written to be trimmable (see cut points).
+The user confirmed the display names **Deston, Kym and Larm**. Recording roles below follow the existing lead/A/B plan; exact full names for the submission form remain unverified.
 
----
+| Speaker | Role in the recording | Individual script |
+|---|---|---|
+| Deston | Opening, wallet/adoption, close | [Deston / Lead](speakers/lead.md) |
+| Kym | Pet experience, daily care, close | [Kym / Teammate A](speakers/teammate-a.md) |
+| Larm | Persistence, community, scope, close | [Larm / Teammate B](speakers/teammate-b.md) |
 
-## 0. Before recording — preconditions
+Record each scene separately and slate its ID before the take. Keep two seconds of silence at both ends. Narration and face-camera clips can be recorded separately from the screen demonstration. Exclude conditional result lines until matching real evidence exists. Send original clips here in Codex, named by scene, speaker and take. See the [checklist](RECORDING_CHECKLIST.md) and [editor handoff](EDITOR_HANDOFF.md).
 
-- [x] `PetRegistry` deployed to X Layer testnet, address committed in
-      `src/lib/deployment.ts` — `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`,
-      chain id 1952. Verified on chain by the lead (deploy tx receipt `0x1`,
-      `cast code` matches `forge inspect` byte for byte).
-- [x] Public site live and reading that contract: https://memepet.vercel.app
-- [ ] A prepared demo wallet holds enough of the network's gas token to
-      adopt + care live, on camera.
-- [ ] `docs/qa/BROWSER_WALKTHROUGH.md` rows 1–6 and 9 have been run for real
-      against that environment and are filled in (not blank).
-- [ ] Screen recording is at a resolution that reads clearly at 390px and
-      desktop — show both if time allows.
+## Combined timeline
 
-If any box above is unchecked, this is a rehearsal, not the submission take.
+Quoted text is spoken. Other text directs capture and editing. Times are editorial targets; keep actual states readable and remain below four minutes.
 
----
+### S01 · 0:00–0:20 · Deston · The idea
 
-## 1. The problem (≈20s)
+> “MemePet gives a meme community a daily ritual around a shared mascot. Connect a wallet, adopt a pet, and care for it over time. We built it on X Layer so the adoption and care history can be read from a public registry.”
 
-> "Meme communities are almost entirely transactional — the only way to
-> belong is to buy and hold a token. MemePet gives a community a shared
-> mascot, and every wallet its own pet, earned by showing up, not spending."
+Face-camera opening, then genuine landing-page footage. Title: **MemePet — X Layer testnet prototype**.
 
-*(Cut point: trim to one sentence if under time pressure.)*
+### S02 · 0:20–0:40 · Kym · The experience
 
-## 2. Connect and adopt (≈40s)
+> “The interaction is simple: one pet per wallet and one care action per UTC day. The app turns each recorded care into ten growth points. The three stages are Hatchling, Buddy and Guardian, with no missed-day penalty.”
 
-- Open https://memepet.vercel.app in a clean browser — no dev tools, no
-  pre-filled state, no extensions beyond the wallet.
-- Click **Connect wallet**, approve in the prepared demo wallet.
-- Click **Adopt pet**, approve the signature.
-- Narrate while it confirms: "This is one transaction, no token, no
-  approval — just a wallet-linked adoption record."
-- Show the pet appear **only after** the receipt confirms and the UI
-  re-reads the chain (not immediately on signing).
+Show landing steps and approved mascot artwork. Label a three-stage art strip **Stage artwork — progression rules**. This is not evidence of a wallet reaching every stage. First care gives 10 points and remains Hatchling; Buddy starts at 20, Guardian at 50.
 
-**Evidence to capture:** transaction hash for the adopt call, visible on
-screen or captured in `docs/qa/evidence/` for the notes below.
+### S03 · 0:40–1:20 · Deston · Connect and adopt
 
-## 3. Care and growth (≈40s)
+> “This demonstration uses X Layer testnet. I’m connecting a prepared demo wallet, then requesting an adoption. The registry records the pet against the wallet. There’s no token purchase or token approval; transactions still need network gas.”
 
-- Click **Care**, approve the signature.
-- Narrate: "Care is once per UTC calendar day, enforced on chain — not just
-  in the UI." Show the pending state (no growth shown yet).
-- After confirmation: growth points increase by 10; if this crosses a stage
-  threshold, the evolution celebration plays.
+Show genuine connection approval, adoption request, wallet transaction confirmation and pending state. Use this next line only after a successful receipt **and** a visible pet read-back — **CONDITIONAL / UNVERIFIED**:
 
-**Evidence to capture:** transaction hash for the care call.
+> “The transaction has confirmed, and the app has read the new pet back.”
 
-## 4. Refresh and shared progress (≈30s)
+Overlay **Prepared team demo wallet · X Layer testnet** only once that preparation/disclosure is confirmed. Keep the continuous raw capture and full adoption hash. Label a waiting-time cut **Confirmation wait shortened**. A submitted hash alone is not success. No private wallet details in frame.
 
-- Hard-refresh the page. Show the same pet recovered — from the chain, not
-  from a fixture or local storage.
-- Scroll to (or navigate to) the community panel. Point out the **Care
-  actions** counter incrementing by exactly one from the confirmed care
-  above, and that it is labelled "Care actions," not a headcount.
+### S04 · 1:20–2:00 · Kym · Daily care
 
-*(Cut point: this section can merge with §3 if time is tight — refresh
-immediately after the care confirmation instead of as a separate beat.)*
+> “Now for the daily interaction: care for the pet and approve the transaction. The contract allows one care per UTC calendar day. The interface is designed to wait for confirmation and a fresh registry read before displaying growth.”
 
-## 5. Honesty beat — what this is not (≈20s)
+Show genuine care request, wallet confirmation and pending state. Use this result line only after checking the successful receipt, before/after values and cooldown — **CONDITIONAL / UNVERIFIED**:
 
-> "There's no MemePet token, no staking, no marketplace. Progress here is
-> non-transferable and can't be bought. Anything you see labelled 'preview
-> data' or 'unknown' in this app is not live — we don't fake a number we
-> can't justify."
+> “This confirmed care added ten points. The pet is still a Hatchling, and the next care time is shown in UTC.”
 
-Optionally show one `/dev/*` preview briefly, labelled on screen, to
-illustrate the distinction between fixture and live data — clearly
-identify it as a development preview, not the live app.
+This assumes a fresh pet's first care. If the verified state differs, rewrite the line before recording. Never animate an unearned stage change. Hold the actual cooldown and disabled care button.
 
-## 6. Close (≈10s)
+### S05 · 2:00–2:35 · Larm · Persistence and community
 
-> "MemePet — adopt the meme, grow the community. Repository and live link
-> are in the submission."
+This scene's narration is **CONDITIONAL / UNVERIFIED** until the matching walkthrough rows pass:
 
----
+> “After refreshing, the same wallet’s pet and care progress are still here. The shared counter has also increased by one for this confirmed care. That number counts care actions, not people or pets. We show an unknown state when a read fails, rather than inventing a total.”
 
-## Prepared wallet / fixture disclosure
+Show real refresh/reconnection if needed, then community values captured immediately before and after care. If other wallets acted during the interval, explain the actual difference rather than attributing their actions to this transaction. A public profile is optional; include a pet-bearing profile only after its real read matches the demonstrated pet. The supplied address's public page currently shows **no pet**.
 
-State explicitly in the submission notes and, if practical, on screen:
+### S06 · 2:35–2:55 · Larm · Integration and scope
 
-- The wallet used in the recording is a **prepared demo wallet** funded by
-  the team for this purpose, not an organic user.
-- Any `/dev/*` route shown is fictional preview data, gated out of the
-  production build (`docs/QA_CHECKLIST.md` I12) — confirm that gate against
-  the actual deployed build before recording, don't just assume it holds.
+> “The integration is a Solidity pet registry on X Layer, connected to a Next.js interface. This prototype supports one community and one mascot. There’s no MemePet token, marketplace or financial reward, and we’re presenting a testnet prototype, not a security-audited product.”
 
-## Known limitations to state, not hide
+Show the real repository and configured contract address. Use an explorer page only if it loads and matches; label a code/configuration view as such. Bytecode comparison is not explorer source verification or a security audit.
 
-- Single community/mascot only; no multi-community, marketplace, or social
-  feed (`docs/PROJECT_BRIEF.md` — stretch/out-of-scope scope).
-- `communityStats` reverts for an unapproved community id; the UI maps that
-  to "unknown," not zero — mention this if a revert happens on camera
-  instead of editing it out silently.
-- AI-assisted development review is not a security audit — do not describe
-  the contract as audited.
+### S07 · 2:55–3:15 · All three · Close
 
-## Facts the lead must verify before submission (not assumed here)
+**Deston:**
 
-- [ ] The exact organizer-required video length and submission format.
-- [ ] The X Layer test/mainnet environment the track actually requires, and
-      that the deployed address matches it.
-- [ ] The public live-product link resolves in a clean, logged-out browser
-      (see link-check below).
-- [ ] The repository is public and the README is current at the commit
-      being submitted.
-- [ ] No secrets, private keys, or unpublished RPC credentials are visible
-      in any frame of the recording or any committed file.
+> “Our aim is to make showing up for a community feel personal.”
 
----
+**Kym:**
 
-## Clean-browser link-check (run immediately before submitting)
+> “A small daily action gives the mascot a story you can follow.”
 
-Use a fresh private/incognito window with no extensions:
+**Larm:**
 
-- [ ] Repository URL loads and the README renders correctly on GitHub.
-- [ ] Live product URL loads over HTTPS with no console errors on first
-      paint (`docs/QA_CHECKLIST.md` I13).
-- [ ] `/dev/*` preview routes return not-found in the deployed build
-      (I12) — confirmed against the actual production deployment, not
-      just local `npm run build`.
-- [ ] Demo video link (once uploaded) plays without requiring a login.
-- [ ] Any block explorer link for the adopt/care transactions resolves to
-      the correct network and address.
+> “MemePet: adopt the meme, grow the community. Explore the app and code through the links in our submission.”
+
+Show each person in sequence, then the app and repository links on an end card. No unsupported user counts, partnerships or adoption claims.
+
+## Evidence gates before the submission take
+
+- [x] Application fixes deployed and checked at revision `35186b5` on 22 September. Recheck the exact recording deployment before filming.
+- [ ] Human prepares/unlocks an injected demo wallet; verify chain **1952**, registry **`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`**, gas and consent to use it in the recording. A public address alone cannot sign.
+- [ ] Run and document [the real wallet walkthrough](../qa/BROWSER_WALKTHROUGH.md), including rejection, adoption, refresh, care, cooldown, account switching and counter comparison. Keep failures and blocked rows honest.
+- [ ] Keep Anvil time travel separate. Next-day care on X Layer needs a real later UTC day.
+- [ ] Fill transaction hashes, receipts, wallet disclosure and before/after values in [submission notes](SUBMISSION_NOTES.md).
+- [ ] Confirm full submission roster, team name, participation route, testnet eligibility and exact declaration. Form pages 2–3 remain unverified.
+- [ ] Check app, repository, transaction links and uploaded video while logged out.
+
+Capture the full QA run first, then use its genuinely successful clips after review. Adoption happens once per wallet, care once per UTC day. A separate retake needs another prepared wallet or a later day as appropriate; do not splice unrelated wallets into an apparently continuous journey. If the wallet remains unavailable, record S01/S02/S06/S07 and label the edit **REHEARSAL — WALLET DEMO MISSING**. That is not a completed working-integration submission.
