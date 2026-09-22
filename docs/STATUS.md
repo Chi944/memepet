@@ -1,6 +1,56 @@
 # Shared status
 
-Updated: 22 September 2026.
+## Current next steps — 23 September 2026 (Singapore)
+
+Reviewed against `main` at **`8c276bd`** after PR #40. There were **no open PRs**
+at this review. The core feature implementation is merged; no mandatory new
+feature prompt is waiting to be run. Build fixes only for defects found during
+the remaining acceptance checks.
+
+| Prompt / area | Current interpretation |
+|---|---|
+| L0/L1, A1/A2, B1/B2 | Foundation and core presentation delivered; do not rerun to rebuild existing files |
+| A3/A4/A5 | Corrected artwork, evolution presentation and share backgrounds merged; release-level visual checks remain |
+| L2/L3/B3 | Integration exists; genuine browser-wallet acceptance and final-release QA remain incomplete |
+| B4 | Combined and individual scripts, production plan and editing handoff done; recording/editing/submission still to execute |
+| B5 public view | Feature implemented through the public route and shared pet presentation; no need to recreate it under an old proposed component filename |
+| B6 user tests | Optional validation; three external usability-session records are still blank |
+| Review/debug/handoff pack | Reusable templates, not a queue of unfinished tasks |
+
+**Do not follow the older NEXT packs as a fresh task queue.** They include
+completed invitation, PR-rebase and A3–A5 instructions. Kym's write access was
+already verified, and the original feature/recording changes have merged.
+The dated history below is retained for context, not current execution guidance.
+
+### What remains
+
+1. Complete the real [browser-wallet walkthrough](qa/BROWSER_WALKTHROUGH.md):
+   rejection, adoption, care, receipt/read-back, cooldown, refresh, account switch
+   and public/community consistency. Capture the community baseline **before** care.
+2. Finish current-release desktop/mobile, keyboard and reduced-motion checks,
+   including the latest artwork/evolution and public/share presentation. Use the
+   [component worksheet](qa/COMPONENT_QA_WORKSHEET.md) and preserve actual results.
+3. Upload one MP3 each from the [three speaker scripts](demo/DEMO_SCRIPT.md),
+   capture genuine product footage, then edit and review the 2–4 minute video.
+4. Confirm eligibility, rights and form answers; check final links and submit.
+   [Team owners](demo/TEAM_READINESS.md) and [submission notes](demo/SUBMISSION_NOTES.md)
+   hold the unresolved fields. Later-day Buddy footage has an honest script alternate.
+
+The [latest recording-kit CI](https://github.com/Chi944/memepet/actions/runs/35787304045)
+passed **111 app tests / 20 files**, **15 contract tests**, typecheck, lint,
+build and production-route gates. Lint retained one existing image warning.
+Hosted connection was observed; real account-access revocation and disconnected
+reload were verified in the [release audit](qa/evidence/RELEASE_AUDIT_2026-09-23.md).
+This does not pass adoption/care. A fresh warning-free wallet prompt remains unverified.
+
+The README hero was recaptured from the public homepage on 23 September Singapore
+time for task `README-RESTORE`. It shows the current design and stage artwork;
+no wallet action was performed and no acceptance row was upgraded by that capture.
+
+<details>
+<summary>Historical status — 22 September 2026 (superseded snapshot)</summary>
+
+Historical update: 22 September 2026. Values, blockers and next steps below describe that earlier snapshot.
 
 ## Hackathon deadline
 
@@ -157,3 +207,5 @@ npm run dev
 ```
 
 Then open `http://localhost:3000`.
+
+</details>
