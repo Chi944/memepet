@@ -219,11 +219,40 @@ funded from the X Layer faucet. The private key was never displayed or shared.
 | Block | `41543244` |
 | Receipt status | `0x1` (read from the chain, not from forge's report) |
 | Gas used | 354,926 at 0.02 gwei |
-| Bytecode | `cast code` equals `forge inspect PetRegistry deployedBytecode` from `main` **byte for byte, including CBOR metadata** |
+| Bytecode | Historical **byte-for-byte match, including CBOR metadata**; matching contract source pinned to `587ceb054d35dd4b7c04a8dd580dcab3b743b30b` in the 22 September comparison below |
 | `APPROVED_COMMUNITY_ID()` | `1` |
 | `communityStats(1)` | `0` — a confirmed zero, not unknown |
 | `communityStats(99)` | reverts `InvalidCommunity`, as audited |
 | `petOf(deployer)` | `exists = false` |
-| Explorer verification | Not done — needs an OKX-linked OKLink API key. The bytecode match above is the stronger guarantee that this is the repository's source. |
+| Explorer verification | Not done — needs an OKX-linked OKLink API key. The exact bytecode comparison above verifies the pinned historical source build; it is not explorer source verification. |
 
 Explorer: https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216
+
+## Source comparison — 22 September 2026
+
+PR #26 (`8b7882da22e67aa31eabbc7a1f1e3138732c222b`) adds an SPDX header to
+`PetRegistry.sol`. The contract's executable logic is unchanged. Recompiled
+both the historical source at `587ceb054d35dd4b7c04a8dd580dcab3b743b30b` and
+PR #26 through the installed Solidity **0.8.24+commit.e11b9ed9** standard JSON
+interface: optimizer enabled, 200 runs, Cancun EVM, IPFS metadata and the
+repository's `forge-std/=lib/forge-std/src/` remapping. Compared both results with
+a fresh `eth_getCode` read from the configured X Layer testnet RPC.
+
+| Check | Actual result |
+|---|---|
+| Historical compiled bytecode vs deployed code | **Exact match**, including metadata |
+| PR #26 compiled bytecode vs deployed code | **Not an exact full-bytecode match**; metadata differs |
+| Executable runtime, excluding trailing CBOR and its length | **Identical**, 1,344 bytes |
+| ABI and storage layout between the two source builds | **Identical** |
+| Full deployed-bytecode length, both builds | 1,397 bytes |
+| Trailing CBOR plus two-byte length, both builds | 53 bytes |
+| Historical/deployed full-bytecode keccak256 | `0xef261f8fd7613eeaee1b0a0485d6aff7c10847738e602392fb78486f52329a4b` |
+| PR #26 full-bytecode keccak256 | `0x517380ddf2da261531e099f00d5531c3137243b1578b6173c760af2697fdc458` |
+| Shared executable-runtime keccak256, excluding metadata | `0x6fcce1f70d73a84f5856dd7464f34d26d99f500726e8c653c21dae67b646bb90` |
+
+The suffix was separated using its encoded two-byte CBOR length, not by
+assuming a fixed metadata prefix. Solidity includes source hashes and license
+identifiers in metadata, so even a comment-only source edit can change the full
+bytecode. See [Solidity 0.8.24 metadata documentation](https://docs.soliditylang.org/en/v0.8.24/metadata.html).
+No contract was redeployed during this comparison. These read-only checks do
+not establish a successful browser wallet connection, adoption or care.

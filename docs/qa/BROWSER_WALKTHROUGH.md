@@ -54,6 +54,12 @@ preview showed the corrected heading/empty state and hid development routes,
 but **no wallet row passed** there either. See the evidence record for CI and
 preview verification; these are separate from the unchanged production site.
 
+**Post-merge follow-up:** PRs #22 and #26 subsequently reached production at
+application revision `35186b5`. The production page now shows the corrected
+heading/empty state, but a fresh real Chrome Connect attempt still returned
+**No injected wallet was found**. The results below remain BLOCKED / NOT RUN.
+No signature, adoption, care or account switch was performed after deployment.
+
 | X Layer live repeat | Actual result | Status |
 |---|---|---|
 | 1. Connect/approve at `https://memepet.vercel.app/pet` | Clicked Connect wallet; **No injected wallet was found.** | BLOCKED; approval not performed |

@@ -25,8 +25,8 @@ Progression is earned by showing up — not by spending.
 | | |
 |---|---|
 | **Event** | OKX Dev Day 2026 |
-| **Track** | Build a Market — meme applications |
-| **Team** | 3 people: lead (integration + contract), Teammate A (pet experience), Teammate B (community UI, QA, demo) |
+| **Track** | Intended: Build a Market — meme applications; testnet eligibility remains unverified |
+| **Team** | 3 people: Deston (lead), Kym (pet experience), Larm (community UI, QA, demo); form full names remain unverified |
 | **Live demo** | [memepet.vercel.app](https://memepet.vercel.app) |
 | **Demo video** | ⏳ *Not recorded yet* |
 | **Contract** | [`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`](https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216) on X Layer testnet (chain 1952) |
@@ -95,12 +95,19 @@ rather than the pitch. Anything not finished says so.
 | Landing, how-it-works, community panel | ✅ On `main` |
 | Pet scene, three stage assets, care-state panel | ✅ On `main` |
 | Design system, dark mode, mobile (390px) | ✅ On `main` |
-| `PetRegistry` contract + 13 unit tests | ✅ On `main` |
-| Wallet connect → adopt → read back → survive refresh | ✅ On `main`, verified on local Anvil |
+| `PetRegistry` contract + 15 unit tests | ✅ On `main`; 15/15 passed on the combined integration, 22 September |
+| Wallet connect → adopt → read back → survive refresh | Implemented on `main`; historical local Anvil transaction checks passed, but the real browser-wallet journey remains **unverified** |
 | Daily care transaction + live community read | ✅ On `main` |
-| Deployed to X Layer testnet | ✅ Block 41,543,244 — bytecode verified identical to `main` |
+| Deployed to X Layer testnet | ✅ Block 41,543,244 — executable runtime matches current source; compiler metadata differs after PR #26. [Comparison evidence](docs/deploy/XLAYER_TESTNET.md#source-comparison--22-september-2026) |
 | Public live link | ✅ [memepet.vercel.app](https://memepet.vercel.app) |
+| Read-only public pet page | ✅ On `main` through PR #21, with the PR #27 badge correction |
+| Three-person recording scripts | Ready for Deston, Kym and Larm; successful wallet-action lines remain conditional |
 | Demo video | ❌ Not yet |
+
+The latest real Chrome connection attempt reported **“No injected wallet was
+found.”** No connection approval, adoption or care passed the browser walkthrough.
+See the [QA record](docs/qa/evidence/OKX_PREP_2026-09-22.md) and
+[combined recording script](docs/demo/DEMO_SCRIPT.md).
 
 **A design principle you can check in the code:** the UI never shows a number it
 cannot justify.
@@ -193,7 +200,7 @@ than a placeholder — by design, so that a fake address could never reach a dem
 | Styling | CSS Modules + custom properties | No UI framework; full control of the design system, zero runtime cost |
 | Chain access | [viem](https://viem.sh) + injected EIP-1193 provider | Smallest workable surface — one dependency, no wallet-UI framework |
 | Contract | [Foundry](https://getfoundry.sh), Solidity 0.8.24 | Fast tests, good time-travel for the UTC-day rule |
-| Testing | [Vitest](https://vitest.dev) + Testing Library, `forge test` | 39 app tests, 13 contract tests |
+| Testing | [Vitest](https://vitest.dev) + Testing Library, `forge test` | 73 app tests, 15 contract tests; both suites passed on 22 September |
 | CI | GitHub Actions | Both suites plus a production preview-gate assertion on every PR |
 
 **Total runtime dependencies: 4** — `next`, `react`, `react-dom`, `viem`.
@@ -279,9 +286,9 @@ steps (simulate / human broadcast / record): [`docs/deploy/XLAYER_TESTNET.md`](d
 ```bash
 npm run typecheck        # tsc --noEmit
 npm run lint             # eslint
-npm test                 # vitest run  — 39 tests
+npm test                 # vitest run  — 73 tests
 npm run build            # next build
-npm run test:contracts   # forge test  — 13 tests
+npm run test:contracts   # forge test  — 15 tests
 ```
 
 CI runs all of these on every pull request, plus a production-server check
@@ -294,7 +301,7 @@ asserting `/` is 200 and each `/dev/*` route is 404.
 ```
 contracts/
   src/PetRegistry.sol        Wallet-linked, non-transferable pet registry
-  test/PetRegistry.t.sol     13 tests, including UTC-day boundary cases
+  test/PetRegistry.t.sol     15 tests, including UTC-day boundaries and Cared events
 src/
   app/                       Routes, layout, global styles, dev previews
   components/
@@ -340,8 +347,11 @@ Recorded honestly; the full list lives in
 - **Deployed to X Layer testnet, not mainnet.** Testnet OKB has no value, which
   is deliberate: nothing in MemePet should ever cost a user real money.
 - The contract is not source-verified on the explorer. Verification needs an
-  OKLink API key tied to an OKX account; instead, the deployed bytecode was
-  compared against `main` and matches byte for byte, including metadata.
+  OKLink API key tied to an OKX account. The deployed bytecode matches contract
+  source at `587ceb054d35dd4b7c04a8dd580dcab3b743b30b` byte for byte, including
+  metadata. After PR #26 adds the SPDX header, current source still produces the
+  same executable runtime and ABI, but different compiler metadata. See the
+  [dated comparison](docs/deploy/XLAYER_TESTNET.md#source-comparison--22-september-2026).
 - `communityStats()` reverts for an unapproved community id. The read layer must
   map that revert to *unknown*, never to `0`.
 - Browser-level wallet states — rejecting a signature in MetaMask, switching
@@ -353,12 +363,17 @@ Recorded honestly; the full list lives in
 
 ## 🔭 Roadmap
 
-Immediate, before submission: run the manual wallet walkthrough against the
-deployed contract and record the demo video.
+Immediate, before submission: finish the genuine
+[browser wallet walkthrough](docs/qa/BROWSER_WALKTHROUGH.md), confirm the remaining
+[submission fields](docs/demo/SUBMISSION_NOTES.md), and record the demo video.
+The [combined script](docs/demo/DEMO_SCRIPT.md), individual scripts for
+[Deston](docs/demo/speakers/lead.md), [Kym](docs/demo/speakers/teammate-a.md) and
+[Larm](docs/demo/speakers/teammate-b.md), [recording checklist](docs/demo/RECORDING_CHECKLIST.md)
+and [Codex editing handoff](docs/demo/EDITOR_HANDOFF.md) are ready. No final video
+exists yet; success narration remains conditional on genuine wallet evidence.
 
-Beyond the hackathon: multiple communities, accessory saving, public pet profile
-pages, and a read-only holder indicator. All are listed as stretch scope in the
-brief and none are started.
+Read-only public pet pages are implemented. Multiple communities, accessory
+saving and a read-only holder indicator remain stretch scope.
 
 ---
 
@@ -369,9 +384,9 @@ Three contributors with clear ownership boundaries, documented in
 
 | Role | Owns |
 |---|---|
-| **Lead** | Contract, wallet and data integration, routes, shared UI, types, CI, deployment |
-| **Teammate A** | Pet presentation and stage artwork |
-| **Teammate B** | Landing and community UI, manual QA, demo materials |
+| **Deston — lead** | Contract, wallet and data integration, routes, shared UI, types, CI, deployment |
+| **Kym — Teammate A** | Pet presentation and stage artwork |
+| **Larm — Teammate B** | Landing and community UI, manual QA, demo materials |
 
 Built with open-source tooling: [Next.js](https://nextjs.org),
 [React](https://react.dev), [viem](https://viem.sh),

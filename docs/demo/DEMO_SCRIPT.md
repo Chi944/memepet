@@ -2,12 +2,13 @@
 
 Updated **22 September 2026**. Target **3:15**, within the organizer's **2–4 minute** requirement. Deadline: **25 September 2026, 23:59 UTC / 26 September, 07:59 Singapore**. [Official builder kit](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit).
 
-**Script ready; wallet demonstration blocked.** Real Chrome reached “Not installed” and “No injected wallet was found.” No wallet connection approval, adoption or care was performed. Success lines below are **CONDITIONAL — UNVERIFIED**, not results. The locally integrated truthfulness fixes also need publication and verification on the actual recording deployment.
+**Script ready; wallet demonstration blocked.** Real Chrome reached “Not installed” and “No injected wallet was found.” No wallet connection approval, adoption or care was performed. Success lines below are **CONDITIONAL — UNVERIFIED**, not results. The application fixes from PRs #22 and #26 are now deployed; the real signing walkthrough is still required.
 
-The integration is available in [draft PR #28](https://github.com/Chi944/memepet/pull/28)
-and a [verified preview](https://memepet-21qy9t1rs-chi944s-projects.vercel.app/pet)
-of commit `8a88f4b`. Wallet-free preview checks and CI passed; the same real
-wallet connection attempt remained blocked. The production domain is unchanged.
+The recording pack is tracked in [PR #28](https://github.com/Chi944/memepet/pull/28).
+Production [pet home](https://memepet.vercel.app/pet), application revision
+`35186b5`, was checked after PRs #22/#26 merged: the correct heading and honest
+empty state render, and development routes return 404. The same real wallet
+connection attempt remained blocked. See the [release evidence](../qa/evidence/OKX_PREP_2026-09-22.md#merge-completion-and-production-follow-up).
 
 ## Speakers and recording pack
 
@@ -89,7 +90,7 @@ Show each person in sequence, then the app and repository links on an end card. 
 
 ## Evidence gates before the submission take
 
-- [ ] Publish reviewed integration and identify the actual deployed revision.
+- [x] Application fixes deployed and checked at revision `35186b5` on 22 September. Recheck the exact recording deployment before filming.
 - [ ] Human prepares/unlocks an injected demo wallet; verify chain **1952**, registry **`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`**, gas and consent to use it in the recording. A public address alone cannot sign.
 - [ ] Run and document [the real wallet walkthrough](../qa/BROWSER_WALKTHROUGH.md), including rejection, adoption, refresh, care, cooldown, account switching and counter comparison. Keep failures and blocked rows honest.
 - [ ] Keep Anvil time travel separate. Next-day care on X Layer needs a real later UTC day.

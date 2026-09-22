@@ -33,6 +33,7 @@ An optional 1:1 team display picture accepts an image up to 10 MB. **Pages 2–3
 | Live app | [memepet.vercel.app](https://memepet.vercel.app); read-only checks recorded, wallet journey blocked |
 | Network | X Layer testnet, chain **1952**, configured gas currency **OKB** |
 | Registry | **`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`** |
+| Verified application deployment | Main application revision **`35186b5`**, production rollout confirmed 22 September; recheck the exact recording revision |
 | Deployment transaction | **`0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9`**, block **41543244**; receipt success/bytecode match recorded in `src/lib/deployment.ts` |
 | Final submission commit / deployed revision | **UNVERIFIED — FINAL_COMMIT_AND_DEPLOYMENT** |
 | Testnet acceptance | **UNVERIFIED — ORGANIZER_TESTNET_ELIGIBILITY** |
@@ -60,7 +61,7 @@ A zero community **care** count is not a count of adopted pets, users or wallets
 
 ## Integration and current checks
 
-The public-pet branch reached `main` through **PR #21**, with a badge follow-up in **PR #27**. The truthfulness/read-loop work from **PR #22** is integrated on `prep/okx-dev-day-submission` at code commit **`13298d9`** (parents `a3c66ab` from main and `30c2dab` from the fix branch), published in **[draft PR #28](https://github.com/Chi944/memepet/pull/28)**. The repository's existing Vercel integration produced a [preview for `8a88f4b`](https://memepet-21qy9t1rs-chi944s-projects.vercel.app). Main and the production domain were not updated.
+The public-pet branch reached `main` through **PR #21**, with a badge follow-up in **PR #27**. **PR #22** is now merged as `0f32601`, retaining the public share feature and integration safeguards from `13298d9`. **PR #26** is merged as `35186b5`, adding security headers and two event tests. Its production deployment succeeded and was checked on 22 September. **[PR #28](https://github.com/Chi944/memepet/pull/28)** contains the recording pack and updated evidence. The earlier [preview for `8a88f4b`](https://memepet-21qy9t1rs-chi944s-projects.vercel.app) remains historical evidence.
 
 Real Chrome inspection of this final-code preview confirmed the heading, no fabricated growth, a read-only community total of 0, no captured `/pet` error logs, and 404 pages for `/dev/pet`, `/dev/landing` and `/dev/community`. Clicking Connect wallet again returned **No injected wallet was found**. This is a preview rendering check, not a wallet pass. Logged-out preview access is unverified.
 
@@ -70,14 +71,16 @@ Real Chrome inspection of this final-code preview confirmed the heading, no fabr
 | `npm run lint` | **PASS**, exit 0 |
 | `npm test` | **PASS**, 73/73 tests across 15 files |
 | `npm run build` | **PASS**, exit 0 |
-| `npm run test:contracts` | **PASS**, 13/13 tests |
+| `npm run test:contracts` | **PASS**, 15/15 tests after PR #26 (previously 13) |
 | Local final production HTTP smoke | **NOT RUN** — automatic approval review rejected starting the production server on `127.0.0.1:3300` (“blocked by policy”) |
 | GitHub CI at `8a88f4b` | **PASS** — [run 35688426933](https://github.com/Chi944/memepet/actions/runs/35688426933), including app/contract jobs, clean install and the production `/dev/*` smoke step |
 | Real browser wallet walkthrough | **BLOCKED — no injected wallet; no wallet action passed** |
 
 These current results were executed and reported by the lead in this preparation task. See [current evidence](../qa/evidence/OKX_PREP_2026-09-22.md) for the command record. Automated checks and browser checks are separate.
 
-Independent checks of the **existing public deployment** returned HTTP 200 for `/` and `/pet`, and HTTP 404 for `/dev/pet`, `/dev/landing`, `/dev/community`, `/dev/profile` and `/pet/not-an-address`. A live read confirmed chain 1952 and bytecode matching the compiled registry. Earlier local Anvil development-browser checks observed the new heading and absence of fabricated growth; they preceded the final hook edits and are not a final production-browser pass.
+After PRs #22/#26 merged, production `/` and `/pet` returned 200, and `/dev/pet`, `/dev/landing`, `/dev/community` and `/pet/not-an-address` returned 404. All four configured security headers were present. Real Chrome showed the corrected heading, no fabricated growth and a community count of 0; captured `/pet` error logs were empty. Connect still returned **No injected wallet was found**. These are final application rendering checks; no wallet action passed.
+
+Contract verification now distinguishes code from metadata: deployed bytes match historical contract source `587ceb054d35dd4b7c04a8dd580dcab3b743b30b` exactly. PR #26's SPDX comment changes the compiler metadata, so current full compiled bytecode is **not identical** to deployed bytecode. The 1,344-byte executable runtime, ABI and storage layout are unchanged and were verified to match. No contract was redeployed. See [release evidence](../qa/evidence/OKX_PREP_2026-09-22.md#merge-completion-and-production-follow-up).
 
 ## Wallet and transaction evidence
 
