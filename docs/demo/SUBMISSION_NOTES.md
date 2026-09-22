@@ -56,6 +56,7 @@ After genuine wallet verification, replace the final sentence with the specific 
 | [Earlier preparation evidence, 22 Sep](../qa/evidence/OKX_PREP_2026-09-22.md) | Real Chrome Connect attempt reported no injected wallet; supplied address has no pet and a readable testnet balance; form page 1 inspected | Successful wallet connection, signing authority, adoption, care or form submission |
 | [Later wallet warning review, 22 Sep](../qa/evidence/METAMASK_WARNING_2026-09-22.md) | Hosted warning observed; public review issue submitted; reviewer later said the domain did not appear flagged anymore and closed the issue | Warning removal in the current wallet prompt, an independent security audit, or successful adoption/care |
 | [Separate local wallet session, 22 Sep](../qa/evidence/LOCAL_ANVIL_2026-09-22.md) | Real local connection and chain 31337 displayed after human approvals; adoption request reached the pending state | Confirmed rejection, adoption, care, or any X Layer browser transaction; local runtime later stopped |
+| [Release audit and hosted disconnect, 23 Sep Singapore](../qa/evidence/RELEASE_AUDIT_2026-09-23.md) | PR #38 deployed; 111 app/15 contract tests passed; real hosted Disconnect revoked account access and reload rechecked the disconnected state | Adoption/care, a new warning-free connection prompt, or a guarantee of zero security risk |
 | [Local Anvil observations, 20 Sep](../qa/evidence/OBSERVATIONS.md) | Local rendering, read-only states, mocked wrong-chain and controlled failed-read states | X Layer transactions or genuine wallet rejection/account switching |
 | [Development setup history](../DEV_SETUP.md) | Historical automated and unlocked local-node checks, with dates | Current prep-branch checks or browser-wallet success |
 
@@ -129,7 +130,7 @@ Whether the warning has disappeared in the current wallet prompt is
 | Gas budget sufficient for the actual requested transactions | Balance read above is verified; transaction gas budget **UNVERIFIED** |
 | Real connection approval | Hosted full address/chain 1952 **OBSERVED**, following the user's reported approval; local Anvil address/chain 31337 also **OBSERVED**. Neither is a transaction pass |
 | Hosted wallet warning removed in current prompt | **UNVERIFIED**; reviewer closure alone is not a browser check |
-| Wallet dapp permission disconnected after testing | **UNVERIFIED**; the user requested help finding MetaMask's Dapp connections |
+| Wallet dapp permission disconnected after testing | **PASS for hosted origin**: real Chrome Disconnect and reload verified account-access revocation on PR #38's production build. Local-origin permission unchanged. See release evidence |
 | Rejected adoption, no pet/growth created | **NOT RUN on X Layer**; local request reached pending, but rejection not observed |
 | Adoption hash + successful receipt + pet read-back | **UNVERIFIED — ADOPT_TX_AND_RECEIPT** |
 | Care hash + successful receipt + before/after values | **UNVERIFIED — CARE_TX_AND_RECEIPT** |

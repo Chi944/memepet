@@ -14,9 +14,11 @@ Three documents, one per job:
 
 Nothing below has been recorded yet. Lines marked **⚑ CONDITIONAL** describe a
 result and may be used only beside footage of that result actually happening.
-The user reports connection and network switching only. The hosted page now
-displays the intended address on chain 1952, with no pet; the separate local Anvil
-connection and chain 31337 were also observed. No browser adoption or care is verified.
+The user reports connection and network switching only. The hosted page displayed
+the intended address on chain 1952, with no pet; the separate local Anvil
+connection and chain 31337 were also observed. The hosted wallet has since been
+disconnected, with permission revocation verified through the app and reload.
+No browser adoption or care is verified.
 See the [current submission status](SUBMISSION_NOTES.md#wallet-and-transaction-evidence).
 
 ---

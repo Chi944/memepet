@@ -45,3 +45,21 @@ Fresh real Chrome hosted `/pet` displayed `0x2ec8471290793FeB64792861Ce3102d291c
 The separate [local run](LOCAL_ANVIL_2026-09-22.md) verified connection and chain **31337** before its servers stopped. The rejection test reached awaiting-signature, with no observed human rejection/approval. No browser adoption/care receipt, account-switch check, cooldown, next-day evolution or confirmed-pet refresh is claimed. Wallet extension URLs are blocked by browser-tool policy; no alternate control route was used.
 
 Browser reduced-motion behavior, external social-preview caching/cropping, and the original artwork licence chain remain outside this pass. No user keystore, recovery phrase, password or private key was read or decrypted. A site rebuild cannot itself certify removal of an external security classification.
+
+## Production release and real disconnect — 22 September, 21:11 UTC
+
+[PR #38](https://github.com/Chi944/memepet/pull/38) merged as `e0e1b0743a6d87420df4646dc93c2317759615a0` after App, Contracts and Vercel checks passed. The main-branch check run also passed. GitHub deployment `6600806339` identifies that exact commit as **Production**, with successful completion at `2026-09-22T21:10:34Z`.
+
+The following actions were genuinely performed in real Chrome at `https://memepet.vercel.app/pet`, using the existing MetaMask connection:
+
+| Action | Observed result | Status |
+|---|---|---|
+| Reload the deployed page | Intended full address and chain `1952` displayed with Disconnect | PASS: existing connection observed |
+| Click Disconnect | Wallet changed to **Not connected**, chain **Unknown**, pet **Connect to view**; the app displayed **Wallet account access was revoked for this site** | PASS: real permission-revocation flow |
+| Reload after disconnect | The same disconnected state and verified-revocation message remained | PASS: fresh `eth_accounts` verification through the reviewed hook, not merely replayed local status |
+
+The reviewed success path requires `wallet_revokePermissions` to resolve and `eth_accounts` to return an empty list. Reload independently checks `eth_accounts` again before displaying the saved success. These observed UI results support account-access removal for this origin/provider at that time. The extension's settings UI was not inspected; no extension-policy workaround or direct hidden provider evaluation was used.
+
+No adoption, care, signing request, token approval, funds transfer, or new connection approval was performed. Disconnect does not cancel an already-open wallet prompt or revoke token allowances. The separate local origin's permissions were not changed. A fresh warning-free connection prompt remains unverified.
+
+![Real Chrome after permission revocation and reload](wallet-disconnected-2026-09-23.png)

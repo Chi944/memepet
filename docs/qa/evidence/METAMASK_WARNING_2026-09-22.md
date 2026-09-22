@@ -39,7 +39,7 @@ A duplicate search for `memepet.vercel.app` returned no existing issues. The off
 
 **Reviewer response:** At `2026-09-22T19:31:23Z`, repository collaborator `AlexHerman1` wrote, “this doesn't appear to be flagged anymore, please reply here or reopen if you are still seeing warnings,” and closed the issue. [Direct response](https://github.com/MetaMask/eth-phishing-detect/issues/296216#issuecomment-5782692269). Closure and comment were checked through GitHub's API. This is the reviewer's report, not proof that this browser's current prompt is clear or an exhaustive security clearance.
 
-**User report on follow-up:** Only connection and network switching were approved; no signature, adoption/care transaction, spending limit or token approval was reported. Manual disconnect instructions were provided; successful permission removal has not yet been observed.
+**User report on follow-up:** Only connection and network switching were approved; no signature, adoption/care transaction, spending limit or token approval was reported. The user requested help locating Dapp connections. After releasing the corrected app handler, real Chrome Disconnect and reload both showed verified account-access removal. See [the release evidence](RELEASE_AUDIT_2026-09-23.md#production-release-and-real-disconnect--22-september-2111-utc).
 
 **Independent hosted-page observation on follow-up:** A fresh Chrome visit to `https://memepet.vercel.app/pet` displayed the intended full address, chain `1952`, pet **None yet**, community cares `0`, and the Adopt pet button. No connection or signing request was issued during this observation. It verifies an existing authorized connection, not a warning-free wallet prompt, and does not establish any adoption count from the care counter.
 
@@ -47,7 +47,7 @@ A duplicate search for `memepet.vercel.app` returned no existing issues. The off
 
 The application connect handler requests accounts and chain ID. Automatic follow-up calls read the latest block, `petOf(address)` and `communityStats(1)`; pet reads repeat every 30 seconds. The checked connect path does not request a signature or call a contract write. Adoption, care and network changes have separate explicit callbacks.
 
-**The audited pre-fix Disconnect button only clears React state. It does not revoke MetaMask site permissions.** A reload or provider account/network event can restore an already-authorized account through `eth_accounts`. This finding is being corrected in task `QA-WALLET-RELEASE`; the dated assessment here describes the original behavior. To remove the wallet's site permission manually, use MetaMask's account-view menu → **Dapp connections** → the site → **Disconnect**. Disconnecting does not revoke any token approvals already signed. See [MetaMask's documentation](https://support.metamask.io/more-web3/dapps/disconnect-wallet-from-a-dapp/).
+**The audited pre-fix Disconnect button only cleared React state; it did not revoke MetaMask site permissions.** A reload or provider account/network event could restore an already-authorized account through `eth_accounts`. PR #38 corrected this finding; real hosted revocation and reload were observed afterward in the linked release record. To remove the wallet's site permission manually, use MetaMask's account-view menu → **Dapp connections** → the site → **Disconnect**. Disconnecting does not revoke any token approvals already signed. See [MetaMask's documentation](https://support.metamask.io/more-web3/dapps/disconnect-wallet-from-a-dapp/).
 
 ### Public served-code spot check — 15:06 UTC
 

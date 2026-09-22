@@ -10,6 +10,8 @@ The supplied screenshot showed MetaMask's **“Malicious—flagged as unsafe”*
 
 ## Disconnect the current site
 
+**Completed for the hosted origin:** The deployed app's corrected Disconnect button was clicked in real Chrome. It confirmed account-access revocation and remained disconnected after reload and a fresh wallet-account check. [Evidence and screenshot](evidence/RELEASE_AUDIT_2026-09-23.md#production-release-and-real-disconnect--22-september-2111-utc). The manual instructions below remain available for another origin or an unsupported wallet; the local origin's permissions were not changed.
+
 Cancel any pending transaction or signature prompt. In MetaMask's account view, open the top-right menu, choose **Dapp connections**, select `memepet.vercel.app`, then **Disconnect**. Older versions may call the menu **Connected sites**. Remove `http://127.0.0.1:3400` separately if you also want to end the local test connection. The current user report includes no spending approval; disconnecting would not undo any previously signed token allowance. [Official instructions](https://support.metamask.io/more-web3/dapps/disconnect-wallet-from-a-dapp/).
 
 ## Chrome setup
