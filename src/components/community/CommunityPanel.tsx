@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 import type { CommunityPanelProps } from "@/types/view-models";
 import { Card } from "@/components/ui/Card";
 import { DataModeBadge } from "@/components/ui/Badge";
@@ -14,90 +14,20 @@ export function CommunityPanel({ community }: CommunityPanelProps) {
     Number.isFinite(community.totalCareActions) &&
     community.totalCareActions >= 0;
 
-  let body: ReactNode;
-  let isKnown = true;
+  const canShowTotal =
+    knownTotal && !community.isLoading && !community.errorMessage;
+  const total = canShowTotal ? (community.totalCareActions as number) : null;
+  const target = validTarget ? (community.milestoneTarget as number) : null;
+  const percentage =
+    target === null || total === null
+      ? null
+      : Math.min(100, Math.max(0, (total / target) * 100));
+  const progressStyle =
+    percentage === null
+      ? undefined
+      : ({ "--community-progress": `${percentage}%` } as CSSProperties);
+  const achieved = target !== null && total !== null && total >= target;
 
-  if (community.isLoading) {
-    isKnown = false;
-    body = (
-      <>
-        <p>Loading community progress…</p>
-        <div className={styles.trackPending} aria-hidden="true" />
-      </>
-    );
-  } else if (community.errorMessage) {
-    isKnown = false;
-    body = (
-      <>
-        <p className={styles.error}>{community.errorMessage}</p>
-        <p>Live progress is unavailable; no fictional total is shown.</p>
-        <div className={styles.trackUnknown} aria-hidden="true" />
-      </>
-    );
-  } else if (!knownTotal) {
-    isKnown = false;
-    body = (
-      <>
-        <p className={styles.unknown}>Care actions: Unknown</p>
-        {/* Hatched, never an empty fill: unknown must not look like zero. */}
-        <div className={styles.trackUnknown} aria-hidden="true" />
-        <p className={styles.note}>
-          A count appears here once a registry read succeeds.
-        </p>
-      </>
-    );
-  } else {
-    const total = community.totalCareActions as number;
-    const target = validTarget ? (community.milestoneTarget as number) : null;
-    const percentage =
-      target === null
-        ? null
-        : Math.min(100, Math.max(0, (total / target) * 100));
-    const progressStyle =
-      percentage === null
-        ? undefined
-        : ({ "--community-progress": `${percentage}%` } as CSSProperties);
-    const achieved = target !== null && total >= target;
-
-    body = (
-      <>
-        <p className={styles.total}>
-          Care actions: <strong>{total}</strong>
-        </p>
-
-        {target === null ? (
-          <>
-            <div className={styles.trackUnknown} aria-hidden="true" />
-            <p className={styles.unknown}>
-              Milestone target unavailable. No percentage can be calculated.
-            </p>
-          </>
-        ) : (
-          <>
-            <div
-              className={`${styles.progressTrack} ${achieved ? styles.progressAchieved : ""}`.trim()}
-              role="progressbar"
-              aria-label="Community milestone progress"
-              aria-valuemin={0}
-              aria-valuemax={target}
-              aria-valuenow={Math.min(total, target)}
-              aria-valuetext={`${total} care actions toward a target of ${target}`}
-            >
-              <span className={styles.progressFill} style={progressStyle} />
-            </div>
-            <p className={styles.target}>
-              Target: {target} care actions
-              {achieved ? " — milestone achieved" : ""}
-            </p>
-          </>
-        )}
-      </>
-    );
-  }
-
-  // One live region for every state, kept mounted across transitions. Each
-  // state used to return its own Card, so the loading region was replaced by
-  // a node with no aria-live and the arriving total was never announced.
   return (
     <Card
       className={styles.panel}
@@ -106,10 +36,81 @@ export function CommunityPanel({ community }: CommunityPanelProps) {
     >
       <header className={styles.head}>
         <p className={styles.kicker}>Community habitat</p>
-        <DataModeBadge mode={community.dataMode} isKnown={isKnown} />
+        <DataModeBadge mode={community.dataMode} isKnown={Boolean(canShowTotal)} />
       </header>
-      <h2>{community.name}</h2>
-      {body}
+      <div className={styles.body}>
+        <div className={styles.intro}>
+          <h2>{community.name}</h2>
+          <p className={styles.note}>
+            Every confirmed care contributes to our shared progress.
+          </p>
+        </div>
+
+        {total !== null ? (
+          <>
+            <p className={styles.total}>
+              Care actions: <strong>{total}</strong>
+            </p>
+            <div className={styles.milestone}>
+              <p className={styles.milestoneLabel}>
+                {achieved ? "Growing together" : "Our next milestone"}
+              </p>
+              {target === null ? (
+                <>
+                  <div className={styles.trackUnknown} aria-hidden="true" />
+                  <p className={styles.unknown}>
+                    Milestone target unavailable. No percentage can be calculated.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div
+                    className={`${styles.progressTrack} ${achieved ? styles.progressAchieved : ""}`.trim()}
+                    role="progressbar"
+                    aria-label="Community milestone progress"
+                    aria-valuemin={0}
+                    aria-valuemax={target}
+                    aria-valuenow={Math.min(total, target)}
+                    aria-valuetext={`${total} care actions toward a target of ${target}`}
+                  >
+                    <span className={styles.progressFill} style={progressStyle} />
+                  </div>
+                  <p className={styles.target}>
+                    Target: {target} care actions
+                    {achieved ? " — milestone achieved" : ""}
+                  </p>
+                </>
+              )}
+            </div>
+          </>
+        ) : (
+          <div className={styles.state}>
+            {community.isLoading ? (
+              <>
+                <p className={styles.stateLabel}>Loading community progress…</p>
+                <div className={styles.trackPending} aria-hidden="true" />
+              </>
+            ) : community.errorMessage ? (
+              <>
+                <p className={styles.error}>{community.errorMessage}</p>
+                <div className={styles.trackUnknown} aria-hidden="true" />
+                <p className={styles.note}>
+                  Live progress is unavailable; no fictional total is shown.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className={styles.unknown}>Care actions: Unknown</p>
+                {/* Hatched, never an empty fill: unknown must not look like zero. */}
+                <div className={styles.trackUnknown} aria-hidden="true" />
+                <p className={styles.note}>
+                  A count appears here once a registry read succeeds.
+                </p>
+              </>
+            )}
+          </div>
+        )}
+      </div>
     </Card>
   );
 }
