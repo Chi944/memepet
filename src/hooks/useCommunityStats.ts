@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { type Address, createPublicClient, http } from "viem";
 import { chainFromDeployment } from "@/lib/chains";
 import type { Deployment } from "@/lib/deployment";
@@ -44,7 +44,10 @@ export function useCommunityStats({
     );
   }
 
-  const chain = chainFromDeployment(deployment);
+  // chainFromDeployment builds a fresh object for any chain id outside X Layer,
+  // and this value is an effect dependency: an unstable identity re-fires the
+  // read on every render. getActiveDeployment is now cached, so this is stable.
+  const chain = useMemo(() => chainFromDeployment(deployment), [deployment]);
   const registryAddress = deployment.registryAddress as Address | null;
   const canRead = Boolean(registryAddress && chain && !wrongChain);
 
@@ -83,6 +86,10 @@ export function useCommunityStats({
       cancelled = true;
     };
   }, [
+    // `address` is required: the render-phase cacheKey reset puts the panel
+    // back into loading on an account switch, and without this dep the effect
+    // never re-runs to resolve it.
+    address,
     canRead,
     chain,
     deployment.rpcUrl,

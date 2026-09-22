@@ -32,7 +32,8 @@ export interface PetSceneProps {
 }
 
 export interface CarePanelProps {
-  readonly pet: PetViewModel;
+  /** null when no pet is known: never substitute a fabricated pet. */
+  readonly pet: PetViewModel | null;
   readonly action: CareActionState;
   readonly onCare: () => void;
   readonly onConnect: () => void;

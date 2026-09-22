@@ -12,17 +12,6 @@ import { usePetRegistry } from "@/hooks/usePetRegistry";
 import { useWallet } from "@/hooks/useWallet";
 import { resolveCareActionState } from "@/lib/care-action-machine";
 import { publicPetPath } from "@/lib/public-pet";
-import type { PetViewModel } from "@/types/view-models";
-
-const PLACEHOLDER_PET: PetViewModel = {
-  displayName: "Mochi",
-  communityName: "Approved community",
-  stage: "hatchling",
-  growthPoints: 0,
-  nextStageAt: 20,
-  artSrc: "/pets/hatchling.png",
-  dataMode: "live",
-};
 
 export function PetLiveClient() {
   const wallet = useWallet();
@@ -75,6 +64,7 @@ export function PetLiveClient() {
         readErrorMessage: registry.readErrorMessage ?? undefined,
         hasPet: registry.hasPet,
         txPhase: registry.txPhase,
+        txKind: registry.txKind,
         transactionHash: registry.transactionHash,
         txErrorMessage: registry.txErrorMessage ?? undefined,
         careEnabled: true,
@@ -87,6 +77,7 @@ export function PetLiveClient() {
       registry.readStatus,
       registry.transactionHash,
       registry.txErrorMessage,
+      registry.txKind,
       registry.txPhase,
       wallet.address,
       wallet.installed,
@@ -94,7 +85,6 @@ export function PetLiveClient() {
     ],
   );
 
-  const displayPet = registry.pet ?? PLACEHOLDER_PET;
   const celebrate = registry.celebrateStageUp;
 
   return (
@@ -106,6 +96,7 @@ export function PetLiveClient() {
             {wallet.deployment.networkName ?? "Configured network"}
           </Badge>
         </div>
+        <h1>Your pet</h1>
         <p className="lede">
           Wallet reads, adoption, and daily care talk to the configured
           registry. Growth and community totals update only after a confirmed
@@ -202,7 +193,7 @@ export function PetLiveClient() {
       ) : (
         <div className="pet-live-grid">
           <CarePanel
-            pet={displayPet}
+            pet={null}
             action={action}
             onCare={() => void registry.care()}
             onConnect={() => void wallet.connect()}
