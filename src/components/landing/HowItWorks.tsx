@@ -13,17 +13,17 @@ const STEPS = [
   {
     id: "connect",
     title: "Connect a wallet",
-    body: "Your pet is linked to your wallet address. Nothing is transferred and no token approval is requested.",
+    body: "Your pet belongs to your wallet address. Nothing leaves your wallet, and you are never asked to approve a token.",
   },
   {
     id: "adopt",
     title: "Adopt your pet",
-    body: "One pet per wallet, starting at the Hatchling stage with zero growth points.",
+    body: "One pet per wallet. Yours starts as a Hatchling, with no growth points yet.",
   },
   {
     id: "care",
     title: "Care once a day",
-    body: "Each confirmed care adds 10 growth points and one action to the shared community total. Miss a day and nothing is lost.",
+    body: "Each care adds 10 growth points to your pet, and one to the community's shared total. Miss a day and you lose nothing.",
   },
 ] as const;
 
@@ -49,8 +49,8 @@ export function HowItWorks({ connected }: HowItWorksProps) {
 
       <p className={styles.stepsNote}>
         {connected
-          ? "Growth points are shown only after a care transaction is confirmed on chain."
-          : "Adoption and care need a deployed registry. That contract is not connected in this build, so no pet can be adopted here yet."}
+          ? "Points appear only after the transaction is confirmed on chain, never before."
+          : "Adopting and caring need a live contract, and none is connected in this build — so no pet can be adopted here yet."}
       </p>
     </section>
   );

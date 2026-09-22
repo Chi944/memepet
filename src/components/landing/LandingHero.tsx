@@ -15,16 +15,16 @@ export function LandingHero({ onGetStarted }: LandingHeroProps) {
         <p className={styles.kicker}>A companion for meme communities</p>
         <h1 id="landing-title">Adopt the meme. Grow the community.</h1>
         <p className={styles.blurb}>
-          Adopt a meme-community mascot, care for it each day, and add to
-          shared habitat progress. Growth comes from participation, not from
-          spending a token.
+          Adopt a meme-community mascot, care for it once a day, and watch the
+          community&apos;s shared habitat grow alongside it. Showing up is the
+          only thing that counts here — there is nothing to buy.
         </p>
         <div className={styles.actions}>
           <Button size="lg" onClick={onGetStarted}>
             Meet your pet
           </Button>
           <p className={styles.actionNote}>
-            No token approvals. No transfers. One care action a day.
+            Nothing to buy. Nothing to approve. One care a day.
           </p>
         </div>
       </div>
