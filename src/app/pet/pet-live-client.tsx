@@ -164,9 +164,17 @@ export function PetLiveClient() {
           </div>
         ) : null}
         <div className="pet-gate-actions">
-          {wallet.address ? (
-            <Button tone="secondary" onClick={wallet.disconnect}>
-              Disconnect
+          {wallet.address || wallet.connecting || wallet.disconnectStatus === "pending" ? (
+            <Button
+              tone="secondary"
+              onClick={() => void wallet.disconnect()}
+              disabled={wallet.disconnectStatus === "pending"}
+            >
+              {wallet.disconnectStatus === "pending"
+                ? "Disconnecting…"
+                : wallet.connecting
+                  ? "Cancel connection"
+                  : "Disconnect"}
             </Button>
           ) : (
             <Button onClick={() => void wallet.connect()} disabled={wallet.connecting}>
@@ -195,6 +203,19 @@ export function PetLiveClient() {
         ) : null}
         {wallet.errorMessage ? (
           <p className="pet-live-error" role="alert">{wallet.errorMessage}</p>
+        ) : null}
+        {wallet.disconnectStatus === "manual" ? (
+          <p className="pet-live-error" role="alert">
+            MemePet is disconnected, but wallet access could not be confirmed as revoked.
+            In MetaMask, open the account menu, choose Dapp connections, select this site,
+            then Disconnect. In another wallet, use its connected-sites settings.
+            Reject any open wallet requests. Disconnecting does not revoke token approvals.
+          </p>
+        ) : wallet.disconnectStatus === "revoked" ? (
+          <p className="status-note" role="status">
+            MemePet is disconnected. Wallet account access was revoked for this site.
+            Reject any open wallet requests; disconnecting does not revoke token approvals.
+          </p>
         ) : null}
       </Card>
 

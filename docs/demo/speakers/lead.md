@@ -6,8 +6,8 @@ Read only the quoted words. Record each scene as its own clip: landscape 1920×1
 
 > "In most meme communities, belonging means buying a token and watching a
 > chart. MemePet offers a different ritual: adopt a mascot, care for it once a
-> day, and grow it just by showing up. Every adoption and care is recorded on
-> X Layer."
+> day, and grow it just by showing up. Confirmed adoptions and cares are recorded
+> on X Layer testnet."
 
 Say the first sentence to camera. The editor covers the rest with the landing
 page. Land on "showing up" — it is the idea of the whole project.
@@ -21,7 +21,7 @@ Narrate over the live screen, in three parts:
 
 *(decline in the wallet)*
 
-> "Nothing is created, and no progress appears. The app only believes the
+> ⚑ **CONDITIONAL** — "Nothing is created, and no progress appears. The app only believes the
 > chain. Now I'll approve it."
 
 *(approve and wait)*

@@ -16,9 +16,9 @@
 |---|---|---|---|
 | S01 | `S01_Deston_T01.mp4` | Face, then landing page; title card | Anytime |
 | S02 | `S02_Kym_T01.mp4` | "How it works"; stage art labelled **Stage artwork — progression rules** | Anytime |
-| S03 | `S03_Deston_T01.mp4` | Real adopt request **declined**, app showing no pet; then approved, pending, confirmed read-back | **Day 1**, 22 Sep before 23:59 UTC |
+| S03 | `S03_Deston_T01.mp4` | Real adopt request **declined**, app showing no pet; then approved, pending, confirmed read-back | **Day 1**, actual first-care UTC date |
 | S04 | `S04_Kym_T01.mp4` | Community total before; care, pending, 0 → 10 points, UTC cooldown, disabled button | **Day 1** |
-| S05 | `S05_Kym_T01.mp4` | Care again: 10 → 20 points, **real Hatchling → Buddy**; caption **Recorded 23 September — next UTC day** | **Day 2**, 23 Sep after 00:00 UTC — **cut if not captured** |
+| S05 | `S05_Kym_T01.mp4` | Care again: 10 → 20 points, **real Hatchling → Buddy**; caption **Recorded [ACTUAL UTC DATE] — next UTC day**, filled from evidence | **Day 2**, a later UTC date — **cut if not captured** |
 | S06 | `S06_Larm_T01.mp4` | Hard refresh with same pet; community total after; public `/pet/<address>` page showing the same pet | Day 1, then Day 2 |
 | S07 | `S07_Larm_T01.mp4` | Repository and the contract address in `deployment.ts`; explorer only if it loads and matches | Anytime |
 | S08 | `S08_Deston_T01.mp4`, `S08_Kym_T01.mp4`, `S08_Larm_T01.mp4` | Faces in sequence; end card with app, repo and contract | Anytime |
@@ -26,6 +26,10 @@
 If over 4:00, cut in this order: the public-page half of S06, then S05's second
 sentence, then S02's last sentence. Never cut S03's decline — it is the beat that
 shows the app awarding nothing the chain did not confirm.
+
+The first and second cares can be on 23/24 Sep UTC, or 24/25 Sep UTC with less
+editing time. Missing 22 Sep does not by itself rule out Buddy. Do not infer a
+new UTC day from Singapore midnight; it changes at 08:00 Singapore time.
 
 ## Editing rules
 

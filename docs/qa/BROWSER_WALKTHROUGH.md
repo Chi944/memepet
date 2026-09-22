@@ -4,6 +4,28 @@ Worksheet for the connect → adopt → care journey against **local Anvil**.
 These steps need a real injected wallet (MetaMask / OKX Wallet). They are
 **not** pre-marked as passing.
 
+**Current status — 23 September 2026 (Singapore):** The user reports only
+connecting and switching networks, with no signature or transaction approval.
+The separate real Chrome local run independently showed the intended address
+`0x2ec8471290793FeB64792861Ce3102d291ce1CA1` and chain **31337** after the
+human approved the prompts. See [the local record](evidence/LOCAL_ANVIL_2026-09-22.md).
+An adoption request reached awaiting-signature, but no rejection or approval
+was observed. That runtime has stopped. No browser adoption/care receipt exists.
+On follow-up, a fresh hosted `/pet` page independently displayed the intended
+address, chain `1952`, pet **None yet**, and community cares `0`. This observes
+an existing authorized connection; it does not verify the original connection
+prompt or a fresh warning-free approval.
+
+MetaMask's reviewer closed [review request #296216](https://github.com/MetaMask/eth-phishing-detect/issues/296216#issuecomment-5782692269)
+on 22 September at 19:31 UTC, reporting that the domain did not appear flagged
+anymore. A fresh wallet prompt has not been independently checked. If a warning
+still appears, leave it unapproved and follow up on that review; do not bypass it.
+See [the warning evidence record](evidence/METAMASK_WARNING_2026-09-22.md).
+The matching address reuses the existing wallet, not a new isolated wallet.
+X Layer browser transactions, rejection, account switching and confirmed-state
+refresh remain unverified. The older result tables below are historical, not
+the current local run; they have not been upgraded to passes.
+
 **Authorship note:** Lead authored this file because Teammate B had not
 started `docs/qa/` yet. **Teammate B owns `docs/qa/` from here** — edit,
 extend, and fill results as B.
@@ -30,7 +52,7 @@ Automated, non-signature checks and screenshots live in
 Fill **Actual result** with observed outcomes, or explicitly mark NOT RUN / BLOCKED. Never infer a pass from automated tests or CLI calls.
 Do not mark Pass/Fail in advance.
 
-### Latest attempt — 22 September 2026, OKX-PREP
+### Earlier observed attempt — 22 September 2026, OKX-PREP
 
 See [the evidence record](evidence/OKX_PREP_2026-09-22.md) for commands,
 screenshots, branch provenance and automated checks. **Zero wallet rows passed.**
@@ -78,6 +100,8 @@ help. A public address is not a signer. Its live `petOf` result was
 observations, not evidence for any row above. A community counter of zero
 proves zero recorded cares, not zero adoptions.
 
+The following prerequisites were recorded for that earlier attempt; the
+current security warning above must be resolved before hosted signing resumes.
 To resume, the human must make an injected MetaMask/OKX wallet available in
 Chrome and unlock it privately. Use a dedicated test wallet; do not expose
 keys or seed phrases. Recheck chain, registry, account and build before each
