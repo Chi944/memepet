@@ -27,10 +27,11 @@ function getInjectedProvider(): EthereumProvider | null {
     return null;
   }
 
-  const ethereum = (
-    window as Window & { ethereum?: EthereumProvider }
-  ).ethereum;
-  return ethereum ?? null;
+  const injected = window as Window & {
+    ethereum?: EthereumProvider;
+    okxwallet?: EthereumProvider;
+  };
+  return injected.ethereum ?? injected.okxwallet ?? null;
 }
 
 export type WalletState = {
