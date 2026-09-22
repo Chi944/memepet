@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import type { CarePanelProps, CareActionState } from "@/types/view-models";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -58,13 +59,38 @@ export function CarePanel({
   onSwitchNetwork,
 }: CarePanelProps) {
   const status = statusChip(action);
+  const isWaiting =
+    action.kind === "awaiting-signature" ||
+    action.kind === "submitting" ||
+    action.kind === "pending";
+  const actionRef = useRef<HTMLDivElement>(null);
+  const hadFocus = useRef(false);
+  const lastKind = useRef(action.kind);
+
+  // Each state renders a different subtree, so the button the user just
+  // activated is unmounted and focus falls to <body>. Most follow-on states
+  // are disabled buttons, which cannot take focus, so there is nothing to tab
+  // back to. Put focus on the live region instead, but only when it was
+  // genuinely lost: if the user has moved focus elsewhere on the page,
+  // activeElement is not <body> and we leave it alone.
+  useEffect(() => {
+    if (lastKind.current === action.kind) {
+      return;
+    }
+    lastKind.current = action.kind;
+
+    if (hadFocus.current && document.activeElement === document.body) {
+      actionRef.current?.focus();
+    }
+  }, [action.kind]);
+
   let content: React.ReactNode;
 
   switch (action.kind) {
     case "ready":
       content = (
         <Button size="lg" onClick={onCare}>
-          Care for {pet.displayName}
+          {pet ? `Care for ${pet.displayName}` : "Care for your pet"}
         </Button>
       );
       break;
@@ -132,7 +158,7 @@ export function CarePanel({
     case "success":
       content = (
         <p className={styles.confirmed}>
-          Care is confirmed. Displayed progress comes from the parent state.
+          Care is confirmed. Your pet’s progress is up to date.
         </p>
       );
       break;
@@ -156,18 +182,47 @@ export function CarePanel({
       surface="warm"
       aria-labelledby="care-heading"
       className={styles.carePanel}
+      data-action={action.kind}
     >
       <div className={styles.careHead}>
         <p className={styles.kicker}>Daily care</p>
         <Badge tone={status.tone}>{status.label}</Badge>
       </div>
+      <div className={styles.careIcon} aria-hidden="true">
+        {action.kind === "success" || action.kind === "cooldown" ? (
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="m5 12 4 4L19 6" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 20s-8-4.8-8-10.1A4.9 4.9 0 0 1 12 6a4.9 4.9 0 0 1 8 3.9C20 15.2 12 20 12 20Z" />
+          </svg>
+        )}
+      </div>
       <h2 id="care-heading">Care for your pet</h2>
-      <p className={styles.careSummary}>
-        {pet.nextStageAt === null
-          ? `Final stage. Displayed growth is ${pet.growthPoints} points from the parent.`
-          : `${pet.growthPoints} growth points. Next stage at ${pet.nextStageAt}.`}
-      </p>
-      <div className={styles.actionContent} aria-live="polite">
+      {pet ? (
+        <p className={styles.careSummary}>
+          {pet.nextStageAt === null
+            ? `Final stage. ${pet.growthPoints} growth points.`
+            : `${pet.growthPoints} growth points. Next stage at ${pet.nextStageAt}.`}
+        </p>
+      ) : null}
+      <div
+        ref={actionRef}
+        tabIndex={-1}
+        className={styles.actionContent}
+        aria-live="polite"
+        onFocusCapture={() => {
+          hadFocus.current = true;
+        }}
+      >
+        {isWaiting ? (
+          <span className={styles.waitingIndicator} aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+        ) : null}
         {content}
       </div>
     </Card>

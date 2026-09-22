@@ -9,7 +9,10 @@ describe("CommunityPanel", () => {
 
     expect(screen.getByText("Care actions:")).toBeInTheDocument();
     expect(screen.getByText("0")).toBeInTheDocument();
-    expect(screen.queryByText("Unknown")).not.toBeInTheDocument();
+    // Substring, not an exact match: the unknown state renders "Care actions:
+    // Unknown" as one node, so queryByText("Unknown") returned null even when
+    // the panel WAS unknown, and the assertion could never fail.
+    expect(screen.queryByText(/Unknown/)).not.toBeInTheDocument();
   });
 
   it("treats a null total as unknown, not zero", () => {
@@ -24,6 +27,26 @@ describe("CommunityPanel", () => {
 
     expect(screen.getByText("Care actions: Unknown")).toBeInTheDocument();
     expect(screen.queryByText("0")).not.toBeInTheDocument();
+  });
+
+  // Regression: each state used to return its own Card, so the loading live
+  // region was replaced by a node carrying no aria-live. A screen reader was
+  // never told the total had arrived.
+  it("keeps one live region mounted from loading through to the total", () => {
+    const { container, rerender } = render(
+      <CommunityPanel community={communityFixtures.loading} />,
+    );
+
+    const region = container.querySelector("[aria-live]");
+    expect(region).not.toBeNull();
+    expect(region).toHaveAttribute("aria-busy", "true");
+
+    rerender(<CommunityPanel community={communityFixtures.empty} />);
+
+    const afterwards = container.querySelector("[aria-live]");
+    expect(afterwards).toBe(region);
+    expect(afterwards).not.toHaveAttribute("aria-busy", "true");
+    expect(afterwards).toHaveTextContent("Care actions:");
   });
 
   it("shows loading without a fake total", () => {

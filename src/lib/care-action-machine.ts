@@ -15,6 +15,8 @@ export type LivePetControllerInput = {
     | "success"
     | "error"
     | "rejected";
+  /** Which write produced txPhase. An adopt receipt must not read as a confirmed care. */
+  readonly txKind?: "idle" | "adopt" | "care";
   readonly transactionHash?: string;
   readonly txErrorMessage?: string;
   /** When false, care remains unavailable even if a pet exists. */
@@ -28,8 +30,8 @@ export type LivePetControllerInput = {
 
 /**
  * Maps wallet / read / tx outcomes onto the frozen CareActionState union.
- * A hash alone never becomes success — callers only pass txPhase "success"
- * after receipt confirmation and a successful re-read.
+ * A hash alone never becomes success. A confirmed receipt with a failed
+ * re-read remains unavailable; only a valid pet read can display success.
  */
 export function resolveCareActionState(
   input: LivePetControllerInput,
@@ -57,28 +59,6 @@ export function resolveCareActionState(
     };
   }
 
-  if (input.txPhase === "rejected") {
-    return {
-      kind: "error",
-      message:
-        input.txErrorMessage ??
-        "You declined the wallet request. No progress was awarded.",
-    };
-  }
-
-  if (input.txPhase === "error") {
-    return {
-      kind: "error",
-      message:
-        input.txErrorMessage ??
-        "The transaction failed. No progress was awarded.",
-    };
-  }
-
-  if (input.txPhase === "success") {
-    return { kind: "success" };
-  }
-
   if (input.readStatus === "loading") {
     return {
       kind: "unavailable",
@@ -86,13 +66,30 @@ export function resolveCareActionState(
     };
   }
 
+  // A failed read is "unavailable", not "error": we do not know whether a pet
+  // exists or whether the daily cooldown is active, so care must not be
+  // offered. The "error" kind renders an enabled retry that submits a write.
   if (input.readStatus === "error") {
     return {
-      kind: "error",
+      kind: "unavailable",
       message:
         input.readErrorMessage ??
         "Pet data could not be loaded. No preview data is shown.",
     };
+  }
+
+  const transactionFailed =
+    input.txPhase === "rejected" || input.txPhase === "error";
+  const transactionError =
+    input.txErrorMessage ??
+    (input.txPhase === "rejected"
+      ? "You declined the wallet request. No progress was awarded."
+      : "The transaction failed. No progress was awarded.");
+
+  // The error state offers a CARE retry. Preserve adoption errors without
+  // wiring that retry to the wrong contract method.
+  if (transactionFailed && (input.txKind === "adopt" || !input.hasPet)) {
+    return { kind: "unavailable", message: transactionError };
   }
 
   if (!input.hasPet) {
@@ -109,11 +106,20 @@ export function resolveCareActionState(
     };
   }
 
+  // Only a confirmed care with a valid pet read can announce care success.
+  if (input.txPhase === "success" && input.txKind !== "adopt") {
+    return { kind: "success" };
+  }
+
   if (input.cooldownAvailableAtIso) {
     return {
       kind: "cooldown",
       availableAtIso: input.cooldownAvailableAtIso,
     };
+  }
+
+  if (transactionFailed) {
+    return { kind: "error", message: transactionError };
   }
 
   return { kind: "ready" };

@@ -1,7 +1,367 @@
-/* ---------- developer preview chrome ---------- */
+/* The mascot is the single expressive element; the surrounding UI stays quiet. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  column-gap: clamp(2rem, 5vw, 5.5rem);
+  row-gap: 3.5rem;
+  align-items: center;
+  padding-top: 1.5rem;
+}
+
+.copy {
+  animation: copy-arrive 650ms var(--ease-out) both;
+}
+
+.copy h1 {
+  max-width: 12ch;
+  margin-bottom: 1.5rem;
+  font-size: clamp(3.2rem, 5.4vw, 5.3rem);
+  font-weight: 650;
+  line-height: 1.015;
+  letter-spacing: -0.065em;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+  color: var(--ink-soft);
+  font-size: 0.8125rem;
+}
+
+.kicker span {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--action);
+}
+
+.blurb {
+  max-width: 39ch;
+  margin-bottom: 2rem;
+  color: var(--ink-soft);
+  font-size: var(--step-1);
+  line-height: 1.65;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.actions button {
+  min-width: 11.5rem;
+}
+
+.actions button span {
+  margin-left: 0.8rem;
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+
+.secondaryAction {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 1rem;
+  color: var(--ink);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.secondaryAction span {
+  color: var(--ink-faint);
+  transition: transform 180ms ease;
+}
+
+.secondaryAction:hover span {
+  transform: translateY(3px);
+}
+
+.actionNote {
+  margin: 1rem 0 0;
+  color: var(--ink-faint);
+  font-size: 0.75rem;
+}
+
+.showcase {
+  position: relative;
+  min-width: 0;
+  padding: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: #10110e;
+  animation: showcase-arrive 850ms var(--ease-out) both;
+}
+
+.showcaseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.artLabel {
+  color: var(--ink-faint);
+  font-size: 0.6875rem;
+  font-weight: 400;
+}
+
+.artFrame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1.28;
+  isolation: isolate;
+}
+
+.orbit {
+  position: absolute;
+  z-index: -1;
+  width: 78%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #c6ff00;
+}
+
+.orbit::after {
+  position: absolute;
+  inset: -12px;
+  border: 1px solid #4b591b;
+  border-radius: 50%;
+  content: '';
+}
+
+.artEnter {
+  display: grid;
+  width: 100%;
+  place-items: center;
+  animation: pet-arrive 650ms var(--ease-out) both;
+}
+
+.art {
+  width: 88%;
+  height: auto;
+  max-height: 24rem;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 15px rgb(0 0 0 / 25%));
+  transition: transform 450ms var(--ease-out);
+}
+
+@media (hover: hover) {
+  .artFrame:hover .art {
+    transform: translateY(-6px) rotate(-3deg);
+  }
+}
+
+.artCross, .artCrossBottom {
+  position: absolute;
+  color: #667044;
+  font-family: var(--font-mono-stack);
+  font-size: 1.25rem;
+}
+
+.artCross {
+  left: 4%;
+  top: 18%;
+}
+
+.artCrossBottom {
+  right: 4%;
+  bottom: 15%;
+}
+
+.stageDescription {
+  position: relative;
+  text-align: center;
+}
+
+.stageDescription h2 {
+  margin-bottom: 0.3rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.04em;
+}
+
+.stageDescription p {
+  margin: 0 0 1.25rem;
+  color: var(--ink-soft);
+  font-size: 0.8125rem;
+}
+
+.stageRail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+  padding: 0.3rem;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: #080906;
+}
+
+.stageRail button {
+  display: grid;
+  gap: 0.15rem;
+  min-height: 3.3rem;
+  padding: 0.6rem 0.2rem;
+  border: 1px solid transparent;
+  border-radius: 0.55rem;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.stageRail small {
+  font-size: 0.65rem;
+  font-weight: 400;
+}
+
+.stageNow {
+  color: var(--on-action);
+  background: var(--action);
+}
+
+.stageNext {
+  color: var(--ink-soft);
+  background: transparent;
+}
+
+.stageNext:hover {
+  color: var(--ink);
+  border-color: var(--line-strong);
+  background: var(--surface-sunken);
+}
+
+.previewNote {
+  margin: 0.8rem 0 0;
+  color: var(--ink-faint);
+  font-size: 0.6875rem;
+  text-align: center;
+}
+
+.ruleStrip {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 1.65rem 0;
+  border-block: 1px solid var(--line);
+}
+
+.ruleStrip div {
+  display: grid;
+  gap: 0.2rem;
+  padding-inline: 2rem;
+  border-left: 1px solid var(--line);
+}
+
+.ruleStrip div:first-child {
+  padding-left: 0;
+  border: 0;
+}
+
+.ruleStrip strong {
+  font-size: 0.95rem;
+  font-weight: 550;
+}
+
+.ruleStrip span {
+  color: var(--ink-faint);
+  font-size: 0.8125rem;
+}
+
+.steps {
+  display: grid;
+  gap: 2.5rem;
+  padding: 3rem 0 2rem;
+}
+
+.stepsIntro {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+}
+
+.stepsIntro h2 {
+  max-width: 19ch;
+  margin: 0;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+}
+
+.stepsIntro p {
+  margin-bottom: 0.75rem;
+}
+
+.stepsSubhead {
+  max-width: 29ch;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.stepList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: grid;
+  align-content: start;
+  gap: 0.85rem;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+.stepNumber {
+  color: var(--action);
+  font-family: var(--font-mono-stack);
+  font-size: 0.8rem;
+}
+
+.stepTitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.035em;
+}
+
+.stepBody {
+  max-width: 36ch;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
+
+.stepsNote {
+  margin: 0;
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-sm);
+  color: var(--ink-soft);
+  background: var(--surface);
+  font-size: 0.8125rem;
+}
+
+.stepsNote::before {
+  display: inline-block;
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-right: 0.7rem;
+  border-radius: 50%;
+  background: var(--action);
+  content: '';
+  vertical-align: middle;
+}
 
 .previewPage {
-  width: min(100%, 74rem);
+  width: min(100%, 80rem);
   margin: 0 auto;
   padding: clamp(1rem, 4vw, 3rem);
 }
@@ -20,13 +380,9 @@
   margin-bottom: 0.75rem;
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  color: #ffffff;
+  color: #fff;
   background: #9c1f35;
-  font-family: var(--font-mono-stack);
   font-size: var(--step--1);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 
 .counter {
@@ -37,207 +393,139 @@
   margin-bottom: 0;
 }
 
-/* ---------- hero ---------- */
-
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(16rem, 0.85fr);
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  align-items: center;
-  padding: clamp(1.35rem, 4vw, 3.25rem);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background:
-    radial-gradient(28rem 20rem at 88% 8%, var(--clay-wash) 0, transparent 70%),
-    var(--surface);
-  box-shadow: var(--shadow-lift);
-}
-
-.copy h1 {
-  max-width: 16ch;
-  margin-bottom: 1rem;
-  font-size: clamp(2.2rem, 5.2vw, 3.9rem);
-}
-
-.kicker {
-  margin-bottom: 0.75rem;
-  color: var(--action);
-  font-family: var(--font-mono-stack);
-  font-size: var(--step--1);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.blurb {
-  max-width: 44ch;
-  margin-bottom: 1.5rem;
-  color: var(--ink-soft);
-  font-size: var(--step-1);
-}
-
-.actions {
-  display: grid;
-  justify-items: start;
-  gap: 0.7rem;
-}
-
-.actionNote {
-  max-width: 40ch;
-  margin: 0;
-  color: var(--ink-faint);
-  font-size: var(--step--1);
-}
-
-/* ---------- hero art and stage rail ---------- */
-
-.artColumn {
-  display: grid;
-  gap: 0.85rem;
-}
-
-.artFrame {
-  display: grid;
-  place-items: center;
-  padding: clamp(0.75rem, 2vw, 1.5rem);
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  background:
-    radial-gradient(circle at 50% 42%, rgb(255 255 255 / 70%) 0 22%, transparent 62%),
-    linear-gradient(155deg, var(--action-wash), var(--live-wash));
-}
-
-.art {
-  width: min(100%, 24rem);
-  height: auto;
-  filter: drop-shadow(0 16px 24px rgb(45 27 66 / 16%));
-}
-
-.stageRail {
-  display: flex;
-  gap: 0.4rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: stage;
-}
-
-.stageRail li {
-  flex: 1;
-  padding: 0.45rem 0.5rem;
-  border-radius: 999px;
-  font-family: var(--font-mono-stack);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.stageNow {
-  color: #ffffff;
-  background: var(--action);
-}
-
-.stageNext {
-  color: var(--ink-faint);
-  border: 1px dashed var(--line-strong);
-  background: transparent;
-}
-
-@media (prefers-color-scheme: dark) {
-  .stageNow {
-    color: #1a1029;
+@keyframes copy-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
   }
-
-  .art {
-    filter: drop-shadow(0 16px 28px rgb(0 0 0 / 45%));
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* ---------- how it works ---------- */
-
-.steps {
-  display: grid;
-  gap: 1.15rem;
-  padding: clamp(1.25rem, 3.5vw, 2.25rem);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-card);
+@keyframes showcase-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.stepsIntro p {
-  margin-bottom: 0.5rem;
+@keyframes pet-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-.stepsIntro h2 {
-  margin: 0;
+@media (max-width: 1000px) {
+  .hero {
+    column-gap: 2rem;
+  }
+  .copy h1 {
+    font-size: clamp(3rem, 5.5vw, 4.3rem);
+  }
+  .showcase {
+    padding: 1.15rem;
+  }
 }
 
-.stepList {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr;
+    row-gap: 2.5rem;
+    padding-top: 1rem;
+  }
+  .copy h1 {
+    max-width: 14ch;
+    font-size: clamp(3rem, 8vw, 4.5rem);
+  }
+  .blurb {
+    max-width: 46ch;
+  }
+  .showcase {
+    width: min(100%, 32rem);
+    justify-self: center;
+  }
+  .kicker {
+    margin-bottom: 1.25rem;
+  }
+  .ruleStrip {
+    gap: 1rem;
+  }
+  .ruleStrip div {
+    padding-inline: 1rem;
+  }
+  .steps {
+    padding-top: 1.5rem;
+    gap: 1.75rem;
+  }
+  .stepsIntro {
+    display: block;
+  }
+  .stepsSubhead {
+    max-width: 45ch;
+    margin: 1rem 0 0;
+  }
+  .stepList {
+    gap: 1.5rem;
+  }
 }
 
-.step {
-  display: grid;
-  align-content: start;
-  gap: 0.4rem;
-  padding: 1.1rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface-sunken);
-}
-
-.stepNumber {
-  color: var(--action);
-  font-family: var(--font-mono-stack);
-  font-size: var(--step--1);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
-
-.stepTitle {
-  margin: 0;
-  font-size: var(--step-1);
-}
-
-.stepBody {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.95rem;
-}
-
-.stepsNote {
-  margin: 0;
-  padding: 0.85rem 1rem;
-  border-left: 3px solid var(--line-strong);
-  color: var(--ink-soft);
-  font-size: 0.95rem;
-}
-
-@media (max-width: 860px) {
+@media (max-width: 560px) {
+  .copy h1 {
+    font-size: clamp(2.65rem, 11.5vw, 4rem);
+  }
+  .blurb {
+    font-size: 1rem;
+  }
+  .actions {
+    gap: 1rem;
+  }
+  .showcase {
+    padding: 1.1rem;
+  }
+  .ruleStrip {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .ruleStrip div {
+    grid-template-columns: 8.5rem 1fr;
+    align-items: baseline;
+    padding: 0;
+    border: 0;
+    gap: 0.5rem;
+  }
+  .ruleStrip strong {
+    font-size: 0.875rem;
+  }
+  .ruleStrip span {
+    font-size: 0.75rem;
+  }
   .stepList {
     grid-template-columns: 1fr;
   }
-}
-
-@media (max-width: 760px) {
-  .hero {
-    grid-template-columns: 1fr;
+  .step {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.6rem 0.5rem;
+    padding-top: 1.25rem;
   }
-
-  .artColumn {
-    order: -1;
+  .stepNumber {
+    padding-top: 0.15rem;
   }
-
-  .copy h1 {
+  .stepTitle {
+    margin: 0;
+  }
+  .stepBody {
+    grid-column: 2;
     max-width: none;
   }
 }
