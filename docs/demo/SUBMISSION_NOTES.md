@@ -1,8 +1,9 @@
 # Submission notes — draft
 
-Drafted 21 September 2026, from `docs/STATUS.md` and `docs/qa/evidence/OBSERVATIONS.md`
-only. Every ⏳ item below is unverified and must be filled with a real value —
-never a placeholder left in — before this is submitted.
+Updated **22 September 2026**. Facts here come from `docs/STATUS.md`,
+`docs/qa/evidence/OBSERVATIONS.md` and `src/lib/deployment.ts`. Every ⏳ item
+is still unverified and must be filled with a real value — never a placeholder
+left in — before this is submitted.
 
 ## Team and track
 
@@ -28,15 +29,18 @@ progression is earned by participation, not purchase.
 | Team info and track | Ready — see above | this doc |
 | Project summary | Draft ready — see above | this doc |
 | Public repository with clear README | Done | `README.md` |
-| 2–4 minute demo video | ⏳ Not recorded — blocked on X Layer deploy | `docs/demo/DEMO_SCRIPT.md` |
-| Live product / test-environment link | ⏳ None yet | `docs/STATUS.md` |
+| 2–4 minute demo video | ⏳ Not recorded. No longer blocked on the deploy — now gated only on running the wallet walkthrough | `docs/demo/DEMO_SCRIPT.md` |
+| Live product / test-environment link | ✅ https://memepet.vercel.app | `docs/STATUS.md` |
+| Deployed contract | ✅ `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`, X Layer testnet (chain 1952) | `src/lib/deployment.ts` |
 | Guideline declaration | ⏳ Not drafted here — organizer-specific, lead to source the exact required wording | — |
 
 ## What is actually confirmed working (and how)
 
-Grounded only in `docs/qa/evidence/OBSERVATIONS.md` (automated, non-signature
-Playwright checks against a **local Anvil** deployment, 20 September 2026)
-and merged PRs. Nothing below is a claim about X Layer.
+Grounded in `docs/qa/evidence/OBSERVATIONS.md` (automated, non-signature
+Playwright checks against a **local Anvil** deployment, 20 September 2026) and
+merged PRs. The rendering behaviour below was observed on Anvil, not on
+X Layer — the contract being live does not retroactively make these X Layer
+observations.
 
 - Landing page, how-it-works, and a **live** (not fixture) community
   "Care actions" counter render correctly at desktop and mobile, light and
@@ -56,9 +60,11 @@ and merged PRs. Nothing below is a claim about X Layer.
 - **No real wallet-signature flow has been exercised.** Every row in
   `docs/qa/BROWSER_WALKTHROUGH.md` (connect, adopt, reject, refresh, care,
   cooldown, day-advance, account switch, counter increment) is blank.
-- **No X Layer deployment exists.** `src/lib/deployment.ts` has no committed
-  X Layer address (`docs/STATUS.md`).
-- **No public live link and no demo video exist yet.**
+- **Nothing has been exercised against the live X Layer contract.** The
+  deployment and the public site both exist, but every claim in the section
+  above was observed on local Anvil. No one has confirmed the live site
+  performs an adoption or a care.
+- **No demo video exists yet.**
 - The 390px "text clipping" bug originally logged as B1 was investigated and
   withdrawn as a capture artefact, not a real defect — see
   `docs/qa/evidence/OBSERVATIONS.md` for the reproduction of the false
@@ -69,8 +75,9 @@ and merged PRs. Nothing below is a claim about X Layer.
 Any transaction, address or screenshot used in the final submission must
 state whether it came from:
 
-1. A real signed transaction on the declared X Layer test environment
-   (state the network name and address), or
+1. A real signed transaction on X Layer testnet (chain 1952, registry
+   `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`) — state the transaction hash
+   and link it to the OKX explorer, or
 2. The local Anvil verification session recorded in
    `docs/qa/evidence/OBSERVATIONS.md` (address
    `0x0165878A594ca255338adfa4d48449f69242Eb8F`, never broadcast, not a
@@ -100,21 +107,24 @@ Do not present (2) or (3) as evidence of (1).
 - [ ] The specific X Layer network (mainnet vs. the correct testnet) the
       "Build a Market" track requires, and that the deployed address and
       `src/lib/deployment.ts` agree with official X Layer documentation.
-- [ ] That the deployed `PetRegistry` bytecode matches the reviewed source
-      (the contract changed after the care-guard fix; re-diff before
-      deploying, per `docs/STATUS.md`).
-- [ ] That the public URL, once live, passes the clean-browser link-check in
+- [x] That the deployed `PetRegistry` bytecode matches the reviewed source —
+      the lead recorded `cast code` matching `forge inspect PetRegistry
+      deployedBytecode` byte for byte, including CBOR metadata.
+- [ ] That https://memepet.vercel.app passes the clean-browser link-check in
       `docs/demo/DEMO_SCRIPT.md`.
 - [ ] That no team member's personal wallet address or an unfunded/test-only
       key is presented as a "real user" in the video or notes.
 
 ## Open items blocking a real submission (see `docs/STATUS.md` for owners)
 
-1. X Layer testnet deployment of `PetRegistry` with a verified, committed
-   address — lead, critical path.
-2. Public deployment of the app with `NEXT_PUBLIC_SITE_URL` set — lead.
-3. A completed, real run of `docs/qa/BROWSER_WALKTHROUGH.md` against that
-   deployment — Teammate B, once (1) and (2) land.
+1. ~~X Layer testnet deployment~~ — **done 21 September**, registry
+   `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216` on chain 1952.
+2. ~~Public deployment of the app~~ — **done**, https://memepet.vercel.app.
+3. **A completed, real run of `docs/qa/BROWSER_WALKTHROUGH.md` against the
+   live contract — Teammate B. This is now the critical path.** All nine rows
+   are still blank, so nobody has confirmed an adoption or a care works
+   outside local Anvil. Use a throwaway wallet funded from the X Layer testnet
+   faucet, never one holding real funds.
 4. Recording of `docs/demo/DEMO_SCRIPT.md` against the live deployment —
-   Teammate B.
+   Teammate B, after (3).
 5. Sourcing the organizer's exact submission requirements — lead.

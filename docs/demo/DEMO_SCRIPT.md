@@ -1,14 +1,19 @@
 # Demo script — OKX Dev Day 2026 submission
 
-Status when drafted: **21 September 2026**. Deadline: **25 September 2026,
-23:59 UTC** (`docs/STATUS.md`).
+Updated **22 September 2026**. Deadline: **25 September 2026, 23:59 UTC**
+(`docs/STATUS.md`).
 
 This is a script to run and record, not a record of something already run.
-As of drafting, no wallet-signature walkthrough row in
-`docs/qa/BROWSER_WALKTHROUGH.md` has been executed, and no X Layer deployment
-exists (`docs/STATUS.md` → "X Layer deployment: None"). **Do not record this
-script until both are true, and update the ⏳ markers below with real
-evidence before submitting.**
+
+**The contract is live.** `PetRegistry` is deployed on X Layer testnet at
+`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216` (chain id 1952) and
+https://memepet.vercel.app reads it. The deployment blocker is cleared.
+
+**One precondition remains:** no wallet-signature row in
+`docs/qa/BROWSER_WALKTHROUGH.md` has been executed yet — all nine are still
+blank. Record this script only after that walkthrough has been run for real
+against the live contract, so the take is a demonstration of something known
+to work rather than a first attempt on camera.
 
 Target length: 2–4 minutes — **verify the organizer's exact required length
 before recording**; this script is written to be trimmable (see cut points).
@@ -17,10 +22,11 @@ before recording**; this script is written to be trimmable (see cut points).
 
 ## 0. Before recording — preconditions
 
-- [ ] `PetRegistry` is deployed to the **declared X Layer test environment**
-      (not Anvil) and the address is committed in `src/lib/deployment.ts` —
-      never an invented address.
-- [ ] `NEXT_PUBLIC_SITE_URL` points at a public, reachable deployment.
+- [x] `PetRegistry` deployed to X Layer testnet, address committed in
+      `src/lib/deployment.ts` — `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`,
+      chain id 1952. Verified on chain by the lead (deploy tx receipt `0x1`,
+      `cast code` matches `forge inspect` byte for byte).
+- [x] Public site live and reading that contract: https://memepet.vercel.app
 - [ ] A prepared demo wallet holds enough of the network's gas token to
       adopt + care live, on camera.
 - [ ] `docs/qa/BROWSER_WALKTHROUGH.md` rows 1–6 and 9 have been run for real
@@ -42,8 +48,8 @@ If any box above is unchecked, this is a rehearsal, not the submission take.
 
 ## 2. Connect and adopt (≈40s)
 
-- Open the **live public URL** (⏳ fill in once deployed) in a clean browser
-  — no dev tools, no pre-filled state.
+- Open https://memepet.vercel.app in a clean browser — no dev tools, no
+  pre-filled state, no extensions beyond the wallet.
 - Click **Connect wallet**, approve in the prepared demo wallet.
 - Click **Adopt pet**, approve the signature.
 - Narrate while it confirms: "This is one transaction, no token, no
