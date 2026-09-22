@@ -63,14 +63,12 @@ export const metadata: Metadata = {
     title: "MemePet — adopt the meme, grow the community",
     description:
       "Adopt a meme-community mascot, care for it once a day, and add to shared habitat progress.",
-    images: [{ url: "/pets/hatchling.png", width: 1024, height: 1024, alt: "Mochi, the MemePet hatchling mascot" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "MemePet — adopt the meme, grow the community",
     description:
       "Adopt a meme-community mascot, care for it once a day, and add to shared habitat progress.",
-    images: ["/pets/hatchling.png"],
   },
 };
 
