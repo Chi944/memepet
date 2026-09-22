@@ -67,6 +67,38 @@ contract PetRegistryTest is Test {
         assertEq(registry.communityStats(1), 1);
     }
 
+    /// `Cared` carries two same-width uint32 args next to each other, so an
+    /// argument-order regression in the emit would compile and still satisfy
+    /// every state-only assertion in this file. Check the log itself.
+    function test_care_emitsCaredWithOwnerCommunityCountAndDay() public {
+        vm.prank(ownerA);
+        registry.adopt(1);
+
+        vm.prank(ownerA);
+        vm.expectEmit(true, true, false, true);
+        emit PetRegistry.Cared(ownerA, 1, 1, uint64((MIDNIGHT + 12 hours) / DAY));
+        registry.care();
+    }
+
+    function test_care_emitsCaredWithIncrementedCountOnNextDay() public {
+        vm.prank(ownerA);
+        registry.adopt(1);
+        vm.prank(ownerA);
+        registry.care();
+
+        vm.warp(MIDNIGHT + 12 hours + DAY);
+
+        vm.prank(ownerA);
+        vm.expectEmit(true, true, false, true);
+        emit PetRegistry.Cared(
+            ownerA,
+            1,
+            2,
+            uint64((MIDNIGHT + 12 hours + DAY) / DAY)
+        );
+        registry.care();
+    }
+
     function test_care_rejectsDuplicateSameUtcDay() public {
         vm.prank(ownerA);
         registry.adopt(1);
