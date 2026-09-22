@@ -91,3 +91,16 @@ The preview browser lost access to localhost after the development server was
 restarted to refresh the optimized-image cache. Final browser verification of
 the corrected PNGs and display transforms is therefore pending; the successful
 asset-composite checks above must not be presented as a completed app walkthrough.
+
+### Integration with current main — 23 September 2026
+
+The newer UI uses an arrival animation, a finite celebration lift and a hover
+transform rather than the original idle bob/pulse. Its existing reduced-motion
+rule disables those animations and transitions. Artwork alignment now uses
+independent CSS `translate` and `scale` properties so those `transform`
+animations cannot overwrite the common stage framing.
+
+After merging current main: typecheck passed; lint passed with two pre-existing
+unused-disable warnings in the lead-owned Open Graph routes; all 79 tests in
+16 files passed; production build passed. Final OS-level appearance and
+reduced-motion browser checks remain unverified, as recorded above.

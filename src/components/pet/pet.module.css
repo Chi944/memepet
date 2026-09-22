@@ -82,31 +82,48 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--surface);
-  box-shadow: var(--shadow-card);
 }
 
 .artFrame {
   position: relative;
   display: grid;
-  min-height: 22rem;
+  min-height: 23rem;
   place-items: center;
-  padding: 1.5rem;
+  padding: 1.5rem 2rem 0;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 46%, rgb(255 255 255 / 70%) 0 20%, transparent 60%),
-    linear-gradient(155deg, var(--action-wash), var(--live-wash));
+  isolation: isolate;
+  border-bottom: 1px solid var(--line);
+  background: #0b0d09;
+}
+
+.artFrame::before,
+.artFrame::after {
+  position: absolute;
+  z-index: -1;
+  width: 68%;
+  aspect-ratio: 1;
+  border: 1px solid #303922;
+  border-radius: 50%;
+  content: "";
+}
+
+.artFrame::after {
+  width: 88%;
+  border-color: #20261a;
 }
 
 .artInner {
   display: grid;
   place-items: center;
+  animation: pet-arrive 800ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .art {
-  width: min(100%, 26rem);
+  width: min(100%, 25rem);
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 14px 22px rgb(45 27 66 / 18%));
+  filter: drop-shadow(0 16px 24px rgb(0 0 0 / 35%));
+  transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* Align approved PNG silhouettes to Hatchling's height, centre and feet.
@@ -114,11 +131,13 @@
  * Measurements and source bounds are recorded in docs/pet-assets.md.
  */
 .art[data-stage-art="buddy"] {
-  transform: translate(-0.542044%, 0.257739%) scale(0.907168);
+  translate: -0.542044% 0.257739%;
+  scale: 0.907168;
 }
 
 .art[data-stage-art="guardian"] {
-  transform: translate(-1.519782%, 1.07018%) scale(0.818664);
+  translate: -1.519782% 1.07018%;
+  scale: 0.818664;
 }
 
 .placeholder {
@@ -138,40 +157,30 @@
   line-height: 1;
 }
 
-.idle {
-  animation: idle-bob 3.6s ease-in-out infinite alternate;
-}
-
-.celebrating {
-  animation: celebration-pulse 900ms ease-in-out infinite alternate;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .idle,
-  .celebrating {
-    animation: none;
-  }
+.celebrating .art {
+  animation: celebration-lift 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .celebration {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  padding: 0.3rem 0.7rem;
+  padding: 0.45rem 0.75rem;
   border-radius: 999px;
-  color: #ffffff;
-  background: #1f7a52;
+  color: var(--on-action);
+  background: var(--action);
   font-family: var(--font-mono-stack);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  animation: confirmation-arrive 400ms ease-out both;
 }
 
 .sceneDetails {
   display: grid;
-  gap: 0.6rem;
-  padding: clamp(1.1rem, 3.5vw, 1.85rem);
+  gap: 0.8rem;
+  padding: clamp(1.25rem, 3.5vw, 2rem);
 }
 
 .sceneHead {
@@ -188,47 +197,55 @@
 
 .sceneDetails h2 {
   margin: 0;
-  font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  letter-spacing: -0.055em;
 }
 
 .sceneDetails p {
   margin: 0;
 }
 
-.kicker,
-.stageLabel {
+.kicker {
   color: var(--action);
   font-family: var(--font-mono-stack);
-  font-size: var(--step--1);
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.stageLabel {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
 }
 
 .growth {
   font-family: var(--font-display-stack);
   font-size: var(--step-2);
   font-weight: 700;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---------- stage trail ---------- */
 
 .stageTrail {
   display: flex;
-  gap: 0.35rem;
-  margin: 0.15rem 0;
+  gap: 0.4rem;
+  margin: 0.4rem 0;
   padding: 0;
   list-style: none;
 }
 
 .stageTrail li {
   flex: 1;
-  padding: 0.4rem 0.4rem;
-  border-radius: 999px;
+  padding: 0.6rem 0.35rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
   font-family: var(--font-mono-stack);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
   text-align: center;
   text-transform: uppercase;
 }
@@ -239,13 +256,14 @@
 }
 
 .stageCurrent {
-  color: #ffffff;
+  color: var(--on-action);
   background: var(--action);
 }
 
-.stageFuture {
+.stageTrail .stageFuture {
   color: var(--ink-faint);
-  border: 1px dashed var(--line-strong);
+  border-color: var(--line);
+  background: var(--surface-sunken);
 }
 
 .srOnly {
@@ -261,15 +279,14 @@
 
 .progressGroup {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.6rem;
 }
 
 .progressTrack {
-  height: 0.75rem;
+  height: 0.35rem;
   overflow: hidden;
   border-radius: 999px;
   background: var(--surface-sunken);
-  box-shadow: inset 0 0 0 1px var(--line);
 }
 
 .progressFill {
@@ -277,12 +294,13 @@
   width: var(--pet-progress);
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--action), var(--clay));
+  background: var(--action);
+  transition: width 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .progressCaption {
   color: var(--ink-soft);
-  font-size: 0.95rem;
+  font-size: 0.8rem;
 }
 
 .finalStage,
@@ -301,8 +319,39 @@
 
 .carePanel {
   display: grid;
-  gap: 0.7rem;
+  gap: 0.85rem;
   width: 100%;
+  min-width: 0;
+  transition: border-color 250ms ease;
+}
+
+.carePanel[data-action="success"] {
+  border-color: #536b12;
+}
+
+.careIcon {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-top: 0.8rem;
+  place-items: center;
+  border: 1px solid #354019;
+  border-radius: 14px;
+  color: var(--action);
+  background: var(--action-wash);
+}
+
+.careIcon svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.carePanel[data-action="success"] .careIcon {
+  animation: confirmation-arrive 450ms ease-out both;
 }
 
 .careHead {
@@ -320,17 +369,51 @@
 .carePanel h2 {
   margin: 0;
   font-size: var(--step-2);
+  letter-spacing: -0.045em;
 }
 
 .careSummary {
   margin: 0;
   color: var(--ink-soft);
+  font-size: 0.9rem;
 }
 
 .actionContent {
   display: grid;
-  gap: 0.75rem;
+  gap: 1rem;
   justify-items: start;
+  min-width: 0;
+  margin-top: 0.3rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.actionContent:focus-visible {
+  outline: 2px solid var(--action);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+.waitingIndicator {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.waitingIndicator span {
+  width: 0.4rem;
+  height: 0.4rem;
+  background: var(--action);
+  animation: waiting-step 800ms ease-in-out 3;
+}
+
+.waitingIndicator span:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.waitingIndicator span:nth-child(3) {
+  animation-delay: 200ms;
 }
 
 .actionContent p,
@@ -345,9 +428,10 @@
 .hash {
   display: block;
   width: 100%;
-  padding: 0.45rem 0.6rem;
+  padding: 0.75rem;
   overflow-wrap: anywhere;
   border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
   color: var(--ink-soft);
   background: var(--surface-sunken);
   font-family: var(--font-mono-stack);
@@ -385,31 +469,50 @@
   font-weight: 800;
 }
 
-@keyframes idle-bob {
+@keyframes pet-arrive {
   from {
-    transform: translateY(3px);
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
   }
   to {
-    transform: translateY(-6px);
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes celebration-pulse {
-  from {
-    box-shadow: inset 0 0 0 0 rgb(31 122 82 / 0%);
+@keyframes celebration-lift {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
   }
-  to {
-    box-shadow: inset 0 0 0 0.55rem rgb(31 122 82 / 24%);
+  40% {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+  70% {
+    transform: translateY(-4px) rotate(1deg);
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .stageCurrent {
-    color: #10261b;
+@keyframes confirmation-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
 
-  .art {
-    filter: drop-shadow(0 14px 26px rgb(0 0 0 / 45%));
+@keyframes waiting-step {
+  50% {
+    transform: translateY(-3px);
+    opacity: 0.4;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .artFrame:hover .art {
+    transform: translateY(-4px);
   }
 }
 
@@ -420,5 +523,22 @@
 
   .artFrame {
     min-height: 17rem;
+    padding: 1rem 1.5rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .artInner,
+  .celebrating .art,
+  .celebration,
+  .carePanel[data-action="success"] .careIcon,
+  .waitingIndicator span {
+    animation: none;
+  }
+
+  .art,
+  .carePanel,
+  .progressFill {
+    transition: none;
   }
 }

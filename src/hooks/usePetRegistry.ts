@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   type Address,
   createPublicClient,
@@ -14,7 +14,7 @@ import { mapPetOfToViewModel } from "@/lib/map-pet";
 import { petRegistryAbi, type PetOfResult } from "@/lib/pet-registry-abi";
 import type { Deployment } from "@/lib/deployment";
 import { chainFromDeployment } from "@/lib/chains";
-import type { PetStage, PetViewModel } from "@/types/view-models";
+import type { PetViewModel } from "@/types/view-models";
 
 export type PetReadStatus = "idle" | "loading" | "ready" | "error";
 
@@ -40,6 +40,7 @@ type PetSnapshot = {
   readonly pet: PetViewModel | null;
   readonly hasPet: boolean;
   readonly rawPet: PetOfResult | null;
+  readonly chainTimeMs: number | null;
 };
 
 const emptySnapshot: PetSnapshot = {
@@ -48,6 +49,14 @@ const emptySnapshot: PetSnapshot = {
   pet: null,
   hasPet: false,
   rawPet: null,
+  chainTimeMs: null,
+};
+
+type WalletSession = {
+  readonly key: string;
+  active: boolean;
+  operation: object | null;
+  revision: number;
 };
 
 function isUserRejection(error: unknown): boolean {
@@ -76,9 +85,7 @@ export function usePetRegistry({
   const [txErrorMessage, setTxErrorMessage] = useState<string | null>(null);
   const [refreshToken, setRefreshToken] = useState(0);
   const [celebrateStageUp, setCelebrateStageUp] = useState(false);
-  const [nowMs, setNowMs] = useState(() => Date.now());
-  const submitLock = useRef(false);
-  const stageBeforeCare = useRef<PetStage | null>(null);
+  const sessionRef = useRef<WalletSession | null>(null);
 
   if (activeKey !== cacheKey) {
     setActiveKey(cacheKey);
@@ -90,27 +97,50 @@ export function usePetRegistry({
     setCelebrateStageUp(false);
   }
 
-  const chain = chainFromDeployment(deployment);
+  // chainFromDeployment builds a fresh object for any chain id outside X Layer,
+  // and this value is an effect dependency: an unstable identity re-fires the
+  // read on every render. getActiveDeployment is now cached, so this is stable.
+  const chain = useMemo(() => chainFromDeployment(deployment), [deployment]);
   const registryAddress = deployment.registryAddress as Address | null;
 
   useEffect(() => {
-    submitLock.current = false;
-    stageBeforeCare.current = null;
+    // A new session identity also invalidates A → B → A writes. Comparing
+    // address strings alone would accept the original A result after return.
+    const session: WalletSession = {
+      key: cacheKey,
+      active: true,
+      operation: null,
+      revision: 0,
+    };
+    sessionRef.current = session;
+    return () => {
+      session.active = false;
+    };
   }, [cacheKey]);
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setNowMs(Date.now());
-    }, 30_000);
-    return () => window.clearInterval(id);
-  }, []);
 
   useEffect(() => {
     if (!address || !registryAddress || !chain || wrongChain) {
       return;
     }
 
+    // Cooldown follows the chain clock, including local Anvil time travel.
+    // Refresh confirmed reads instead of guessing from the computer's clock.
+    const id = window.setInterval(() => {
+      setRefreshToken((value) => value + 1);
+    }, 30_000);
+    return () => window.clearInterval(id);
+  }, [address, registryAddress, chain, wrongChain]);
+
+  useEffect(() => {
+    const session = sessionRef.current;
+    if (!address || !registryAddress || !chain || wrongChain || !session || session.operation) {
+      return;
+    }
+
     let cancelled = false;
+    const readRevision = session.revision;
+    const isCurrentRead = () =>
+      !cancelled && session.active && session.revision === readRevision;
 
     void (async () => {
       try {
@@ -119,14 +149,16 @@ export function usePetRegistry({
           transport: http(deployment.rpcUrl ?? undefined),
         });
 
+        const block = await publicClient.getBlock({ blockTag: "latest" });
         const result = await publicClient.readContract({
           address: registryAddress,
           abi: petRegistryAbi,
           functionName: "petOf",
           args: [address],
+          blockNumber: block.number,
         });
 
-        if (cancelled) {
+        if (!isCurrentRead()) {
           return;
         }
 
@@ -144,9 +176,10 @@ export function usePetRegistry({
           rawPet: mappedRaw,
           hasPet: mapped.kind === "pet",
           pet: mapped.kind === "pet" ? mapped.pet : null,
+          chainTimeMs: Number(block.timestamp) * 1000,
         });
       } catch {
-        if (cancelled) {
+        if (!isCurrentRead()) {
           return;
         }
 
@@ -157,6 +190,7 @@ export function usePetRegistry({
           pet: null,
           hasPet: false,
           rawPet: null,
+          chainTimeMs: null,
         });
       }
     })();
@@ -174,11 +208,11 @@ export function usePetRegistry({
   ]);
 
   const cooldownAvailableAtIso =
-    snapshot.rawPet && snapshot.rawPet.exists
+    snapshot.rawPet && snapshot.rawPet.exists && snapshot.chainTimeMs !== null
       ? careCooldownAvailableAtIso({
           careCount: Number(snapshot.rawPet.careCount),
           lastCareDay: snapshot.rawPet.lastCareDay,
-          nowMs,
+          nowMs: snapshot.chainTimeMs,
         })
       : null;
 
@@ -195,11 +229,22 @@ export function usePetRegistry({
 
   const runWrite = useCallback(
     async (kind: "adopt" | "care") => {
-      if (submitLock.current) {
+      const session = sessionRef.current;
+      if (!session?.active || session.key !== cacheKey || session.operation) {
         return;
       }
 
       if (!address || !registryAddress || !chain || wrongChain) {
+        return;
+      }
+
+      // Do not submit against unknown/stale pet data, including accidental
+      // care callbacks after an adoption was rejected.
+      if (
+        snapshot.readStatus !== "ready" ||
+        (kind === "care" && !snapshot.hasPet) ||
+        (kind === "adopt" && snapshot.hasPet)
+      ) {
         return;
       }
 
@@ -220,18 +265,22 @@ export function usePetRegistry({
         return;
       }
 
-      submitLock.current = true;
+      const operation = {};
+      session.operation = operation;
+      // Discard any background read started before this write. Background
+      // refreshes must not award progress ahead of the receipt/read sequence.
+      session.revision += 1;
+      const isCurrentOperation = () =>
+        session.active &&
+        sessionRef.current === session &&
+        session.operation === operation;
       setCelebrateStageUp(false);
       setTxErrorMessage(null);
       setTransactionHash(undefined);
       setTxKind(kind);
       setTxPhase("awaiting-signature");
 
-      if (kind === "care") {
-        stageBeforeCare.current = snapshot.pet?.stage ?? null;
-      } else {
-        stageBeforeCare.current = null;
-      }
+      const stageBeforeCare = kind === "care" ? snapshot.pet?.stage ?? null : null;
 
       try {
         const publicClient = createPublicClient({
@@ -258,10 +307,18 @@ export function usePetRegistry({
               },
         )) as Hash;
 
+        if (!isCurrentOperation()) {
+          return;
+        }
+
         setTransactionHash(hash);
         setTxPhase("pending");
 
         const receipt = await publicClient.waitForTransactionReceipt({ hash });
+
+        if (!isCurrentOperation()) {
+          return;
+        }
 
         if (receipt.status !== "success") {
           setTxPhase("error");
@@ -270,17 +327,45 @@ export function usePetRegistry({
               ? "The adoption transaction reverted. No pet was created."
               : "The care transaction reverted. No progress was awarded.",
           );
-          submitLock.current = false;
           return;
         }
 
         // Re-read before treating the write as success. A hash alone is not enough.
-        const result = await publicClient.readContract({
-          address: registryAddress,
-          abi: petRegistryAbi,
-          functionName: "petOf",
-          args: [address],
-        });
+        let result;
+        let chainTimeMs;
+        try {
+          const block = await publicClient.getBlock({
+            blockNumber: receipt.blockNumber,
+          });
+          result = await publicClient.readContract({
+            address: registryAddress,
+            abi: petRegistryAbi,
+            functionName: "petOf",
+            args: [address],
+            blockNumber: block.number,
+          });
+          chainTimeMs = Number(block.timestamp) * 1000;
+        } catch {
+          // The receipt already confirmed success, so the write DID land. Say
+          // so, and mark the display as stale rather than claiming failure.
+          if (!isCurrentOperation()) {
+            return;
+          }
+          setSnapshot((previous) => ({
+            ...previous,
+            readStatus: "error",
+            readErrorMessage:
+              kind === "adopt"
+                ? "Adoption confirmed on chain, but refreshing the pet failed. The displayed state may be out of date."
+                : "Care confirmed on chain, but refreshing the pet failed. The displayed progress may be out of date.",
+          }));
+          setTxPhase("success");
+          return;
+        }
+
+        if (!isCurrentOperation()) {
+          return;
+        }
 
         const mappedRaw: PetOfResult = {
           exists: result[0],
@@ -296,14 +381,14 @@ export function usePetRegistry({
           rawPet: mappedRaw,
           hasPet: mapped.kind === "pet",
           pet: mapped.kind === "pet" ? mapped.pet : null,
+          chainTimeMs,
         });
-        setNowMs(Date.now());
 
         if (
           kind === "care" &&
           mapped.kind === "pet" &&
-          stageBeforeCare.current !== null &&
-          mapped.pet.stage !== stageBeforeCare.current
+          stageBeforeCare !== null &&
+          mapped.pet.stage !== stageBeforeCare
         ) {
           setCelebrateStageUp(true);
         }
@@ -311,6 +396,10 @@ export function usePetRegistry({
         setTxPhase("success");
         setRefreshToken((value) => value + 1);
       } catch (error) {
+        if (!isCurrentOperation()) {
+          return;
+        }
+
         if (isUserRejection(error)) {
           setTxPhase("rejected");
           setTxErrorMessage(
@@ -327,16 +416,21 @@ export function usePetRegistry({
           );
         }
       } finally {
-        submitLock.current = false;
+        if (session.operation === operation) {
+          session.operation = null;
+        }
       }
     },
     [
       address,
+      cacheKey,
       chain,
       cooldownAvailableAtIso,
       createWalletClient,
       deployment.rpcUrl,
       registryAddress,
+      snapshot.hasPet,
+      snapshot.readStatus,
       snapshot.pet?.stage,
       wrongChain,
     ],

@@ -42,7 +42,7 @@ describe("resolveCareActionState", () => {
     ).toEqual({ kind: "pending", transactionHash: "0xabc" });
   });
 
-  it("maps rejection and read failure to error without fixture fallback", () => {
+  it("maps rejection and read failure without fixture fallback", () => {
     expect(
       resolveCareActionState({
         ...base,
@@ -50,6 +50,9 @@ describe("resolveCareActionState", () => {
       }),
     ).toMatchObject({ kind: "error" });
 
+    // A failed read is "unavailable", not "error": the "error" kind renders an
+    // enabled retry that submits a real care write, and after a failed read
+    // neither the pet nor the cooldown is known.
     expect(
       resolveCareActionState({
         ...base,
@@ -57,7 +60,7 @@ describe("resolveCareActionState", () => {
         readErrorMessage: "Pet data could not be loaded.",
       }),
     ).toEqual({
-      kind: "error",
+      kind: "unavailable",
       message: "Pet data could not be loaded.",
     });
   });
@@ -89,6 +92,53 @@ describe("resolveCareActionState", () => {
     expect(resolveCareActionState({ ...base, hasPet: false })).toEqual({
       kind: "unavailable",
       message: "No pet adopted yet. Use Adopt on this page.",
+    });
+  });
+
+  it.each(["rejected", "error"] as const)(
+    "preserves an adoption %s without offering a care retry",
+    (txPhase) => {
+      expect(
+        resolveCareActionState({
+          ...base,
+          hasPet: false,
+          txKind: "adopt",
+          txPhase,
+          txErrorMessage: "Adoption was declined.",
+        }),
+      ).toEqual({ kind: "unavailable", message: "Adoption was declined." });
+    },
+  );
+
+  it.each(["rejected", "error", "success"] as const)(
+    "prioritizes an unknown pet read over a prior care %s",
+    (txPhase) => {
+      expect(
+        resolveCareActionState({
+          ...base,
+          txKind: "care",
+          txPhase,
+          readStatus: "error",
+          readErrorMessage: "Confirmed state could not be read.",
+        }),
+      ).toEqual({
+        kind: "unavailable",
+        message: "Confirmed state could not be read.",
+      });
+    },
+  );
+
+  it("keeps a known cooldown disabled even after a transaction error", () => {
+    expect(
+      resolveCareActionState({
+        ...base,
+        txPhase: "error",
+        txKind: "care",
+        cooldownAvailableAtIso: "2030-01-02T00:00:00.000Z",
+      }),
+    ).toEqual({
+      kind: "cooldown",
+      availableAtIso: "2030-01-02T00:00:00.000Z",
     });
   });
 });

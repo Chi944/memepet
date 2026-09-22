@@ -45,7 +45,7 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
       <div
         className={`${styles.artFrame} ${celebrate ? styles.celebrating : ""}`.trim()}
       >
-        <div className={`${styles.artInner} ${styles.idle}`}>
+        <div className={styles.artInner}>
           {pet.artSrc ? (
             <Image
               className={styles.art}
@@ -72,7 +72,7 @@ export function PetScene({ pet, celebrate }: PetSceneProps) {
         </div>
         {celebrate ? (
           <span className={styles.celebration} aria-label="Celebration active">
-            Confirmed celebration
+            Care confirmed
           </span>
         ) : null}
       </div>

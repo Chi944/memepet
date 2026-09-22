@@ -27,10 +27,11 @@ function getInjectedProvider(): EthereumProvider | null {
     return null;
   }
 
-  const ethereum = (
-    window as Window & { ethereum?: EthereumProvider }
-  ).ethereum;
-  return ethereum ?? null;
+  const injected = window as Window & {
+    ethereum?: EthereumProvider;
+    okxwallet?: EthereumProvider;
+  };
+  return injected.ethereum ?? injected.okxwallet ?? null;
 }
 
 export type WalletState = {
@@ -194,20 +195,32 @@ export function useWallet() {
           : null;
 
       if (code === 4902) {
-        await provider.request({
-          method: "wallet_addEthereumChain",
-          params: [
-            {
-              chainId: chainIdHex,
-              chainName: expectedChain.name,
-              nativeCurrency: expectedChain.nativeCurrency,
-              rpcUrls: [...expectedChain.rpcUrls.default.http],
-              blockExplorerUrls: expectedChain.blockExplorers
-                ? [expectedChain.blockExplorers.default.url]
-                : undefined,
-            },
-          ],
-        });
+        // Declining this prompt rejects too. Without its own catch the
+        // rejection escapes switchNetwork, and every call site invokes it as
+        // `void switchNetwork()` — an unhandled rejection with no error shown.
+        try {
+          await provider.request({
+            method: "wallet_addEthereumChain",
+            params: [
+              {
+                chainId: chainIdHex,
+                chainName: expectedChain.name,
+                nativeCurrency: expectedChain.nativeCurrency,
+                rpcUrls: [...expectedChain.rpcUrls.default.http],
+                blockExplorerUrls: expectedChain.blockExplorers
+                  ? [expectedChain.blockExplorers.default.url]
+                  : undefined,
+              },
+            ],
+          });
+        } catch (addError) {
+          const addMessage =
+            addError instanceof Error
+              ? addError.message
+              : `${expectedChain.name} could not be added to your wallet.`;
+          setState((prev) => ({ ...prev, errorMessage: addMessage }));
+          return;
+        }
       } else {
         const message =
           error instanceof Error ? error.message : "Network switch failed.";

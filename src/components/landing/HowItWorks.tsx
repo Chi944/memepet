@@ -13,17 +13,17 @@ const STEPS = [
   {
     id: "connect",
     title: "Connect a wallet",
-    body: "Your pet is linked to your wallet address. Nothing is transferred and no token approval is requested.",
+    body: "Your wallet is your pet’s home. Connect on the configured network. No token approvals; network gas applies to transactions.",
   },
   {
     id: "adopt",
     title: "Adopt your pet",
-    body: "One pet per wallet, starting at the Hatchling stage with zero growth points.",
+    body: "One pet per wallet. Yours starts as a Hatchling, with no growth points yet.",
   },
   {
     id: "care",
     title: "Care once a day",
-    body: "Each confirmed care adds 10 growth points and one action to the shared community total. Miss a day and nothing is lost.",
+    body: "Each care adds 10 growth points to your pet, and one to the community's shared total. Miss a day and you lose nothing.",
   },
 ] as const;
 
@@ -31,8 +31,11 @@ export function HowItWorks({ connected }: HowItWorksProps) {
   return (
     <section className={styles.steps} aria-labelledby="how-it-works">
       <div className={styles.stepsIntro}>
-        <p className="eyebrow">How it works</p>
-        <h2 id="how-it-works">Three steps, then one action a day</h2>
+        <div>
+          <p className="eyebrow">How it works</p>
+          <h2 id="how-it-works">Small actions. Real connection.</h2>
+        </div>
+        <p className={styles.stepsSubhead}>Three steps to get started. A reason to come back every day.</p>
       </div>
 
       <ol className={styles.stepList}>
@@ -49,8 +52,8 @@ export function HowItWorks({ connected }: HowItWorksProps) {
 
       <p className={styles.stepsNote}>
         {connected
-          ? "Growth points are shown only after a care transaction is confirmed on chain."
-          : "Adoption and care need a deployed registry. That contract is not connected in this build, so no pet can be adopted here yet."}
+          ? "Points appear only after the transaction is confirmed on chain, never before."
+          : "Adopting and caring need a live contract, and none is connected in this build — so no pet can be adopted here yet."}
       </p>
     </section>
   );

@@ -36,8 +36,11 @@ export interface Deployment {
  * Every value below was confirmed on chain, not copied from tool output:
  *   - deployment tx 0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9
  *     receipt status 0x1, block 41543244, 354926 gas
- *   - `cast code` at this address equals `forge inspect PetRegistry
- *     deployedBytecode` from main byte for byte, including CBOR metadata
+ *   - full deployed bytecode matches the compiled registry source at
+ *     587ceb054d35dd4b7c04a8dd580dcab3b743b30b, including CBOR metadata
+ *   - comparison repeated 22 September: PR #26 changes source metadata only;
+ *     current executable runtime (excluding CBOR), ABI and storage are identical
+ *     See docs/deploy/XLAYER_TESTNET.md for the pinned comparison and hashes.
  *   - APPROVED_COMMUNITY_ID() == 1, communityStats(1) == 0 at deploy,
  *     communityStats(99) reverts InvalidCommunity
  * Network values are from the official OKX X Layer network-information page.
@@ -95,9 +98,20 @@ function readEnvOverride(): Deployment | null {
   };
 }
 
-/** Active deployment: env override (local Anvil / authorized testnet) or committed defaults. */
+/**
+ * Active deployment: env override (local Anvil / authorized testnet) or
+ * committed defaults.
+ *
+ * Resolved once. NEXT_PUBLIC_* values are inlined at build time and cannot
+ * change at runtime, and returning a fresh object per call made every consumer
+ * of `deployment` referentially unstable — which re-fired the registry read
+ * effects on every render.
+ */
+let activeDeployment: Deployment | null = null;
+
 export function getActiveDeployment(): Deployment {
-  return readEnvOverride() ?? DEPLOYMENT;
+  activeDeployment ??= readEnvOverride() ?? DEPLOYMENT;
+  return activeDeployment;
 }
 
 /** True only when a verified contract address is configured. */
