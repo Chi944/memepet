@@ -56,16 +56,3 @@ export interface CommunityPanelProps {
 export interface LandingHeroProps {
   readonly onGetStarted: () => void;
 }
-
-/**
- * Stretch: read-only public pet card, shown at a shareable URL.
- * The lead supplies every value from a confirmed chain read; the card never
- * fetches, never connects a wallet, and never shows a pet that was not read.
- */
-export interface PublicPetCardProps {
-  readonly pet: PetViewModel;
-  /** Shortened owner address for display, e.g. "0x2ec8…1CA1". */
-  readonly ownerLabel: string;
-  /** Explorer URL for the owner's address, or null when unavailable. */
-  readonly explorerUrl: string | null;
-}

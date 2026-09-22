@@ -62,7 +62,7 @@ After genuine wallet verification, replace the final sentence with the specific 
 | [Separate local wallet session, 22 Sep](../qa/evidence/LOCAL_ANVIL_2026-09-22.md) | Real local connection and chain 31337 displayed after human approvals; adoption request reached the pending state | Confirmed rejection, adoption, care, or any X Layer browser transaction; local runtime later stopped |
 | [Release audit and hosted disconnect, 23 Sep Singapore](../qa/evidence/RELEASE_AUDIT_2026-09-23.md) | PR #38 deployed; 111 app/15 contract tests passed; real hosted Disconnect revoked account access and reload rechecked the disconnected state | Adoption/care, a new warning-free connection prompt, or a guarantee of zero security risk |
 | [Local Anvil observations, 20 Sep](../qa/evidence/OBSERVATIONS.md) | Local rendering, read-only states, mocked wrong-chain and controlled failed-read states | X Layer transactions or genuine wallet rejection/account switching |
-| [Development setup history](../DEV_SETUP.md) | Historical automated and unlocked local-node checks, with dates | Current prep-branch checks or browser-wallet success |
+| [Development setup history](https://github.com/Chi944/memepet/blob/a8c14cb8a54181487d41ab752212407fab3c1c64/docs/DEV_SETUP.md#actual-verification) | Historical automated and unlocked local-node checks, with dates; preserved at the pre-cleanup revision | Current prep-branch checks or browser-wallet success |
 
 A zero community **care** count is not a count of adopted pets, users or wallets. It cannot establish zero adopters. Historical reports describe their capture, not current merge/deployment status.
 
@@ -155,7 +155,7 @@ Each person records one MP3 using the matching [speaker script](DEMO_SCRIPT.md#t
 
 The [production plan](PRODUCTION_PLAN.md) records the playful, polished direction, researched finalist examples and adaptations from the pinned `latent-spaces/brag` workflow. No competitor media, bundled music, synthetic narration or recreated success UI has been used. No paid generation or render has been performed. The [editor handoff](EDITOR_HANDOFF.md) keeps source timings, transaction references and final export fields unverified until actual media arrives.
 
-The [repository audit](REPOSITORY_AUDIT.md) records two unused decorative screenshot removals and ignores for raw recordings/exports. Dated QA evidence and production assets remain. This documentation-only revision does not establish additional wallet passes or erase prior observations.
+The [repository audit](REPOSITORY_AUDIT.md) records obsolete onboarding-document and unused-code cleanup, preserves the earlier screenshot cleanup history, and retains raw-media ignores. Dated QA evidence and production assets remain. Cleanup does not establish additional wallet passes or erase prior observations.
 
 ## Recording and submission gates
 

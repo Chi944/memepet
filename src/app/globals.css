@@ -2,7 +2,6 @@
 :root {
   color-scheme: dark;
   --ground: #000;
-  --ground-tint: #10120a;
   --surface: #111;
   --surface-sunken: #181818;
   --surface-warm: #141613;
@@ -15,9 +14,6 @@
   --action-press: #d5ff4d;
   --action-wash: #222b08;
   --on-action: #101400;
-  --clay: #e09a89;
-  --clay-deep: #efb6a6;
-  --clay-wash: #29201d;
   --live: #c6ff00;
   --live-wash: #20290b;
   --alert: #ff9ba6;
@@ -28,8 +24,6 @@
   --radius-sm: 0.5rem;
   --radius: 0.75rem;
   --radius-lg: 1.25rem;
-  --shadow-card: none;
-  --shadow-lift: 0 20px 60px rgb(0 0 0 / 20%);
   --step--1: 0.8125rem;
   --step-0: 1rem;
   --step-1: 1.125rem;
@@ -256,15 +250,6 @@ button, a {
   color: var(--ink-soft);
   font-size: var(--step-1);
   line-height: 1.65;
-}
-
-.page-shell {
-  display: grid;
-  place-items: start center;
-  width: min(100%, 80rem);
-  min-height: 100dvh;
-  margin: 0 auto;
-  padding: clamp(1rem, 4vw, 3rem);
 }
 
 .status-note {
