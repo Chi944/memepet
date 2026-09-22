@@ -104,3 +104,38 @@ After merging current main: typecheck passed; lint passed with two pre-existing
 unused-disable warnings in the lead-owned Open Graph routes; all 79 tests in
 16 files passed; production build passed. Final OS-level appearance and
 reduced-motion browser checks remain unverified, as recorded above.
+
+## A5 share-card backgrounds — 23 September 2026
+
+Ready for the lead to wire into the generated share image. These are background
+assets only; the lead-owned Open Graph routes have not been changed.
+
+| File | Dimensions / format | File size | Source |
+|---|---|---:|---|
+| `public/pets/share/hatchling.png` | 1200×630 RGB PNG | 152,535 bytes | Corrected `public/pets/hatchling.png` above |
+| `public/pets/share/buddy.png` | 1200×630 RGB PNG | 146,932 bytes | Corrected `public/pets/buddy.png` above |
+| `public/pets/share/guardian.png` | 1200×630 RGB PNG | 153,645 bytes | Corrected `public/pets/guardian.png` above |
+
+Composition uses deterministic Pillow processing, with no generation or redraw.
+Only transparent source margins are trimmed. Each complete silhouette is resized
+with Lanczos filtering to 480 pixels tall, centred at x=930, and placed at y=85
+(feet at y=565). The original aspect ratio is preserved to the nearest pixel.
+The background blends lilac `#efe7ff` to mint `#e2f6ec`, using a linear RGB mix
+weighted 65% by horizontal position and 35% by vertical position. These colours
+follow the A5 prompt's lilac-to-mint direction; the current live UI is dark/lime.
+All files are losslessly saved, without palette quantisation.
+
+The left 660 pixels (55%) contain only the calm gradient, reserved for the
+lead's live name, stage and growth-point text. No text, marks or tickers are
+baked into the art. Keep that text inside the left area with suitable margins
+and dark, high-contrast lettering. The subject occupies the right 45%, with
+clear margins on every edge.
+
+All three exports were visually inspected. Programmatic checks verified exact
+1200×630 dimensions, file sizes below 300,000 bytes, complete subject bounds,
+and that the left 55% is pixel-identical to the empty gradient. Source stage
+PNGs are unchanged. Actual social-platform cropping and the final text overlay
+remain for integration testing after the lead wires these files in.
+
+The permission and licence position above applies unchanged to these derivatives.
+No new rights, exclusive ownership, or third-party clearance is claimed.
