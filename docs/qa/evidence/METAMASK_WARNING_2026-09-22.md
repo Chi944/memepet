@@ -1,6 +1,6 @@
 # MetaMask domain warning — 22 September 2026
 
-Task: `QA-WALLET-WARNING`. **Classification unresolved; pause the hosted X Layer wallet transaction walkthrough.** A separate local Anvil test is recorded in [LOCAL_ANVIL_2026-09-22.md](LOCAL_ANVIL_2026-09-22.md).
+Task: `QA-WALLET-WARNING`. **Reviewer reports the domain no longer appears flagged; a fresh wallet prompt remains unverified.** A separate local Anvil test is recorded in [LOCAL_ANVIL_2026-09-22.md](LOCAL_ANVIL_2026-09-22.md). Do not approve a prompt that still shows a warning.
 
 ## Observed and reported evidence
 
@@ -35,13 +35,19 @@ The user explicitly authorized submission on 22 September 2026. The request was 
 
 A duplicate search for `memepet.vercel.app` returned no existing issues. The official blocklist-removal template was completed with the project URL, repository/revision, intended network and registry, the limited nature of the source assessment, and the user-supplied warning screenshot. The submitted request explicitly asks for routing if a different provider owns this classification.
 
-**Submitted:** [MetaMask/eth-phishing-detect issue #296216](https://github.com/MetaMask/eth-phishing-detect/issues/296216), created `2026-09-22T15:06:00Z`. The published issue and screenshot were verified in the browser and the issue was OPEN with no comments when checked. No classification removal or response has been received. No secrets were included.
+**Submitted:** [MetaMask/eth-phishing-detect issue #296216](https://github.com/MetaMask/eth-phishing-detect/issues/296216), created `2026-09-22T15:06:00Z`. The published issue and screenshot were verified in the browser. It was initially OPEN with no comments. No secrets were included.
+
+**Reviewer response:** At `2026-09-22T19:31:23Z`, repository collaborator `AlexHerman1` wrote, “this doesn't appear to be flagged anymore, please reply here or reopen if you are still seeing warnings,” and closed the issue. [Direct response](https://github.com/MetaMask/eth-phishing-detect/issues/296216#issuecomment-5782692269). Closure and comment were checked through GitHub's API. This is the reviewer's report, not proof that this browser's current prompt is clear or an exhaustive security clearance.
+
+**User report on follow-up:** Only connection and network switching were approved; no signature, adoption/care transaction, spending limit or token approval was reported. Manual disconnect instructions were provided; successful permission removal has not yet been observed.
+
+**Independent hosted-page observation on follow-up:** A fresh Chrome visit to `https://memepet.vercel.app/pet` displayed the intended full address, chain `1952`, pet **None yet**, community cares `0`, and the Adopt pet button. No connection or signing request was issued during this observation. It verifies an existing authorized connection, not a warning-free wallet prompt, and does not establish any adoption count from the care counter.
 
 ### Connect/disconnect assessment
 
 The application connect handler requests accounts and chain ID. Automatic follow-up calls read the latest block, `petOf(address)` and `communityStats(1)`; pet reads repeat every 30 seconds. The checked connect path does not request a signature or call a contract write. Adoption, care and network changes have separate explicit callbacks.
 
-**MemePet's current Disconnect button only clears React state. It does not revoke MetaMask site permissions.** A reload or provider account/network event can restore an already-authorized account through `eth_accounts`. To remove the wallet's site permission, use MetaMask's account menu → **Dapp connections** → the site → **Disconnect**. Disconnecting does not revoke any token approvals already signed. See [MetaMask's documentation](https://support.metamask.io/more-web3/dapps/disconnect-wallet-from-a-dapp/).
+**The audited pre-fix Disconnect button only clears React state. It does not revoke MetaMask site permissions.** A reload or provider account/network event can restore an already-authorized account through `eth_accounts`. This finding is being corrected in task `QA-WALLET-RELEASE`; the dated assessment here describes the original behavior. To remove the wallet's site permission manually, use MetaMask's account-view menu → **Dapp connections** → the site → **Disconnect**. Disconnecting does not revoke any token approvals already signed. See [MetaMask's documentation](https://support.metamask.io/more-web3/dapps/disconnect-wallet-from-a-dapp/).
 
 ### Public served-code spot check — 15:06 UTC
 
@@ -79,4 +85,4 @@ We have a screenshot of the warning and have paused the transaction walkthrough.
 
 Thank you.
 
-The submitted GitHub issue adapts this draft to MetaMask's template and includes the warning screenshot. Review submission is verified; clearance is not.
+The submitted GitHub issue adapts this draft to MetaMask's template and includes the warning screenshot. Submission and the reviewer's later response are verified; a fresh warning-free wallet prompt and exhaustive security clearance are not.

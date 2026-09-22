@@ -4,21 +4,27 @@ Worksheet for the connect → adopt → care journey against **local Anvil**.
 These steps need a real injected wallet (MetaMask / OKX Wallet). They are
 **not** pre-marked as passing.
 
-**Current status — 22 September 2026:** The user reports that connection
-works and that MetaMask's **Imported Account 1** matches
-`0x2ec8471290793FeB64792861Ce3102d291ce1CA1`. This is **USER-REPORTED**,
-not an independently observed pass. The supplied screenshot shows a pending
-connection, chain `1` (switch required), and MetaMask's
-**“Malicious—flagged as unsafe”** warning for `memepet.vercel.app`.
-The warning remains unresolved and is now the blocker. Pause further
-connection approvals and signing; follow
-[MetaMask's manual review guidance](https://support.metamask.io/configure/wallet/security-alerts/).
-No false positive or submitted review is established. See
-[the current warning evidence record](evidence/METAMASK_WARNING_2026-09-22.md).
+**Current status — 23 September 2026 (Singapore):** The user reports only
+connecting and switching networks, with no signature or transaction approval.
+The separate real Chrome local run independently showed the intended address
+`0x2ec8471290793FeB64792861Ce3102d291ce1CA1` and chain **31337** after the
+human approved the prompts. See [the local record](evidence/LOCAL_ANVIL_2026-09-22.md).
+An adoption request reached awaiting-signature, but no rejection or approval
+was observed. That runtime has stopped. No browser adoption/care receipt exists.
+On follow-up, a fresh hosted `/pet` page independently displayed the intended
+address, chain `1952`, pet **None yet**, and community cares `0`. This observes
+an existing authorized connection; it does not verify the original connection
+prompt or a fresh warning-free approval.
+
+MetaMask's reviewer closed [review request #296216](https://github.com/MetaMask/eth-phishing-detect/issues/296216#issuecomment-5782692269)
+on 22 September at 19:31 UTC, reporting that the domain did not appear flagged
+anymore. A fresh wallet prompt has not been independently checked. If a warning
+still appears, leave it unapproved and follow up on that review; do not bypass it.
+See [the warning evidence record](evidence/METAMASK_WARNING_2026-09-22.md).
 The matching address reuses the existing wallet, not a new isolated wallet.
-Adoption, care, rejection, network switching, account switching and refresh
-persistence remain unverified. The dated results below are historical and
-have not been upgraded to passes.
+X Layer browser transactions, rejection, account switching and confirmed-state
+refresh remain unverified. The older result tables below are historical, not
+the current local run; they have not been upgraded to passes.
 
 **Authorship note:** Lead authored this file because Teammate B had not
 started `docs/qa/` yet. **Teammate B owns `docs/qa/` from here** — edit,

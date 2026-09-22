@@ -1,6 +1,6 @@
 # Submission notes — verified facts and open items
 
-Updated **22 September 2026**. Working draft, not a submitted entry. Keep every **UNVERIFIED** field visible until actual evidence replaces it. Never turn a planned action into a result.
+Updated **23 September 2026 (Singapore)**. Working draft, not a submitted entry. Keep every **UNVERIFIED** field visible until actual evidence replaces it. Never turn a planned action into a result.
 
 ## Organizer requirements
 
@@ -30,10 +30,10 @@ An optional 1:1 team display picture accepts an image up to 10 MB. **Pages 2–3
 | Participation route / finale attendance count | **UNVERIFIED — IN_PERSON_OR_REMOTE / ATTENDEE_COUNT** |
 | New project / pre-existing codebase selection | **UNVERIFIED — PROJECT_ORIGIN_FORM_SELECTION** |
 | Repository | [Chi944/memepet](https://github.com/Chi944/memepet), visibility **PUBLIC** verified; repeat logged-out access check at submission |
-| Live app | [memepet.vercel.app](https://memepet.vercel.app); read-only checks recorded, wallet journey blocked |
+| Live app | [memepet.vercel.app](https://memepet.vercel.app); historical read-only checks recorded; complete browser transaction journey **UNVERIFIED** |
 | Network | X Layer testnet, chain **1952**, configured gas currency **OKB** |
 | Registry | **`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`** |
-| Verified application deployment | Main application revision **`35186b5`**, production rollout confirmed 22 September; recheck the exact recording revision |
+| Historical application deployment | Revision **`35186b5`**, production rollout confirmed 22 September in the linked preparation evidence; this is not the final recording revision |
 | Deployment transaction | **`0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9`**, block **41543244**; receipt success/bytecode match recorded in `src/lib/deployment.ts` |
 | Final submission commit / deployed revision | **UNVERIFIED — FINAL_COMMIT_AND_DEPLOYMENT** |
 | Testnet acceptance | **UNVERIFIED — ORGANIZER_TESTNET_ELIGIBILITY** |
@@ -53,19 +53,31 @@ After genuine wallet verification, replace the final sentence with the specific 
 | Source | What it establishes | What it does not establish |
 |---|---|---|
 | [Live X Layer observations, 22 Sep](../qa/evidence/LIVE_XLAYER_OBSERVATIONS.md) | Public site reads chain 1952; community cares were 0 at capture; one RPC read per page load; `/dev/pet` returned 404; mobile/console checks recorded | Any signed transaction or adopted-pet persistence |
-| [Current preparation evidence, 22 Sep](../qa/evidence/OKX_PREP_2026-09-22.md) | Real Chrome Connect attempt reported no injected wallet; supplied address has no pet and a readable testnet balance; form page 1 inspected | Successful wallet connection, signing authority, adoption, care or form submission |
+| [Earlier preparation evidence, 22 Sep](../qa/evidence/OKX_PREP_2026-09-22.md) | Real Chrome Connect attempt reported no injected wallet; supplied address has no pet and a readable testnet balance; form page 1 inspected | Successful wallet connection, signing authority, adoption, care or form submission |
+| [Later wallet warning review, 22 Sep](../qa/evidence/METAMASK_WARNING_2026-09-22.md) | Hosted warning observed; public review issue submitted; reviewer later said the domain did not appear flagged anymore and closed the issue | Warning removal in the current wallet prompt, an independent security audit, or successful adoption/care |
+| [Separate local wallet session, 22 Sep](../qa/evidence/LOCAL_ANVIL_2026-09-22.md) | Real local connection and chain 31337 displayed after human approvals; adoption request reached the pending state | Confirmed rejection, adoption, care, or any X Layer browser transaction; local runtime later stopped |
 | [Local Anvil observations, 20 Sep](../qa/evidence/OBSERVATIONS.md) | Local rendering, read-only states, mocked wrong-chain and controlled failed-read states | X Layer transactions or genuine wallet rejection/account switching |
 | [Development setup history](../DEV_SETUP.md) | Historical automated and unlocked local-node checks, with dates | Current prep-branch checks or browser-wallet success |
 
 A zero community **care** count is not a count of adopted pets, users or wallets. It cannot establish zero adopters. Historical reports describe their capture, not current merge/deployment status.
 
-## Integration and current checks
+## Integration and dated checks
 
-The public-pet branch reached `main` through **PR #21**, with a badge follow-up in **PR #27**. **PR #22** is now merged as `0f32601`, retaining the public share feature and integration safeguards from `13298d9`. **PR #26** is merged as `35186b5`, adding security headers and two event tests. Its production deployment succeeded and was checked on 22 September. **[PR #28](https://github.com/Chi944/memepet/pull/28)** contains the recording pack and updated evidence. The earlier [preview for `8a88f4b`](https://memepet-21qy9t1rs-chi944s-projects.vercel.app) remains historical evidence.
+The public-pet branch reached `main` through **PR #21**, with a badge follow-up in **PR #27**. **PR #22** merged as `0f32601`, retaining the public share feature and integration safeguards from `13298d9`. **PR #26** merged as `35186b5`, adding security headers and two event tests. Its production deployment succeeded and was checked on 22 September. **[PR #28](https://github.com/Chi944/memepet/pull/28)** contains the recording pack and updated evidence. The earlier [preview for `8a88f4b`](https://memepet-21qy9t1rs-chi944s-projects.vercel.app) remains historical evidence.
 
-Real Chrome inspection of this final-code preview confirmed the heading, no fabricated growth, a read-only community total of 0, no captured `/pet` error logs, and 404 pages for `/dev/pet`, `/dev/landing` and `/dev/community`. Clicking Connect wallet again returned **No injected wallet was found**. This is a preview rendering check, not a wallet pass. Logged-out preview access is unverified.
+The later demo revision **[PR #33](https://github.com/Chi944/memepet/pull/33)** and
+teammate artwork, evolution and share-image changes **[PR #34](https://github.com/Chi944/memepet/pull/34)**,
+**[PR #35](https://github.com/Chi944/memepet/pull/35)**,
+**[PR #36](https://github.com/Chi944/memepet/pull/36)** and
+**[PR #37](https://github.com/Chi944/memepet/pull/37)** are merged in `origin/main`
+at **`2394853`**, inspected during this audit. Saved documentation branch commit
+`66362b6` is already retained through merge `c041ea2`; its `docs/demo` content had
+no difference from that main revision. Merged code is not proof that a particular
+browser recording used it. The final recording deployment remains a placeholder.
 
-| Current prep-branch command | Actual result |
+Real Chrome inspection of the earlier `8a88f4b` preview confirmed the heading, no fabricated growth, a read-only community total of 0, no captured `/pet` error logs, and 404 pages for `/dev/pet`, `/dev/landing` and `/dev/community`. Clicking Connect wallet then returned **No injected wallet was found**. This is a historical preview rendering check, not the current wallet state or a wallet pass. Logged-out preview access is unverified.
+
+| Historical preparation command / check | Actual result at that revision |
 |---|---|
 | `npm run typecheck` | **PASS**, exit 0 |
 | `npm run lint` | **PASS**, exit 0 |
@@ -74,11 +86,15 @@ Real Chrome inspection of this final-code preview confirmed the heading, no fabr
 | `npm run test:contracts` | **PASS**, 15/15 tests after PR #26 (previously 13) |
 | Local final production HTTP smoke | **NOT RUN** — automatic approval review rejected starting the production server on `127.0.0.1:3300` (“blocked by policy”) |
 | GitHub CI at `8a88f4b` | **PASS** — [run 35688426933](https://github.com/Chi944/memepet/actions/runs/35688426933), including app/contract jobs, clean install and the production `/dev/*` smoke step |
-| Real browser wallet walkthrough | **BLOCKED — no injected wallet; no wallet action passed** |
+| Real browser wallet walkthrough at that capture | **BLOCKED — no injected wallet; no wallet action passed in that capture** |
 
-These current results were executed and reported by the lead in this preparation task. See [current evidence](../qa/evidence/OKX_PREP_2026-09-22.md) for the command record. Automated checks and browser checks are separate.
+These historical results were executed and reported by the lead in the earlier
+preparation task. See the [dated evidence](../qa/evidence/OKX_PREP_2026-09-22.md)
+for the command record. They do not establish checks for the later main or this
+audit branch. Automated checks and browser checks are separate; final-release
+checks must refer to their actual revision and results.
 
-After PRs #22/#26 merged, production `/` and `/pet` returned 200, and `/dev/pet`, `/dev/landing`, `/dev/community` and `/pet/not-an-address` returned 404. All four configured security headers were present. Real Chrome showed the corrected heading, no fabricated growth and a community count of 0; captured `/pet` error logs were empty. Connect still returned **No injected wallet was found**. These are final application rendering checks; no wallet action passed.
+After PRs #22/#26 merged, production `/` and `/pet` returned 200, and `/dev/pet`, `/dev/landing`, `/dev/community` and `/pet/not-an-address` returned 404. All four configured security headers were present. Real Chrome showed the corrected heading, no fabricated growth and a community count of 0; captured `/pet` error logs were empty. Connect then returned **No injected wallet was found**. These are historical rendering checks; no wallet action passed in that capture.
 
 Contract verification now distinguishes code from metadata: deployed bytes match historical contract source `587ceb054d35dd4b7c04a8dd580dcab3b743b30b` exactly. PR #26's SPDX comment changes the compiler metadata, so current full compiled bytecode is **not identical** to deployed bytecode. The 1,344-byte executable runtime, ABI and storage layout are unchanged and were verified to match. No contract was redeployed. See [release evidence](../qa/evidence/OKX_PREP_2026-09-22.md#merge-completion-and-production-follow-up).
 
@@ -86,12 +102,35 @@ Contract verification now distinguishes code from metadata: deployed bytes match
 
 The user supplied public address **`0x2ec8471290793FeB64792861Ce3102d291ce1CA1`**. A read-only X Layer testnet query returned `petOf.exists = false` and balance **199985802959290148 wei**, approximately **0.1999858 OKB**, on 22 September. Its public page rendered no pet. These reads do not connect a wallet, prove control of it or authorize a signature by themselves.
 
+The user subsequently reported importing that same account, connecting it and
+switching networks. On 23 September Singapore time, the user explicitly reported
+**only connection/network switching**, with no approved transaction or signature.
+The separate local Anvil page independently displayed the address and chain 31337.
+An adoption request reached a pending wallet state, but no rejection or successful
+transaction was observed before the local runtime stopped. This does not complete
+the X Layer walkthrough.
+
+A later read-only Chrome inspection independently showed the intended full
+address on the hosted `/pet` page, chain **1952**, **None yet**, community cares
+**0**, and the **Adopt pet** button. This establishes an existing authorized
+connection in that browser. No new Connect click or wallet prompt was inspected,
+and no transaction was requested during that check.
+
+The hosted site previously showed MetaMask's malicious-site warning. The
+[public review issue #296216](https://github.com/MetaMask/eth-phishing-detect/issues/296216)
+was closed after a reviewer said on **22 September, 19:31 UTC** that it did not
+appear flagged anymore. [Reviewer response](https://github.com/MetaMask/eth-phishing-detect/issues/296216#issuecomment-5782692269).
+Whether the warning has disappeared in the current wallet prompt is
+**UNVERIFIED**. No independent security audit or blanket safety assurance is claimed.
+
 | Required value / check | Status |
 |---|---|
 | Demo-wallet provenance, preparation and recording disclosure | **UNVERIFIED — PREPARED_DEMO_WALLET_DISCLOSURE** |
 | Gas budget sufficient for the actual requested transactions | Balance read above is verified; transaction gas budget **UNVERIFIED** |
-| Real connection approval | **BLOCKED — no injected wallet** |
-| Rejected adoption, no pet/growth created | **NOT RUN** |
+| Real connection approval | Hosted full address/chain 1952 **OBSERVED**, following the user's reported approval; local Anvil address/chain 31337 also **OBSERVED**. Neither is a transaction pass |
+| Hosted wallet warning removed in current prompt | **UNVERIFIED**; reviewer closure alone is not a browser check |
+| Wallet dapp permission disconnected after testing | **UNVERIFIED**; the user requested help finding MetaMask's Dapp connections |
+| Rejected adoption, no pet/growth created | **NOT RUN on X Layer**; local request reached pending, but rejection not observed |
 | Adoption hash + successful receipt + pet read-back | **UNVERIFIED — ADOPT_TX_AND_RECEIPT** |
 | Care hash + successful receipt + before/after values | **UNVERIFIED — CARE_TX_AND_RECEIPT** |
 | Refresh restores same pet | **NOT RUN** |
@@ -112,4 +151,4 @@ Use a human-prepared throwaway wallet for capture. When verified, disclose it as
 5. Review the 2–4 minute render and [recording checklist](RECORDING_CHECKLIST.md), upload it, then check playback while logged out.
 6. Recheck public app/repo/video/technical links and complete the form before the UTC deadline.
 
-Keep these limitations visible: one community/mascot, **testnet**, no security audit, no verified organic usage metrics, and remaining failed/unrun browser steps. The historical mobile-clipping finding was withdrawn as a capture artefact; it is not an outstanding verified defect.
+Keep these limitations visible: one community/mascot, **testnet**, no independent security audit, no verified organic usage metrics, and remaining failed/unrun browser steps. The historical mobile-clipping finding was withdrawn as a capture artefact; it is not an outstanding verified defect.

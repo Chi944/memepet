@@ -1,6 +1,6 @@
 # Separate local Anvil walkthrough — 22 September 2026
 
-**LOCAL ONLY. This is not X Layer testnet evidence and does not clear the hosted domain warning.** The user authorized this independent local test while the [domain-review request](METAMASK_WARNING_2026-09-22.md) is pending.
+**LOCAL ONLY. This is not X Layer testnet evidence and does not clear the hosted domain warning.** The user authorized this independent local test while the [domain-review request](METAMASK_WARNING_2026-09-22.md) was pending.
 
 ## Environment
 
@@ -22,8 +22,8 @@ The browser tool cannot inspect MetaMask extension URLs: the attempt was explici
 
 | Walkthrough step | Actual result | Status |
 |---|---|---|
-| Connect wallet / network prerequisite | Real Chrome clicked Connect on the local page. Human reported approval; the page independently displayed the full intended address. Chain remained `1`. Switch network was requested; human network confirmation is pending. | Connection verified; network prerequisite pending |
-| Reject adoption | Not attempted | NOT RUN |
+| Connect wallet / network prerequisite | Real Chrome clicked Connect on the local page. Human reported approval; the page independently displayed the full intended address. After the human reported switching networks, the page independently displayed chain `31337`, pet “None yet” and community `0`. | PASS for this local prerequisite only |
+| Reject adoption | Clicked Adopt pet to start the rejection test. The page displayed awaiting-signature/pending with no awarded progress. No human rejection or resulting rejected-state/refresh check was observed. | INCOMPLETE; not a rejection pass |
 | Approve adoption | Not attempted | NOT RUN |
 | Refresh confirmed pet | No browser adoption yet | NOT RUN |
 | Approve care | Not attempted | NOT RUN |
@@ -33,3 +33,7 @@ The browser tool cannot inspect MetaMask extension URLs: the attempt was explici
 | Community increment | Baseline only; no care yet | NOT RUN |
 
 Any receipt and on-screen state used to update these rows must come from the actual run. Mock providers, unlocked CLI calls, and public testnet reads cannot substitute for browser signature results.
+
+## Interrupted run — follow-up on 23 September (Singapore)
+
+Neither local port `18545` nor `3400` was listening when work resumed. The page's unavailable runtime cannot complete the outstanding test; no persisted Anvil state has been established. The user explicitly reports **only connecting and switching networks**, with no signed transaction. Cancel any stale wallet prompt before restarting. Recreate and verify the local environment before continuing from its actual state. Do not describe this as an adoption, care, rejection or X Layer browser pass.

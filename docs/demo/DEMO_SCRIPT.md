@@ -1,6 +1,6 @@
 # MemePet — three-person demo script
 
-Updated **22 September 2026, 13:30 UTC**. Target **3:20**, inside the organiser's
+Updated **23 September 2026 (Singapore)**. Target **3:20**, inside the organiser's
 **2–4 minute** limit. Submission closes **25 September 2026, 23:59 UTC**
 (26 September, 07:59 Singapore). [Official builder kit](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit).
 
@@ -14,6 +14,10 @@ Three documents, one per job:
 
 Nothing below has been recorded yet. Lines marked **⚑ CONDITIONAL** describe a
 result and may be used only beside footage of that result actually happening.
+The user reports connection and network switching only. The hosted page now
+displays the intended address on chain 1952, with no pet; the separate local Anvil
+connection and chain 31337 were also observed. No browser adoption or care is verified.
+See the [current submission status](SUBMISSION_NOTES.md#wallet-and-transaction-evidence).
 
 ---
 
@@ -32,39 +36,45 @@ as zero. That last sentence is what makes this project different, so the video
 
 A pet evolves from Hatchling to Buddy at 20 points, and each confirmed care adds
 10. The contract allows one care per **UTC** calendar day. So a real, filmable
-evolution needs **two cares on two different UTC days** — and the calendar still
-allows it, but only if the first care happens today.
+evolution needs **two cares on two different UTC days**. "Day 1" below means the
+UTC date of the first genuinely confirmed care, not a fixed recording date.
 
 | When (UTC) | What to capture | Scenes |
 |---|---|---|
-| **Day 1 — 22 Sep, before 23:59 UTC** | Decline the adopt request, then adopt, then the first care (0 → 10 points, still Hatchling), the cooldown, and a hard refresh. Note the community total before and after. | S03, S04, S06 |
-| **Day 2 — 23 Sep, after 00:00 UTC** | The second care: 10 → 20 points and the **real Hatchling → Buddy evolution**. Then the public pet page and its share link. | S05, S06 |
-| Day 2 or 3 | Face-camera clips for all three speakers. These need no wallet and can be recorded any time. | S01, S02, S07, S08 |
-| **Day 3 — 24 Sep** | Edit, caption, review against the evidence gates. | — |
-| **Day 4 — 25 Sep** | Final logged-out link check, then submit **well before 23:59 UTC**. | — |
+| **Day 1 — first confirmed care, preferably by 23 Sep UTC** | Decline the adopt request, then adopt, then the first care (0 → 10 points, still Hatchling), the cooldown, and a hard refresh. Note the community total before and after. | S03, S04, S06 |
+| **Day 2 — a later UTC calendar day** | The second care: 10 → 20 points and the **real Hatchling → Buddy evolution**. Then the public pet page and its share link. | S05, S06 |
+| Any time | Face-camera clips for all three speakers; record conditional result lines after the matching result. | S01, S02, S07, S08 |
+| **24 Sep, if footage is ready** | Edit, caption, review against the evidence gates. Leave time for corrections. | — |
+| **25 Sep** | Final logged-out link check, then submit **well before 23:59 UTC**. | — |
 
-**If Day 1 slips past 23:59 UTC tonight**, the evolution can no longer be filmed
-before the deadline. Drop S05, extend S04 by 10 seconds, and say nothing about
-Buddy beyond the stage artwork in S02. Guardian (50 points, five cares) is not
-reachable before the deadline under any plan — do not imply it.
+For example, first care on **23 Sep UTC** and second care on **24 Sep UTC** works.
+First care on 24 Sep and second care on 25 Sep is also possible, but leaves less
+editing time. The UTC day changes at **08:00 Singapore time**, not local midnight.
+Use receipt timestamps and the app's UTC cooldown label to schedule the next care.
+If a genuine second care cannot be captured before export, drop S05 and extend
+S04 by 10 seconds. Keep Buddy and Guardian in S02 only as labelled stage artwork;
+do not imply the demo wallet reached a stage it has not earned.
 
 ### Setting up the demo wallet
 
 The browser needs an injected wallet; a keystore file on disk cannot sign in a
-browser. The simplest safe route:
+browser. The user has imported the existing `0x2ec8…1CA1` account; importing it
+does not create a separate wallet. For a separate recording wallet:
 
 1. Install OKX Wallet (or MetaMask) and **create a brand-new wallet inside the
    extension**. Do not import any wallet that holds real funds.
 2. Add X Layer testnet: chain ID **1952**, RPC
    `https://testrpc.xlayer.tech/terigon`, symbol **OKB**.
-3. Fund it. Either use the [faucet](https://web3.okx.com/xlayer/faucet), or send
-   a little OKB from the deployer wallet yourself, in your own terminal:
-   `cast send <new-address> --value 0.05ether --rpc-url https://testrpc.xlayer.tech/terigon --account memepet-xlayer-testnet`
-   (it prompts for your keystore password; `0.05ether` means 0.05 OKB here).
+3. Obtain testnet gas from the [faucet](https://web3.okx.com/xlayer/faucet).
+   Confirm the receiving address and test network before any funding operation.
 4. Confirm the wallet shows chain 1952 and a balance, and that the new address
    has **no pet** yet — open `https://memepet.vercel.app/pet/<new-address>`.
 
 Never film wallet creation, the recovery phrase, or the password prompt.
+MetaMask's reviewer [closed the domain review](https://github.com/MetaMask/eth-phishing-detect/issues/296216#issuecomment-5782692269)
+on 22 September, saying it did not appear flagged anymore. Removal in the current
+wallet prompt is **UNVERIFIED**. If a warning still appears, cancel the request
+and keep that result in the walkthrough; the review response is not a security audit.
 
 ---
 
@@ -73,28 +83,28 @@ Never film wallet creation, the recovery phrase, or the password prompt.
 Spoken words only. About 150 words per minute is a comfortable pace; each scene
 lists its word count so no one has to rush.
 
-### S01 · Deston · The hook · 0:00–0:20 · 43 words
+### S01 · Deston · The hook · 0:00–0:20 · 44 words
 
 > "In most meme communities, belonging means buying a token and watching a
 > chart. MemePet offers a different ritual: adopt a mascot, care for it once a
-> day, and grow it just by showing up. Every adoption and care is recorded on
-> X Layer."
+> day, and grow it just by showing up. Confirmed adoptions and cares are recorded
+> on X Layer testnet."
 
-### S02 · Kym · The rules · 0:20–0:40 · 45 words
+### S02 · Kym · The rules · 0:20–0:40 · 44 words
 
 > "It's deliberately simple. One pet per wallet, and one care per day. Each
 > confirmed care adds ten growth points. At twenty, your Hatchling becomes a
 > Buddy; at fifty, a Guardian. Miss a day and you lose nothing — this is a
 > ritual, not a chore."
 
-### S03 · Deston · Adopt — and decline first · 0:40–1:20 · 51 words
+### S03 · Deston · Adopt — and decline first · 0:40–1:20 · 50 words
 
 > "I'm on X Layer testnet with a demo wallet. I'll request an adoption — and
 > first, I'll decline it on purpose."
 
 *(decline in the wallet)*
 
-> "Nothing is created, and no progress appears. The app only believes the
+> ⚑ **CONDITIONAL** — "Nothing is created, and no progress appears. The app only believes the
 > chain. Now I'll approve it."
 
 *(approve; wait for confirmation)*
@@ -102,7 +112,7 @@ lists its word count so no one has to rush.
 > ⚑ **CONDITIONAL** — "Confirmed, and the app has read the new pet back from the
 > registry."
 
-### S04 · Kym · The first care · 1:20–1:50 · 38 words
+### S04 · Kym · The first care · 1:20–1:50 · 36 words
 
 > "Now the daily action. Care, approve, and wait — growth only appears once the
 > transaction confirms."
@@ -110,23 +120,23 @@ lists its word count so no one has to rush.
 > ⚑ **CONDITIONAL** — "Ten points. Still a Hatchling. And care is now closed until
 > the next UTC day — the time is shown right here."
 
-### S05 · Kym · The next day · 1:50–2:15 · 32 words
+### S05 · Kym · The next day · 1:50–2:15 · 33 words
 
 Record on **Day 2** only.
 
-> "It's the next UTC day, so care is open again."
+> ⚑ **CONDITIONAL** — "It's the next UTC day, so care is open again."
 
 > ⚑ **CONDITIONAL** — "That's twenty points — and Mochi evolves into a Buddy. We
-> didn't animate this for the video; the chain says it happened."
+> read two confirmed cares from the chain; the app derives its new stage."
 
-### S06 · Larm · Persistence and community · 2:15–2:45 · 46 words
+### S06 · Larm · Persistence and community · 2:15–2:45 · 45 words
 
 > ⚑ **CONDITIONAL** — "After a hard refresh, the same pet is still here — it's
 > read from the chain, not saved in the browser. The community counter rose by
 > one for each confirmed care. And every pet has a public page anyone can open,
 > read straight from the registry."
 
-### S07 · Larm · What's underneath · 2:45–3:05 · 40 words
+### S07 · Larm · What's underneath · 2:45–3:05 · 39 words
 
 > "Under the hood is a Solidity registry on X Layer and a Next.js app. There's
 > no MemePet token, no marketplace and no financial reward. And wherever the app
@@ -165,10 +175,11 @@ successful receipt *and* the pet visibly read back.
 pending state, confirmed 10 points, and the cooldown with its UTC time and the
 disabled button. Hold each state long enough to read.
 
-**S05 — Day 2.** Same wallet, same browser. Caption the scene **Recorded 23
-September — next UTC day** so the jump is explained, not hidden. Show 10 → 20
-points and the stage change from Hatchling to Buddy. If the evolution animation
-(Teammate A's A4) is merged, it plays here on its own; do not add effects in the
+**S05 — Day 2.** Same wallet, same browser. Caption the scene **Recorded
+[ACTUAL UTC DATE] — next UTC day**, replacing the placeholder from the receipt.
+Show 10 → 20 points and the stage change from Hatchling to Buddy. A4's evolution
+presentation is merged in PR #35; confirm it is in the filmed deployment. Let
+the app present the real stage change; do not add a simulated evolution in the
 edit. If the stage does not change on camera, cut this scene rather than fake it.
 
 **S06.** Hard refresh (Ctrl+Shift+R) with the same wallet; the pet returns. Show
@@ -191,20 +202,22 @@ repository URL and the contract address.
 
 | Scene | Speaker | Length | Words | Needs wallet |
 |---|---|---|---|---|
-| S01 | Deston | 0:20 | 43 | no |
-| S02 | Kym | 0:20 | 45 | no |
-| S03 | Deston | 0:40 | 51 | Day 1 |
-| S04 | Kym | 0:30 | 38 | Day 1 |
-| S05 | Kym | 0:25 | 32 | Day 2 |
-| S06 | Larm | 0:30 | 46 | Day 1 + 2 |
-| S07 | Larm | 0:20 | 40 | no |
+| S01 | Deston | 0:20 | 44 | no |
+| S02 | Kym | 0:20 | 44 | no |
+| S03 | Deston | 0:40 | 50 | Day 1 |
+| S04 | Kym | 0:30 | 36 | Day 1 |
+| S05 | Kym | 0:25 | 33 | Day 2 |
+| S06 | Larm | 0:30 | 45 | Day 1 + 2 |
+| S07 | Larm | 0:20 | 39 | no |
 | S08 | All | 0:15 | 35 | no |
-| **Total** | | **3:20** | **330** | |
+| **Total** | | **3:20** | **326** | |
 
 Scenes with a wallet run longer than their word count suggests, because the
 screen is waiting on confirmations. If the edit runs over 4:00, cut in this
 order: the public-page half of S06, then S05's second sentence, then S02's last
 sentence.
+Counts include quoted speech only, excluding standalone punctuation and the
+conditional labels. Recheck timing on the actual recordings.
 
 ---
 
@@ -218,7 +231,8 @@ sentence.
 - [ ] [Wallet walkthrough](../qa/BROWSER_WALKTHROUGH.md) run and documented,
   including the decline, adoption, refresh, care, cooldown, account switching
   and the counter comparison. Keep failed or blocked rows honest.
-- [ ] Day 2 care recorded after 00:00 UTC on 23 September, or S05 cut.
+- [ ] Day 2 care recorded on a later UTC date than Day 1, with actual dates
+  documented and captioned, or S05 cut.
 - [ ] Anvil time travel kept out of the video entirely. Next-day care on X Layer
   needs a real later UTC day.
 - [ ] Transaction hashes, receipts, wallet disclosure and before/after values

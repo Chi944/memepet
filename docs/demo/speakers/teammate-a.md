@@ -22,17 +22,18 @@ the thresholds; they are not proof that a wallet reached them.
 
 Say "U-T-C" clearly. Point to the cooldown time on screen as you say "right here".
 
-## S05 · The next day · about 25 seconds · **Day 2, after 00:00 UTC on 23 September**
+## S05 · The next day · about 25 seconds · **a later UTC date than the first care**
 
-> "It's the next UTC day, so care is open again."
+> ⚑ **CONDITIONAL** — "It's the next UTC day, so care is open again."
 
 > ⚑ **CONDITIONAL** — "That's twenty points — and Mochi evolves into a Buddy. We
-> didn't animate this for the video; the chain says it happened."
+> read two confirmed cares from the chain; the app derives its new stage."
 
 This is the payoff of the whole video, so it only exists if the evolution really
-happens on camera. If your A4 evolution animation is merged by then, the app plays
-it on its own — nothing is added in the edit. If the first care slips past
-23:59 UTC tonight, this scene is cut.
+happens on camera. A4 is merged in PR #35; confirm it is in the filmed deployment.
+The app presents the stage change itself — nothing is added in the edit. Use
+actual UTC recording dates; if a second care is not captured before export,
+cut this scene. A first care on 23 Sep and second on 24 Sep UTC can still work.
 
 ## S08 · Close · about 5 seconds · anytime
 

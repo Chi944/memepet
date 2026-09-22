@@ -35,5 +35,6 @@ You close the video.
 - `S07_Larm_T01.mp4`
 - `S08_Larm_T01.mp4`
 
-The zero on the community counter before our first care is a real confirmed
-zero. It does not prove anything about users or adopters, so make no usage claim.
+Read and record the community counter immediately before the care; do not assume
+it is still zero. The counter measures cares, not users or adopters, so make no
+usage claim from it.

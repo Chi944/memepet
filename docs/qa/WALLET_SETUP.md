@@ -2,11 +2,15 @@
 
 “Injected wallet” means a browser extension makes a wallet provider available to the site. It is not a field where you paste an address. An address-only/watch-only account cannot approve adoption or care transactions.
 
-## Current status — 22 September 2026
+## Current status — 23 September 2026 (Singapore)
 
-The user reports that connection works and that MetaMask's **Imported Account 1** matches `0x2ec8471290793FeB64792861Ce3102d291ce1CA1`. This is **USER-REPORTED**, not an independently observed walkthrough pass. The same address means the existing wallet was imported; it is not a new, isolated demo wallet.
+The user reports only connection and network-switch approvals, with no signed transaction. The local Chrome page independently displayed `0x2ec8471290793FeB64792861Ce3102d291ce1CA1` and chain `31337` after those approvals. On follow-up, the hosted page also displayed that address and X Layer testnet chain `1952`; this observes an existing connection, not the original permission prompt. The same address means the existing wallet was imported; it is not a new, isolated demo wallet.
 
-The supplied screenshot shows MetaMask's **“Malicious—flagged as unsafe”** warning for `memepet.vercel.app`. The warning remains unresolved: pause further connection approvals and signing, keep security alerts enabled, and follow [MetaMask's manual review guidance](https://support.metamask.io/configure/wallet/security-alerts/). No false positive has been established and no review submission is recorded. See [the warning evidence record](evidence/METAMASK_WARNING_2026-09-22.md). The setup instructions below do not override this pause.
+The supplied screenshot showed MetaMask's **“Malicious—flagged as unsafe”** warning for `memepet.vercel.app`. [Review request #296216](https://github.com/MetaMask/eth-phishing-detect/issues/296216#issuecomment-5782692269) was submitted and closed on 22 September at 19:31 UTC: the reviewer said the domain did not appear flagged anymore. A fresh wallet prompt remains unverified. Keep alerts enabled; leave any prompt that still warns unapproved and follow up on the review. See [the warning evidence record](evidence/METAMASK_WARNING_2026-09-22.md). Neither closure nor connection proves adoption/care works or guarantees safety.
+
+## Disconnect the current site
+
+Cancel any pending transaction or signature prompt. In MetaMask's account view, open the top-right menu, choose **Dapp connections**, select `memepet.vercel.app`, then **Disconnect**. Older versions may call the menu **Connected sites**. Remove `http://127.0.0.1:3400` separately if you also want to end the local test connection. The current user report includes no spending approval; disconnecting would not undo any previously signed token allowance. [Official instructions](https://support.metamask.io/more-web3/dapps/disconnect-wallet-from-a-dapp/).
 
 ## Chrome setup
 
@@ -36,7 +40,7 @@ MetaMask Extension documents encrypted JSON-file import. This provides a route f
 2. Open MetaMask's account selector, choose **Add wallet**, then **Import an account**.
 3. On the import page, change **Select Type** to **JSON File** and choose the keystore file above. The Foundry filename may have no `.json` extension; use the full path in the file picker or its all-files filter if available.
 4. Enter the keystore password used by Foundry, then click **Import**. This is the password protecting the file, which may differ from MetaMask's own unlock password. Enter it only in the official extension.
-5. Verify the imported account's full address against `0x2ec8471290793FeB64792861Ce3102d291ce1CA1`. The user now reports the match; it has not been independently verified in the browser. Importing this account reuses the same wallet.
+5. Verify the imported account's full address against `0x2ec8471290793FeB64792861Ce3102d291ce1CA1`. The local and hosted pages have displayed this address, but the extension's import process was not independently inspected. Importing this account reuses the same wallet.
 6. Once the current security warning has been resolved, select and unlock the intended account, reload MemePet in the same Chrome profile, click **Connect wallet**, and review the connection prompt. If prompted by MemePet, use **Switch network** for X Layer testnet (1952).
 
 Source: [MetaMask's account and JSON-file import instructions](https://support.metamask.io/start/use-an-existing-wallet), checked 22 September 2026. If the extension reports an import error, share only the error text; keep the wallet file and password private. A successful import alone does not mark any transaction walkthrough step as passed.
@@ -49,7 +53,7 @@ References: [OKX extension detection](https://web3.okx.com/onchainos/dev-docs/wa
 
 ## Verification boundary
 
-Automated provider tests use mocks. They do not count as a real wallet walkthrough. The earlier independently observed browser connection attempt returned **No injected wallet was found**; its dated results below remain valid history. The latest user report supersedes missing-provider setup as the current blocker: connection is user-reported, while the MetaMask warning remains unresolved. Adoption, care, signature rejection, network switching, account switching and refresh persistence remain unverified.
+Automated provider tests use mocks. They do not count as a real wallet walkthrough. The earlier independently observed browser attempt returned **No injected wallet was found**; its dated results below remain valid history. The subsequent local connection/network display and hosted existing connection are now observed, as described above. Adoption, care, signature rejection, account switching and confirmed-pet refresh persistence remain unverified. See [the separate local run](evidence/LOCAL_ANVIL_2026-09-22.md); its runtime has stopped, so it must be recreated before continuing.
 
 ### Compatibility update checks — 22 September 2026
 
