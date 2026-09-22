@@ -1,49 +1,49 @@
-# Deston — your lines
+# Deston — your MP3 script
 
-Read only the quoted words. Record each scene as its own clip: landscape 1920×1080, clean audio, no music, two seconds of silence at both ends. Say the scene ID before each take; the editor trims it. Lines marked **⚑ CONDITIONAL** go in the final edit only beside footage of that result really happening. [Full script, schedule and screen directions](../DEMO_SCRIPT.md).
+**Script ID: MP-EQ-20260923-v1.** Your selected narration is **130 words**
+across three turns. The editor interleaves it with the other two voices.
+[Combined script and evidence gates](../DEMO_SCRIPT.md).
 
-## S01 · The hook · about 20 seconds · anytime
+Record one file named **`MemePet_Deston_MP-EQ-v1.mp3`**.
+No face-camera recording is required. Read only the quoted words below.
+Before each block, say its scene ID, pause two seconds, read the lines, then
+leave two seconds of silence. Slates and extra pauses are removed in the edit.
 
-> "In most meme communities, belonging means buying a token and watching a
-> chart. MemePet offers a different ritual: adopt a mascot, care for it once a
-> day, and grow it just by showing up. Confirmed adoptions and cares are recorded
-> on X Layer testnet."
+Use your natural voice at roughly **125–135 words per minute**: about one minute
+of selected speech. Exact speaking time is measured after upload, not guaranteed
+by word count. Record in a quiet room, keep a steady microphone distance, and
+use no music, effects or speed changes. Keep your original recording. Export
+44.1 or 48 kHz MP3 at 192 kbps or better if available.
 
-Say the first sentence to camera. The editor covers the rest with the landing
-page. Land on "showing up" — it is the idea of the whole project.
+**CONDITIONAL** means planned narration that requires matching genuine footage.
+You may record it now, but it cannot enter the submission if the result was not
+captured. One human can operate the wallet; “we” does not mean you personally
+clicked or signed. Do not read directions or conditional labels.
 
-## S03 · Adopt — and decline first · about 40 seconds · **Day 1, before 23:59 UTC**
+Your scene order: **S01 → S04 → S07**.
 
-Narrate over the live screen, in three parts:
+## S01 · Meet Mochi · 42 words
 
-> "I'm on X Layer testnet with a demo wallet. I'll request an adoption — and
-> first, I'll decline it on purpose."
+> "Meet Mochi. Tiny paws, very serious about attention. We built MemePet for meme communities that want a warmer reason to return together. Adopt a wallet linked pet, care for it daily, and watch a small shared ritual grow on X Layer testnet."
 
-*(decline in the wallet)*
+Warm and conversational. Let the line about attention breathe for a moment.
 
-> ⚑ **CONDITIONAL** — "Nothing is created, and no progress appears. The app only believes the
-> chain. Now I'll approve it."
+## S04 · One daily care · 44 words · CONDITIONAL
 
-*(approve and wait)*
+> "Time for care. We approve the request and wait for confirmation. Ten growth points appear, and Mochi is still a Hatchling. The care button now waits until the next UTC day. One little check in is enough; nobody needs to keep clicking all afternoon."
 
-> ⚑ **CONDITIONAL** — "Confirmed, and the app has read the new pet back from the
-> registry."
+This needs real care confirmation, ten points and the UTC cooldown.
+Say “UTC” as three letters. A small smile on “all afternoon” is enough.
 
-The decline is the most important beat in the video: it shows the app refusing
-to award anything the chain did not confirm. Let it breathe for a second before
-"Nothing is created". Record the last line as a separate pickup, only after the
-pet has visibly appeared.
+## S07 · Why the chain matters · 44 words
 
-## S08 · Close · about 5 seconds · anytime
+> "X Layer holds the shared record: adoption and care events in our Solidity registry. The Next.js app turns confirmed care counts into growth and stages. Wallet approval, a successful receipt, then a fresh read: that is the path from an action to visible progress."
 
-> "We wanted showing up for a community to feel personal."
+Keep the steps distinct: approval, receipt, fresh read. Say “Next.js” naturally
+as “Next J S”. There is no need to race through the technical sentence.
 
-Kym follows you in the edit; no group call needed.
+## Send back
 
-## Files to send
-
-- `S01_Deston_T01.mp4`
-- `S03_Deston_T01.mp4` — narration over the Day 1 screen capture
-- `S08_Deston_T01.mp4`
-
-Send original files with a note on your preferred take.
+Upload `MemePet_Deston_MP-EQ-v1.mp3` here, with any preferred take noted.
+No footage needs to be embedded in the MP3. If a result line needs changing
+after capture, we will request a pickup and keep the three final parts balanced.
