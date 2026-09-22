@@ -94,6 +94,7 @@ export function PetLiveClient() {
             {wallet.deployment.networkName ?? "Configured network"}
           </Badge>
         </div>
+        <h1>Your pet</h1>
         <p className="lede">
           Wallet reads, adoption, and daily care talk to the configured
           registry. Growth and community totals update only after a confirmed

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import type { CarePanelProps, CareActionState } from "@/types/view-models";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -58,6 +59,27 @@ export function CarePanel({
   onSwitchNetwork,
 }: CarePanelProps) {
   const status = statusChip(action);
+  const actionRef = useRef<HTMLDivElement>(null);
+  const hadFocus = useRef(false);
+  const lastKind = useRef(action.kind);
+
+  // Each state renders a different subtree, so the button the user just
+  // activated is unmounted and focus falls to <body>. Most follow-on states
+  // are disabled buttons, which cannot take focus, so there is nothing to tab
+  // back to. Put focus on the live region instead, but only when it was
+  // genuinely lost: if the user has moved focus elsewhere on the page,
+  // activeElement is not <body> and we leave it alone.
+  useEffect(() => {
+    if (lastKind.current === action.kind) {
+      return;
+    }
+    lastKind.current = action.kind;
+
+    if (hadFocus.current && document.activeElement === document.body) {
+      actionRef.current?.focus();
+    }
+  }, [action.kind]);
+
   let content: React.ReactNode;
 
   switch (action.kind) {
@@ -169,7 +191,15 @@ export function CarePanel({
             : `${pet.growthPoints} growth points. Next stage at ${pet.nextStageAt}.`}
         </p>
       ) : null}
-      <div className={styles.actionContent} aria-live="polite">
+      <div
+        ref={actionRef}
+        tabIndex={-1}
+        className={styles.actionContent}
+        aria-live="polite"
+        onFocusCapture={() => {
+          hadFocus.current = true;
+        }}
+      >
         {content}
       </div>
     </Card>
