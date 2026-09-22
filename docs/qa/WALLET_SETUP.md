@@ -2,6 +2,12 @@
 
 “Injected wallet” means a browser extension makes a wallet provider available to the site. It is not a field where you paste an address. An address-only/watch-only account cannot approve adoption or care transactions.
 
+## Current status — 22 September 2026
+
+The user reports that connection works and that MetaMask's **Imported Account 1** matches `0x2ec8471290793FeB64792861Ce3102d291ce1CA1`. This is **USER-REPORTED**, not an independently observed walkthrough pass. The same address means the existing wallet was imported; it is not a new, isolated demo wallet.
+
+The supplied screenshot shows MetaMask's **“Malicious—flagged as unsafe”** warning for `memepet.vercel.app`. The warning remains unresolved: pause further connection approvals and signing, keep security alerts enabled, and follow [MetaMask's manual review guidance](https://support.metamask.io/configure/wallet/security-alerts/). No false positive has been established and no review submission is recorded. See [the warning evidence record](evidence/METAMASK_WARNING_2026-09-22.md). The setup instructions below do not override this pause.
+
 ## Chrome setup
 
 1. Install the Chrome extension using the [official OKX Wallet download page](https://web3.okx.com/download).
@@ -30,8 +36,8 @@ MetaMask Extension documents encrypted JSON-file import. This provides a route f
 2. Open MetaMask's account selector, choose **Add wallet**, then **Import an account**.
 3. On the import page, change **Select Type** to **JSON File** and choose the keystore file above. The Foundry filename may have no `.json` extension; use the full path in the file picker or its all-files filter if available.
 4. Enter the keystore password used by Foundry, then click **Import**. This is the password protecting the file, which may differ from MetaMask's own unlock password. Enter it only in the official extension.
-5. Verify the imported account's full address against `0x2ec8471290793FeB64792861Ce3102d291ce1CA1`. Import success and the address match have not yet been verified in the browser.
-6. With that account selected and unlocked, reload MemePet in the same Chrome profile, click **Connect wallet**, and approve the connection. If prompted by MemePet, use **Switch network** for X Layer testnet (1952).
+5. Verify the imported account's full address against `0x2ec8471290793FeB64792861Ce3102d291ce1CA1`. The user now reports the match; it has not been independently verified in the browser. Importing this account reuses the same wallet.
+6. Once the current security warning has been resolved, select and unlock the intended account, reload MemePet in the same Chrome profile, click **Connect wallet**, and review the connection prompt. If prompted by MemePet, use **Switch network** for X Layer testnet (1952).
 
 Source: [MetaMask's account and JSON-file import instructions](https://support.metamask.io/start/use-an-existing-wallet), checked 22 September 2026. If the extension reports an import error, share only the error text; keep the wallet file and password private. A successful import alone does not mark any transaction walkthrough step as passed.
 
@@ -43,7 +49,7 @@ References: [OKX extension detection](https://web3.okx.com/onchainos/dev-docs/wa
 
 ## Verification boundary
 
-Automated provider tests use mocks. They do not count as a real wallet walkthrough. The last genuine browser connection attempt returned **No injected wallet was found**; adoption, care, signature rejection and account-switch walkthrough steps remain unverified until performed with a real unlocked wallet.
+Automated provider tests use mocks. They do not count as a real wallet walkthrough. The earlier independently observed browser connection attempt returned **No injected wallet was found**; its dated results below remain valid history. The latest user report supersedes missing-provider setup as the current blocker: connection is user-reported, while the MetaMask warning remains unresolved. Adoption, care, signature rejection, network switching, account switching and refresh persistence remain unverified.
 
 ### Compatibility update checks — 22 September 2026
 

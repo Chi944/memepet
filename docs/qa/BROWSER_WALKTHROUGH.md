@@ -4,6 +4,22 @@ Worksheet for the connect → adopt → care journey against **local Anvil**.
 These steps need a real injected wallet (MetaMask / OKX Wallet). They are
 **not** pre-marked as passing.
 
+**Current status — 22 September 2026:** The user reports that connection
+works and that MetaMask's **Imported Account 1** matches
+`0x2ec8471290793FeB64792861Ce3102d291ce1CA1`. This is **USER-REPORTED**,
+not an independently observed pass. The supplied screenshot shows a pending
+connection, chain `1` (switch required), and MetaMask's
+**“Malicious—flagged as unsafe”** warning for `memepet.vercel.app`.
+The warning remains unresolved and is now the blocker. Pause further
+connection approvals and signing; follow
+[MetaMask's manual review guidance](https://support.metamask.io/configure/wallet/security-alerts/).
+No false positive or submitted review is established. See
+[the current warning evidence record](evidence/METAMASK_WARNING_2026-09-22.md).
+The matching address reuses the existing wallet, not a new isolated wallet.
+Adoption, care, rejection, network switching, account switching and refresh
+persistence remain unverified. The dated results below are historical and
+have not been upgraded to passes.
+
 **Authorship note:** Lead authored this file because Teammate B had not
 started `docs/qa/` yet. **Teammate B owns `docs/qa/` from here** — edit,
 extend, and fill results as B.
@@ -30,7 +46,7 @@ Automated, non-signature checks and screenshots live in
 Fill **Actual result** with observed outcomes, or explicitly mark NOT RUN / BLOCKED. Never infer a pass from automated tests or CLI calls.
 Do not mark Pass/Fail in advance.
 
-### Latest attempt — 22 September 2026, OKX-PREP
+### Earlier observed attempt — 22 September 2026, OKX-PREP
 
 See [the evidence record](evidence/OKX_PREP_2026-09-22.md) for commands,
 screenshots, branch provenance and automated checks. **Zero wallet rows passed.**
@@ -78,6 +94,8 @@ help. A public address is not a signer. Its live `petOf` result was
 observations, not evidence for any row above. A community counter of zero
 proves zero recorded cares, not zero adoptions.
 
+The following prerequisites were recorded for that earlier attempt; the
+current security warning above must be resolved before hosted signing resumes.
 To resume, the human must make an injected MetaMask/OKX wallet available in
 Chrome and unlock it privately. Use a dedicated test wallet; do not expose
 keys or seed phrases. Recheck chain, registry, account and build before each
