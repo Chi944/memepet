@@ -1,6 +1,18 @@
-# Recording checklist — 3 people, 3:15 target
+# Recording checklist — 3 people, 3:20 target
 
 **Current blocker:** no injected wallet in the real browser. No wallet action passed. Introductions and product explanation can be recorded now; success narration needs genuine evidence.
+
+## The schedule is the constraint
+
+Care is limited to one per **UTC** day, and Buddy needs two cares. To film a real
+evolution before the deadline:
+
+- [ ] **Day 1 — 22 Sep, before 23:59 UTC:** decline, adopt, first care, cooldown, refresh (S03, S04, S06).
+- [ ] **Day 2 — 23 Sep, after 00:00 UTC:** second care and the Hatchling → Buddy evolution; public page (S05, S06).
+- [ ] **Day 3 — 24 Sep:** edit. **Day 4 — 25 Sep:** logged-out link check and submit.
+- [ ] If Day 1 slips past midnight UTC, cut S05 and make no Buddy claim.
+
+Wallet setup steps are in [the script](DEMO_SCRIPT.md#setting-up-the-demo-wallet).
 
 ## Before capture
 
@@ -27,7 +39,7 @@
 
 ## Final review
 
-- [ ] Target **3:15**, stay within **2–4 minutes**. Export MP4 with readable captions, check audio and private information end-to-end.
+- [ ] Target **3:20**, stay within **2–4 minutes**. Export MP4 with readable captions, check audio and private information end-to-end.
 - [ ] Compare every claimed result against QA evidence. An edit missing wallet scenes remains **REHEARSAL — WALLET DEMO MISSING**.
 - [ ] Check app/repo/explorer/video links while logged out. Resolve team/form fields, eligibility and declaration.
 - [ ] Submit by **25 September 2026, 23:59 UTC / 26 September, 07:59 Singapore**.
