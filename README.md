@@ -14,7 +14,7 @@ Growth comes from confirmed care. No MemePet token to buy; network gas applies.
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3.5-black)](https://nextjs.org)
 [![Solidity 0.8.24](https://img.shields.io/badge/Solidity-0.8.24-363636)](https://soliditylang.org)
 
-[Live app](https://memepet.vercel.app) · [Demo script](docs/demo/DEMO_SCRIPT.md) · [Submission notes](docs/demo/SUBMISSION_NOTES.md)
+[Live app](https://memepet.vercel.app)
 
 <img src="docs/images/home-desktop.jpg" alt="MemePet's current black and lime homepage with the Mochi stage-art showcase" width="820">
 
@@ -39,7 +39,7 @@ Growth comes from confirmed care. No MemePet token to buy; network gas applies.
 
 The core implementation is merged. The remaining work is real wallet verification,
 final release QA and the submission package. Current evidence is summarized below;
-all unverified fields remain visible in the [submission notes](docs/demo/SUBMISSION_NOTES.md).
+remaining acceptance work is tracked in [current status](docs/STATUS.md).
 
 ---
 
@@ -56,7 +56,7 @@ all unverified fields remain visible in the [submission notes](docs/demo/SUBMISS
 - [Project structure](#project-structure)
 - [Product scope](#product-scope)
 - [Known limitations](#known-limitations)
-- [Roadmap and recording pack](#roadmap)
+- [Roadmap](#roadmap)
 - [Team and credits](#team-and-credits)
 
 ---
@@ -108,7 +108,6 @@ results are listed separately.
 | Public pet page and generated share images | ✅ Merged; adopted-pet browser consistency still needs evidence |
 | X Layer testnet deployment | ✅ Deployed; executable runtime comparison documented |
 | Automated checks | ✅ **111 app tests / 20 files**, **15 contract tests**, typecheck, lint, build and production route checks passed on recording-kit revision `9a2bdab` |
-| Three-person recording scripts | ✅ Three turns and **130 selected words each**; planned runtime **3:25** |
 | Final demo video and submission | ⏳ Three MP3s, genuine transaction footage, editing and remaining form answers outstanding |
 
 [CI run for `9a2bdab`](https://github.com/Chi944/memepet/actions/runs/35787304045)
@@ -314,7 +313,7 @@ public/pets/               Stage artwork and share backgrounds
 docs/
   PROJECT_BRIEF.md          Scope and core user story
   OWNERSHIP.md              Integration responsibilities
-  STATUS.md                 Current next steps and dated history
+  STATUS.md                 Current delivery and acceptance status
   demo/                    Scripts, production plan and submission notes
   qa/                      Walkthroughs and dated evidence
 ```
@@ -353,35 +352,20 @@ and a read-only holder indicator remain optional future work.
   See [pet asset provenance](docs/pet-assets.md).
 
 <a id="roadmap"></a>
-## 🔭 Roadmap and recording pack
+## 🔭 Roadmap
 
-**The core feature prompts are implemented.** The immediate work is verification
-and delivery; use [current task status](docs/STATUS.md) before running an older
-prompt pack. A prompt's presence in the repository does not mean it is unfinished.
+**The core implementation is merged.** The immediate work is verification
+and delivery. See [current status](docs/STATUS.md) for the remaining acceptance checks.
 
 | Next step | Completion evidence |
 |---|---|
 | Real wallet walkthrough | Genuine rejection, adoption, care, receipt/read-back, cooldown, refresh and account-switch results |
 | Final release QA | Current desktop/mobile, keyboard, reduced-motion and public/share-page checks |
-| Three voice recordings | One MP3 each from Deston, Kym and Larm |
-| Demo edit | Actual product footage, balanced voices, captions and a reviewed 2–4 minute export |
+| Demo video | Genuine product footage and a reviewed 2–4 minute export |
 | Submission | Eligibility/rights and form answers confirmed; app/repo/video links checked; receipt retained |
 
-The [combined script](docs/demo/DEMO_SCRIPT.md) gives everyone **three turns and
-130 selected words**, targeting **3:25**. Individual read-aloud scripts:
-[Deston](docs/demo/speakers/lead.md) · [Kym](docs/demo/speakers/teammate-a.md) ·
-[Larm](docs/demo/speakers/teammate-b.md).
-
-Use the [production plan](docs/demo/PRODUCTION_PLAN.md),
-[recording checklist](docs/demo/RECORDING_CHECKLIST.md) and
-[Codex editing handoff](docs/demo/EDITOR_HANDOFF.md). Actual speaking durations and
-the final video remain pending. Later-day Buddy footage is optional: the script
-includes an equal-length artwork/rules alternate. Core adoption/care footage is
-still required.
-
-[Team responsibilities](docs/demo/TEAM_READINESS.md) ·
-[Submission fields](docs/demo/SUBMISSION_NOTES.md) ·
-[Repository cleanup record](docs/demo/REPOSITORY_AUDIT.md)
+The final video is pending. Every demonstrated result must match actual wallet
+and chain evidence; illustrations alone do not prove adoption, care or evolution.
 
 ---
 

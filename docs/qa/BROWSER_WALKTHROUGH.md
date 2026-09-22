@@ -41,7 +41,7 @@ extend, and fill results as B.
 
 1. Anvil running on `http://127.0.0.1:8545` (chain id `31337`).
 2. `PetRegistry` deployed with an unlocked Anvil account (no `--private-key`
-   on the CLI). See README “Trying the on-chain flow locally”.
+   on the CLI). See the [separate local Anvil setup](../DEV_SETUP.md#separate-local-anvil-setup).
 3. `.env.local` pointed at that **local-only** address (never commit it;
    never put it in `deployment.ts` or the README).
 4. `npm run dev` and open `/pet`.

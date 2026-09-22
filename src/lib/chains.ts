@@ -40,16 +40,6 @@ export const xLayerTestnet = defineChain({
   },
 });
 
-/** Local Anvil — verification only, not an X Layer network. */
-export const localAnvil = defineChain({
-  id: 31337,
-  name: "Anvil local",
-  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
-  rpcUrls: {
-    default: { http: ["http://127.0.0.1:8545"] },
-  },
-});
-
 export function chainFromDeployment(deployment: Deployment) {
   if (
     deployment.chainId === null ||
