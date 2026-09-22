@@ -46,7 +46,17 @@ export default async function PublicPetPage({ params }: PageProps) {
         <Card className="public-pet-status">
           <div className="pet-gate-head">
             <p className="eyebrow">Public pet</p>
-            <Badge tone="live">Read only</Badge>
+            <Badge
+              tone={
+                snapshot.kind === "pet" || snapshot.kind === "no-pet"
+                  ? "live"
+                  : "unknown"
+              }
+            >
+              {snapshot.kind === "pet" || snapshot.kind === "no-pet"
+                ? "Read only"
+                : "Not read"}
+            </Badge>
           </div>
           <h1>Pet of {snapshot.ownerLabel}</h1>
           <p className="lede">
