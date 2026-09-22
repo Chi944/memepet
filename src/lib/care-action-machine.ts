@@ -79,7 +79,17 @@ export function resolveCareActionState(
 
   // A confirmed adoption is not a confirmed care: fall through to the normal
   // read/cooldown logic so the panel offers the first care instead.
-  if (input.txPhase === "success" && input.txKind !== "adopt") {
+  //
+  // A failed re-read also falls through, even though the write confirmed. The
+  // write path sets readStatus "error" alongside txPhase "success" precisely to
+  // say "confirmed on chain, but the displayed progress is stale". Answering
+  // "success" here would render that stale progress as confirmed and throw the
+  // warning away.
+  if (
+    input.txPhase === "success" &&
+    input.txKind !== "adopt" &&
+    input.readStatus !== "error"
+  ) {
     return { kind: "success" };
   }
 

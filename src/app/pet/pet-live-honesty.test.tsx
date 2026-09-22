@@ -83,6 +83,39 @@ describe("live pet surface never fabricates progress", () => {
     expect(afterAdopt.kind).not.toBe("success");
   });
 
+  // Regression: the write path sets readStatus "error" alongside txPhase
+  // "success" to say "confirmed on chain, but the display is stale". Checking
+  // success first short-circuited that, rendering stale growth as confirmed
+  // and discarding the warning the write path went out of its way to produce.
+  it("does not render a confirmed care when the post-receipt re-read failed", () => {
+    const stale =
+      "Care confirmed on chain, but refreshing the pet failed. The displayed progress may be out of date.";
+
+    const action = resolveCareActionState({
+      ...baseInput,
+      hasPet: true,
+      readStatus: "error",
+      readErrorMessage: stale,
+      txPhase: "success",
+      txKind: "care",
+    });
+
+    expect(action.kind).not.toBe("success");
+
+    render(
+      <CarePanel
+        pet={null}
+        action={action}
+        onCare={() => {}}
+        onConnect={() => {}}
+        onSwitchNetwork={() => {}}
+      />,
+    );
+
+    expect(screen.getByText(stale)).toBeInTheDocument();
+    expect(screen.queryByText(/Care is confirmed/)).toBeNull();
+  });
+
   it("still announces a confirmed care after a care", () => {
     const afterCare = resolveCareActionState({
       ...baseInput,
