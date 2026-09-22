@@ -1,4 +1,4 @@
-import { access, readFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { PetStage } from "@/types/view-models";
 
@@ -8,23 +8,14 @@ export function isPetStage(value: string): value is PetStage {
   return (STAGES as readonly string[]).includes(value);
 }
 
-/**
- * Prefer Teammate A's share plate when it exists.
- * Until then, the stage illustration is drawn on the app's lilac field.
- */
+/** Read a 1200×630 share background. Missing art leaves an honest text-only card. */
 export async function readStageArt(stage: PetStage): Promise<Buffer | null> {
   const sharePath = path.join(process.cwd(), "public", "pets", "share", `${stage}.png`);
-  const stagePath = path.join(process.cwd(), "public", "pets", `${stage}.png`);
-
   try {
-    await access(sharePath);
     return await readFile(sharePath);
   } catch {
-    try {
-      return await readFile(stagePath);
-    } catch {
-      return null;
-    }
+    // Square stage stills cannot substitute for a full-canvas share background.
+    return null;
   }
 }
 

@@ -1,3 +1,4 @@
+import { ShareImage } from "@/components/share/ShareImage";
 import { ImageResponse } from "next/og";
 import { notFound } from "next/navigation";
 import { artDataUrl, readStageArt } from "@/lib/og-art";
@@ -49,61 +50,12 @@ export default async function PublicPetOpenGraphImage({ params }: ImageProps) {
           : "No registry is connected.";
 
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          background: "#000000",
-          color: "#fafafa",
-          padding: "64px",
-          fontFamily: "sans-serif",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            maxWidth: artSrc ? "620px" : "100%",
-            gap: "18px",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              fontSize: 28,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "#c6ff00",
-              fontWeight: 700,
-            }}
-          >
-            MemePet
-          </div>
-          <div style={{ display: "flex", fontSize: 72, fontWeight: 800, lineHeight: 1.05 }}>
-            {heading}
-          </div>
-          <div style={{ display: "flex", fontSize: 36, color: "#b3b3b3" }}>{detail}</div>
-          <div style={{ display: "flex", fontSize: 28, color: "#929292" }}>
-            {snapshot.ownerLabel}
-          </div>
-        </div>
-        {artSrc ? (
-          // next/og ImageResponse renders through Satori, which only accepts <img>.
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={artSrc}
-            width={420}
-            height={420}
-            alt=""
-            style={{ borderRadius: 32 }}
-          />
-        ) : null}
-      </div>
-    ),
+    <ShareImage
+      artSrc={artSrc}
+      heading={heading}
+      detail={detail}
+      ownerLabel={snapshot.ownerLabel}
+    />,
     { ...size },
   );
 }
