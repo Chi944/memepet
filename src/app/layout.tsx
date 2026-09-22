@@ -1,27 +1,17 @@
 import type { Metadata } from "next";
-import { Baloo_2, JetBrains_Mono, Nunito_Sans } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-/** Display: rounded and toy-like, to match the clay-render mascot. */
-const display = Baloo_2({
+/** A precise sans lets the mascot supply the playfulness. */
+const body = Geist({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-/** Body: soft humanist sans, legible at 390px. */
-const body = Nunito_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });
 
 /** Utility: on-chain values are ledger data and are set as ledger data. */
-const mono = JetBrains_Mono({
+const mono = Geist_Mono({
   subsets: ["latin"],
-  weight: ["500", "700"],
   variable: "--font-mono",
   display: "swap",
 });
@@ -80,7 +70,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      className={`${body.variable} ${mono.variable}`}
     >
       <body>{children}</body>
     </html>

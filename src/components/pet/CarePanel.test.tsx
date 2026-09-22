@@ -105,7 +105,7 @@ describe("CarePanel", () => {
 
     expect(
       screen.getByText(
-        "Final stage. Displayed growth is 50 points from the parent.",
+        "Final stage. 50 growth points.",
       ),
     ).toBeInTheDocument();
   });

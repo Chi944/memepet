@@ -13,7 +13,7 @@ const STEPS = [
   {
     id: "connect",
     title: "Connect a wallet",
-    body: "Your pet belongs to your wallet address. Nothing leaves your wallet, and you are never asked to approve a token.",
+    body: "Your wallet is your pet’s home. Connect on the configured network. No token approvals; network gas applies to transactions.",
   },
   {
     id: "adopt",
@@ -31,8 +31,11 @@ export function HowItWorks({ connected }: HowItWorksProps) {
   return (
     <section className={styles.steps} aria-labelledby="how-it-works">
       <div className={styles.stepsIntro}>
-        <p className="eyebrow">How it works</p>
-        <h2 id="how-it-works">Three steps, then one action a day</h2>
+        <div>
+          <p className="eyebrow">How it works</p>
+          <h2 id="how-it-works">Small actions. Real connection.</h2>
+        </div>
+        <p className={styles.stepsSubhead}>Three steps to get started. A reason to come back every day.</p>
       </div>
 
       <ol className={styles.stepList}>

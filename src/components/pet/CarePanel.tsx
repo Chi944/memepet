@@ -59,6 +59,10 @@ export function CarePanel({
   onSwitchNetwork,
 }: CarePanelProps) {
   const status = statusChip(action);
+  const isWaiting =
+    action.kind === "awaiting-signature" ||
+    action.kind === "submitting" ||
+    action.kind === "pending";
   const actionRef = useRef<HTMLDivElement>(null);
   const hadFocus = useRef(false);
   const lastKind = useRef(action.kind);
@@ -154,7 +158,7 @@ export function CarePanel({
     case "success":
       content = (
         <p className={styles.confirmed}>
-          Care is confirmed. Displayed progress comes from the parent state.
+          Care is confirmed. Your pet’s progress is up to date.
         </p>
       );
       break;
@@ -178,16 +182,28 @@ export function CarePanel({
       surface="warm"
       aria-labelledby="care-heading"
       className={styles.carePanel}
+      data-action={action.kind}
     >
       <div className={styles.careHead}>
         <p className={styles.kicker}>Daily care</p>
         <Badge tone={status.tone}>{status.label}</Badge>
       </div>
+      <div className={styles.careIcon} aria-hidden="true">
+        {action.kind === "success" || action.kind === "cooldown" ? (
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="m5 12 4 4L19 6" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 20s-8-4.8-8-10.1A4.9 4.9 0 0 1 12 6a4.9 4.9 0 0 1 8 3.9C20 15.2 12 20 12 20Z" />
+          </svg>
+        )}
+      </div>
       <h2 id="care-heading">Care for your pet</h2>
       {pet ? (
         <p className={styles.careSummary}>
           {pet.nextStageAt === null
-            ? `Final stage. Displayed growth is ${pet.growthPoints} points from the parent.`
+            ? `Final stage. ${pet.growthPoints} growth points.`
             : `${pet.growthPoints} growth points. Next stage at ${pet.nextStageAt}.`}
         </p>
       ) : null}
@@ -200,6 +216,13 @@ export function CarePanel({
           hadFocus.current = true;
         }}
       >
+        {isWaiting ? (
+          <span className={styles.waitingIndicator} aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+        ) : null}
         {content}
       </div>
     </Card>

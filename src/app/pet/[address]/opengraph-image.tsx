@@ -57,8 +57,8 @@ export default async function PublicPetOpenGraphImage({ params }: ImageProps) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: "#f3edff",
-          color: "#241c33",
+          background: "#000000",
+          color: "#fafafa",
           padding: "64px",
           fontFamily: "sans-serif",
         }}
@@ -77,7 +77,7 @@ export default async function PublicPetOpenGraphImage({ params }: ImageProps) {
               fontSize: 28,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
-              color: "#6d3fd0",
+              color: "#c6ff00",
               fontWeight: 700,
             }}
           >
@@ -86,8 +86,8 @@ export default async function PublicPetOpenGraphImage({ params }: ImageProps) {
           <div style={{ display: "flex", fontSize: 72, fontWeight: 800, lineHeight: 1.05 }}>
             {heading}
           </div>
-          <div style={{ display: "flex", fontSize: 36, color: "#5f5573" }}>{detail}</div>
-          <div style={{ display: "flex", fontSize: 28, color: "#7a7189" }}>
+          <div style={{ display: "flex", fontSize: 36, color: "#b3b3b3" }}>{detail}</div>
+          <div style={{ display: "flex", fontSize: 28, color: "#929292" }}>
             {snapshot.ownerLabel}
           </div>
         </div>
