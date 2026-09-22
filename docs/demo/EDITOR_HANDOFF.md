@@ -4,24 +4,28 @@
 
 ## Output and source conventions
 
-- Target **3:15**, **1920×1080**, **30 fps**, MP4; stay within **2–4 minutes**. Retain an editable project and reviewed final export.
+- Target **3:20**, **1920×1080**, **30 fps**, MP4; stay within **2–4 minutes**. Retain an editable project and reviewed final export.
 - Display names: **Deston, Kym, Larm**, confirmed by the user. Exact full names for the form remain unverified.
-- Speaker files: `S03A_Deston_T01.mp4`. Screen files: `S03_Screen_XLayer1952_YYYYMMDD_T01.mp4`; screenshots use `.png`. Preserve original files and takes.
+- Speaker files: `S03_Deston_T01.mp4`. Screen files: `S03_Screen_XLayer1952_YYYYMMDD_T01.mp4`; screenshots use `.png`. Preserve original files and takes.
 - For each screen source, record UTC capture time, URL, deployment revision if known, chain, public demo-wallet identifier and QA reference. Never include signing credentials.
 - Actual source paths, durations, frame rates and audio properties: **UNVERIFIED — populate after recordings arrive**.
 
 ## Shot and asset manifest
 
-| Scene | Speaker files | Visuals required | Evidence/status |
+| Scene | Speaker files | Visuals required | When captured |
 |---|---|---|---|
-| S01 | `S01_Deston_T01.mp4` | Genuine landing page; title | Recordings **MISSING** |
-| S02 | `S02_Kym_T01.mp4` | Landing steps; stage art from `public/pets/` | Art exists; capture **MISSING**. Label “Stage artwork — progression rules”. |
-| S03 | `S03A_Deston_T01.mp4`, conditional `S03B_Deston_T01.mp4` | Real connect/adoption/pending/read-back | **BLOCKED / UNVERIFIED**. Need successful receipt/hash and continuous raw capture. |
-| S04 | `S04A_Kym_T01.mp4`, conditional `S04B_Kym_T01.mp4` | Real care/pending/new growth/UTC cooldown | **BLOCKED / UNVERIFIED**. Need receipt/hash and before/after values. |
-| S05 | Conditional `S05_Larm_T01.mp4` | Real refresh; community before/after | **BLOCKED / UNVERIFIED**. Counter measures actions. |
-| S05 optional | No extra narration | Public profile matching demonstrated pet | **UNVERIFIED**. Supplied address currently renders no pet. Cut first if over time. |
-| S06 | `S06_Larm_T01.mp4` | Real repo and contract/configuration view | Capture **MISSING**. Label code versus explorer; no audit claim. |
-| S07 | `S07_Deston_T01.mp4`, `S07_Kym_T01.mp4`, `S07_Larm_T01.mp4` | Faces in sequence, end card | Recordings **MISSING** |
+| S01 | `S01_Deston_T01.mp4` | Face, then landing page; title card | Anytime |
+| S02 | `S02_Kym_T01.mp4` | "How it works"; stage art labelled **Stage artwork — progression rules** | Anytime |
+| S03 | `S03_Deston_T01.mp4` | Real adopt request **declined**, app showing no pet; then approved, pending, confirmed read-back | **Day 1**, 22 Sep before 23:59 UTC |
+| S04 | `S04_Kym_T01.mp4` | Community total before; care, pending, 0 → 10 points, UTC cooldown, disabled button | **Day 1** |
+| S05 | `S05_Kym_T01.mp4` | Care again: 10 → 20 points, **real Hatchling → Buddy**; caption **Recorded 23 September — next UTC day** | **Day 2**, 23 Sep after 00:00 UTC — **cut if not captured** |
+| S06 | `S06_Larm_T01.mp4` | Hard refresh with same pet; community total after; public `/pet/<address>` page showing the same pet | Day 1, then Day 2 |
+| S07 | `S07_Larm_T01.mp4` | Repository and the contract address in `deployment.ts`; explorer only if it loads and matches | Anytime |
+| S08 | `S08_Deston_T01.mp4`, `S08_Kym_T01.mp4`, `S08_Larm_T01.mp4` | Faces in sequence; end card with app, repo and contract | Anytime |
+
+If over 4:00, cut in this order: the public-page half of S06, then S05's second
+sentence, then S02's last sentence. Never cut S03's decline — it is the beat that
+shows the app awarding nothing the chain did not confirm.
 
 ## Editing rules
 

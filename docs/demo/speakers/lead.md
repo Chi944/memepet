@@ -1,36 +1,49 @@
-# Deston — individual recording script
+# Deston — your lines
 
-Read only quoted words. Record each scene separately in landscape 1080p with clean audio, no music and two seconds of silence at both ends. Say the scene ID before the take; the editor removes the slate. [Combined script and screen directions](../DEMO_SCRIPT.md).
+Read only the quoted words. Record each scene as its own clip: landscape 1920×1080, clean audio, no music, two seconds of silence at both ends. Say the scene ID before each take; the editor trims it. Lines marked **⚑ CONDITIONAL** go in the final edit only beside footage of that result really happening. [Full script, schedule and screen directions](../DEMO_SCRIPT.md).
 
-## S01 · Opening · about 20 seconds
+## S01 · The hook · about 20 seconds · anytime
 
-> “MemePet gives a meme community a daily ritual around a shared mascot. Connect a wallet, adopt a pet, and care for it over time. We built it on X Layer so the adoption and care history can be read from a public registry.”
+> "In most meme communities, belonging means buying a token and watching a
+> chart. MemePet offers a different ritual: adopt a mascot, care for it once a
+> day, and grow it just by showing up. Every adoption and care is recorded on
+> X Layer."
 
-Look into the camera for the first line. The editor can cover the rest with the landing page.
+Say the first sentence to camera. The editor covers the rest with the landing
+page. Land on "showing up" — it is the idea of the whole project.
 
-## S03-A · Connect and adopt · about 30 seconds plus screen action
+## S03 · Adopt — and decline first · about 40 seconds · **Day 1, before 23:59 UTC**
 
-> “This demonstration uses X Layer testnet. I’m connecting a prepared demo wallet, then requesting an adoption. The registry records the pet against the wallet. There’s no token purchase or token approval; transactions still need network gas.”
+Narrate over the live screen, in three parts:
 
-This is planned narration. Include it in the final edit only beside a genuine prepared-wallet connection and adoption attempt. A human prepares/unlocks the wallet and handles prompts inaccessible to Codex. Never record wallet recovery or setup.
+> "I'm on X Layer testnet with a demo wallet. I'll request an adoption — and
+> first, I'll decline it on purpose."
 
-## S03-B · Adoption result · CONDITIONAL — UNVERIFIED
+*(decline in the wallet)*
 
-> “The transaction has confirmed, and the app has read the new pet back.”
+> "Nothing is created, and no progress appears. The app only believes the
+> chain. Now I'll approve it."
 
-Record this as a separate pickup only after a real successful receipt and pet read-back are documented. The current browser has no injected wallet; do not state this as a completed result now.
+*(approve and wait)*
 
-## S07-Deston · Close · about 6 seconds
+> ⚑ **CONDITIONAL** — "Confirmed, and the app has read the new pet back from the
+> registry."
 
-> “Our aim is to make showing up for a community feel personal.”
+The decline is the most important beat in the video: it shows the app refusing
+to award anything the chain did not confirm. Let it breathe for a second before
+"Nothing is created". Record the last line as a separate pickup, only after the
+pet has visibly appeared.
 
-Kym follows in the edit; no group call is needed.
+## S08 · Close · about 5 seconds · anytime
 
-## Files to share here in Codex
+> "We wanted showing up for a community to feel personal."
+
+Kym follows you in the edit; no group call needed.
+
+## Files to send
 
 - `S01_Deston_T01.mp4`
-- `S03A_Deston_T01.mp4`
-- `S03B_Deston_T01.mp4` — only once verified
-- `S07_Deston_T01.mp4`
+- `S03_Deston_T01.mp4` — narration over the Day 1 screen capture
+- `S08_Deston_T01.mp4`
 
-Send original files with a preferred-take note. These clips provide narration; matching genuine screen footage supplies the wallet evidence.
+Send original files with a note on your preferred take.

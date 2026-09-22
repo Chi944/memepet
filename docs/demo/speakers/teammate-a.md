@@ -1,36 +1,46 @@
-# Kym — individual recording script
+# Kym — your lines
 
-Read only quoted words. Record each scene separately in landscape 1080p with clean audio, no music and two seconds of silence at both ends. Say the scene ID before the take; the editor removes the slate. [Combined script and screen directions](../DEMO_SCRIPT.md).
+Read only the quoted words. Record each scene as its own clip: landscape 1920×1080, clean audio, no music, two seconds of silence at both ends. Say the scene ID before each take; the editor trims it. Lines marked **⚑ CONDITIONAL** go in the final edit only beside footage of that result really happening. [Full script, schedule and screen directions](../DEMO_SCRIPT.md).
 
-## S02 · The experience · about 20 seconds
+## S02 · The rules · about 20 seconds · anytime
 
-> “The interaction is simple: one pet per wallet and one care action per UTC day. The app turns each recorded care into ten growth points. The three stages are Hatchling, Buddy and Guardian, with no missed-day penalty.”
+> "It's deliberately simple. One pet per wallet, and one care per day. Each
+> confirmed care adds ten growth points. At twenty, your Hatchling becomes a
+> Buddy; at fifty, a Guardian. Miss a day and you lose nothing — this is a
+> ritual, not a chore."
 
-Say “U-T-C” clearly. Artwork can illustrate the three stages; it does not show that a wallet earned them.
+The editor shows the three stage images here, labelled as artwork. They explain
+the thresholds; they are not proof that a wallet reached them.
 
-## S04-A · Daily care · about 25 seconds plus screen action
+## S04 · The first care · about 30 seconds · **Day 1, before 23:59 UTC**
 
-> “Now for the daily interaction: care for the pet and approve the transaction. The contract allows one care per UTC calendar day. The interface is designed to wait for confirmation and a fresh registry read before displaying growth.”
+> "Now the daily action. Care, approve, and wait — growth only appears once the
+> transaction confirms."
 
-This is planned narration. The final edit needs genuine care footage underneath. Deston can operate the wallet while your voice explains the scene; all three people need not operate it.
+> ⚑ **CONDITIONAL** — "Ten points. Still a Hatchling. And care is now closed until
+> the next UTC day — the time is shown right here."
 
-## S04-B · Care result · CONDITIONAL — UNVERIFIED
+Say "U-T-C" clearly. Point to the cooldown time on screen as you say "right here".
 
-> “This confirmed care added ten points. The pet is still a Hatchling, and the next care time is shown in UTC.”
+## S05 · The next day · about 25 seconds · **Day 2, after 00:00 UTC on 23 September**
 
-Record this pickup only after verified care confirmation, read-back and cooldown. The wording assumes the first care on a fresh pet. If the actual state differs, update the line before recording. Buddy starts at 20 points and Guardian at 50; the first care does not trigger evolution.
+> "It's the next UTC day, so care is open again."
 
-## S07-Kym · Close · about 6 seconds
+> ⚑ **CONDITIONAL** — "That's twenty points — and Mochi evolves into a Buddy. We
+> didn't animate this for the video; the chain says it happened."
 
-> “A small daily action gives the mascot a story you can follow.”
+This is the payoff of the whole video, so it only exists if the evolution really
+happens on camera. If your A4 evolution animation is merged by then, the app plays
+it on its own — nothing is added in the edit. If the first care slips past
+23:59 UTC tonight, this scene is cut.
 
-The editor places this between Deston and Larm; record it separately.
+## S08 · Close · about 5 seconds · anytime
 
-## Files to share here in Codex
+> "A small daily action gives the mascot a story you can follow."
+
+## Files to send
 
 - `S02_Kym_T01.mp4`
-- `S04A_Kym_T01.mp4`
-- `S04B_Kym_T01.mp4` — only once verified
-- `S07_Kym_T01.mp4`
-
-Send original files and a preferred-take note.
+- `S04_Kym_T01.mp4` — narration over the Day 1 screen capture
+- `S05_Kym_T01.mp4` — Day 2 only
+- `S08_Kym_T01.mp4`
