@@ -1,40 +1,51 @@
-# Larm — your lines
+# Larm — your MP3 script
 
-Read only the quoted words. Record each scene as its own clip: landscape 1920×1080, clean audio, no music, two seconds of silence at both ends. Say the scene ID before each take; the editor trims it. Lines marked **⚑ CONDITIONAL** go in the final edit only beside footage of that result really happening. [Full script, schedule and screen directions](../DEMO_SCRIPT.md).
+**Script ID: MP-EQ-20260923-v1.** Your selected narration is **130 words**
+across three turns. The editor interleaves it with the other two voices.
+[Combined script and evidence gates](../DEMO_SCRIPT.md).
 
-## S06 · Persistence and community · about 30 seconds · **after Day 1 (and Day 2 if recorded)**
+Record one file named **`MemePet_Larm_MP-EQ-v1.mp3`**.
+No face-camera recording is required. Read only the quoted words below.
+Before each block, say its scene ID, pause two seconds, read the lines, then
+leave two seconds of silence. Slates and extra pauses are removed in the edit.
 
-> ⚑ **CONDITIONAL** — "After a hard refresh, the same pet is still here — it's
-> read from the chain, not saved in the browser. The community counter rose by
-> one for each confirmed care. And every pet has a public page anyone can open,
-> read straight from the registry."
+Use your natural voice at roughly **125–135 words per minute**: about one minute
+of selected speech. Exact speaking time is measured after upload, not guaranteed
+by word count. Record in a quiet room, keep a steady microphone distance, and
+use no music, effects or speed changes. Keep your original recording. Export
+44.1 or 48 kHz MP3 at 192 kbps or better if available.
 
-Every sentence here is a claim, so each needs matching footage: the refresh, the
-counter before and after, and the public page showing the same pet. If other
-wallets cared in the meantime, change the second sentence to state the real
-difference. The counter counts care actions — not people, and not pets.
+**CONDITIONAL** means planned narration that requires matching genuine footage.
+You may record it now, but it cannot enter the submission if the result was not
+captured. One human can operate the wallet; “we” does not mean you personally
+clicked or signed. Do not read directions or conditional labels.
 
-## S07 · What's underneath · about 20 seconds · anytime
+Your scene order: **S03 → S06 → S09**.
 
-> "Under the hood is a Solidity registry on X Layer and a Next.js app. There's
-> no MemePet token, no marketplace and no financial reward. And wherever the app
-> can't read something, it says 'unknown' — it never guesses a number."
+## S03 · A real adoption · 44 words · CONDITIONAL
 
-Over the repository and the contract address. Do not call the bytecode comparison
-an audit or explorer verification.
+> "Now we approve adoption on X Layer testnet. The app shows the request waiting, then checks the successful receipt and reads the registry again. Here is our new Hatchling, starting at zero points. This is the same wallet throughout, with one pet per wallet."
 
-## S08 · Close · about 5 seconds · anytime
+This requires actual adoption, a successful receipt and the new pet read back.
+Leave a small pause before “Here is our new Hatchling”.
 
-> "MemePet: adopt the meme, grow the community. The links are in our submission."
+## S06 · A shared total · 44 words · CONDITIONAL
 
-You close the video.
+> "Each confirmed care also adds one to the community care total. Here are the readings around our care, alongside its receipt. That total measures care actions, not people or adopted pets. If the read fails, the interface shows unknown instead of inventing a number."
 
-## Files to send
+The footage must contain the real readings around the care and its receipt.
+The counter measures care actions, so do not substitute a claim about users.
+The last sentence explains implemented handling; it does not claim a filmed outage.
 
-- `S06_Larm_T01.mp4`
-- `S07_Larm_T01.mp4`
-- `S08_Larm_T01.mp4`
+## S09 · The next chapter · 42 words · CONDITIONAL
 
-Read and record the community counter immediately before the care; do not assume
-it is still zero. The counter measures cares, not users or adopters, so make no
-usage claim from it.
+> "Our next goal is to test this daily ritual with a real meme community and learn what brings people back. For now, you can inspect the app, code, and recorded transactions in our project submission. MemePet: a little care, a shared story."
+
+The first sentence is a future goal. The app, code and recorded transaction
+links must actually be in the submission before this take is used.
+End warmly, with a small pause before the final phrase.
+
+## Send back
+
+Upload `MemePet_Larm_MP-EQ-v1.mp3` here, with any preferred take noted.
+No group recording is needed. Your voice closes the final edit.

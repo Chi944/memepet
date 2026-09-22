@@ -4,9 +4,11 @@ Updated **23 September 2026 (Singapore)**. Working draft, not a submitted entry.
 
 ## Organizer requirements
 
-The [official OKX Dev Day builder kit](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit), updated 18 September and checked on 22 September, specifies **25 September 2026, 23:59 UTC** as the deadline (**26 September, 07:59 Singapore**) and a **2–4 minute video** showing a working integration. Contract addresses and technical links are among the requested materials.
+The [official OKX Dev Day builder kit](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit), updated 18 September and rechecked on 23 September Singapore time, specifies **25 September 2026, 23:59 UTC** as the deadline (**26 September, 07:59 Singapore**) and a **2–4 minute video** showing a working integration. Contract addresses and technical links are among the requested materials.
 
 Build a Market requires X Layer integration and a meme or another listed ecosystem component. Our intended route is a meme application; acceptance of this precise implementation is **UNVERIFIED**. The accessible kit does **not specify mainnet versus testnet** for this case. Testnet eligibility remains **UNVERIFIED**, not implicitly accepted.
+
+The kit lists the Singapore finale as **7 October**, while the linked [terms](https://www.okx.com/learn/okx-dev-day-terms) list **6 October** and contain a precedence clause. The team must obtain organizer clarification before making finale/travel claims. Accepted-team status, individual eligibility, rights and final declarations are not established by this repository or by a polished video. See [team readiness](TEAM_READINESS.md) for the prepared organizer question; no message has been sent on the team's behalf.
 
 The [actual submission form](https://docs.google.com/forms/d/e/1FAIpQLScoFQsVBvoatzVyi0XqdLwP_rfhrhUqiMP4O1jkjJgIFp3mFA/viewform) was inspected in the existing Chrome session without entering data. **Page 1 of 3** verifies these required fields:
 
@@ -39,6 +41,8 @@ An optional 1:1 team display picture accepts an image up to 10 MB. **Pages 2–3
 | Testnet acceptance | **UNVERIFIED — ORGANIZER_TESTNET_ELIGIBILITY** |
 | Guideline declaration | **UNVERIFIED — EXACT_FORM_DECLARATION** |
 | Demo video | **UNVERIFIED — VIDEO_URL**; not recorded/exported yet |
+| Source voices | **UNVERIFIED — THREE_MP3_RECORDINGS**; planned 130 selected words per person, actual speaking balance pending |
+| Final render / captions / poster / media rights | **UNVERIFIED — FINAL_MEDIA_AND_RIGHTS**; storyboard and editing plan exist, media export does not |
 
 Deployment transaction evidence is not adoption/care evidence. Bytecode comparison is distinct from explorer source verification.
 
@@ -143,12 +147,22 @@ Whether the warning has disappeared in the current wallet prompt is
 
 Use a human-prepared throwaway wallet for capture. When verified, disclose it as a team-prepared demo wallet, not an organic user. Never request or record seed phrases/private keys. For real transactions, retain network, registry, public address, full hash, successful receipt, UTC time and before/after values. Verify explorer links before publishing them. Keep Anvil and fictional preview evidence separately labelled.
 
+## Current recording package
+
+Script **MP-EQ-20260923-v1** replaces the earlier camera-led version. The combined script has **390 selected spoken words**, exactly **130 each** for Deston, Kym and Larm across three interleaved turns. The **3:25** timeline is a plan, not a measured export. Kym's two S08 options each contain 42 words; exactly one enters the final. No current evidence establishes browser adoption, care or earned evolution.
+
+Each person records one MP3 using the matching [speaker script](DEMO_SCRIPT.md#three-mp3-files). No face camera is required. The editor removes scene slates and excess pauses, measures retained speech, and balances the three voices after upload. Every result line remains conditional on matching genuine screen evidence. An artwork-only S08 can replace missing later-day evolution, but cannot replace the core adoption/care demonstration.
+
+The [production plan](PRODUCTION_PLAN.md) records the playful, polished direction, researched finalist examples and adaptations from the pinned `latent-spaces/brag` workflow. No competitor media, bundled music, synthetic narration or recreated success UI has been used. No paid generation or render has been performed. The [editor handoff](EDITOR_HANDOFF.md) keeps source timings, transaction references and final export fields unverified until actual media arrives.
+
+The [repository audit](REPOSITORY_AUDIT.md) records two unused decorative screenshot removals and ignores for raw recordings/exports. Dated QA evidence and production assets remain. This documentation-only revision does not establish additional wallet passes or erase prior observations.
+
 ## Recording and submission gates
 
 1. Publish and verify the reviewed app revision; finish the real [wallet walkthrough](../qa/BROWSER_WALKTHROUGH.md). Preserve failures/unrun rows honestly.
 2. Confirm form roster, team name, participation route, attendance, project-origin answer, eligibility and exact declaration. No submission has occurred.
-3. Record the [combined script](DEMO_SCRIPT.md) and individual scripts. Preserve continuous genuine screen footage for the core journey.
-4. Share source recordings in Codex for editing using [EDITOR_HANDOFF.md](EDITOR_HANDOFF.md). The final video does not yet exist.
+3. Record one MP3 per person from the [combined script and individual scripts](DEMO_SCRIPT.md). Preserve separate continuous genuine screen footage for the core journey.
+4. Share the three MP3s and screen sources in Codex for editing using [EDITOR_HANDOFF.md](EDITOR_HANDOFF.md). The final video does not yet exist.
 5. Review the 2–4 minute render and [recording checklist](RECORDING_CHECKLIST.md), upload it, then check playback while logged out.
 6. Recheck public app/repo/video/technical links and complete the form before the UTC deadline.
 

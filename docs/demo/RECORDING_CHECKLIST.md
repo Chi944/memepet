@@ -1,53 +1,31 @@
-# Recording checklist — 3 people, 3:20 target
+# Recording checklist — equal voices, 3:25 target
 
-**Current status:** the hosted page displayed the intended address on chain 1952
-with no pet; the separate local Anvil connection and chain 31337 were also
-observed. Hosted Disconnect and reload subsequently verified permission revocation;
-the wallet is now disconnected. No browser adoption or care is verified. MetaMask's reviewer says the domain no longer
-appears flagged; the current prompt is unverified. Introductions and product
-explanation can be recorded now; result narration needs matching genuine evidence.
+Script **MP-EQ-20260923-v1**: three turns and **130 selected spoken words each** for Deston, Kym and Larm. Follow the [combined script](DEMO_SCRIPT.md), [production plan](PRODUCTION_PLAN.md) and [individual responsibilities](TEAM_READINESS.md).
 
-## The schedule is the constraint
+## Each person
 
-Care is limited to one per **UTC** day, and Buddy needs two cares. To film a real
-evolution before the deadline:
+- [ ] Read your own speaker file; record its three scene blocks into **one MP3**.
+- [ ] Use the exact filename in your script. Slate the scene ID, pause two seconds, then read naturally; the editor removes slates.
+- [ ] Quiet room, consistent mic distance, no baked-in music or effects, a little room tone. No face camera required.
+- [ ] Keep useful retakes after a pause; never splice partial words yourself. Upload the original MP3 here.
+- [ ] Treat result lines as planned narration until genuine matching footage exists. The editor measures equal retained voice time after upload.
 
-- [ ] **Day 1 — actual first-care UTC date, preferably by 23 Sep:** decline, adopt, first care, cooldown, refresh (S03, S04, S06).
-- [ ] **Day 2 — a later UTC date:** second care and the Hatchling → Buddy evolution; public page (S05, S06). For example, 23/24 Sep UTC; midnight UTC is 08:00 Singapore.
-- [ ] **24 Sep if ready:** edit. **25 Sep:** logged-out link check and submit.
-- [ ] If a genuine second care is not captured before export, cut S05 and make no claim that the wallet reached Buddy.
+## Browser operator and verifier
 
-Wallet setup steps are in [the script](DEMO_SCRIPT.md#setting-up-the-demo-wallet).
+- [ ] Confirm the filmed app revision, chain **1952**, registry, public demo-wallet identifier and sufficient testnet gas. Reconnect only through a warning-free prompt; keep any remaining warning unapproved.
+- [ ] Record the full raw session: decline adoption → verify unchanged state → adopt → receipt and read-back → timestamped community baseline → first care → receipt, pet read-back and refreshed community total → cooldown → hard refresh → public pet checks.
+- [ ] Save actual UTC times and full hashes. Keep pending states and readable results. Mark shortened confirmation waits in the edit.
+- [ ] Complete the account-switch row separately even if the final video omits it. Never splice two wallets into one apparent journey.
+- [ ] For Buddy, record a second confirmed care on a **later UTC date**, captioning the actual date. UTC midnight is **08:00 Singapore**. Otherwise use the S08 rules alternate with stage-art labels.
+- [ ] Update [BROWSER_WALKTHROUGH.md](../qa/BROWSER_WALKTHROUGH.md) only with actual results. No adoption/care has passed yet.
 
-## Before capture
+## Editor and team review
 
-- [ ] Verify the published app revision includes the reviewed fixes.
-- [ ] Check the current wallet prompt. If a security warning remains, cancel it and record the blocker; do not treat a closed review ticket as wallet clearance.
-- [ ] Human prepares/unlocks a throwaway wallet with sufficient X Layer testnet gas: chain **1952**, correct registry, no pet for the adoption sequence. A public address is not a connected wallet.
-- [ ] Record the entire real [wallet walkthrough](../qa/BROWSER_WALKTHROUGH.md), preserving raw footage. Use successful scenes only after reviewing evidence.
-- [ ] Capture community count before care; retain adoption/care hashes, receipts, before/after pet values, refresh, cooldown and account switching. Keep blocked/failed results honest.
-- [ ] A separate adoption retake needs another prepared wallet; same-day care is also limited. Never fake a repeated transaction.
+- [ ] Interleave all nine blocks; retain exactly one S08 variant. Keep 130 selected words each and measure actual speech balance.
+- [ ] Pair every result claim with proof. Use real screen interactions; no recreated success UI. Keep testnet and any illustration labels legible.
+- [ ] Check captions, names, rights, audio, safe margins, technical links, before/after values and the settled final card.
+- [ ] Play the exported **2–4 minute** file end to end; check the uploaded link while logged out.
+- [ ] Confirm organizer eligibility, roster, route, rights and form declarations. Replace the video URL and final revision placeholders only with verified values.
+- [ ] Submit by **25 September 2026, 23:59 UTC** (**26 September, 07:59 Singapore**), leaving upload/review time. Retain the receipt.
 
-## Each speaker
-
-- [ ] Deston, Kym and Larm: landscape **1920×1080**, ideally **30 fps**, eye-level camera, front light, quiet room. Make a five-second audio test.
-- [ ] Use your individual script: [Deston](speakers/lead.md), [Kym](speakers/teammate-a.md), [Larm](speakers/teammate-b.md). Separate clips by scene ID, slate the ID, speak naturally and leave two-second handles.
-- [ ] No music, baked captions or added animations. Send original files, not recompressed copies.
-- [ ] Use filenames such as `S01_Deston_T01.mp4`; share here in Codex with preferred takes.
-
-## Screen capture and edit
-
-- [ ] Desktop capture at 1080p with readable browser zoom, clean tabs and notifications off. Keep keys, recovery phrases, passwords and unrelated account details out of every frame. Never record wallet setup/recovery.
-- [ ] Show **X Layer testnet** and, once verified, **Prepared team demo wallet** on transaction scenes. Label artwork/previews. Never present Anvil as X Layer.
-- [ ] Hold pending, confirmed read-back, refresh and cooldown long enough to read. Keep the same wallet/network throughout. Label shortened confirmation waits.
-- [ ] Use genuine browser/desktop footage and screenshots. Human operation/capture may be required for wallet-extension or native prompts; verify tool access before recording.
-- [ ] Match sources to [EDITOR_HANDOFF.md](EDITOR_HANDOFF.md). Optional public profile footage needs a matching real pet read.
-
-## Final review
-
-- [ ] Target **3:20**, stay within **2–4 minutes**. Export MP4 with readable captions, check audio and private information end-to-end.
-- [ ] Compare every claimed result against QA evidence. An edit missing wallet scenes remains **REHEARSAL — WALLET DEMO MISSING**.
-- [ ] Check app/repo/explorer/video links while logged out. Resolve team/form fields, eligibility and declaration.
-- [ ] Submit by **25 September 2026, 23:59 UTC / 26 September, 07:59 Singapore**.
-
-[Official requirement source](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit). This task prepared documents; no video has yet been recorded, edited or exported.
+Current proof: local connection/network display and hosted account-access revocation/reload were observed. The hosted wallet is now disconnected. These are not adoption/care passes. The final video, three MP3s and complete transaction footage are still outstanding.

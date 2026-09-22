@@ -1,237 +1,83 @@
-<div align="center">
+# MemePet
 
-# 🐣 MemePet
+**A small companion. A reason to come back.**
 
-**Adopt the meme. Grow the community.**
+MemePet is a meme-community companion on **X Layer testnet**. Adopt a wallet-linked pet, care for it once per UTC day, and contribute to a shared community care count. Its purpose is to make participation visible through a familiar daily ritual.
 
-A meme-community companion pet on **X Layer**. Adopt a wallet-linked mascot,
-care for it once a day, and watch a shared community habitat grow.
-Progression is earned by showing up — not by spending.
+[Live app](https://memepet.vercel.app) · [Contract](https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216) · [Submission notes](docs/demo/SUBMISSION_NOTES.md) · [Demo script](docs/demo/DEMO_SCRIPT.md)
 
 [![Checks](https://github.com/Chi944/memepet/actions/workflows/checks.yml/badge.svg)](https://github.com/Chi944/memepet/actions/workflows/checks.yml)
-[![OKX Dev Day 2026](https://img.shields.io/badge/OKX_Dev_Day_2026-Build_a_Market-black)](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit)
-[![X Layer](https://img.shields.io/badge/chain-X_Layer-blue)](https://web3.okx.com/onchainos/dev-docs/xlayer)
-[![Next.js 16](https://img.shields.io/badge/Next.js-16.3.5-black)](https://nextjs.org)
-[![Solidity 0.8.24](https://img.shields.io/badge/Solidity-0.8.24-363636)](https://soliditylang.org)
 
-<img src="docs/images/home-desktop.png" alt="The MemePet landing page" width="820">
+## For judges
 
-</div>
-
----
-
-## 📋 Submission at a glance
-
-| | |
+| Item | Current position |
 |---|---|
-| **Event** | OKX Dev Day 2026 |
-| **Track** | Intended: Build a Market — meme applications; testnet eligibility remains unverified |
-| **Team** | 3 people: Deston (lead), Kym (pet experience), Larm (community UI, QA, demo); form full names remain unverified |
-| **Live demo** | [memepet.vercel.app](https://memepet.vercel.app) |
-| **Demo video** | ⏳ *Not recorded yet* |
-| **Contract** | [`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`](https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216) on X Layer testnet (chain 1952) |
-| **Repository** | [github.com/Chi944/memepet](https://github.com/Chi944/memepet) |
+| Event | OKX Dev Day 2026 |
+| Intended track | Build a Market — meme application; precise track fit and testnet acceptance remain **UNVERIFIED** |
+| Product | One community, one wallet-linked pet per account, three growth stages and a shared care counter |
+| Live application | [memepet.vercel.app](https://memepet.vercel.app) |
+| Network | X Layer **testnet**, chain **1952**, gas currency **OKB** |
+| Registry | `0xe844152262D243a7B90F6e07FF7A67F1d7FeD216` |
+| Demo video | **UNVERIFIED — VIDEO_URL**. The final video has not been recorded or exported |
+| Team | Deston — integration; Kym — pet experience; Larm — community experience and QA |
 
-> We would rather show you an empty box than a fake one. Every placeholder above
-> is a real gap, not a formatting artefact. See [Honest status](#-honest-status).
+This is a working prototype with an incomplete browser transaction walkthrough. The deployed site and contract exist; successful browser adoption, care and persisted-pet refresh still need genuine wallet evidence. [Current evidence and open submission fields](docs/demo/SUBMISSION_NOTES.md).
 
----
+## The experience
 
-## 📖 Table of contents
+1. Connect a browser wallet and select X Layer testnet.
+2. Adopt a pet linked to that wallet.
+3. Care once per UTC calendar day. Each recorded care contributes **10 growth points** and **one community care action**.
+4. Return to the same wallet to read the pet's saved state. Growth reaches **Buddy at 20 points** and **Guardian at 50**.
 
-- [The problem](#-the-problem)
-- [What MemePet does](#-what-memepet-does)
-- [Honest status](#-honest-status)
-- [How it works](#️-how-it-works)
-- [Architecture](#️-architecture)
-- [Deployed contracts](#-deployed-contracts)
-- [Getting started](#-getting-started)
-- [Running the checks](#-running-the-checks)
-- [Project structure](#-project-structure)
-- [What we deliberately did not build](#-what-we-deliberately-did-not-build)
-- [Known limitations](#-known-limitations)
-- [Roadmap](#-roadmap)
-- [Team and credits](#-team-and-credits)
+There is no missed-day penalty. The prototype has no MemePet token, token purchase, marketplace, staking or financial reward. Adoption and care still require network gas.
 
----
+The three stage illustrations below are product artwork, **not evidence of an earned live evolution**.
 
-## 🧐 The problem
+| Hatchling · 0 points | Buddy · 20 points | Guardian · 50 points |
+|:---:|:---:|:---:|
+| <img src="public/pets/hatchling.png" alt="Hatchling pet artwork" width="180"> | <img src="public/pets/buddy.png" alt="Buddy pet artwork" width="180"> | <img src="public/pets/guardian.png" alt="Guardian pet artwork" width="180"> |
 
-Meme communities are enormous and almost entirely transactional. The only way to
-"belong" is to buy, hold, and watch a chart. That has three consequences:
+## What is verified
 
-1. **Participation costs money.** If you cannot afford the token, you cannot join in.
-2. **Nothing accumulates.** Being active in a community for six months leaves no trace.
-3. **Engagement apps become casinos.** The usual fix — rewards, staking, yield —
-   turns a community into a financial product and attracts people who do not care
-   about the community at all.
+The [23 September release audit](docs/qa/evidence/RELEASE_AUDIT_2026-09-23.md) records the exact checks and limitations. Its results apply to that release, rather than automatically certifying every later change.
 
-There is no lightweight, non-financial way to *show up* for a meme community and
-have that showing-up mean something.
-
-## 💡 What MemePet does
-
-MemePet gives a community one shared mascot and gives every wallet its own pet.
-
-- **Adopt** a pet, linked to your wallet. One per wallet. Costs nothing but gas.
-- **Care** for it once per UTC day. One transaction, no approvals, no transfers.
-- **Grow** — each confirmed care adds 10 growth points. Your pet evolves through
-  three stages: Hatchling → Buddy → Guardian.
-- **Contribute** — every care also increments a shared community counter, so the
-  habitat grows from collective participation.
-
-Nothing is bought, sold, staked or swapped. There is **no MemePet token**. The
-scarcest thing in the system is attention, and that is the point.
-
----
-
-## 🚦 Honest status
-
-This is a hackathon project mid-build, and the README reflects the repository
-rather than the pitch. Anything not finished says so.
-
-| Capability | State |
+| Area | Evidence |
 |---|---|
-| Landing, how-it-works, community panel | ✅ On `main` |
-| Pet scene, three stage assets, care-state panel | ✅ On `main` |
-| Design system, dark mode, mobile (390px) | ✅ On `main` |
-| `PetRegistry` contract + 15 unit tests | ✅ On `main`; 15/15 passed on the combined integration, 22 September |
-| Wallet connect → adopt → read back → survive refresh | Implemented on `main`; historical local Anvil transaction checks passed, but the real browser-wallet journey remains **unverified** |
-| Daily care transaction + live community read | ✅ On `main` |
-| Deployed to X Layer testnet | ✅ Block 41,543,244 — executable runtime matches current source; compiler metadata differs after PR #26. [Comparison evidence](docs/deploy/XLAYER_TESTNET.md#source-comparison--22-september-2026) |
-| Public live link | ✅ [memepet.vercel.app](https://memepet.vercel.app) |
-| Read-only public pet page | ✅ On `main` through PR #21, with the PR #27 badge correction |
-| Three-person recording scripts | Ready for Deston, Kym and Larm; successful wallet-action lines remain conditional |
-| Demo video | ❌ Not yet |
+| Automated checks | **111 app tests** and **15 contract tests** passed; production build and TypeScript checks passed |
+| Lint | Exit 0, with one existing image-element warning in the Open Graph renderer |
+| Dependencies | `npm audit` reported **0 known vulnerabilities** at audit time; this is not an independent security audit |
+| Deployment | X Layer testnet registry deployed; current executable runtime matches the deployed contract after excluding compiler metadata |
+| Real browser wallet | Existing hosted connection on chain 1952 observed; Disconnect revoked account access and the disconnected state survived reload |
+| Browser adoption, care and persistence | **UNVERIFIED**; automated tests and historical local-node transactions do not complete the real wallet walkthrough |
+| Demo and submission | **INCOMPLETE**; final video, remaining form answers and eligibility confirmation are still required |
 
-The latest real Chrome connection attempt reported **“No injected wallet was
-found.”** No connection approval, adoption or care passed the browser walkthrough.
-See the [QA record](docs/qa/evidence/OKX_PREP_2026-09-22.md) and
-[combined recording script](docs/demo/DEMO_SCRIPT.md).
+The UI reads confirmed chain state. It does not award growth merely because a button was pressed or a transaction hash was returned: a successful receipt and a fresh registry read are required. Unknown data stays unknown. Fictional development fixtures are never a fallback for failed live reads.
 
-**A design principle you can check in the code:** the UI never shows a number it
-cannot justify.
+A community care count is **not** a count of adopted pets, users or wallets. We do not claim organic adoption or usage metrics.
 
-- `null` means **unknown**, and unknown renders as a hatched, explicitly-unknown
-  bar — never as an empty bar that reads as zero.
-- A confirmed `0` renders as `0`, which is a different thing.
-- Every data surface carries a provenance chip: `Live`, `Preview data`, or `Unknown`.
-- Development fixtures are **never** used as a fallback when a live read fails.
-  A failed read is an error state.
-- Growth is displayed only after a transaction receipt confirms success *and* the
-  pet is re-read from the chain. A transaction hash is not success.
-
----
-
-## ⚙️ How it works
+## Architecture
 
 ```mermaid
 flowchart LR
-    A[Visitor] -->|Connect wallet| B[Adopt]
-    B -->|One pet per wallet| C[Pet home]
-    C -->|Care, once per UTC day| D{Transaction}
-    D -->|Rejected or reverted| E[No growth awarded]
-    D -->|Receipt confirmed| F[Re-read from chain]
-    F --> G[+10 growth points]
-    F --> H[+1 community care action]
-    E --> C
-    G --> C
-    H --> I[Shared habitat progress]
+    A[Pet and community UI] -->|User action| B[Wallet and registry hooks]
+    B -->|adopt or care| C[PetRegistry on X Layer testnet]
+    C -->|Receipt and fresh reads| B
+    B -->|Confirmed view models| A
+    C -->|Read only| D[Public pet page and share image]
 ```
 
-### The rules, enforced on chain
+- **Next.js / React / TypeScript:** routes, public pet pages and server-rendered share images.
+- **CSS Modules:** original MemePet interface, stage artwork and motion with reduced-motion styles.
+- **viem + an injected EIP-1193 wallet:** contract reads and explicit adoption/care requests.
+- **Solidity / Foundry:** one pet per wallet, one approved community and one care per UTC day. Growth and stage are derived from `careCount` in the app.
+- **Vitest / Testing Library / GitHub Actions:** application, contract and production preview-gate checks.
 
-| Rule | Where |
-|---|---|
-| One pet per wallet | `adopt()` reverts with `AlreadyAdopted` |
-| Only the approved community | `adopt()` reverts with `InvalidCommunity` |
-| Cannot care without a pet | `care()` reverts with `NoPet` |
-| One care per UTC calendar day | `care()` reverts with `AlreadyCaredToday` |
-| 10 growth points per confirmed care | Derived in the UI, never stored on chain |
-| Buddy at 20 points, Guardian at 50 | Derived in the UI |
-| Missing a day costs nothing | No penalty logic exists |
+Presentation components receive values and callbacks. Contract and wallet logic lives in `src/hooks/` and `src/lib/`; the contract lives in [`contracts/src/PetRegistry.sol`](contracts/src/PetRegistry.sol). Deployment configuration is in [`src/lib/deployment.ts`](src/lib/deployment.ts).
 
-Growth points and stage are **derived** from `careCount` rather than stored, so
-there is no second source of truth to drift.
+## Run locally
 
-The daily rule uses `block.timestamp / 1 days`, so the boundary is UTC midnight.
-Four dedicated tests pin that boundary: first care at exact midnight, a duplicate
-at the last second of the same day, a care one second into the next day, and a
-care after skipping 30 days.
-
----
-
-## 🏗️ Architecture
-
-A strict boundary runs through the app: **presentational components receive
-display values and callbacks. They never fetch, never sign, and never award
-progress.**
-
-```
-┌─────────────────────────────────────────────────────────┐
-│  Presentation  src/components/**                        │
-│  PetScene · CarePanel · LandingHero · CommunityPanel     │
-│  props in, callbacks out. No wallet imports. No fetching.│
-└──────────────────────────▲──────────────────────────────┘
-                           │  view models + onCare/onConnect
-┌──────────────────────────┴──────────────────────────────┐
-│  Integration  src/hooks/** · src/lib/**                  │
-│  useWallet · usePetRegistry · care-action-machine        │
-│  map-pet · pet-progress · chains · deployment            │
-└──────────────────────────▲──────────────────────────────┘
-                           │  viem
-┌──────────────────────────┴──────────────────────────────┐
-│  Chain  contracts/src/PetRegistry.sol                    │
-│  adopt() · care() · petOf() · communityStats()           │
-└─────────────────────────────────────────────────────────┘
-```
-
-`src/lib/deployment.ts` is the **single source of truth** for what is deployed.
-It records the X Layer testnet deployment with every value confirmed on chain,
-and can be overridden only by validated `NEXT_PUBLIC_MEMEPET_*` environment
-variables for local work. Before the deploy it held `null` everywhere rather
-than a placeholder — by design, so that a fake address could never reach a demo.
-
-### Built with
-
-| Layer | Choice | Why |
-|---|---|---|
-| Framework | [Next.js 16.3.5](https://nextjs.org) App Router, React 19, TypeScript | Static landing, server components, one deploy target |
-| Styling | CSS Modules + custom properties | No UI framework; full control of the design system, zero runtime cost |
-| Chain access | [viem](https://viem.sh) + injected EIP-1193 provider | Smallest workable surface — one dependency, no wallet-UI framework |
-| Contract | [Foundry](https://getfoundry.sh), Solidity 0.8.24 | Fast tests, good time-travel for the UTC-day rule |
-| Testing | [Vitest](https://vitest.dev) + Testing Library, `forge test` | 73 app tests, 15 contract tests; both suites passed on 22 September |
-| CI | GitHub Actions | Both suites plus a production preview-gate assertion on every PR |
-
-**Total runtime dependencies: 4** — `next`, `react`, `react-dom`, `viem`.
-
----
-
-## 🔗 Deployed contracts
-
-| Network | Chain ID | Address | Explorer |
-|---|---|---|---|
-| X Layer testnet | 1952 | [`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`](https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216) | [deploy tx](https://www.okx.com/web3/explorer/xlayer-test/tx/0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9) |
-| X Layer mainnet | 196 | *not planned for this submission* | — |
-
-Network parameters are taken from the
-[official X Layer network information](https://web3.okx.com/onchainos/dev-docs/xlayer/developer/build-on-xlayer/network-information)
-and live in [`src/lib/chains.ts`](src/lib/chains.ts).
-
-Local verification uses Anvil (chain `31337`). An Anvil address is a local
-artefact and is never committed — it goes in a gitignored `.env.local`.
-
----
-
-## 🚀 Getting started
-
-### Prerequisites
-
-- **Node 24.19.x** (pinned in `.nvmrc`) and **npm 11.19.x**
-- [Foundry](https://getfoundry.sh) — only needed for contract work
-- A browser wallet (MetaMask or OKX Wallet) — only needed for the live flow
-
-### Install and run
+Requires **Node 24.19.x** and **npm 11.19.x**. Foundry is needed only for contract tests and local chain work.
 
 ```bash
 git clone https://github.com/Chi944/memepet.git
@@ -240,162 +86,55 @@ npm ci
 npm run dev
 ```
 
-Open <http://localhost:3000>. No wallet, RPC endpoint, API key or backend is
-required to browse the app or any preview.
+Open [localhost:3000](http://localhost:3000). The committed configuration uses the public X Layer testnet registry. Browsing needs no wallet; live reads need network access. The wallet flow needs a browser wallet and testnet gas. Build-time Google Fonts downloads also require network access.
 
-### Pages
-
-| Route | What it is |
+| Route | Purpose |
 |---|---|
-| `/` | Landing, how-it-works, and the community habitat panel |
-| `/pet` | Pet home. Shows an honest gate when no registry is configured |
-| `/dev/pet` | Pet UI across all stages and care states — fictional data |
-| `/dev/landing` | Landing hero — fictional data |
-| `/dev/community` | Community panel across loading / zero / growing / achieved / unavailable / unknown-target |
+| `/` | Overview and community care total |
+| `/pet` | Connect, adopt, care and view the connected wallet's pet |
+| `/pet/<wallet-address>` | Read-only public pet page; missing pets and unavailable reads stay explicit |
+| `/dev/pet`, `/dev/landing`, `/dev/community` | Fictional UI previews for development only; production requests return 404 |
 
-The `/dev/*` routes exist so the UI can be built and reviewed without a wallet.
-They are **excluded from production builds** — the layout calls `notFound()`
-before rendering, and CI asserts all three return HTTP 404 in a production
-server on every pull request.
+For a separate local chain, follow [development setup](docs/DEV_SETUP.md) and the public placeholders in [`.env.example`](.env.example). Keep local overrides in the gitignored `.env.local`. Never put signing credentials in `NEXT_PUBLIC_*` variables or the repository.
 
-### Trying the on-chain flow locally
+### Checks
 
 ```bash
-# terminal 1
-anvil
-
-# terminal 2
-forge create --root contracts src/PetRegistry.sol:PetRegistry \
-  --rpc-url http://127.0.0.1:8545 --broadcast --unlocked \
-  --from <an anvil account>
-
-cp .env.example .env.local   # set the deployed address, then restart npm run dev
+npm run lint
+npm test
+npm run build
+npm run typecheck
 ```
 
-### Public hosting (Vercel)
-
-The app is hosted on Vercel at [memepet.vercel.app](https://memepet.vercel.app)
-and reads the X Layer testnet registry directly. See
-[`docs/deploy/VERCEL.md`](docs/deploy/VERCEL.md). X Layer testnet contract
-steps (simulate / human broadcast / record): [`docs/deploy/XLAYER_TESTNET.md`](docs/deploy/XLAYER_TESTNET.md).
-
----
-
-## ✅ Running the checks
+Install Foundry and its test dependency before checking the contract:
 
 ```bash
-npm run typecheck        # tsc --noEmit
-npm run lint             # eslint
-npm test                 # vitest run  — 73 tests
-npm run build            # next build
-npm run test:contracts   # forge test  — 15 tests
+cd contracts
+forge install foundry-rs/forge-std --no-git
+cd ..
+npm run test:contracts
 ```
 
-CI runs all of these on every pull request, plus a production-server check
-asserting `/` is 200 and each `/dev/*` route is 404.
+CI also starts the production build and checks that `/` returns 200 and every `/dev/*` preview returns 404. A test pass is distinct from a real browser wallet action.
 
----
+## Submission and recording pack
 
-## 📁 Project structure
+The voiceover pack includes a [combined script](docs/demo/DEMO_SCRIPT.md) and individual scripts for [Deston](docs/demo/speakers/lead.md), [Kym](docs/demo/speakers/teammate-a.md) and [Larm](docs/demo/speakers/teammate-b.md). Each person has three turns and 130 selected spoken words, recorded into one MP3. The planned runtime is 3:25; actual duration and voice balance remain pending recordings.
 
-```
-contracts/
-  src/PetRegistry.sol        Wallet-linked, non-transferable pet registry
-  test/PetRegistry.t.sol     15 tests, including UTC-day boundaries and Cared events
-src/
-  app/                       Routes, layout, global styles, dev previews
-  components/
-    pet/                     PetScene, CarePanel        (Teammate A)
-    landing/                 LandingHero, HowItWorks    (Teammate B)
-    community/               CommunityPanel             (Teammate B)
-    ui/                      Button, Card, Badge, AppShell (lead)
-  hooks/                     useWallet, usePetRegistry
-  lib/                       deployment, chains, mapping, progression rules
-  types/view-models.ts       The frozen UI contract between layers
-  fixtures/                  Fictional data — previews and tests only
-docs/
-  PROJECT_BRIEF.md           Frozen scope
-  OWNERSHIP.md               File ownership and integration contract
-  DEV_SETUP.md               Verified commands and actual results
-  AUDIT_2026-09-20.md        Audit findings, fixed and open
-  STATUS.md                  Current state and per-person next steps
-```
+The [production plan](docs/demo/PRODUCTION_PLAN.md), [recording checklist](docs/demo/RECORDING_CHECKLIST.md) and [editing handoff](docs/demo/EDITOR_HANDOFF.md) separate narration, visual treatment and genuine screen evidence. [Team readiness](docs/demo/TEAM_READINESS.md) assigns remaining work; the [repository audit](docs/demo/REPOSITORY_AUDIT.md) records the bounded cleanup and retained evidence.
 
----
+Before submission, complete the [browser walkthrough](docs/qa/BROWSER_WALKTHROUGH.md), capture real transaction receipts and read-back states, supply the three voice recordings, edit and review the 2–4 minute video, and replace `VIDEO_URL` with its verified public link. Keep any unavailable evolution sequence out of the success narration. [Submission notes](docs/demo/SUBMISSION_NOTES.md) track the remaining organizer and team fields.
 
-## 🚫 What we deliberately did not build
+## Scope, safety and credits
 
-Scope discipline was a design decision, recorded in
-[`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md) before implementation started:
+This release supports one community and one mascot on **testnet**. It has not received an independent security audit. The prior MetaMask domain-warning review was closed by a reviewer; a fresh warning-free wallet prompt remains unverified. If a warning appears, leave the prompt unapproved and follow the [wallet setup guidance](docs/qa/WALLET_SETUP.md). Disconnecting account access does not revoke separate token allowances or cancel an already-open wallet prompt.
 
-**No** new token · **no** marketplace · **no** launchpad · **no** staking or
-yield · **no** breeding or trading · **no** NFT · **no** token approvals or
-transfers · **no** rewards with financial value · **no** chatbot · **no**
-real-time 3D engine · **no** in-app social feed.
+The contract has an MIT SPDX identifier, but the repository does not yet declare a project-wide licence. Artwork source and remaining rights checks are recorded in [pet asset provenance](docs/pet-assets.md); no blanket clearance or exclusive ownership is claimed. AI coding tools were used during development.
 
-We also kept it to **one community and one mascot with three stages**. A second
-mascot would have added nothing a judge scores and would have meant changing and
-redeploying the contract during the final days.
-
----
-
-## ⚠️ Known limitations
-
-Recorded honestly; the full list lives in
-[`docs/AUDIT_2026-09-20.md`](docs/AUDIT_2026-09-20.md).
-
-- **Deployed to X Layer testnet, not mainnet.** Testnet OKB has no value, which
-  is deliberate: nothing in MemePet should ever cost a user real money.
-- The contract is not source-verified on the explorer. Verification needs an
-  OKLink API key tied to an OKX account. The deployed bytecode matches contract
-  source at `587ceb054d35dd4b7c04a8dd580dcab3b743b30b` byte for byte, including
-  metadata. After PR #26 adds the SPDX header, current source still produces the
-  same executable runtime and ABI, but different compiler metadata. See the
-  [dated comparison](docs/deploy/XLAYER_TESTNET.md#source-comparison--22-september-2026).
-- `communityStats()` reverts for an unapproved community id. The read layer must
-  map that revert to *unknown*, never to `0`.
-- Browser-level wallet states — rejecting a signature in MetaMask, switching
-  accounts mid-session — are handled in code but have not been exercised by hand.
-- The mascot art was produced by knocking a black studio background out to alpha,
-  so some edge fringing may remain. See [`docs/pet-assets.md`](docs/pet-assets.md).
-- No third-party licence was purchased for the artwork; treat it as
-  team-generated hackathon material.
-
-## 🔭 Roadmap
-
-Immediate, before submission: finish the genuine
-[browser wallet walkthrough](docs/qa/BROWSER_WALKTHROUGH.md), confirm the remaining
-[submission fields](docs/demo/SUBMISSION_NOTES.md), and record the demo video.
-The [combined script](docs/demo/DEMO_SCRIPT.md), individual scripts for
-[Deston](docs/demo/speakers/lead.md), [Kym](docs/demo/speakers/teammate-a.md) and
-[Larm](docs/demo/speakers/teammate-b.md), [recording checklist](docs/demo/RECORDING_CHECKLIST.md)
-and [Codex editing handoff](docs/demo/EDITOR_HANDOFF.md) are ready. No final video
-exists yet; success narration remains conditional on genuine wallet evidence.
-
-Read-only public pet pages are implemented. Multiple communities, accessory
-saving and a read-only holder indicator remain stretch scope.
-
----
-
-## 👥 Team and credits
-
-Three contributors with clear ownership boundaries, documented in
-[`docs/OWNERSHIP.md`](docs/OWNERSHIP.md):
-
-| Role | Owns |
+| Contributor | Project contribution |
 |---|---|
-| **Deston — lead** | Contract, wallet and data integration, routes, shared UI, types, CI, deployment |
-| **Kym — Teammate A** | Pet presentation and stage artwork |
-| **Larm — Teammate B** | Landing and community UI, manual QA, demo materials |
+| **Deston** | Contract, wallet and data integration, deployment, shared UI and release checks |
+| **Kym** | Pet presentation, stage artwork and evolution presentation |
+| **Larm** | Landing and community presentation, QA and demo materials |
 
-Built with open-source tooling: [Next.js](https://nextjs.org),
-[React](https://react.dev), [viem](https://viem.sh),
-[Foundry](https://getfoundry.sh), [Vitest](https://vitest.dev),
-[Testing Library](https://testing-library.com). Fonts are
-[Baloo 2](https://fonts.google.com/specimen/Baloo+2),
-[Nunito Sans](https://fonts.google.com/specimen/Nunito+Sans) and
-[JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono), served via
-`next/font`.
-
-AI coding tools were used during development. Every check result reported in this
-repository was actually executed, and anything unverified is labelled as such.
+Build and review context remains in [`docs/`](docs/): [project brief](docs/PROJECT_BRIEF.md), [file ownership](docs/OWNERSHIP.md), [development setup](docs/DEV_SETUP.md), [deployment evidence](docs/deploy/XLAYER_TESTNET.md) and [dated QA records](docs/qa/evidence/). Historical results retain their dates so they cannot be mistaken for a current transaction pass.

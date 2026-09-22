@@ -26,3 +26,12 @@ contracts/lib/
 .DS_Store
 Thumbs.db
 *.log
+
+# Local deployment metadata and test-run output
+/.vercel/
+/playwright-report/
+/test-results/
+# Raw recordings and rendered media stay outside the source submission
+/media/recordings/
+/media/exports/
+/media/cache/
