@@ -4,6 +4,11 @@ Updated **22 September 2026**. Target **3:15**, within the organizer's **2–4 m
 
 **Script ready; wallet demonstration blocked.** Real Chrome reached “Not installed” and “No injected wallet was found.” No wallet connection approval, adoption or care was performed. Success lines below are **CONDITIONAL — UNVERIFIED**, not results. The locally integrated truthfulness fixes also need publication and verification on the actual recording deployment.
 
+The integration is available in [draft PR #28](https://github.com/Chi944/memepet/pull/28)
+and a [verified preview](https://memepet-21qy9t1rs-chi944s-projects.vercel.app/pet)
+of commit `8a88f4b`. Wallet-free preview checks and CI passed; the same real
+wallet connection attempt remained blocked. The production domain is unchanged.
+
 ## Speakers and recording pack
 
 The user confirmed the display names **Deston, Kym and Larm**. Recording roles below follow the existing lead/A/B plan; exact full names for the submission form remain unverified.

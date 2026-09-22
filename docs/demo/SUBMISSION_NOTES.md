@@ -60,7 +60,9 @@ A zero community **care** count is not a count of adopted pets, users or wallets
 
 ## Integration and current checks
 
-The public-pet branch reached `main` through **PR #21**, with a badge follow-up in **PR #27**. The truthfulness/read-loop work from **PR #22** is integrated locally on `prep/okx-dev-day-submission` at code commit **`13298d9`** (parents `a3c66ab` from main and `30c2dab` from the fix branch), with regression checks below. It has **not been newly deployed**; production parity remains unverified.
+The public-pet branch reached `main` through **PR #21**, with a badge follow-up in **PR #27**. The truthfulness/read-loop work from **PR #22** is integrated on `prep/okx-dev-day-submission` at code commit **`13298d9`** (parents `a3c66ab` from main and `30c2dab` from the fix branch), published in **[draft PR #28](https://github.com/Chi944/memepet/pull/28)**. The repository's existing Vercel integration produced a [preview for `8a88f4b`](https://memepet-21qy9t1rs-chi944s-projects.vercel.app). Main and the production domain were not updated.
+
+Real Chrome inspection of this final-code preview confirmed the heading, no fabricated growth, a read-only community total of 0, no captured `/pet` error logs, and 404 pages for `/dev/pet`, `/dev/landing` and `/dev/community`. Clicking Connect wallet again returned **No injected wallet was found**. This is a preview rendering check, not a wallet pass. Logged-out preview access is unverified.
 
 | Current prep-branch command | Actual result |
 |---|---|
@@ -70,6 +72,7 @@ The public-pet branch reached `main` through **PR #21**, with a badge follow-up 
 | `npm run build` | **PASS**, exit 0 |
 | `npm run test:contracts` | **PASS**, 13/13 tests |
 | Local final production HTTP smoke | **NOT RUN** — automatic approval review rejected starting the production server on `127.0.0.1:3300` (“blocked by policy”) |
+| GitHub CI at `8a88f4b` | **PASS** — [run 35688426933](https://github.com/Chi944/memepet/actions/runs/35688426933), including app/contract jobs, clean install and the production `/dev/*` smoke step |
 | Real browser wallet walkthrough | **BLOCKED — no injected wallet; no wallet action passed** |
 
 These current results were executed and reported by the lead in this preparation task. See [current evidence](../qa/evidence/OKX_PREP_2026-09-22.md) for the command record. Automated checks and browser checks are separate.

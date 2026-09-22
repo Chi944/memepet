@@ -47,6 +47,13 @@ a blocked prerequisite, not a successful connection or a proven app defect.
 Rows 2–9 were not executed. There were no wallet signatures, rejection clicks,
 adoption/care receipts, account switches or browser growth comparisons.
 
+The same connection attempt was later repeated on the automatically built
+[PR #28 preview](https://memepet-21qy9t1rs-chi944s-projects.vercel.app/pet),
+commit `8a88f4b`, with the same missing-provider result. The final integrated
+preview showed the corrected heading/empty state and hid development routes,
+but **no wallet row passed** there either. See the evidence record for CI and
+preview verification; these are separate from the unchanged production site.
+
 | X Layer live repeat | Actual result | Status |
 |---|---|---|
 | 1. Connect/approve at `https://memepet.vercel.app/pet` | Clicked Connect wallet; **No injected wallet was found.** | BLOCKED; approval not performed |
