@@ -126,6 +126,20 @@
   transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Align approved PNG silhouettes to Hatchling's height, centre and feet.
+ * Keep the source canvases intact; custom art keeps its supplied framing.
+ * Measurements and source bounds are recorded in docs/pet-assets.md.
+ */
+.art[data-stage-art="buddy"] {
+  translate: -0.542044% 0.257739%;
+  scale: 0.907168;
+}
+
+.art[data-stage-art="guardian"] {
+  translate: -1.519782% 1.07018%;
+  scale: 0.818664;
+}
+
 .placeholder {
   display: grid;
   max-width: 15rem;
