@@ -1,6 +1,6 @@
 # MetaMask domain warning — 22 September 2026
 
-Task: `QA-WALLET-WARNING`. **Classification unresolved; pause wallet transaction walkthrough.**
+Task: `QA-WALLET-WARNING`. **Classification unresolved; pause the hosted X Layer wallet transaction walkthrough.** A separate local Anvil test is recorded in [LOCAL_ANVIL_2026-09-22.md](LOCAL_ANVIL_2026-09-22.md).
 
 ## Observed and reported evidence
 
@@ -29,7 +29,36 @@ This is a limited source review, **not a security audit or a verification of eve
 
 An ordinary page rebuild cannot be relied upon to clear an external classification. Investigate any issue identified by the review, fix and verify it if necessary, then request reassessment. Do not disable alerts or change domains/wallets merely to bypass the warning. Resume the signing walkthrough only after the concern has been investigated and resolved, with the intended account and chain checked again.
 
-## Ready-to-send support request — NOT SUBMITTED
+## Submission outcome — review requested
+
+The user explicitly authorized submission on 22 September 2026. The request was first sent through MetaMask's official support chat without connecting a wallet to support. Its AI assistant directed the report to MetaMask's `eth-phishing-detect` review queue; the AI response itself was not a human review or a clearance.
+
+A duplicate search for `memepet.vercel.app` returned no existing issues. The official blocklist-removal template was completed with the project URL, repository/revision, intended network and registry, the limited nature of the source assessment, and the user-supplied warning screenshot. The submitted request explicitly asks for routing if a different provider owns this classification.
+
+**Submitted:** [MetaMask/eth-phishing-detect issue #296216](https://github.com/MetaMask/eth-phishing-detect/issues/296216), created `2026-09-22T15:06:00Z`. The published issue and screenshot were verified in the browser and the issue was OPEN with no comments when checked. No classification removal or response has been received. No secrets were included.
+
+### Connect/disconnect assessment
+
+The application connect handler requests accounts and chain ID. Automatic follow-up calls read the latest block, `petOf(address)` and `communityStats(1)`; pet reads repeat every 30 seconds. The checked connect path does not request a signature or call a contract write. Adoption, care and network changes have separate explicit callbacks.
+
+**MemePet's current Disconnect button only clears React state. It does not revoke MetaMask site permissions.** A reload or provider account/network event can restore an already-authorized account through `eth_accounts`. To remove the wallet's site permission, use MetaMask's account menu → **Dapp connections** → the site → **Disconnect**. Disconnecting does not revoke any token approvals already signed. See [MetaMask's documentation](https://support.metamask.io/more-web3/dapps/disconnect-wallet-from-a-dapp/).
+
+### Public served-code spot check — 15:06 UTC
+
+The public `/pet` HTML returned HTTP 200 and referenced 12 same-origin script-tag assets, all under `/_next/static/immutable/chunks/`. These returned JavaScript successfully and totalled 940,490 raw bytes. Two inline Next bootstrap/flight scripts were present; no external script origin appeared in those HTML script tags.
+
+The served wallet chunk contained the checked `eth_requestAccounts` → `eth_chainId` handler, and the pet chunk contained `adopt(1)` / `care()` writes. Bundled viem also includes generic signing/approval helpers; their presence is not evidence of an application call, and this inspection did not establish that every possible runtime path is safe.
+
+| Served chunk | SHA-256 |
+|---|---|
+| `36wsc-c-we1ff.js` | `70A5EFE13699BC456CE8DD1C5AEAEE4D7E194827D08CB28A25793D6065BF6B0D` |
+| `27zh-3nrvff-o.js` | `673BE813D4F68A711BBBE481897B274CB33300099B809846A874D39B0871A69F` |
+
+Cross-host byte comparison against the immutable deployment was blocked by its Vercel SSO redirect. Comparisons against the returned login HTML were discarded, not treated as mismatches. Dynamically loaded chunks, exhaustive dependency analysis, browser integrity and the classification rationale remain outside this bounded check. No downloaded JavaScript was executed by the inspection.
+
+The assessment supports **no unexpected automatic write found in the checked connect path**, not permission to disregard the malicious-site warning or a confirmed false positive.
+
+## Original support-request draft (retained for provenance)
 
 **Subject:** Request manual review of MetaMask website classification for memepet.vercel.app
 
@@ -50,4 +79,4 @@ We have a screenshot of the warning and have paused the transaction walkthrough.
 
 Thank you.
 
-**Before sending:** attach the warning screenshot after checking it contains no private information. Use MetaMask's official support route; no wallet connection is required for the documented “Continue without wallet” support option. Do not include wallet files, recovery words, passwords or private keys. This draft has not been sent, and no review ticket or clearance exists yet.
+The submitted GitHub issue adapts this draft to MetaMask's template and includes the warning screenshot. Review submission is verified; clearance is not.
