@@ -1,8 +1,9 @@
 # Recording checklist — 3 people, 3:20 target
 
-**Current status:** the hosted page displays the intended address on chain 1952
+**Current status:** the hosted page displayed the intended address on chain 1952
 with no pet; the separate local Anvil connection and chain 31337 were also
-observed. No browser adoption or care is verified. MetaMask's reviewer says the domain no longer
+observed. Hosted Disconnect and reload subsequently verified permission revocation;
+the wallet is now disconnected. No browser adoption or care is verified. MetaMask's reviewer says the domain no longer
 appears flagged; the current prompt is unverified. Introductions and product
 explanation can be recorded now; result narration needs matching genuine evidence.
 

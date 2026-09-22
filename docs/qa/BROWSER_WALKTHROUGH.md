@@ -16,6 +16,13 @@ address, chain `1952`, pet **None yet**, and community cares `0`. This observes
 an existing authorized connection; it does not verify the original connection
 prompt or a fresh warning-free approval.
 
+**Subsequent hosted disconnect: PASS.** On the deployed PR #38 fix, clicked
+Disconnect in real Chrome, observed verified wallet account-access revocation,
+then reloaded and observed the same result after a fresh account-access check.
+The wallet is now disconnected from the hosted origin. See [release evidence
+and screenshot](evidence/RELEASE_AUDIT_2026-09-23.md#production-release-and-real-disconnect--22-september-2111-utc).
+This is a disconnect pass only; it does not upgrade any adoption/care row.
+
 MetaMask's reviewer closed [review request #296216](https://github.com/MetaMask/eth-phishing-detect/issues/296216#issuecomment-5782692269)
 on 22 September at 19:31 UTC, reporting that the domain did not appear flagged
 anymore. A fresh wallet prompt has not been independently checked. If a warning
