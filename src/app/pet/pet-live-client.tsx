@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { CarePanel } from "@/components/pet/CarePanel";
 import { PetScene } from "@/components/pet/PetScene";
 import { Badge } from "@/components/ui/Badge";
@@ -91,16 +92,16 @@ export function PetLiveClient() {
     <div className="pet-live">
       <Card className="pet-live-status">
         <div className="pet-gate-head">
-          <p className="eyebrow">Live pet home</p>
+          <p className="eyebrow">Your daily companion</p>
           <Badge tone="live">
             {wallet.deployment.networkName ?? "Configured network"}
           </Badge>
         </div>
         <h1>Your pet</h1>
         <p className="lede">
-          Wallet reads, adoption, and daily care talk to the configured
-          registry. Growth and community totals update only after a confirmed
-          receipt and a successful re-read.
+          A little care, once a day. Connect your wallet to find your pet.
+          Progress updates after your transaction is confirmed and read back
+          from the chain.
         </p>
         <dl className="pet-live-meta">
           <div>
@@ -126,13 +127,17 @@ export function PetLiveClient() {
           <div>
             <dt>Pet</dt>
             <dd>
-              {registry.readStatus === "loading"
-                ? "Reading…"
-                : registry.readStatus === "error"
-                  ? "Read failed"
-                  : registry.hasPet
-                    ? "Adopted"
-                    : "None yet"}
+              {!wallet.address
+                ? "Connect to view"
+                : wallet.wrongChain
+                  ? "Switch network to view"
+                  : registry.readStatus === "loading"
+                    ? "Reading…"
+                    : registry.readStatus === "error"
+                      ? "Read failed"
+                      : registry.hasPet
+                        ? "Adopted"
+                        : "None yet"}
             </dd>
           </div>
           <div>
@@ -146,6 +151,11 @@ export function PetLiveClient() {
             </dd>
           </div>
         </dl>
+        {!wallet.installed ? (
+          <p className="status-note">
+            Use a browser with an unlocked wallet extension, then reload this page to connect.
+          </p>
+        ) : null}
         <div className="pet-gate-actions">
           {wallet.address ? (
             <Button tone="secondary" onClick={wallet.disconnect}>
@@ -175,7 +185,7 @@ export function PetLiveClient() {
           <SharePetLink path={publicPetPath(wallet.address)} />
         ) : null}
         {wallet.errorMessage ? (
-          <p className="pet-live-error">{wallet.errorMessage}</p>
+          <p className="pet-live-error" role="alert">{wallet.errorMessage}</p>
         ) : null}
       </Card>
 
@@ -191,7 +201,15 @@ export function PetLiveClient() {
           />
         </div>
       ) : (
-        <div className="pet-live-grid">
+        <div className="pet-live-empty-grid">
+          <section className="pet-live-invitation" aria-labelledby="pet-invitation-title">
+            <Image src="/pets/hatchling.png" alt="Mochi mascot illustration" width={320} height={320} sizes="(max-width: 800px) 35vw, 208px" />
+            <div>
+              <h2 id="pet-invitation-title">A small companion.<br />A new daily ritual.</h2>
+              <p>Adopt, care, and grow together. Your wallet keeps your place, even when you take a day off.</p>
+              <small>Mascot illustration. No wallet pet is displayed here.</small>
+            </div>
+          </section>
           <CarePanel
             pet={null}
             action={action}

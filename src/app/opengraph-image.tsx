@@ -18,8 +18,8 @@ export default async function SiteOpenGraphImage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: "#f3edff",
-          color: "#241c33",
+          background: "#000000",
+          color: "#fafafa",
           padding: "72px",
           fontFamily: "sans-serif",
         }}
@@ -31,7 +31,7 @@ export default async function SiteOpenGraphImage() {
               fontSize: 28,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
-              color: "#6d3fd0",
+              color: "#c6ff00",
               fontWeight: 700,
             }}
           >
@@ -40,7 +40,7 @@ export default async function SiteOpenGraphImage() {
           <div style={{ display: "flex", fontSize: 68, fontWeight: 800, lineHeight: 1.05 }}>
             Adopt the meme. Grow the community.
           </div>
-          <div style={{ display: "flex", fontSize: 32, color: "#5f5573" }}>
+          <div style={{ display: "flex", fontSize: 32, color: "#b3b3b3" }}>
             One care a day. Progress from participation, not from spending.
           </div>
         </div>

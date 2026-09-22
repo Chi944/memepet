@@ -43,18 +43,20 @@ export function HomeScreen() {
     <AppShell>
       <LandingHero onGetStarted={() => router.push("/pet")} />
       <HowItWorks connected={configured} />
-      {configured ? (
-        <LiveHomeCommunity />
-      ) : (
-        <CommunityPanel community={unpublishedCommunity} />
-      )}
+      <div id="community" className="community-section">
+        {configured ? (
+          <LiveHomeCommunity />
+        ) : (
+          <CommunityPanel community={unpublishedCommunity} />
+        )}
+      </div>
 
       {/* Shown in every environment: the reason a live total is unknown is
           part of the product, not a development-only aside. */}
       <p className="status-note">
         {configured
-          ? "Community totals come from communityStats on the configured registry. A failed or reverting read stays unknown — never zero, never a fixture."
-          : "Care totals stay unknown until a registry contract is connected and read. This build never substitutes preview numbers for a live read."}
+          ? "Community progress is read from the chain. If a read fails, the total stays unknown until it can be verified."
+          : "Community progress will appear when a registry is connected. No live total is available yet."}
       </p>
 
       {isDevelopment ? (
