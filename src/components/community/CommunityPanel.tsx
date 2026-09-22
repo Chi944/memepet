@@ -31,9 +31,8 @@ export function CommunityPanel({ community }: CommunityPanelProps) {
   return (
     <Card
       className={styles.panel}
-      aria-live={community.isLoading ? "polite" : undefined}
-      aria-busy={community.isLoading || undefined}
-      role={community.errorMessage ? "status" : undefined}
+      aria-live="polite"
+      aria-busy={community.isLoading}
     >
       <header className={styles.head}>
         <p className={styles.kicker}>Community habitat</p>

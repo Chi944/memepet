@@ -41,3 +41,7 @@ Chrome, local app at `http://127.0.0.1:3300`, using explicit public X Layer test
 - Contract tests are not rerun locally for presentation-only edits; repository CI remains required before integration.
 
 Final hosted checks are reported in the pull request and task response. Wallet walkthrough evidence from the submission pack remains blocked and is not upgraded by this UI pass.
+
+## Concurrent accessibility fix
+
+PR #29 arrived during this work. Its conflict with the redesign was resolved by retaining the new layout while keeping one persistent `aria-live="polite"` region and `aria-busy={community.isLoading}` across all states. Both incoming test improvements were retained. The seven community tests passed locally. The regression verifies DOM identity and attributes; actual screen-reader speech was not tested.
