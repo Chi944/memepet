@@ -161,11 +161,25 @@
   animation: celebration-lift 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.celebration {
+/* Decorative light stays behind the artwork and never covers scene details. */
+.evolutionGlow {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.45rem 0.75rem;
+  z-index: -1;
+  width: 90%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(196 241 99 / 45%), rgb(196 241 99 / 12%) 45%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  animation: evolution-glow 1200ms ease-out;
+}
+
+.celebrating .stageCurrent {
+  animation: stage-reveal 1000ms ease-out;
+}
+
+.celebration {
+  padding: 0.65rem 0.85rem;
   border-radius: 999px;
   color: var(--on-action);
   background: var(--action);
@@ -480,15 +494,26 @@
   }
 }
 
+@keyframes evolution-glow {
+  0% { opacity: 0; transform: scale(0.65); }
+  35% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.15); }
+}
+
+@keyframes stage-reveal {
+  0% { box-shadow: 0 0 0 0 rgb(196 241 99 / 50%); }
+  100% { box-shadow: 0 0 0 10px transparent; }
+}
+
 @keyframes celebration-lift {
   0%, 100% {
     transform: translateY(0) rotate(0);
   }
   40% {
-    transform: translateY(-12px) rotate(-2deg);
+    transform: translateY(-8px) scale(1.05);
   }
   70% {
-    transform: translateY(-4px) rotate(1deg);
+    transform: translateY(-2px) scale(1.02);
   }
 }
 
@@ -531,6 +556,8 @@
   .artInner,
   .celebrating .art,
   .celebration,
+  .evolutionGlow,
+  .celebrating .stageCurrent,
   .carePanel[data-action="success"] .careIcon,
   .waitingIndicator span {
     animation: none;
