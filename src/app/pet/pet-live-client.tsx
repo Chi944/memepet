@@ -152,9 +152,16 @@ export function PetLiveClient() {
           </div>
         </dl>
         {!wallet.installed ? (
-          <p className="status-note">
-            Use a browser with an unlocked wallet extension, then reload this page to connect.
-          </p>
+          <div className="wallet-setup">
+            <p>Connect with a browser wallet.</p>
+            <a href="https://web3.okx.com/download" target="_blank" rel="noreferrer">
+              Get OKX Wallet <span aria-hidden="true">↗</span>
+            </a>
+            <p className="status-note">
+              Install the extension in this browser, set up and unlock your wallet, then reload this page.
+              Already have one? Check that you are using the same browser profile.
+            </p>
+          </div>
         ) : null}
         <div className="pet-gate-actions">
           {wallet.address ? (
@@ -162,7 +169,9 @@ export function PetLiveClient() {
               Disconnect
             </Button>
           ) : (
-            <Button onClick={() => void wallet.connect()}>Connect wallet</Button>
+            <Button onClick={() => void wallet.connect()} disabled={wallet.connecting}>
+              {wallet.connecting ? "Connecting…" : "Connect wallet"}
+            </Button>
           )}
           {wallet.wrongChain ? (
             <Button onClick={() => void wallet.switchNetwork()}>
