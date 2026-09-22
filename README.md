@@ -193,7 +193,7 @@ than a placeholder — by design, so that a fake address could never reach a dem
 | Styling | CSS Modules + custom properties | No UI framework; full control of the design system, zero runtime cost |
 | Chain access | [viem](https://viem.sh) + injected EIP-1193 provider | Smallest workable surface — one dependency, no wallet-UI framework |
 | Contract | [Foundry](https://getfoundry.sh), Solidity 0.8.24 | Fast tests, good time-travel for the UTC-day rule |
-| Testing | [Vitest](https://vitest.dev) + Testing Library, `forge test` | 29 app tests, 13 contract tests |
+| Testing | [Vitest](https://vitest.dev) + Testing Library, `forge test` | 39 app tests, 13 contract tests |
 | CI | GitHub Actions | Both suites plus a production preview-gate assertion on every PR |
 
 **Total runtime dependencies: 4** — `next`, `react`, `react-dom`, `viem`.
@@ -279,7 +279,7 @@ steps (simulate / human broadcast / record): [`docs/deploy/XLAYER_TESTNET.md`](d
 ```bash
 npm run typecheck        # tsc --noEmit
 npm run lint             # eslint
-npm test                 # vitest run  — 29 tests
+npm test                 # vitest run  — 39 tests
 npm run build            # next build
 npm run test:contracts   # forge test  — 13 tests
 ```

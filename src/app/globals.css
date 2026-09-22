@@ -491,7 +491,7 @@ a {
 
 .pet-live-error {
   margin: 0;
-  color: var(--danger);
+  color: var(--alert);
   font-weight: 700;
 }
 

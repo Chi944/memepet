@@ -95,9 +95,20 @@ function readEnvOverride(): Deployment | null {
   };
 }
 
-/** Active deployment: env override (local Anvil / authorized testnet) or committed defaults. */
+/**
+ * Active deployment: env override (local Anvil / authorized testnet) or
+ * committed defaults.
+ *
+ * Resolved once. NEXT_PUBLIC_* values are inlined at build time and cannot
+ * change at runtime, and returning a fresh object per call made every consumer
+ * of `deployment` referentially unstable — which re-fired the registry read
+ * effects on every render.
+ */
+let activeDeployment: Deployment | null = null;
+
 export function getActiveDeployment(): Deployment {
-  return readEnvOverride() ?? DEPLOYMENT;
+  activeDeployment ??= readEnvOverride() ?? DEPLOYMENT;
+  return activeDeployment;
 }
 
 /** True only when a verified contract address is configured. */
