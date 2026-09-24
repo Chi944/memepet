@@ -104,7 +104,7 @@ results are listed separately.
 | Landing, how-it-works and community panel | ✅ Merged |
 | Pet scene, three stages and care-state panel | ✅ Merged, including corrected artwork and evolution presentation |
 | Black/lime design, responsive layouts and reduced-motion styles | ✅ Implemented; four viewport layouts and keyboard navigation checked. Reduced-motion preview passed; normal-motion foreground playback is unrun by user preference |
-| Wallet connection, network switch and account-access revocation | ✅ Implemented; hosted connection observed. Disconnect/reload passed in the earlier Account 2 run; the latest network/disconnect rows remain unrun |
+| Wallet connection, network switch and account-access revocation | ✅ Hosted connection and real Disconnect/reload verified. Account access remained revoked after reload; the site was left disconnected. Network away/back remains NOT RUN |
 | Adoption, care, receipts and confirmed read-back | ✅ Account 3 genuinely rejected, adopted and cared on `af886a75`; the pet automatically reached 10 points/cooldown. Normal reload preserved the state. Automatic counter refresh failed; read-only Retry recovered the total without a reload or new transaction |
 | Public pet page and generated share images | ✅ Merged; a separate unconnected browser displayed Account 3's correct address, read-only live Hatchling and 10 points with no care action |
 | X Layer testnet deployment | ✅ Deployed; executable runtime comparison documented |
@@ -114,7 +114,9 @@ results are listed separately.
 [CI for `af886a75`](https://github.com/Chi944/memepet/actions/runs/36040157500)
 passed after merge. Production deployment **6644949897** succeeded at
 **24 September, 18:17:39 UTC**; the public app served the new recovery control.
-This is the tested product revision, separate from later documentation commits.
+This is the tested product revision. A later documentation-only deployment,
+`edae08a` (**6645345099**, 18:37:56 UTC), retained the same runtime source;
+the final disconnect persisted after a normal reload onto that deployment.
 See [latest-release QA](docs/qa/evidence/LATEST_RELEASE_QA_2026-09-24.md).
 Lint passed with one existing image-element warning and no errors.
 The [24 September capture record](docs/qa/evidence/FINAL_CAPTURE_2026-09-24.md)
@@ -377,7 +379,7 @@ and delivery. See [current status](docs/STATUS.md) for the remaining acceptance 
 
 | Next step | Completion evidence |
 |---|---|
-| Remaining wallet QA | Finish the network-switch/disconnect follow-up; Account 3 public viewing passed; preserve the automatic community-refresh failure and verified manual recovery |
+| Remaining wallet QA | Network away/back remains NOT RUN. Disconnect/reload and public viewing passed; preserve the automatic community-refresh failure and verified manual recovery |
 | Final release QA | Deployment verified; normal-motion foreground playback remains unrun by user preference |
 | Demo video | Genuine product footage and a reviewed 2–4 minute export |
 | Submission | Eligibility/rights and form answers confirmed; app/repo/video links checked; receipt retained |
