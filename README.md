@@ -29,16 +29,16 @@ Growth comes from confirmed care. No MemePet token to buy; network gas applies.
 | | |
 |---|---|
 | **Event** | OKX Dev Day 2026 |
-| **Intended track** | Build a Market — meme application; precise track fit and testnet eligibility **UNVERIFIED** |
-| **Team** | Deston (lead), Kym (pet experience), Larm (community UI, QA and demo); exact form roster remains unverified |
+| **Intended track** | Build a Market — meme application; deployed on X Layer testnet |
+| **Team** | **The four musketeers** — Deston, Kym, Larm and YeeWei; exact names for the form remain unverified |
 | **Live demo** | [memepet.vercel.app](https://memepet.vercel.app) |
-| **Demo video** | ⏳ **UNVERIFIED — VIDEO_URL**; script ready, recordings and final edit outstanding |
+| **Demo video** | ✅ 3:05 MP4 and captions complete; technical QC passed. Public link **UNVERIFIED — VIDEO_URL** |
 | **Contract** | [`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`](https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216) |
 | **Network** | X Layer testnet · chain **1952** · gas currency **OKB** |
 | **Repository** | [github.com/Chi944/memepet](https://github.com/Chi944/memepet) |
 
-The core implementation is merged. The remaining work is real wallet verification,
-final release QA and the submission package. Current evidence is summarized below;
+The core implementation is merged. The remaining work is targeted release QA,
+final video review and the submission package. Current evidence is summarized below;
 remaining acceptance work is tracked in [current status](docs/STATUS.md).
 
 ---
@@ -95,26 +95,29 @@ allowances or token transfers; wallet approval and network gas are still require
 <a id="honest-status"></a>
 ## 🚦 Honest status
 
-Updated **23 September 2026 (Singapore)**. Implementation and verified browser
+Updated **25 September 2026 (Singapore)**. Implementation and verified browser
 results are listed separately.
 
 | Capability | Current state |
 |---|---|
 | Landing, how-it-works and community panel | ✅ Merged |
 | Pet scene, three stages and care-state panel | ✅ Merged, including corrected artwork and evolution presentation |
-| Black/lime design, responsive layouts and reduced-motion styles | ✅ Implemented; final visual QA after the latest artwork changes remains open |
+| Black/lime design, responsive layouts and reduced-motion styles | ✅ Implemented; four viewport layouts and keyboard navigation checked. Reduced-motion playback and foreground animation checks remain open |
 | Wallet connection, network switch and account-access revocation | ✅ Implemented; hosted connection observed, real Disconnect and reload verified |
-| Adoption, care, receipts and confirmed read-back | ✅ Implemented; complete browser-wallet journey **UNVERIFIED** |
-| Public pet page and generated share images | ✅ Merged; adopted-pet browser consistency still needs evidence |
+| Adoption, care, receipts and confirmed read-back | ✅ Genuine rejection, adoption, care, later 10-point read-back and cooldown verified. Read failures and the follow-up retry fix are documented separately |
+| Public pet page and generated share images | ✅ Merged; Account 2's disconnected public page showed the same Hatchling and 10 points |
 | X Layer testnet deployment | ✅ Deployed; executable runtime comparison documented |
-| Automated checks | ✅ **111 app tests / 20 files**, **15 contract tests**, typecheck, lint, build and production route checks passed on recording-kit revision `9a2bdab` |
-| Final demo video and submission | ⏳ Three MP3s, genuine transaction footage, editing and remaining form answers outstanding |
+| Automated checks | ✅ **122 app tests / 21 files**, contract CI, typecheck, lint, build and production route checks passed on revision `3d0428e` |
+| Final demo video and submission | ✅ Video/captions complete with technical QC passed; care/refresh result stills labelled. Team playback, public upload and form completion remain |
 
-[CI run for `9a2bdab`](https://github.com/Chi944/memepet/actions/runs/35787304045)
+[CI run for `3d0428e`](https://github.com/Chi944/memepet/actions/runs/36030104889)
 records the automated results. Lint passed with one existing image-element warning.
-The [release audit](docs/qa/evidence/RELEASE_AUDIT_2026-09-23.md) records the real
-hosted disconnect and reload. No browser adoption, care or rejection is being
-claimed as passing. A read-only homepage capture does not change that status.
+The [24 September capture record](docs/qa/evidence/FINAL_CAPTURE_2026-09-24.md)
+separates actual wallet actions, chain receipts, observed app states and usable
+video. Account 2's care confirmed on chain, but reads failed during the flow;
+human refresh recovered the same pet and total. The later community retry fix
+has not yet been exercised by another genuine care. The recorded take cannot
+establish an uninterrupted successful care/refresh sequence.
 
 **Confirmed data drives the interface:**
 
@@ -274,6 +277,7 @@ npm run typecheck
 npm run lint
 npm test
 npm run build
+node --test docs/qa/counter-check.regression.mjs
 ```
 
 Install Foundry and its test library before running contract checks:
@@ -305,7 +309,7 @@ src/
     landing/               LandingHero, HowItWorks
     community/             CommunityPanel
     ui/                    Button, Card, Badge, AppShell
-  hooks/                   useWallet, usePetRegistry
+  hooks/                   useWallet, usePetRegistry, useCommunityStats
   lib/                     Deployment, reads, mappings, progression, share art
   types/view-models.ts      UI contract between layers
   fixtures/                Fictional preview/test data only
@@ -336,14 +340,17 @@ and a read-only holder indicator remain optional future work.
 <a id="known-limitations"></a>
 ## ⚠️ Known limitations
 
-- **Testnet deployment.** Organizer acceptance of this precise track integration
-  and testnet-only implementation remains unverified.
-- **Browser transaction evidence is incomplete.** Rejection, adoption, care,
-  cooldown, account switching and adopted-pet refresh still need a genuine run.
-- **Final visual QA remains open.** Earlier checks predate the latest artwork
-  and evolution merges; complete desktop/mobile, keyboard and reduced-motion checks.
-- **Wallet warning follow-up.** The MetaMask review issue was closed, but a fresh
-  warning-free connection prompt has not been verified. Follow the
+- **Testnet deployment.** No mainnet deployment or organizer approval is claimed.
+  Checked kit/form material does not state a separate written testnet approval
+  requirement; remaining form declarations still need review.
+- **Targeted browser QA remains open.** Account switching and a genuine care
+  after the latest community-read retry fix still need checked results. The
+  earlier read failures remain documented; automated tests do not close them.
+- **Final visual QA remains open.** Reduced-motion playback and foreground
+  animation observation remain unverified in Larm's dated browser audit.
+- **Wallet warning follow-up.** The MetaMask review issue was closed and the
+  user reported no warning on a fresh approval. Automation did not independently
+  inspect that extension prompt. Follow the
   [wallet setup guidance](docs/qa/WALLET_SETUP.md); leave any warning unapproved.
 - **No independent security audit.** The dated dependency audit found zero known
   vulnerabilities at that time; it cannot establish zero risk.
@@ -359,12 +366,12 @@ and delivery. See [current status](docs/STATUS.md) for the remaining acceptance 
 
 | Next step | Completion evidence |
 |---|---|
-| Real wallet walkthrough | Genuine rejection, adoption, care, receipt/read-back, cooldown, refresh and account-switch results |
-| Final release QA | Current desktop/mobile, keyboard, reduced-motion and public/share-page checks |
+| Remaining wallet QA | Account-switch regression and genuine care on the community-read retry release, with receipts and matching UI evidence |
+| Final release QA | Complete the unrun reduced-motion and foreground animation checks |
 | Demo video | Genuine product footage and a reviewed 2–4 minute export |
 | Submission | Eligibility/rights and form answers confirmed; app/repo/video links checked; receipt retained |
 
-The final video is pending. Every demonstrated result must match actual wallet
+The exported video passed technical QC and awaits team playback/upload. Every demonstrated result must match actual wallet
 and chain evidence; illustrations alone do not prove adoption, care or evolution.
 
 ---
@@ -377,6 +384,7 @@ and chain evidence; illustrations alone do not prove adoption, care or evolution
 | **Deston — lead** | Contract, wallet/data integration, routes, shared UI, CI, deployment and release checks |
 | **Kym — pet experience** | Pet presentation, stage artwork and evolution presentation |
 | **Larm — community experience** | Landing/community UI, QA and demo materials |
+| **YeeWei — team member** | Newly joined; included in the four-person introduction without a narration segment |
 
 Responsibilities are documented in [file ownership](docs/OWNERSHIP.md).
 Built with [Next.js](https://nextjs.org), [React](https://react.dev),

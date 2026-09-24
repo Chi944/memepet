@@ -4,7 +4,7 @@
 across three turns. The editor interleaves it with the other two voices.
 [Combined script and evidence gates](../DEMO_SCRIPT.md).
 
-Record one file named **`MemePet_Larm_MP-EQ-v1.mp3`**.
+**25 September update:** your MP3 is received and used in the completed 185-second film. Review your selected takes/captions; no new full recording is requested. The guidance below is retained for pickups only.
 No face-camera recording is required. Read only the quoted words below.
 Before each block, say its scene ID, pause two seconds, read the lines, then
 leave two seconds of silence. Slates and extra pauses are removed in the edit.

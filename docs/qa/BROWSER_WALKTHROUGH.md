@@ -4,7 +4,25 @@ Worksheet for the connect → adopt → care journey against **local Anvil**.
 These steps need a real injected wallet (MetaMask / OKX Wallet). They are
 **not** pre-marked as passing.
 
-**Latest hosted run — 24 September 2026:** A fresh connection and a real first
+**Latest capture work — 24 September 2026 UTC:** The newly prepared Account 2
+`0x86F7De84EBB97c875e1494675Bfcd664f0773CE9` genuinely rejected adoption.
+The app displayed the declined-request message, **None yet** and no awarded
+progress; a fixed-block read confirmed no pet and nonce 0. The first video
+stopped before the Cancel click, so continuous rejection footage is incomplete.
+The guarded retake repeated the rejection, then a genuine approved adoption
+returned a successful receipt and fresh 0-point Hatchling. Genuine care then
+produced 10 points and UTC cooldown. The community header became **Unknown**
+after the receipt despite a verified chain total of 2; human-reported hard
+refresh recovered the same pet and total. Disconnect and the disconnected
+read-only public pet were observed. The community retry follow-up has no live
+care rerun yet. Take 3 review found a pet-read error/0 points around 293 seconds
+and solid green footage at 393–524 seconds, despite a separate app screenshot
+showing 10 points/cooldown. Cause is unproven; no usable continuous care-success
+or refresh shot is claimed. See the
+[final capture record](evidence/FINAL_CAPTURE_2026-09-24.md). This does not
+upgrade any other wallet row or claim a finished video.
+
+**Earlier hosted run — 24 September 2026:** A fresh connection and a real first
 care were performed with human MetaMask approvals. The successful care receipt,
 10-point read-back, disabled UTC cooldown, normal reload, public pet page and
 block-pinned community 0 → 1 attribution are recorded in

@@ -2,9 +2,13 @@
 
 **Script ID: MP-EQ-20260923-v1.** Your selected narration is **130 words**
 across three turns. The editor interleaves it with the other two voices.
+
+**25 September production update:** both MP3 parts A/B are received and form
+your one speaker source. **S08B is selected** in the completed 185-second edit;
+S08A below is unused. Spoken lines and the 130-word allocation are unchanged.
 [Combined script and evidence gates](../DEMO_SCRIPT.md).
 
-Record one file named **`MemePet_Kym_MP-EQ-v1.mp3`**.
+Your recording is complete. The following guidance is retained only for a requested pickup; no new full recording is needed.
 No face-camera recording is required. Read only the quoted words below.
 Before each block, say its scene ID, pause two seconds, read the lines, then
 leave two seconds of silence. Slates and extra pauses are removed in the edit.
@@ -20,7 +24,7 @@ You may record it now, but it cannot enter the submission if the result was not
 captured. One human can operate the wallet; “we” does not mean you personally
 clicked or signed. Do not read directions or conditional labels.
 
-Your scene order: **S02 → S05 → S08A or S08B**.
+Your selected scene order: **S02 → S05 → S08B**.
 
 ## S02 · Say no first · 44 words · CONDITIONAL
 
@@ -54,8 +58,7 @@ This alternate does not replace the adoption and first-care proof.
 
 ## Send back
 
-Upload `MemePet_Kym_MP-EQ-v1.mp3` here. The selected script contains
-**S02 + S05 + one S08 version = 130 words**.
-If the S08 choice is still open, you may include both under separate slates
-in this same MP3 as optional pickups. Only one version is used in the final;
-the extra take gives you no extra screen time. State which version you recorded.
+Your `MemePet_Kym_MP-EQ-v1-partA.mp3` and `MemePet_Kym_MP-EQ-v1-partB.mp3`
+are received. The selected script is **S02 + S05 + S08B = 130 words**.
+Review the chosen takes/captions; record a pickup only if a specific correction
+is requested. No new full recording is needed.
