@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { act, render, renderHook, waitFor } from "@testing-library/react";
-import type { Address } from "viem";
+import { ResourceUnavailableRpcError, type Address } from "viem";
 import type { Deployment } from "@/lib/deployment";
 
 const readContract = vi.fn();
@@ -91,5 +91,62 @@ describe("useCommunityStats read stability", () => {
     rerender({ address: "0x2222222222222222222222222222222222222222" });
     await waitFor(() => expect(result.current.community.isLoading).toBe(false));
     expect(readContract).toHaveBeenLastCalledWith(expect.objectContaining({ blockNumber: undefined }));
+  });
+
+  it("retries a temporarily unavailable community read at the same receipt block", async () => {
+    const deployment = deploymentFor(1952, "X Layer testnet");
+    const { result } = renderHook(() => useCommunityStats({ deployment, address: null, wrongChain: false }));
+    await waitFor(() => expect(result.current.community.totalCareActions).toBe(1));
+    readContract.mockRejectedValueOnce(new ResourceUnavailableRpcError(new Error("Receipt state unavailable")));
+    readContract.mockResolvedValue(BigInt(2));
+
+    await act(async () => { result.current.refresh(BigInt(11)); });
+    expect(result.current.community.isLoading).toBe(true);
+    expect(result.current.community.totalCareActions).toBeNull();
+    expect(result.current.community.errorMessage).toBeNull();
+    await waitFor(() => expect(result.current.community.totalCareActions).toBe(2), { timeout: 3000 });
+
+    expect(readContract).toHaveBeenCalledTimes(3);
+    for (const [args] of readContract.mock.calls.slice(1)) {
+      expect(args.blockNumber).toBe(BigInt(11));
+    }
+  });
+
+  it("stops after three unavailable receipt reads and leaves the total unknown", async () => {
+    const deployment = deploymentFor(1952, "X Layer testnet");
+    const { result } = renderHook(() => useCommunityStats({ deployment, address: null, wrongChain: false }));
+    await waitFor(() => expect(result.current.community.totalCareActions).toBe(1));
+    readContract.mockRejectedValue(new ResourceUnavailableRpcError(new Error("Receipt state unavailable")));
+    await act(async () => { result.current.refresh(BigInt(11)); });
+    await waitFor(() => expect(result.current.community.isLoading).toBe(false), { timeout: 4000 });
+
+    expect(readContract).toHaveBeenCalledTimes(4);
+    expect(result.current.community.totalCareActions).toBeNull();
+    expect(result.current.community.errorMessage).toMatch(/could not be loaded/i);
+    for (const [args] of readContract.mock.calls.slice(1)) {
+      expect(args.blockNumber).toBe(BigInt(11));
+    }
+  });
+
+  it("cancels a delayed community retry when the wallet session changes", async () => {
+    const deployment = deploymentFor(1952, "X Layer testnet");
+    const { result, rerender } = renderHook(
+      ({ address }: { address: Address }) => useCommunityStats({ deployment, address, wrongChain: false }),
+      { initialProps: { address: "0x1111111111111111111111111111111111111111" as Address } },
+    );
+    await waitFor(() => expect(result.current.community.totalCareActions).toBe(1));
+    readContract.mockRejectedValueOnce(new ResourceUnavailableRpcError(new Error("Receipt state unavailable")));
+    await act(async () => { result.current.refresh(BigInt(11)); });
+    expect(readContract).toHaveBeenCalledTimes(2);
+
+    readContract.mockResolvedValue(BigInt(2));
+    rerender({ address: "0x2222222222222222222222222222222222222222" });
+    await waitFor(() => expect(result.current.community.totalCareActions).toBe(2));
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 650)); });
+
+    expect(readContract).toHaveBeenCalledTimes(3);
+    expect(readContract).toHaveBeenLastCalledWith(expect.objectContaining({ blockNumber: undefined }));
+    expect(result.current.community.totalCareActions).toBe(2);
+    expect(result.current.community.errorMessage).toBeNull();
   });
 });

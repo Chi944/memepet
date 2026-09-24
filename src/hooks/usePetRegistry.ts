@@ -14,6 +14,7 @@ import { mapPetOfToViewModel } from "@/lib/map-pet";
 import { petRegistryAbi, type PetOfResult } from "@/lib/pet-registry-abi";
 import type { Deployment } from "@/lib/deployment";
 import { chainFromDeployment } from "@/lib/chains";
+import { readReceiptWithRetry } from "@/lib/receipt-read-retry";
 import type { PetViewModel } from "@/types/view-models";
 
 export type PetReadStatus = "idle" | "loading" | "ready" | "error";
@@ -68,25 +69,6 @@ function isUserRejection(error: unknown): boolean {
       "code" in error &&
       Number((error as { code: number }).code) === 4001)
   );
-}
-
-function isReadTemporarilyUnavailable(error: unknown): boolean {
-  const visited = new Set<unknown>();
-  let cause = error;
-  while (typeof cause === "object" && cause !== null && !visited.has(cause)) {
-    visited.add(cause);
-    const detail = cause as { name?: string; code?: number; status?: number; cause?: unknown };
-    if (detail.name === "ContractFunctionRevertedError") return false;
-    if (detail.name === "BlockNotFoundError" || detail.name === "TimeoutError") return true;
-    if (detail.name === "HttpRequestError") {
-      return detail.status === undefined || [408, 429, 500, 502, 503, 504].includes(detail.status);
-    }
-    if (typeof detail.code === "number" && [-1, -32000, -32001, -32002, -32005, -32007, -32603, 429].includes(detail.code)) {
-      return true;
-    }
-    cause = detail.cause;
-  }
-  return false;
 }
 
 export function usePetRegistry({
@@ -363,28 +345,27 @@ export function usePetRegistry({
         try {
           // RPC replicas can expose a receipt before its state is readable.
           // Retry only reads, at the same confirmed block, with a bounded wait.
-          for (let attempt = 0; ; attempt += 1) {
-            if (!isCurrentOperation()) return;
-            try {
+          const confirmed = await readReceiptWithRetry(
+            receipt.blockNumber,
+            async (blockNumber) => {
               const block = await publicClient.getBlock({
-                blockNumber: receipt.blockNumber,
+                blockNumber,
               });
               if (!isCurrentOperation()) return;
-              result = await publicClient.readContract({
+              const petResult = await publicClient.readContract({
                 address: registryAddress,
                 abi: petRegistryAbi,
                 functionName: "petOf",
                 args: [address],
-                blockNumber: receipt.blockNumber,
+                blockNumber,
               });
-              chainTimeMs = Number(block.timestamp) * 1000;
-              break;
-            } catch (error) {
-              if (!isCurrentOperation()) return;
-              if (attempt >= 2 || !isReadTemporarilyUnavailable(error)) throw error;
-              await new Promise<void>((resolve) => window.setTimeout(resolve, 500 * (attempt + 1)));
-            }
-          }
+              return { result: petResult, chainTimeMs: Number(block.timestamp) * 1000 };
+            },
+            isCurrentOperation,
+          );
+          if (!confirmed) return;
+          result = confirmed.result;
+          chainTimeMs = confirmed.chainTimeMs;
         } catch {
           // The receipt already confirmed success, so the write DID land. Say
           // so, and mark the display as stale rather than claiming failure.
