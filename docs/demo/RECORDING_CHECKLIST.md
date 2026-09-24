@@ -17,7 +17,7 @@ Script **MP-EQ-20260923-v1**: three turns and **130 selected spoken words each**
 - [ ] Save actual UTC times and full hashes. Keep pending states and readable results. Mark shortened confirmation waits in the edit.
 - [ ] Complete the account-switch row separately even if the final video omits it. Never splice two wallets into one apparent journey.
 - [ ] For Buddy, record a second confirmed care on a **later UTC date**, captioning the actual date. UTC midnight is **08:00 Singapore**. Otherwise use the S08 rules alternate with stage-art labels.
-- [ ] Update [BROWSER_WALKTHROUGH.md](../qa/BROWSER_WALKTHROUGH.md) only with actual results. No adoption/care has passed yet.
+- [ ] Update [BROWSER_WALKTHROUGH.md](../qa/BROWSER_WALKTHROUGH.md) only with actual results. The 24 September care passed with receipt/read-back, but was not recorded. Its already-adopted wallet cannot replay the adoption; use a fresh prepared account for that footage.
 
 ## Editor and team review
 
@@ -28,4 +28,9 @@ Script **MP-EQ-20260923-v1**: three turns and **130 selected spoken words each**
 - [ ] Confirm organizer eligibility, roster, route, rights and form declarations. Replace the video URL and final revision placeholders only with verified values.
 - [ ] Submit by **25 September 2026, 23:59 UTC** (**26 September, 07:59 Singapore**), leaving upload/review time. Retain the receipt.
 
-Current proof: local connection/network display and hosted account-access revocation/reload were observed. The hosted wallet is now disconnected. These are not adoption/care passes. The final video, three MP3s and complete transaction footage are still outstanding.
+Current proof: [the 24 September run](../qa/evidence/FINAL_ACCEPTANCE_2026-09-24.md)
+verified a real care, receipt/read-back, cooldown, normal reload, public pet and
+community attribution. Adoption has a verified receipt and user report, but
+its browser transitions were not captured. A stale community header required
+reload and has separate fix/verification work. Rejection, account switching,
+the final video, three MP3s and complete transaction footage remain outstanding.

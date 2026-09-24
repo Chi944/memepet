@@ -39,6 +39,9 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Verify counter evidence helper
+        run: node --test docs/qa/counter-check.regression.mjs
+
       # next/font downloads faces at build time, so this step needs network.
       - name: Build
         run: npm run build

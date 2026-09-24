@@ -53,6 +53,16 @@ celebration pulse under `prefers-reduced-motion: reduce`.
 
 ## Permission and licence position
 
+### Team confirmation — 24 September 2026
+
+Deston reports creating the three originals in **ChatGPT**, with **Kym**
+finalizing the artwork. Deston also confirms that all three teammates agree
+to submit their code and artwork. This is the team's reported provenance and
+submission permission; it does not independently verify the original model
+version, account terms, generation metadata, or any reference-image rights.
+Whether reference images were used, and their permission if so, remains
+unconfirmed. No exclusive-rights claim or project-wide licence is inferred.
+
 The project describes these as accepted, team-generated hackathon assets.
 No third-party licence was purchased, and no release licence has been selected
 or established by this work. Acceptance for the project does not establish

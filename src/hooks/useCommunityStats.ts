@@ -31,9 +31,11 @@ export function useCommunityStats({
     unknownCommunityViewModel({ isLoading: true }),
   );
   const [refreshToken, setRefreshToken] = useState(0);
+  const [readBlockNumber, setReadBlockNumber] = useState<bigint | undefined>();
 
   if (activeKey !== cacheKey) {
     setActiveKey(cacheKey);
+    setReadBlockNumber(undefined);
     setCommunity(
       unknownCommunityViewModel({
         isLoading: Boolean(deployment.registryAddress) && !wrongChain,
@@ -70,6 +72,7 @@ export function useCommunityStats({
           abi: petRegistryAbi,
           functionName: "communityStats",
           args: [APPROVED_COMMUNITY_ID],
+          blockNumber: readBlockNumber,
         });
 
         if (!cancelled) {
@@ -94,10 +97,13 @@ export function useCommunityStats({
     chain,
     deployment.rpcUrl,
     refreshToken,
+    readBlockNumber,
     registryAddress,
   ]);
 
-  const refresh = useCallback(() => {
+  const refresh = useCallback((blockNumber?: bigint) => {
+    setReadBlockNumber(blockNumber);
+    setCommunity(unknownCommunityViewModel({ isLoading: true }));
     setRefreshToken((value) => value + 1);
   }, []);
 

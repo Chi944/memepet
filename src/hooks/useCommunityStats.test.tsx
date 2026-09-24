@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { render, waitFor } from "@testing-library/react";
+import { act, render, renderHook, waitFor } from "@testing-library/react";
 import type { Address } from "viem";
 import type { Deployment } from "@/lib/deployment";
 
-const readContract = vi.fn(async () => BigInt(1));
+const readContract = vi.fn();
 
 vi.mock("viem", async (importOriginal) => {
   const actual = await importOriginal<typeof import("viem")>();
@@ -36,7 +36,10 @@ function Probe({ deployment, address = "0x11111111111111111111111111111111111111
 const settle = () => new Promise((resolve) => setTimeout(resolve, 300));
 
 describe("useCommunityStats read stability", () => {
-  beforeEach(() => readContract.mockClear());
+  beforeEach(() => {
+    readContract.mockReset();
+    readContract.mockResolvedValue(BigInt(1));
+  });
 
   // Regression: chainFromDeployment builds a fresh chain object for any id
   // outside X Layer. Unmemoised, that identity churn re-fired this effect on
@@ -69,5 +72,24 @@ describe("useCommunityStats read stability", () => {
     rerender(<Probe deployment={deployment} address="0x2222222222222222222222222222222222222222" key="stable" />);
     await waitFor(() => expect(readContract).toHaveBeenCalled());
     await waitFor(() => expect(getByTestId("total")).toHaveTextContent("1"));
+  });
+
+  it("does not carry a receipt block into a different wallet session", async () => {
+    const deployment = deploymentFor(31337, "Anvil local");
+    const { result, rerender } = renderHook(
+      ({ address }: { address: Address }) => useCommunityStats({
+        deployment,
+        address,
+        wrongChain: false,
+      }),
+      { initialProps: { address: "0x1111111111111111111111111111111111111111" as Address } },
+    );
+    await waitFor(() => expect(result.current.community.totalCareActions).toBe(1));
+    await act(async () => { result.current.refresh(BigInt(11)); });
+    expect(readContract).toHaveBeenLastCalledWith(expect.objectContaining({ blockNumber: BigInt(11) }));
+
+    rerender({ address: "0x2222222222222222222222222222222222222222" });
+    await waitFor(() => expect(result.current.community.isLoading).toBe(false));
+    expect(readContract).toHaveBeenLastCalledWith(expect.objectContaining({ blockNumber: undefined }));
   });
 });

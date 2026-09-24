@@ -4,7 +4,20 @@ Worksheet for the connect → adopt → care journey against **local Anvil**.
 These steps need a real injected wallet (MetaMask / OKX Wallet). They are
 **not** pre-marked as passing.
 
-**Current status — 23 September 2026 (Singapore):** The user reports only
+**Latest hosted run — 24 September 2026:** A fresh connection and a real first
+care were performed with human MetaMask approvals. The successful care receipt,
+10-point read-back, disabled UTC cooldown, normal reload, public pet page and
+block-pinned community 0 → 1 attribution are recorded in
+[final acceptance evidence](evidence/FINAL_ACCEPTANCE_2026-09-24.md).
+Adoption has a verified receipt and a user report, but its browser transitions
+were not captured. Rejection, account switching and later-day evolution remain
+NOT RUN. No video was recorded. The post-care community header initially stayed
+stale until reload; the evidence records that failure and the separate fix.
+The human reports a warning-free connection prompt; automation did not inspect
+the extension popup. This supersedes the older current-state claims below,
+without rewriting their historical result tables.
+
+**Historical status — 23 September 2026 (Singapore):** The user reports only
 connecting and switching networks, with no signature or transaction approval.
 The separate real Chrome local run independently showed the intended address
 `0x2ec8471290793FeB64792861Ce3102d291ce1CA1` and chain **31337** after the

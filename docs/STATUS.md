@@ -1,6 +1,8 @@
 # Current delivery status
 
-Reviewed 23 September 2026 (Singapore), starting from `main` at **`a8c14cb`**.
+Reviewed 24 September 2026 (Singapore), with final-acceptance work starting from
+`main` at **`a698ed3`**. PR #43 fixes the README network link; reviewed PR #44
+corrects the block-pinned counter-evidence helper.
 
 ## Implemented
 
@@ -19,7 +21,7 @@ remains in Git history. No mandatory new feature prompt is waiting to be run.
 
 | Work | Evidence required | Owner |
 |---|---|---|
-| Real wallet flow | Rejection, adoption, care, receipts/read-back, cooldown, refresh, account switching and public/community consistency | Deston operates; Kym/Larm verify |
+| Remaining wallet flow and capture | Fresh-account rejection/adoption footage, account switching, real care on the follow-up fix; retain the verified 24 September care/receipt/read-back, cooldown, reload and public evidence | Deston operates; Kym/Larm verify |
 | Final release visuals | Desktop/mobile, keyboard, reduced motion, current stage art/evolution and public/share pages | Kym + Larm |
 | Voice recordings | One MP3 each from the matching speaker script | All three |
 | Final demo edit | Genuine screen footage, balanced voices, captions and reviewed 2–4 minute export | Codex after inputs; team reviews |
@@ -45,8 +47,17 @@ passed **111 app tests / 20 files**, **15 contract tests**, typecheck, lint,
 build and production-route gates. Lint retained one existing image warning.
 These results describe that revision, not an unrun current check.
 
-Hosted connection was observed, and real Disconnect/reload verified account-access
-revocation in the [release audit](qa/evidence/RELEASE_AUDIT_2026-09-23.md).
-Browser adoption, care, rejection and earned evolution remain unverified.
-A fresh warning-free connection prompt is also unverified. Homepage screenshots
-show presentation; they do not complete a transaction or acceptance gate.
+The [24 September real browser run](qa/evidence/FINAL_ACCEPTANCE_2026-09-24.md)
+verified first care with a successful receipt and pet read-back, same-day
+cooldown, normal reload, public pet consistency and independent community
+0 → 1 attribution. Adoption has a verified receipt and user report, but its
+browser transition sequence was not captured. Rejection, account switching,
+earned evolution and continuous video remain incomplete. The human reports
+a warning-free new prompt; automation did not inspect the extension popup.
+The post-care header stayed stale until reload; this observed failure and
+separate follow-up fix must not be hidden by the successful chain result.
+
+Larm's active assignment is the [final browser QA prompt](qa/FINAL_BROWSER_QA.md).
+No organizer acceptance has been confirmed by the user. Team contribution
+consent and ChatGPT mascot authorship are user-confirmed; original input rights
+and applicable generation terms remain unresolved in [team readiness](demo/TEAM_READINESS.md).

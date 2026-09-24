@@ -30,6 +30,7 @@ npm run typecheck
 npm run lint
 npm test
 npm run build
+node --test docs/qa/counter-check.regression.mjs
 ```
 
 With Foundry installed:
@@ -45,6 +46,8 @@ npm run test:contracts
 and asserts `/` returns 200 and `/dev/pet`, `/dev/landing`, `/dev/community`
 return 404. For local production inspection, use `npm run start` after building.
 A test pass does not establish a real wallet transaction.
+The separate Node regressions check the read-only counter evidence helper's
+block selection, interval boundaries and validation; they never sign or write.
 
 ## Developer previews
 

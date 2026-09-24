@@ -1,15 +1,27 @@
 # Team readiness — MemePet
 
-23 September 2026 (Singapore) · proposed owners below, using the three confirmed display names.
+24 September 2026 (Singapore) · proposed owners below, using the three confirmed display names.
 
-**The scripts and production plan are ready to record; the submission is not yet complete.** The wallet is disconnected from the hosted site after a verified revocation/reload check. No browser adoption or care has been marked as passing.
+**The scripts and production plan are ready to record; the submission is not yet complete.**
+The [24 September real run](../qa/evidence/FINAL_ACCEPTANCE_2026-09-24.md)
+verified first care, receipt/read-back, cooldown, normal reload and public pet
+consistency. Adoption has a verified receipt and user report, but its browser
+transitions were not captured. Rejection/account switching are still unrun,
+and no video was recorded. Review the evidence for the stale community-header
+finding and the separate fix. The earlier disconnect is a dated observation,
+not an assertion about the wallet's state after every later session.
+
+Deston reports **no organizer confirmation yet**. Check the original
+registration/acceptance email (including spam), then use the official builder
+support channel linked below to resolve acceptance and testnet eligibility.
+Do not infer acceptance from a working app or an accessible submission form.
 
 ## Team-wide remaining work
 
 | Priority | Deliverable | Proposed owner | Definition of done |
 |---|---|---|---|
 | 1 | Eligibility and entry details | Deston, with all three confirming their information | Confirm accepted-team status, exact roster/team name, track, route and form declarations. Obtain organizer clarification for testnet-only MemePet and its meme-ecosystem integration. |
-| 1 | Real working-flow evidence | Deston operates wallet; Kym and Larm verify result/counters | Genuine rejection, adoption, first care, cooldown, refresh, account switch and public/community reads documented in the wallet worksheet with receipts. No remaining wallet security warning ignored. |
+| 1 | Remaining working-flow evidence and footage | Deston operates wallet; Kym and Larm verify result/counters | Film a fresh prepared account's rejection/adoption and care; complete account switching. Preserve the already verified first-care evidence, and repeat the fixed community refresh on a genuine care. No remaining wallet security warning ignored. |
 | 1 | Rights/provenance | Kym gathers asset permissions; each member confirms contributions | Confirm rights for pet artwork, derived share art, code and any added audio. Existing uncertainty stays visible until resolved. A root open-source licence must not be invented without contributor agreement. |
 | 2 | Three voices | Everyone | Upload one MP3 each using the matching script version and filename below; all three blocks present, quiet audio, no music baked in. |
 | 2 | Optional Buddy footage | Deston + Kym | Second confirmed care on a later UTC date with actual timestamp and stage reread; otherwise select the equal-length S08 rules alternate. |
@@ -40,6 +52,14 @@
 The published submission deadline is **25 September 2026, 23:59 UTC**, or **26 September, 07:59 Singapore**. Aim to finish and review on 24 September; leave 25 September for fixes and upload checks. A UTC care day changes at **08:00 Singapore**, not Singapore midnight. Cares on 23/24 or 24/25 September UTC can produce Buddy, but the latter leaves less editing time. Missing optional evolution does not excuse a missing core working demo.
 
 ## Requirements we can and cannot establish
+
+**Team-reported rights update:** Deston confirms all three teammates agree to
+submit their code/artwork, that he created Mochi in ChatGPT, and Kym finalized
+the images. This narrows the remaining art questions to original reference
+inputs/permissions and applicable generation-account terms; it does not prove
+exclusive rights. The repository now includes the official Geist/Geist Mono
+OFL notice. No project-wide release licence has been selected. New audio must
+also be cleared for the final public video.
 
 The [OKX Builder Kit](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit) specifies a 2–4 minute working-product/integration video and a complete linked submission. It does not explicitly settle testnet-only eligibility for this implementation. Its date for the Singapore finale is **7 October**, while the linked [terms](https://www.okx.com/learn/okx-dev-day-terms) state **6 October** and contain a precedence clause. Ask organizers to resolve the discrepancy before making travel/finale claims. Team acceptance, each member's eligibility, rights and exact form declarations remain team-confirmed items; no ID documents should be committed to the repo or uploaded here.
 
