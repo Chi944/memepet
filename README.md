@@ -10,7 +10,7 @@ Growth comes from confirmed care. No MemePet token to buy; network gas applies.
 
 [![Checks](https://github.com/Chi944/memepet/actions/workflows/checks.yml/badge.svg)](https://github.com/Chi944/memepet/actions/workflows/checks.yml)
 [![OKX Dev Day 2026](https://img.shields.io/badge/OKX_Dev_Day_2026-Submission_in_preparation-black)](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit)
-[![X Layer testnet](https://img.shields.io/badge/chain-X_Layer_testnet-c6ff00)](https://web3.okx.com/onchainos/dev-docs/xlayer)
+[![X Layer testnet](https://img.shields.io/badge/chain-X_Layer_testnet-c6ff00)](https://web3.okx.com/onchainos/dev-docs/xlayer/developer/build-on-xlayer/network-information)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3.5-black)](https://nextjs.org)
 [![Solidity 0.8.24](https://img.shields.io/badge/Solidity-0.8.24-363636)](https://soliditylang.org)
 
