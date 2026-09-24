@@ -54,7 +54,7 @@ The public RPC served these pinned reads afterward. The original failed
 browser response was not captured, so its underlying provider cause remains
 unproven.
 
-## Recovery change under verification
+## Deployed recovery change
 
 Failed community reads now offer **Retry community total** with a clear
 read-only explanation. Retry retains the last receipt block, drops results
@@ -66,9 +66,65 @@ manual retry at the same block → correct total while an unpinned latest result
 remains stale. The test asserts only one wallet write. Focused typecheck/lint
 also passed. These controlled tests are not a genuine browser retry pass.
 
-**Fresh hosted adoption/care/recovery on the new revision: NOT RUN yet.**
-Account 3 is funded and connected in preparation; that does not establish a
-transaction or a passed recovery.
+The fix merged through [PR #51](https://github.com/Chi944/memepet/pull/51) as
+`af886a75f1b1f56a7cf4deec0426cbc731bc4cb6`. Production deployment
+**6644949897** succeeded at **18:17:39 UTC**. A fresh public `/pet` reload
+exposed chunk `3cz7dptruubzv.js`, independently fetched and checked for both
+the Retry control and its read-only notice. App/Contracts checks passed on the
+PR and after merge.
+
+### Genuine Account 3 follow-up on the deployed fix
+
+Hosted rejection, adoption, first care and manual read recovery were genuinely
+performed on this revision.
+Account 3 (`0xb7E6D789c39D468CfE3c5dA37C29Bd9852247B3a`) was funded and
+connected. At block 41,814,952 (18:16:29 UTC), it had no pet, nonce 0 and
+0.002 testnet OKB; the community total was 3. Funding alone does not establish
+a transaction or a passed recovery.
+
+- Rejection: human cancelled the first adoption request; the page showed the
+  declined message and None yet. At block **41,815,168**, **18:20:05 UTC**,
+  `petOf` was still absent, nonce 0, balance 0.002 testnet OKB and total 3: PASS.
+- Adoption: human approved the next request. Transaction
+  `0xcacd382ee4890f1b97f3cbe2c1e5968acab7528b853361cd19bb69aa3aaccba9`
+  succeeded in block **41,815,337** at **18:22:54 UTC**. Sender/registry match,
+  value 0, decoded `adopt(1)`, matching `Adopted` event; the receipt-block pet
+  was `(true, 1, 0, 0)`, and total stayed 3. Browser showed the same account's
+  zero-point Hatchling and Ready: PASS.
+- Pre-care baseline: block **41,815,389**, **18:23:46 UTC**, total 3, care count
+  0 and nonce 1. Care was then requested; no advance progress was displayed.
+- Care: human approved transaction
+  `0xa340d65b2e59276568c8ff364ea01ec4cf1cc995b6e0ce720ddd1477906e1a55`.
+  Receipt succeeded in block **41,815,415**, **18:24:12 UTC**: Account 3 to
+  the registry, value 0, decoded `care()`, matching `Cared` event (community 1,
+  care count 1, UTC day 20720), and pet `(true, 1, 1, 20720)`.
+  The total was 3 in the preceding block and 4 in the receipt block.
+  The counter helper found exactly one care in `(41,815,389, 41,815,474]`,
+  matching this owner and transaction: PASS for the exact +1 attribution.
+- Automatic pet read-back: the same page displayed 10 points, Done today and
+  disabled care until **25 September 00:00 UTC**, without reload: PASS.
+- Automatic community read: the fresh DOM still displayed **Unknown** after
+  care, now with the read-only retry notice/control: FAIL for automatic refresh.
+  This run does not establish the underlying cause of the RPC failure.
+- Manual recovery: clicking **Retry community total** once displayed Reading,
+  then **4**. The retry notice disappeared; the pet kept 10 points and cooldown.
+  No page reload or second wallet transaction occurred: PASS for real read-only
+  recovery. This does not upgrade the automatic-refresh failure to a pass.
+- Normal browser reload: after reads settled, Account 3, chain 1952, Live
+  Hatchling, 10 points, cooldown and total 4 returned: PASS. This was a normal
+  automation-triggered reload, not a human hard refresh.
+- Copy link: the button displayed **Link copied** and the visible share target
+  contained Account 3's correct public URL. The browser automation clipboard
+  interface returned no items, so actual clipboard contents remain UNVERIFIED;
+  feedback alone is not an end-to-end clipboard pass.
+- Public viewing: opened the actual share URL in the separate in-app browser,
+  without connecting a wallet. It displayed Read only, the correct Account 3
+  address and Live Hatchling with 10 points, with no care action: PASS.
+- Network away/back and disconnect persistence: NOT RUN on `af886a75` at this
+  checkpoint. The human was asked to select another existing network without
+  signing or sending; the page still displayed 1952 at the last observation.
+  It remains connected so the requested network check can continue. Earlier
+  disconnect evidence is not relabelled as a pass on this revision.
 
 ## Visual follow-up
 
@@ -99,6 +155,11 @@ Removed three clean, fully merged worktrees without force after checking
 ancestry, tracked/untracked files and ignored content. Their Git branches
 remain. A unique ignored forge-std copy was preserved with matching hashes.
 Private video/edit sources and final exports are outside the submitted repo.
+The full video workspace moved intact into the private submission archive;
+all 210 files matched their pre-move hashes. Original Downloads were preserved.
+The active folder now contains only `memepet` for this project. The 41-file
+ignored browser-output directory was also archived and hash-verified. The
+tracked repository is 125 files (about 2.67 MB at the cleanup commit).
 
 ## Automated validation
 
@@ -110,5 +171,6 @@ Private video/edit sources and final exports are outside the submitted repo.
   plain-image warning (server-rendered share art).
 - Local production HTTP: `/` 200; `/dev/pet`, `/dev/landing`, `/dev/community`
   each 404. Temporary development/production servers were stopped afterward.
-- Final hosted deployment and fresh wallet validation of the recovery control:
-  pending; no pass claimed yet.
+- Hosted deployment and shipped recovery-control bundle: verified as above.
+- Fresh wallet validation of the recovery control: PASS on Account 3 as above;
+  automatic community refresh still failed before the successful manual retry.

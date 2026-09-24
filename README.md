@@ -37,8 +37,9 @@ Growth comes from confirmed care. No MemePet token to buy; network gas applies.
 | **Network** | X Layer testnet · chain **1952** · gas currency **OKB** |
 | **Repository** | [github.com/Chi944/memepet](https://github.com/Chi944/memepet) |
 
-The core implementation is merged. The remaining work is targeted release QA,
-final video review and the submission package. Current evidence is summarized below;
+The core implementation is merged. The latest release has genuine wallet
+adoption/care and read-only counter recovery evidence. The remaining work is
+the final unrun checks, team video review and the submission package. Current evidence is summarized below;
 remaining acceptance work is tracked in [current status](docs/STATUS.md).
 
 ---
@@ -103,23 +104,26 @@ results are listed separately.
 | Landing, how-it-works and community panel | ✅ Merged |
 | Pet scene, three stages and care-state panel | ✅ Merged, including corrected artwork and evolution presentation |
 | Black/lime design, responsive layouts and reduced-motion styles | ✅ Implemented; four viewport layouts and keyboard navigation checked. Reduced-motion preview passed; normal-motion foreground playback is unrun by user preference |
-| Wallet connection, network switch and account-access revocation | ✅ Implemented; hosted connection observed, real Disconnect and reload verified |
-| Adoption, care, receipts and confirmed read-back | ✅ Genuine rejection, adoption, care, later 10-point read-back and cooldown verified. Read failures and the follow-up retry fix are documented separately |
-| Public pet page and generated share images | ✅ Merged; Account 2's disconnected public page showed the same Hatchling and 10 points |
+| Wallet connection, network switch and account-access revocation | ✅ Implemented; hosted connection observed. Disconnect/reload passed in the earlier Account 2 run; the latest network/disconnect rows remain unrun |
+| Adoption, care, receipts and confirmed read-back | ✅ Account 3 genuinely rejected, adopted and cared on `af886a75`; the pet automatically reached 10 points/cooldown. Normal reload preserved the state. Automatic counter refresh failed; read-only Retry recovered the total without a reload or new transaction |
+| Public pet page and generated share images | ✅ Merged; a separate unconnected browser displayed Account 3's correct address, read-only live Hatchling and 10 points with no care action |
 | X Layer testnet deployment | ✅ Deployed; executable runtime comparison documented |
-| Automated checks | ✅ Current change: **123 app tests / 21 files**, **15 contract tests**, **8 counter checks**, typecheck, lint, build and local production-route checks passed; hosted deployment verification pending |
+| Automated checks | ✅ Release `af886a75`: **123 app tests / 21 files**, **15 contract tests**, **8 counter checks**, typecheck, lint, build and production-route checks passed. Production deployment verified |
 | Final demo video and submission | ✅ Video/captions complete with technical QC passed; care/refresh result stills labelled. Team playback, public upload and form completion remain |
 
-[CI run for baseline `3d0428e`](https://github.com/Chi944/memepet/actions/runs/36030104889)
-records the earlier 122-test release. The current 123-test results are local
-verification, recorded in [latest-release QA](docs/qa/evidence/LATEST_RELEASE_QA_2026-09-24.md).
+[CI for `af886a75`](https://github.com/Chi944/memepet/actions/runs/36040157500)
+passed after merge. Production deployment **6644949897** succeeded at
+**24 September, 18:17:39 UTC**; the public app served the new recovery control.
+This is the tested product revision, separate from later documentation commits.
+See [latest-release QA](docs/qa/evidence/LATEST_RELEASE_QA_2026-09-24.md).
 Lint passed with one existing image-element warning and no errors.
 The [24 September capture record](docs/qa/evidence/FINAL_CAPTURE_2026-09-24.md)
 separates actual wallet actions, chain receipts, observed app states and usable
 video. Account 2's care confirmed on chain, but reads failed during the flow;
-human refresh recovered the same pet and total. A later genuine care still
-left the community header Unknown; its investigation and current results belong
-in [latest-release QA](docs/qa/evidence/LATEST_RELEASE_QA_2026-09-24.md).
+human refresh recovered the same pet and total. In the latest Account 3 run,
+care automatically updated the pet to 10 points/cooldown but the community header
+became Unknown. **Retry community total** recovered **4** without a reload or
+new transaction. Manual recovery passed; automatic community refresh did not.
 The recorded take cannot establish an uninterrupted successful care/refresh sequence.
 
 **Confirmed data drives the interface:**
@@ -325,8 +329,9 @@ docs/
   qa/                      Walkthroughs and dated evidence
 ```
 
-Raw recordings, exports and media caches are ignored under `media/`. Production
-instructions and reusable source composition belong in tracked files.
+Production sources, recordings and exports are preserved in the private
+submission archive. This repository retains product code, tests, operational
+guides and dated evidence; media caches and raw recordings are not submitted in Git.
 
 ---
 
@@ -346,10 +351,11 @@ and a read-only holder indicator remain optional future work.
 - **Testnet deployment.** No mainnet deployment or organizer approval is claimed.
   Checked kit/form material does not state a separate written testnet approval
   requirement; remaining form declarations still need review.
-- **Targeted browser QA remains open.** The latest account switch and care were
-  observed, but the post-care community read still showed Unknown. The follow-up
-  investigation and unrun rows remain in [current status](docs/STATUS.md);
-  automated tests do not close them.
+- **Automatic community refresh can fail.** The latest care updated the pet
+  correctly, but the counter became Unknown. A genuine read-only retry recovered
+  the receipt-block total without another transaction. This is a verified
+  recovery path, not a pass for automatic refresh. The remaining browser rows
+  are listed in [current status](docs/STATUS.md).
 - **Normal-motion playback remains unrun.** Reduced-motion and missing-art/unknown-total
   previews passed in the follow-up run. The user prefers to keep reduced motion
   enabled, so normal-motion foreground playback has not been observed.
@@ -371,8 +377,8 @@ and delivery. See [current status](docs/STATUS.md) for the remaining acceptance 
 
 | Next step | Completion evidence |
 |---|---|
-| Remaining wallet QA | Resolve the latest community-read failure and record genuine follow-up results for the current release |
-| Final release QA | Verify the pending deployment; normal-motion foreground playback remains unrun by user preference |
+| Remaining wallet QA | Finish the network-switch/disconnect follow-up; Account 3 public viewing passed; preserve the automatic community-refresh failure and verified manual recovery |
+| Final release QA | Deployment verified; normal-motion foreground playback remains unrun by user preference |
 | Demo video | Genuine product footage and a reviewed 2–4 minute export |
 | Submission | Eligibility/rights and form answers confirmed; app/repo/video links checked; receipt retained |
 
