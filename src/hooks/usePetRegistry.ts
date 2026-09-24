@@ -82,6 +82,7 @@ export function usePetRegistry({
   const [txPhase, setTxPhase] = useState<TxPhase>("idle");
   const [txKind, setTxKind] = useState<"idle" | "adopt" | "care">("idle");
   const [transactionHash, setTransactionHash] = useState<string | undefined>();
+  const [confirmedBlockNumber, setConfirmedBlockNumber] = useState<bigint | undefined>();
   const [txErrorMessage, setTxErrorMessage] = useState<string | null>(null);
   const [refreshToken, setRefreshToken] = useState(0);
   const [celebrateStageUp, setCelebrateStageUp] = useState(false);
@@ -93,6 +94,7 @@ export function usePetRegistry({
     setTxPhase("idle");
     setTxKind("idle");
     setTransactionHash(undefined);
+    setConfirmedBlockNumber(undefined);
     setTxErrorMessage(null);
     setCelebrateStageUp(false);
   }
@@ -224,6 +226,7 @@ export function usePetRegistry({
     setTxPhase("idle");
     setTxKind("idle");
     setTransactionHash(undefined);
+    setConfirmedBlockNumber(undefined);
     setTxErrorMessage(null);
   }, []);
 
@@ -277,6 +280,7 @@ export function usePetRegistry({
       setCelebrateStageUp(false);
       setTxErrorMessage(null);
       setTransactionHash(undefined);
+      setConfirmedBlockNumber(undefined);
       setTxKind(kind);
       setTxPhase("awaiting-signature");
 
@@ -329,6 +333,10 @@ export function usePetRegistry({
           );
           return;
         }
+
+        // Related reads must use the receipt's state, not an independently
+        // cached or lagging "latest" response from the RPC service.
+        setConfirmedBlockNumber(receipt.blockNumber);
 
         // Re-read before treating the write as success. A hash alone is not enough.
         let result;
@@ -467,6 +475,7 @@ export function usePetRegistry({
     txPhase,
     txKind,
     transactionHash,
+    confirmedBlockNumber,
     txErrorMessage,
     cooldownAvailableAtIso,
     celebrateStageUp,

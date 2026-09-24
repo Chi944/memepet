@@ -32,21 +32,21 @@ export function PetLiveClient() {
   const refreshCommunity = community.refresh;
   const txKind = registry.txKind;
   const txPhase = registry.txPhase;
+  const confirmedBlockNumber = registry.confirmedBlockNumber;
 
   useEffect(() => {
     if (txPhase !== "success") {
       return;
     }
 
-    const timer = window.setTimeout(() => {
-      dismissTx();
-      if (txKind === "care") {
-        refreshCommunity();
-      }
-    }, 1600);
+    if (txKind === "care" && confirmedBlockNumber !== undefined) {
+      refreshCommunity(confirmedBlockNumber);
+    }
+
+    const timer = window.setTimeout(dismissTx, 1600);
 
     return () => window.clearTimeout(timer);
-  }, [dismissTx, refreshCommunity, txKind, txPhase]);
+  }, [confirmedBlockNumber, dismissTx, refreshCommunity, txKind, txPhase]);
 
   const action = useMemo(
     () =>

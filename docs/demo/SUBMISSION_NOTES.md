@@ -1,10 +1,18 @@
 # Submission notes — verified facts and open items
 
-Updated **23 September 2026 (Singapore)**. Working draft, not a submitted entry. Keep every **UNVERIFIED** field visible until actual evidence replaces it. Never turn a planned action into a result.
+Updated **24 September 2026 (Singapore)**. Working draft, not a submitted entry. Keep every **UNVERIFIED** field visible until actual evidence replaces it. Never turn a planned action into a result.
+
+Latest evidence: the [24 September run](../qa/evidence/FINAL_ACCEPTANCE_2026-09-24.md)
+performed a real first care, verified its receipt and 10-point read-back,
+cooldown, normal reload, public pet and community delta. Adoption is supported
+by a receipt and user report; its browser transitions were not captured.
+Rejection/account switching, full visual QA and continuous video remain open.
+The community header was stale until reload; the separate fix must be tested
+and described independently. The user reports no organizer confirmation yet.
 
 ## Organizer requirements
 
-The [official OKX Dev Day builder kit](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit), updated 18 September and rechecked on 23 September Singapore time, specifies **25 September 2026, 23:59 UTC** as the deadline (**26 September, 07:59 Singapore**) and a **2–4 minute video** showing a working integration. Contract addresses and technical links are among the requested materials.
+The [official OKX Dev Day builder kit](https://www.okx.com/en-sg/learn/okx-dev-day-builder-kit), updated 18 September and rechecked on 24 September Singapore time, specifies **25 September 2026, 23:59 UTC** as the deadline (**26 September, 07:59 Singapore**) and a **2–4 minute video** showing a working integration. Contract addresses and technical links are among the requested materials.
 
 Build a Market requires X Layer integration and a meme or another listed ecosystem component. Our intended route is a meme application; acceptance of this precise implementation is **UNVERIFIED**. The accessible kit does **not specify mainnet versus testnet** for this case. Testnet eligibility remains **UNVERIFIED**, not implicitly accepted.
 
@@ -48,14 +56,16 @@ Deployment transaction evidence is not adoption/care evidence. Bytecode comparis
 
 ## Project summary — factual draft
 
-MemePet is a meme-community companion prototype on X Layer testnet. Its registry stores one pet per wallet and permits one care action per UTC day. The interface derives ten growth points per recorded care, with Hatchling, Buddy and Guardian stages, and reads a shared community care counter. The prototype supports one community and one mascot. There is no MemePet token, token purchase, staking, marketplace or financial reward. Transactions still require network gas. The complete browser wallet journey remains unverified.
+MemePet is a meme-community companion prototype on X Layer testnet. Its registry stores one pet per wallet and permits one care action per UTC day. The interface derives ten growth points per recorded care, with Hatchling, Buddy and Guardian stages, and reads a shared community care counter. The prototype supports one community and one mascot. There is no MemePet token, token purchase, staking, marketplace or financial reward. Transactions still require network gas. A real first care, successful receipt, 10-point read-back, cooldown, reload and public pet were verified on 24 September; the full browser acceptance matrix and final footage remain incomplete.
 
-After genuine wallet verification, replace the final sentence with the specific observed journey and evidence references, not a blanket production-readiness claim.
+Keep future updates tied to the specific observed journey and evidence references,
+not a blanket production-readiness claim.
 
 ## Evidence by environment
 
 | Source | What it establishes | What it does not establish |
 |---|---|---|
+| [Final acceptance, 24 Sep](../qa/evidence/FINAL_ACCEPTANCE_2026-09-24.md) | Real first care, successful adoption/care receipts, pet read-back, UTC cooldown, normal reload, public pet and independently attributed community 0 → 1 | Full adoption browser transitions, rejection, account switch, later-day evolution, final video or a real care rerun after the follow-up fix |
 | [Live X Layer observations, 22 Sep](../qa/evidence/LIVE_XLAYER_OBSERVATIONS.md) | Public site reads chain 1952; community cares were 0 at capture; one RPC read per page load; `/dev/pet` returned 404; mobile/console checks recorded | Any signed transaction or adopted-pet persistence |
 | [Earlier preparation evidence, 22 Sep](../qa/evidence/OKX_PREP_2026-09-22.md) | Real Chrome Connect attempt reported no injected wallet; supplied address has no pet and a readable testnet balance; form page 1 inspected | Successful wallet connection, signing authority, adoption, care or form submission |
 | [Later wallet warning review, 22 Sep](../qa/evidence/METAMASK_WARNING_2026-09-22.md) | Hosted warning observed; public review issue submitted; reviewer later said the domain did not appear flagged anymore and closed the issue | Warning removal in the current wallet prompt, an independent security audit, or successful adoption/care |
@@ -133,23 +143,23 @@ Whether the warning has disappeared in the current wallet prompt is
 | Demo-wallet provenance, preparation and recording disclosure | **UNVERIFIED — PREPARED_DEMO_WALLET_DISCLOSURE** |
 | Gas budget sufficient for the actual requested transactions | Balance read above is verified; transaction gas budget **UNVERIFIED** |
 | Real connection approval | Hosted full address/chain 1952 **OBSERVED**, following the user's reported approval; local Anvil address/chain 31337 also **OBSERVED**. Neither is a transaction pass |
-| Hosted wallet warning removed in current prompt | **UNVERIFIED**; reviewer closure alone is not a browser check |
+| Hosted wallet warning in 24 September prompt | User explicitly reports **no warning** on the fresh approval; extension popup was not independently inspected |
 | Wallet dapp permission disconnected after testing | **PASS for hosted origin**: real Chrome Disconnect and reload verified account-access revocation on PR #38's production build. Local-origin permission unchanged. See release evidence |
 | Rejected adoption, no pet/growth created | **NOT RUN on X Layer**; local request reached pending, but rejection not observed |
-| Adoption hash + successful receipt + pet read-back | **UNVERIFIED — ADOPT_TX_AND_RECEIPT** |
-| Care hash + successful receipt + before/after values | **UNVERIFIED — CARE_TX_AND_RECEIPT** |
-| Refresh restores same pet | **NOT RUN** |
-| Same-day cooldown / UTC label | **NOT RUN** |
+| Adoption hash + successful receipt + pet read-back | **CHAIN VERIFIED + USER REPORTED**: `0x665caef1b35eee8ceea49881b320aaf46f6b09f1ff5ebd7a4752b02f7fd9b4fe`, successful receipt and adopted pet observed. Full browser transition sequence not observed |
+| Care hash + successful receipt + before/after values | **PASS, 24 September**: `0x71306dc528a4b15c26c60b3e106e3d01f05bc526d40b07cc55cd9559f2cb5cf4`, successful receipt, careCount 0 → 1, displayed points 0 → 10 |
+| Refresh restores same pet | **PASS for normal reload**, 24 September; cache-bypassing hard reload not separately tested |
+| Same-day cooldown / UTC label | **PASS**, disabled until 25 September 00:00 UTC |
 | Account switch removes old pet | **NOT RUN** |
-| Community before → after for confirmed care | **UNVERIFIED — COMMUNITY_BEFORE_AFTER** |
-| Public pet route for the supplied address | `/pet/0x2ec8471290793FeB64792861Ce3102d291ce1CA1` read-only **no-pet** state observed; pet-bearing state **UNVERIFIED** |
+| Community before → after for confirmed care | **CHAIN VERIFIED**, 0 → 1 across blocks 41,799,174 → 41,799,310; exactly one matching Cared event/receipt. Browser header initially stayed stale, then showed 1 after reload; follow-up fix recorded separately |
+| Public pet route for the supplied address | **PASS, 24 September**: same Mochi/Hatchling/10 points, read-only controls |
 | Real next-UTC-day care on X Layer | **NOT RUN**; local time travel cannot establish it |
 
 Use a human-prepared throwaway wallet for capture. When verified, disclose it as a team-prepared demo wallet, not an organic user. Never request or record seed phrases/private keys. For real transactions, retain network, registry, public address, full hash, successful receipt, UTC time and before/after values. Verify explorer links before publishing them. Keep Anvil and fictional preview evidence separately labelled.
 
 ## Current recording package
 
-Script **MP-EQ-20260923-v1** replaces the earlier camera-led version. The combined script has **390 selected spoken words**, exactly **130 each** for Deston, Kym and Larm across three interleaved turns. The **3:25** timeline is a plan, not a measured export. Kym's two S08 options each contain 42 words; exactly one enters the final. No current evidence establishes browser adoption, care or earned evolution.
+Script **MP-EQ-20260923-v1** replaces the earlier camera-led version. The combined script has **390 selected spoken words**, exactly **130 each** for Deston, Kym and Larm across three interleaved turns. The **3:25** timeline is a plan, not a measured export. Kym's two S08 options each contain 42 words; exactly one enters the final. The 24 September real care has evidence but no continuous recording. Rejection/adoption footage and earned evolution remain unrecorded; the latter has the labelled artwork alternate.
 
 Each person records one MP3 using the matching [speaker script](DEMO_SCRIPT.md#three-mp3-files). No face camera is required. The editor removes scene slates and excess pauses, measures retained speech, and balances the three voices after upload. Every result line remains conditional on matching genuine screen evidence. An artwork-only S08 can replace missing later-day evolution, but cannot replace the core adoption/care demonstration.
 

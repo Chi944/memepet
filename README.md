@@ -382,7 +382,8 @@ Responsibilities are documented in [file ownership](docs/OWNERSHIP.md).
 Built with [Next.js](https://nextjs.org), [React](https://react.dev),
 [viem](https://viem.sh), [Foundry](https://getfoundry.sh),
 [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com).
-Fonts: **Geist and Geist Mono**, loaded through `next/font`.
+Fonts: **Geist and Geist Mono**, loaded through `next/font`. Copyright 2024
+The Geist Project Authors; [SIL Open Font License 1.1](public/licenses/geist-OFL.txt).
 
 AI coding tools were used during development. Dated evidence distinguishes
 implementation, automated checks, browser observations and planned work.

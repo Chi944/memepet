@@ -79,6 +79,7 @@ describe("usePetRegistry confirmed reads and wallet sessions", () => {
     act(() => { write = result.current.adopt(); });
     await waitFor(() => expect(result.current.txPhase).toBe("pending"));
     expect(result.current.pet).toBeNull();
+    expect(result.current.confirmedBlockNumber).toBeUndefined();
 
     await act(async () => {
       receipt.resolve({ status: "success", blockNumber: block.number });
@@ -90,6 +91,7 @@ describe("usePetRegistry confirmed reads and wallet sessions", () => {
     rpc.readContract.mockResolvedValue(adoptedPet);
     await act(async () => { reread.resolve(adoptedPet); await write; });
     expect(result.current.txPhase).toBe("success");
+    expect(result.current.confirmedBlockNumber).toBe(block.number);
     expect(result.current.pet?.growthPoints).toBe(0);
     expect(rpc.readContract).toHaveBeenLastCalledWith(
       expect.objectContaining({ blockNumber: block.number, args: [walletA] }),
@@ -104,6 +106,7 @@ describe("usePetRegistry confirmed reads and wallet sessions", () => {
     expect(result.current.txPhase).toBe("success");
     expect(result.current.readStatus).toBe("error");
     expect(result.current.readErrorMessage).toMatch(/Adoption confirmed on chain/);
+    expect(result.current.confirmedBlockNumber).toBe(block.number);
     expect(result.current.pet).toBeNull();
   });
 
@@ -185,6 +188,7 @@ describe("usePetRegistry confirmed reads and wallet sessions", () => {
       await act(async () => { receipt.resolve({ status, blockNumber: block.number }); await write; });
       expect(result.current.txPhase).toBe("idle");
       expect(result.current.transactionHash).toBeUndefined();
+      expect(result.current.confirmedBlockNumber).toBeUndefined();
       expect(result.current.txErrorMessage).toBeNull();
       expect(result.current.pet).toBeNull();
     },
