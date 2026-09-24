@@ -29,7 +29,7 @@ observed automatic counter-refresh failure.
 
 | Work | Owner / evidence needed |
 |---|---|
-| Latest-release browser follow-up | Network away/back and disconnect persistence are in progress; public viewing in a separate unconnected browser passed; genuine Account 3 adoption/care, read-only counter recovery and normal reload have passed |
+| Latest-release browser follow-up | Network away/back and disconnect persistence are NOT RUN on af886a75, awaiting the human network-selection step before disconnecting. Public viewing, genuine Account 3 adoption/care, read-only counter recovery and normal reload passed |
 | Remaining visual QA | Reduced-motion and missing-art/unknown-total fixtures passed in the follow-up run; normal-motion foreground playback is NOT RUN because the user prefers to keep reduced motion enabled. Four viewport layouts and keyboard checks passed in Larm's audit |
 | Team video review and upload | All four watch/listen, confirm names/portraits/claims, then upload FINAL MP4 + corrected SRT and check logged-out playback |
 | Submission | Deston completes exact roster/route/origin/declarations and retains receipt; Kym resolves asset-input provenance; Larm verifies public links |

@@ -31,7 +31,8 @@ a reload or another transaction. Manual read-only recovery and a subsequent
 normal reload passed; automatic community refresh failed. A separate unconnected
 browser displayed the correct Account 3 address, read-only live Hatchling and
 10 points with no care action: PASS. Network away/back and disconnect
-persistence remain in progress.
+persistence are NOT RUN on this revision, awaiting the human network-selection
+step before disconnecting.
 
 Reduced-motion and missing-art/unknown-total previews passed; normal-motion
 foreground playback is **NOT RUN by user preference**. Release CI passed 123

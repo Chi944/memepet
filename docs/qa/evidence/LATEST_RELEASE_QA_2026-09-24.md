@@ -120,6 +120,11 @@ a transaction or a passed recovery.
 - Public viewing: opened the actual share URL in the separate in-app browser,
   without connecting a wallet. It displayed Read only, the correct Account 3
   address and Live Hatchling with 10 points, with no care action: PASS.
+- Network away/back and disconnect persistence: NOT RUN on `af886a75` at this
+  checkpoint. The human was asked to select another existing network without
+  signing or sending; the page still displayed 1952 at the last observation.
+  It remains connected so the requested network check can continue. Earlier
+  disconnect evidence is not relabelled as a pass on this revision.
 
 ## Visual follow-up
 

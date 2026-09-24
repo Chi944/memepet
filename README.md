@@ -104,7 +104,7 @@ results are listed separately.
 | Landing, how-it-works and community panel | ✅ Merged |
 | Pet scene, three stages and care-state panel | ✅ Merged, including corrected artwork and evolution presentation |
 | Black/lime design, responsive layouts and reduced-motion styles | ✅ Implemented; four viewport layouts and keyboard navigation checked. Reduced-motion preview passed; normal-motion foreground playback is unrun by user preference |
-| Wallet connection, network switch and account-access revocation | ✅ Implemented; hosted connection observed, real Disconnect and reload verified |
+| Wallet connection, network switch and account-access revocation | ✅ Implemented; hosted connection observed. Disconnect/reload passed in the earlier Account 2 run; the latest network/disconnect rows remain unrun |
 | Adoption, care, receipts and confirmed read-back | ✅ Account 3 genuinely rejected, adopted and cared on `af886a75`; the pet automatically reached 10 points/cooldown. Normal reload preserved the state. Automatic counter refresh failed; read-only Retry recovered the total without a reload or new transaction |
 | Public pet page and generated share images | ✅ Merged; a separate unconnected browser displayed Account 3's correct address, read-only live Hatchling and 10 points with no care action |
 | X Layer testnet deployment | ✅ Deployed; executable runtime comparison documented |

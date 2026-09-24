@@ -35,7 +35,8 @@ automatic 10-point pet/cooldown read-back and a normal reload. Automatic communi
 refresh showed Unknown; read-only Retry recovered 4 without reloading or another
 transaction. Preserve that limitation when describing the working integration.
 A separate unconnected browser also verified Account 3's read-only public pet.
-Network/disconnect follow-up is still in progress; see
+Network away/back and disconnect persistence are NOT RUN on this revision,
+awaiting the human network-selection step; see
 [current status](STATUS.md) and [latest-release QA](qa/evidence/LATEST_RELEASE_QA_2026-09-24.md).
 
 ## Official requirements and open form details
