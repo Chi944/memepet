@@ -11,6 +11,7 @@ import {
 } from "@/lib/map-community";
 import { APPROVED_COMMUNITY_ID } from "@/lib/pet-progress";
 import { petRegistryAbi } from "@/lib/pet-registry-abi";
+import { readReceiptWithRetry } from "@/lib/receipt-read-retry";
 import type { CommunityViewModel } from "@/types/view-models";
 
 type UseCommunityStatsArgs = {
@@ -67,15 +68,20 @@ export function useCommunityStats({
           transport: http(deployment.rpcUrl ?? undefined),
         });
 
-        const total = await publicClient.readContract({
+        const readTotal = (blockNumber?: bigint) => publicClient.readContract({
           address: registryAddress,
           abi: petRegistryAbi,
           functionName: "communityStats",
           args: [APPROVED_COMMUNITY_ID],
-          blockNumber: readBlockNumber,
+          blockNumber,
         });
+        // A receipt can be visible before a replica can serve its state.
+        // Keep every retry pinned and discard it if this effect is replaced.
+        const total = readBlockNumber === undefined
+          ? await readTotal()
+          : await readReceiptWithRetry(readBlockNumber, readTotal, () => !cancelled);
 
-        if (!cancelled) {
+        if (!cancelled && total !== undefined) {
           setCommunity(mapCommunityStatsToViewModel(total));
         }
       } catch (error) {
