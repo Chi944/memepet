@@ -149,4 +149,32 @@ describe("useCommunityStats read stability", () => {
     expect(result.current.community.totalCareActions).toBe(2);
     expect(result.current.community.errorMessage).toBeNull();
   });
+
+  it("discards an in-flight manual retry when the wallet session changes", async () => {
+    const deployment = deploymentFor(1952, "X Layer testnet");
+    const { result, rerender } = renderHook(
+      ({ address }: { address: Address }) => useCommunityStats({ deployment, address, wrongChain: false }),
+      { initialProps: { address: "0x1111111111111111111111111111111111111111" as Address } },
+    );
+    await waitFor(() => expect(result.current.community.totalCareActions).toBe(1));
+    readContract.mockRejectedValueOnce(new Error("Receipt state unavailable"));
+    await act(async () => { result.current.refresh(BigInt(11)); });
+    expect(result.current.community.totalCareActions).toBeNull();
+
+    let resolveRetry!: (total: bigint) => void;
+    readContract.mockReturnValueOnce(new Promise<bigint>((resolve) => { resolveRetry = resolve; }));
+    await act(async () => { result.current.retry(); });
+    expect(result.current.community.isLoading).toBe(true);
+    expect(readContract).toHaveBeenLastCalledWith(expect.objectContaining({ blockNumber: BigInt(11) }));
+
+    readContract.mockResolvedValue(BigInt(3));
+    rerender({ address: "0x2222222222222222222222222222222222222222" });
+    await waitFor(() => expect(result.current.community.totalCareActions).toBe(3));
+    expect(readContract).toHaveBeenLastCalledWith(expect.objectContaining({ blockNumber: undefined }));
+    await act(async () => { resolveRetry(BigInt(2)); });
+
+    expect(readContract).toHaveBeenCalledTimes(4);
+    expect(result.current.community.totalCareActions).toBe(3);
+    expect(result.current.community.errorMessage).toBeNull();
+  });
 });

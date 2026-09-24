@@ -77,8 +77,10 @@
   transition: transform 180ms ease;
 }
 
-.secondaryAction:hover span {
-  transform: translateY(3px);
+@media (prefers-reduced-motion: no-preference) {
+  .secondaryAction:hover span {
+    transform: translateY(3px);
+  }
 }
 
 .actionNote {
@@ -154,7 +156,7 @@
   transition: transform 450ms var(--ease-out);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .artFrame:hover .art {
     transform: translateY(-6px) rotate(-3deg);
   }

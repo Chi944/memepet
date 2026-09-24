@@ -115,9 +115,11 @@ describe("live care refreshes the community counter", () => {
     },
   );
 
-  it("shows the community total as unknown if its confirmed-block read fails", async () => {
+  it("recovers an unknown community total by retrying the receipt block without another transaction", async () => {
     let confirmed = false;
     const communityRead = deferred<bigint>();
+    const recoveredRead = deferred<bigint>();
+    let retrying = false;
     rpc.getBlock.mockImplementation(async ({ blockNumber }) => ({
       number: blockNumber ?? (confirmed ? receiptBlock : BigInt(10)),
       timestamp: day * BigInt(86400) + BigInt(3600),
@@ -128,7 +130,10 @@ describe("live care refreshes the community counter", () => {
     });
     rpc.readContract.mockImplementation(async ({ functionName, blockNumber }) => {
       if (functionName === "communityStats") {
-        return blockNumber === receiptBlock ? communityRead.promise : BigInt(0);
+        // Latest deliberately remains stale even after care succeeds.
+        return blockNumber === receiptBlock
+          ? retrying ? recoveredRead.promise : communityRead.promise
+          : BigInt(0);
       }
       return blockNumber >= receiptBlock
         ? [true, 1, 1, day]
@@ -147,5 +152,25 @@ describe("live care refreshes the community counter", () => {
     await act(async () => { await vi.advanceTimersByTimeAsync(1600); });
     expect(communityTotal()).toHaveTextContent("Unknown");
     expect(screen.getByRole("button", { name: "Care unavailable" })).toBeDisabled();
+    expect(screen.getByText(/Retry only reads the chain/)).toBeInTheDocument();
+
+    await act(async () => {
+      retrying = true;
+      fireEvent.click(screen.getByRole("button", { name: "Retry community total" }));
+    });
+    expect(communityTotal()).toHaveTextContent("Reading…");
+    expect(screen.queryByRole("button", { name: "Retry community total" })).not.toBeInTheDocument();
+    expect(screen.getByText("10 growth points")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Care unavailable" })).toBeDisabled();
+    expect(rpc.readContract).toHaveBeenLastCalledWith(expect.objectContaining({
+      functionName: "communityStats",
+      blockNumber: receiptBlock,
+    }));
+
+    await act(async () => { recoveredRead.resolve(BigInt(1)); });
+    expect(communityTotal()).toHaveTextContent("1");
+    expect(screen.queryByText(/could not be loaded/)).not.toBeInTheDocument();
+    expect(rpc.writeContract).toHaveBeenCalledTimes(1);
+    expect(rpc.waitForTransactionReceipt).toHaveBeenCalledTimes(1);
   });
 });

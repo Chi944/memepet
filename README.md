@@ -102,22 +102,25 @@ results are listed separately.
 |---|---|
 | Landing, how-it-works and community panel | ✅ Merged |
 | Pet scene, three stages and care-state panel | ✅ Merged, including corrected artwork and evolution presentation |
-| Black/lime design, responsive layouts and reduced-motion styles | ✅ Implemented; four viewport layouts and keyboard navigation checked. Reduced-motion playback and foreground animation checks remain open |
+| Black/lime design, responsive layouts and reduced-motion styles | ✅ Implemented; four viewport layouts and keyboard navigation checked. Reduced-motion preview passed; normal-motion foreground playback is unrun by user preference |
 | Wallet connection, network switch and account-access revocation | ✅ Implemented; hosted connection observed, real Disconnect and reload verified |
 | Adoption, care, receipts and confirmed read-back | ✅ Genuine rejection, adoption, care, later 10-point read-back and cooldown verified. Read failures and the follow-up retry fix are documented separately |
 | Public pet page and generated share images | ✅ Merged; Account 2's disconnected public page showed the same Hatchling and 10 points |
 | X Layer testnet deployment | ✅ Deployed; executable runtime comparison documented |
-| Automated checks | ✅ **122 app tests / 21 files**, contract CI, typecheck, lint, build and production route checks passed on revision `3d0428e` |
+| Automated checks | ✅ Current change: **123 app tests / 21 files**, **15 contract tests**, **8 counter checks**, typecheck, lint, build and local production-route checks passed; hosted deployment verification pending |
 | Final demo video and submission | ✅ Video/captions complete with technical QC passed; care/refresh result stills labelled. Team playback, public upload and form completion remain |
 
-[CI run for `3d0428e`](https://github.com/Chi944/memepet/actions/runs/36030104889)
-records the automated results. Lint passed with one existing image-element warning.
+[CI run for baseline `3d0428e`](https://github.com/Chi944/memepet/actions/runs/36030104889)
+records the earlier 122-test release. The current 123-test results are local
+verification, recorded in [latest-release QA](docs/qa/evidence/LATEST_RELEASE_QA_2026-09-24.md).
+Lint passed with one existing image-element warning and no errors.
 The [24 September capture record](docs/qa/evidence/FINAL_CAPTURE_2026-09-24.md)
 separates actual wallet actions, chain receipts, observed app states and usable
 video. Account 2's care confirmed on chain, but reads failed during the flow;
-human refresh recovered the same pet and total. The later community retry fix
-has not yet been exercised by another genuine care. The recorded take cannot
-establish an uninterrupted successful care/refresh sequence.
+human refresh recovered the same pet and total. A later genuine care still
+left the community header Unknown; its investigation and current results belong
+in [latest-release QA](docs/qa/evidence/LATEST_RELEASE_QA_2026-09-24.md).
+The recorded take cannot establish an uninterrupted successful care/refresh sequence.
 
 **Confirmed data drives the interface:**
 
@@ -318,7 +321,7 @@ docs/
   PROJECT_BRIEF.md          Scope and core user story
   OWNERSHIP.md              Integration responsibilities
   STATUS.md                 Current delivery and acceptance status
-  demo/                    Scripts, production plan and submission notes
+  SUBMISSION.md            Entry details, media delivery and final checklist
   qa/                      Walkthroughs and dated evidence
 ```
 
@@ -343,11 +346,13 @@ and a read-only holder indicator remain optional future work.
 - **Testnet deployment.** No mainnet deployment or organizer approval is claimed.
   Checked kit/form material does not state a separate written testnet approval
   requirement; remaining form declarations still need review.
-- **Targeted browser QA remains open.** Account switching and a genuine care
-  after the latest community-read retry fix still need checked results. The
-  earlier read failures remain documented; automated tests do not close them.
-- **Final visual QA remains open.** Reduced-motion playback and foreground
-  animation observation remain unverified in Larm's dated browser audit.
+- **Targeted browser QA remains open.** The latest account switch and care were
+  observed, but the post-care community read still showed Unknown. The follow-up
+  investigation and unrun rows remain in [current status](docs/STATUS.md);
+  automated tests do not close them.
+- **Normal-motion playback remains unrun.** Reduced-motion and missing-art/unknown-total
+  previews passed in the follow-up run. The user prefers to keep reduced motion
+  enabled, so normal-motion foreground playback has not been observed.
 - **Wallet warning follow-up.** The MetaMask review issue was closed and the
   user reported no warning on a fresh approval. Automation did not independently
   inspect that extension prompt. Follow the
@@ -366,8 +371,8 @@ and delivery. See [current status](docs/STATUS.md) for the remaining acceptance 
 
 | Next step | Completion evidence |
 |---|---|
-| Remaining wallet QA | Account-switch regression and genuine care on the community-read retry release, with receipts and matching UI evidence |
-| Final release QA | Complete the unrun reduced-motion and foreground animation checks |
+| Remaining wallet QA | Resolve the latest community-read failure and record genuine follow-up results for the current release |
+| Final release QA | Verify the pending deployment; normal-motion foreground playback remains unrun by user preference |
 | Demo video | Genuine product footage and a reviewed 2–4 minute export |
 | Submission | Eligibility/rights and form answers confirmed; app/repo/video links checked; receipt retained |
 

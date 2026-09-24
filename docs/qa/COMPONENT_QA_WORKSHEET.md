@@ -2,13 +2,13 @@
 
 Covers the **component / fixture checks** row of `docs/QA_CHECKLIST.md`
 (U1–U10). `docs/qa/BROWSER_WALKTHROUGH.md` and `docs/qa/evidence/` cover the
-**integrated application** checks (I1–I14) against a live Anvil registry —
+**integrated application** checks (I1–I14) in the declared environment —
 this sheet is scoped to the isolated developer previews only:
 `/dev/pet`, `/dev/community` (and `/dev/landing` for context).
 
 These are fixture-only checks. A preview rendering correctly proves the
 component honours its props; it does **not** prove the live integration
-behaves the same way — see `BROWSER_WALKTHROUGH.md` and `evidence/OBSERVATIONS.md`
+behaves the same way — see `BROWSER_WALKTHROUGH.md` and [historical observations](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/evidence/OBSERVATIONS.md)
 for that evidence.
 
 Fill **Actual result** only after you run the step. Leave blank until then.
@@ -49,7 +49,7 @@ Do not mark Pass/Fail in advance.
 
 | | |
 |---|---|
-| **Steps** | Select (or construct) a fixture where `artSrc` is `null`. |
+| **Steps** | Select the **missingArt** fixture where `artSrc` is `null`. |
 | **Expected** | An intentional, accessible placeholder is shown — not a broken-image icon — with meaningful alt text. |
 | **Actual result** | |
 | **Pass / Fail** | |
@@ -130,7 +130,7 @@ Do not mark Pass/Fail in advance.
 ## Out of scope for this sheet
 
 - Anything requiring a real wallet signature or a live chain read — see
-  `BROWSER_WALKTHROUGH.md` and `evidence/OBSERVATIONS.md`.
+  `BROWSER_WALKTHROUGH.md` and [historical observations](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/evidence/OBSERVATIONS.md).
 - `/dev/landing` copy and callback checks — a `LandingHero` has only one
   callback (`onGetStarted`); spot-check it alongside U9 rather than as a
   separate numbered row.

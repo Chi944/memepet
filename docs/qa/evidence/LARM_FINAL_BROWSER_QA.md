@@ -1,6 +1,6 @@
 # LARM-FINAL-QA — final browser QA
 
-Task **LARM-FINAL-QA**, assigned by `docs/qa/FINAL_BROWSER_QA.md`. Browser
+Task **LARM-FINAL-QA**, assigned by the [original QA prompt](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/FINAL_BROWSER_QA.md). Browser
 acceptance only. **No wallet was connected, no transaction was signed, nothing
 was adopted, cared for, deployed or merged.** Deston/Codex owns the wallet
 walkthrough; nothing here upgrades any wallet or acceptance record.

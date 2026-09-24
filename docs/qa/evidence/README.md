@@ -1,0 +1,35 @@
+# QA evidence
+
+Current observations and historical runs are separate. Tests are not wallet
+passes, and a recovered read does not erase an earlier failed refresh.
+
+## Current records
+
+- [Latest-release wallet QA](LATEST_RELEASE_QA_2026-09-24.md): current account/network transitions and follow-up care observations.
+- [Final capture and video QC](FINAL_CAPTURE_2026-09-24.md): Account 2 receipts, adoption read-error recovery, failed community refresh, genuine stills, source hashes and completed-video checks.
+- [First real browser acceptance](FINAL_ACCEPTANCE_2026-09-24.md): earlier wallet's care/cooldown/reload/public view; community header initially stale.
+- [Larm's browser audit](LARM_FINAL_BROWSER_QA.md): four viewport layouts, keyboard/preview/error checks, with reduced-motion and foreground playback gaps kept explicit.
+
+## Historical audit trail
+
+Older reports and their original screenshots are preserved at commit
+**19c3fac1f097955f2b6e409ab2f4ab988abc0cee** rather than duplicated in the active
+submission tree. These links retain failures, blocked wallet attempts and
+withdrawn findings; cleanup does not rewrite their results.
+
+| Historical source | Scope and limitation |
+|---|---|
+| [20 September audit](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/AUDIT_2026-09-20.md) | Early implementation/test snapshot; not current release status |
+| [22 September audit](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/AUDIT_2026-09-22.md) | Truthfulness/read-loop findings and then-outstanding leads; later fixes are recorded separately |
+| [UI polish](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/UI_OKX_POLISH_2026-09-22.md) | Earlier local visual/previews; no wallet transaction pass |
+| [Local observations and screenshots](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/evidence/OBSERVATIONS.md) | Local/controlled states; includes the withdrawn mobile-clipping finding |
+| [Submission preparation and screenshots](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/evidence/OKX_PREP_2026-09-22.md) | Initially no injected wallet; blocked live/local attempts and deployment comparisons |
+| [Read-only X Layer observations](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/evidence/LIVE_XLAYER_OBSERVATIONS.md) | Public reads and route checks, no signing |
+| [Local Anvil connection](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/evidence/LOCAL_ANVIL_2026-09-22.md) | Connection/network switch observed; no confirmed adoption/care |
+| [MetaMask warning](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/evidence/METAMASK_WARNING_2026-09-22.md) | Warning, review request and closure; not a security guarantee |
+| [Hosted disconnect audit](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/evidence/RELEASE_AUDIT_2026-09-23.md) | Revocation/reload and dated checks, separate from later wallet state |
+
+The completed [Larm task prompt](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/FINAL_BROWSER_QA.md), blank
+[optional usability worksheet](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/USER_TESTS.md) and
+[production notes](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/demo/DEMO_SCRIPT.md) remain in history/private
+production archives. No external-user research result is claimed.

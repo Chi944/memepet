@@ -1,248 +1,65 @@
-# Browser walkthrough — wallet signature steps
+# Browser wallet walkthrough
 
-Worksheet for the connect → adopt → care journey against **local Anvil**.
-These steps need a real injected wallet (MetaMask / OKX Wallet). They are
-**not** pre-marked as passing.
+Run against the declared deployment with a human-operated browser wallet.
+Automated tests, read-only chain calls and fixture previews do not establish a
+wallet action. Record only what was actually performed.
 
-**Latest capture work — 24 September 2026 UTC:** The newly prepared Account 2
-`0x86F7De84EBB97c875e1494675Bfcd664f0773CE9` genuinely rejected adoption.
-The app displayed the declined-request message, **None yet** and no awarded
-progress; a fixed-block read confirmed no pet and nonce 0. The first video
-stopped before the Cancel click, so continuous rejection footage is incomplete.
-The guarded retake repeated the rejection, then a genuine approved adoption
-returned a successful receipt and fresh 0-point Hatchling. Genuine care then
-produced 10 points and UTC cooldown. The community header became **Unknown**
-after the receipt despite a verified chain total of 2; human-reported hard
-refresh recovered the same pet and total. Disconnect and the disconnected
-read-only public pet were observed. The community retry follow-up has no live
-care rerun yet. Take 3 review found a pet-read error/0 points around 293 seconds
-and solid green footage at 393–524 seconds, despite a separate app screenshot
-showing 10 points/cooldown. Cause is unproven; no usable continuous care-success
-or refresh shot is claimed. See the
-[final capture record](evidence/FINAL_CAPTURE_2026-09-24.md). This does not
-upgrade any other wallet row or claim a finished video.
+## Environment and evidence
 
-**Earlier hosted run — 24 September 2026:** A fresh connection and a real first
-care were performed with human MetaMask approvals. The successful care receipt,
-10-point read-back, disabled UTC cooldown, normal reload, public pet page and
-block-pinned community 0 → 1 attribution are recorded in
-[final acceptance evidence](evidence/FINAL_ACCEPTANCE_2026-09-24.md).
-Adoption has a verified receipt and a user report, but its browser transitions
-were not captured. Rejection, account switching and later-day evolution remain
-NOT RUN. No video was recorded. The post-care community header initially stayed
-stale until reload; the evidence records that failure and the separate fix.
-The human reports a warning-free connection prompt; automation did not inspect
-the extension popup. This supersedes the older current-state claims below,
-without rewriting their historical result tables.
+- Hosted app: [MemePet pet home](https://memepet.vercel.app/pet).
+- Network: **X Layer testnet, 1952**; test gas **OKB**.
+- Registry: **0xe844152262D243a7B90F6e07FF7A67F1d7FeD216**.
+- Record UTC time, deployed revision, browser, public account identifier and
+  before/after state. Never capture passwords, recovery words or signing keys.
+- Use a human-prepared demo wallet with testnet gas. A public address alone
+  cannot sign. See [wallet setup](WALLET_SETUP.md).
+- A local Anvil run is separate evidence; follow [development setup](../DEV_SETUP.md)
+  and label its chain, registry and results as local. No time travel on testnet.
 
-**Historical status — 23 September 2026 (Singapore):** The user reports only
-connecting and switching networks, with no signature or transaction approval.
-The separate real Chrome local run independently showed the intended address
-`0x2ec8471290793FeB64792861Ce3102d291ce1CA1` and chain **31337** after the
-human approved the prompts. See [the local record](evidence/LOCAL_ANVIL_2026-09-22.md).
-An adoption request reached awaiting-signature, but no rejection or approval
-was observed. That runtime has stopped. No browser adoption/care receipt exists.
-On follow-up, a fresh hosted `/pet` page independently displayed the intended
-address, chain `1952`, pet **None yet**, and community cares `0`. This observes
-an existing authorized connection; it does not verify the original connection
-prompt or a fresh warning-free approval.
+The [latest-release run](evidence/LATEST_RELEASE_QA_2026-09-24.md) owns current
+results. The [recorded Account 2 run](evidence/FINAL_CAPTURE_2026-09-24.md)
+contains genuine rejection/adoption/care, receipts, later read-back and public
+viewing, including read failures and explicit capture gaps. Neither record
+upgrades a step that it did not actually exercise. [Earlier evidence](evidence/README.md)
+remains dated and separately accessible.
 
-**Subsequent hosted disconnect: PASS.** On the deployed PR #38 fix, clicked
-Disconnect in real Chrome, observed verified wallet account-access revocation,
-then reloaded and observed the same result after a fresh account-access check.
-The wallet is now disconnected from the hosted origin. See [release evidence
-and screenshot](evidence/RELEASE_AUDIT_2026-09-23.md#production-release-and-real-disconnect--22-september-2111-utc).
-This is a disconnect pass only; it does not upgrade any adoption/care row.
+Current follow-up evidence records account switching and care, including a failed
+post-care community read that recovered after reload. Reduced-motion and
+missing-art/unknown-total previews passed; normal-motion foreground playback is
+**NOT RUN by user preference**. The cleanup/retry change passed 123 application
+tests, 15 contract tests, 8 counter checks, typecheck, lint and production build
+locally; `/` returned 200 and all three development routes returned 404. These
+checks do not establish a fresh wallet pass on the pending deployment.
 
-MetaMask's reviewer closed [review request #296216](https://github.com/MetaMask/eth-phishing-detect/issues/296216#issuecomment-5782692269)
-on 22 September at 19:31 UTC, reporting that the domain did not appear flagged
-anymore. A fresh wallet prompt has not been independently checked. If a warning
-still appears, leave it unapproved and follow up on that review; do not bypass it.
-See [the warning evidence record](evidence/METAMASK_WARNING_2026-09-22.md).
-The matching address reuses the existing wallet, not a new isolated wallet.
-X Layer browser transactions, rejection, account switching and confirmed-state
-refresh remain unverified. The older result tables below are historical, not
-the current local run; they have not been upgraded to passes.
+## Repeatable test matrix
 
-**Authorship note:** Lead authored this file because Teammate B had not
-started `docs/qa/` yet. **Teammate B owns `docs/qa/` from here** — edit,
-extend, and fill results as B.
-
-**Setup (before any row):**
-
-1. Anvil running on `http://127.0.0.1:8545` (chain id `31337`).
-2. `PetRegistry` deployed with an unlocked Anvil account (no `--private-key`
-   on the CLI). See the [separate local Anvil setup](../DEV_SETUP.md#separate-local-anvil-setup).
-3. `.env.local` pointed at that **local-only** address (never commit it;
-   never put it in `deployment.ts` or the README).
-4. `npm run dev` and open `/pet`.
-5. Wallet added for Anvil: chain id `31337`, RPC `http://127.0.0.1:8545`,
-   currency symbol `ETH` (Anvil), and an Anvil test account imported into
-   the wallet by the human (do not paste keys into chat or docs).
-
-Automated, non-signature checks and screenshots live in
-[`evidence/`](./evidence/) and [`evidence/OBSERVATIONS.md`](./evidence/OBSERVATIONS.md).
-
----
-
-## Worksheet
-
-Fill **Actual result** with observed outcomes, or explicitly mark NOT RUN / BLOCKED. Never infer a pass from automated tests or CLI calls.
-Do not mark Pass/Fail in advance.
-
-### Earlier observed attempt — 22 September 2026, OKX-PREP
-
-See [the evidence record](evidence/OKX_PREP_2026-09-22.md) for commands,
-screenshots, branch provenance and automated checks. **Zero wallet rows passed.**
-
-Local setup was performed: Anvil chain `31337` at `127.0.0.1:8545`, an
-unlocked-account local registry deployment, and the integrated app at
-`http://127.0.0.1:3300/pet`. Public environment overrides were supplied to
-the dev-server process; the existing `.env.local` was neither read nor edited.
-These processes are session-local, not a hosted test environment.
-
-Row 1 was attempted in real Chrome: clicking **Connect wallet** returned
-**No injected wallet was found.** No approval prompt was available. This is
-a blocked prerequisite, not a successful connection or a proven app defect.
-Rows 2–9 were not executed. There were no wallet signatures, rejection clicks,
-adoption/care receipts, account switches or browser growth comparisons.
-
-The same connection attempt was later repeated on the automatically built
-[PR #28 preview](https://memepet-21qy9t1rs-chi944s-projects.vercel.app/pet),
-commit `8a88f4b`, with the same missing-provider result. The final integrated
-preview showed the corrected heading/empty state and hid development routes,
-but **no wallet row passed** there either. See the evidence record for CI and
-preview verification; these are separate from the unchanged production site.
-
-**Post-merge follow-up:** PRs #22 and #26 subsequently reached production at
-application revision `35186b5`. The production page now shows the corrected
-heading/empty state, but a fresh real Chrome Connect attempt still returned
-**No injected wallet was found**. The results below remain BLOCKED / NOT RUN.
-No signature, adoption, care or account switch was performed after deployment.
-
-| X Layer live repeat | Actual result | Status |
-|---|---|---|
-| 1. Connect/approve at `https://memepet.vercel.app/pet` | Clicked Connect wallet; **No injected wallet was found.** | BLOCKED; approval not performed |
-| 2. Reject adoption | No wallet approval UI available | NOT RUN |
-| 3. Approve adoption | No signature or transaction | NOT RUN |
-| 4. Refresh confirmed pet | No browser adoption to refresh | NOT RUN |
-| 5. Approve care | No signature or transaction | NOT RUN |
-| 6. Same-day cooldown | No confirmed browser care | NOT RUN |
-| 7. Advance one day | Anvil-only operation; never run time-travel RPC on X Layer | NOT APPLICABLE; real next-UTC-day care still unverified |
-| 8. Switch accounts | No connected wallet accounts | NOT RUN |
-| 9. Counter +1 | Read-only baseline was 0; no care or comparison | NOT RUN |
-
-The user supplied `0x2ec8471290793FeB64792861Ce3102d291ce1CA1` for connection
-help. A public address is not a signer. Its live `petOf` result was
-`exists=false`, and its public page showed no pet. These are read-only
-observations, not evidence for any row above. A community counter of zero
-proves zero recorded cares, not zero adoptions.
-
-The following prerequisites were recorded for that earlier attempt; the
-current security warning above must be resolved before hosted signing resumes.
-To resume, the human must make an injected MetaMask/OKX wallet available in
-Chrome and unlock it privately. Use a dedicated test wallet; do not expose
-keys or seed phrases. Recheck chain, registry, account and build before each
-environment's run. Local Anvil can fund that wallet's **public address** with
-test ETH without importing an Anvil key. Record local and testnet results
-separately, including UTC timestamps and genuine receipt hashes. After a
-successful deployment of this branch, repeat the X Layer rows on that exact
-build before recording success narration. No production rollout is implied
-by local integration.
-
-### 1. Connect wallet, approve
-
-| | |
+| Check | Procedure and expected observation |
 |---|---|
-| **Steps** | On `/pet`, click **Connect wallet**. Approve the connection in the wallet. |
-| **Expected** | Wallet address appears; chain shows `31337` (or Anvil); care/adopt UI leaves the “needs wallet” state. |
-| **Actual result** | ATTEMPTED on local Anvil in real Chrome: clicked Connect wallet; the page returned **No injected wallet was found.** Approval could not be performed. |
-| **Pass / Fail** | NOT RUN / BLOCKED (not a pass) |
-| **Notes / tx** | No browser wallet transaction; no transaction hash. |
+| Read-only visit | Open without connecting. No invented pet/growth; unavailable totals stay unknown, not zero. |
+| Connect | Human approves only the intended account/site. Verify the displayed address; leave any security warning unapproved. |
+| Network switch | Review the wallet's network details. App shows 1952 before any write; wrong-network state offers a switch. |
+| Reject adoption | Use an account with no pet. Request adoption, reject in the wallet, then verify the declined message and unchanged no-pet state. No transaction hash exists for a rejected request. |
+| Adopt | Human approves a zero-value request to the registry. Retain the successful receipt and matching Adopted event; verify the same account's Hatchling at zero points after a fresh read. Record any read error/recovery. |
+| Care | Capture the baseline first. Human approves zero-value care to the registry; verify successful receipt, Cared event, fresh pet count and ten-point increment. A transaction does not pass merely because a button was clicked. |
+| Community increment | Pin reads before and at the receipt block and attribute matching Cared events with [the counter helper](COUNTER_CHECK.md). Independently record whether the browser updates promptly, remains stale or shows Unknown. |
+| Same-day cooldown | Observe disabled care and the explicit next UTC-day time. Do not submit a duplicate just to prove a disabled control. Contract rejection is covered separately by tests. |
+| Refresh | Human performs the chosen normal/hard refresh; after reads settle, verify the same account, pet, growth, cooldown and total. Record which refresh was actually performed. |
+| Switch account | Switch in the wallet with the page open; verify the old account's pet is cleared and the new account's real state appears without a reload. No adoption/care is needed. |
+| Switch away/back | Change network, verify writes are disabled, then return to 1952 and verify the correct state. Account-switch success alone does not prove this row. |
+| Copy/public view | Record Copy link feedback separately from actual clipboard verification. Disconnect, open the public address URL, and confirm the same read-only pet without a new signature. |
+| Disconnect | Observe account-access revocation or honest manual-disconnect guidance. Reload to check persistence; a Disconnecting screenshot alone is not completion proof. |
+| Read failure | In a controlled local environment, make reads unavailable. No fabricated zero/pet/progress. A confirmed write with failed refresh stays distinguished from a failed transaction; never repeat the write automatically. |
+| Later-day evolution | Optional for this film: a second real care on a later UTC date must produce 20 points/Buddy. Artwork previews or local time travel do not prove live evolution. |
 
-### 2. Adopt — reject the signature → no pet is created
+## Recording a result
 
-| | |
-|---|---|
-| **Steps** | Connected wallet with **no** pet. Click **Adopt pet**. **Reject** / cancel the signature in the wallet. |
-| **Expected** | Error / declined message. Pet stays “None yet”. No growth. Refresh still shows no pet for that wallet. |
-| **Actual result** | NOT RUN — blocked by the missing injected wallet in the 22 September 2026 session; see the run record above. |
-| **Pass / Fail** | NOT RUN / BLOCKED (not a pass) |
-| **Notes / tx** | No browser wallet transaction; no transaction hash. |
+Use **PASS / FAIL / NOT RUN / BLOCKED** with environment/revision, actual steps,
+expected/observed state, UTC time, source references and limitations. For a
+confirmed write, retain full transaction hash, receipt status/block, account,
+registry, value, decoded method/events and block-pinned reads. Save untouched
+sources privately; a labelled original still proves an observed state, not a
+continuous action sequence. Preserve transient failures even if a reload recovers.
 
-### 3. Adopt — approve → pet appears only after the receipt confirms
-
-| | |
-|---|---|
-| **Steps** | Click **Adopt pet**. Approve the signature. Watch status through awaiting → pending → confirmed. |
-| **Expected** | A transaction hash alone does **not** show a live pet. Pet / hatchling state appears only after receipt success **and** a successful `petOf` re-read. |
-| **Actual result** | NOT RUN — blocked by the missing injected wallet in the 22 September 2026 session; see the run record above. |
-| **Pass / Fail** | NOT RUN / BLOCKED (not a pass) |
-| **Notes / tx** | No browser wallet transaction; no transaction hash. |
-
-### 4. Hard refresh → same pet
-
-| | |
-|---|---|
-| **Steps** | After a confirmed adopt, hard-refresh `/pet` (Ctrl+Shift+R). |
-| **Expected** | Same wallet still connected (or reconnect); same pet recovered from the registry — not a fixture. |
-| **Actual result** | NOT RUN — blocked by the missing injected wallet in the 22 September 2026 session; see the run record above. |
-| **Pass / Fail** | NOT RUN / BLOCKED (not a pass) |
-| **Notes / tx** | No browser wallet transaction; no transaction hash. |
-
-### 5. Care — approve → growth appears only after confirmation
-
-| | |
-|---|---|
-| **Steps** | With an adopted pet that can care today, click care. Approve the signature. |
-| **Expected** | Pending shows no awarded growth. After receipt success + re-read, growth points increase by 10. Celebration only if the stage threshold was crossed. |
-| **Actual result** | NOT RUN — blocked by the missing injected wallet in the 22 September 2026 session; see the run record above. |
-| **Pass / Fail** | NOT RUN / BLOCKED (not a pass) |
-| **Notes / tx** | No browser wallet transaction; no transaction hash. |
-
-### 6. Care again same day → cooldown with UTC time, button disabled
-
-| | |
-|---|---|
-| **Steps** | Immediately try to care again the same UTC day. |
-| **Expected** | UI shows **cooldown** with an availability time labelled in **UTC**. Care button disabled. No second transaction required to discover the rule. |
-| **Actual result** | NOT RUN — blocked by the missing injected wallet in the 22 September 2026 session; see the run record above. |
-| **Pass / Fail** | NOT RUN / BLOCKED (not a pass) |
-| **Notes / tx** | No browser wallet transaction; no transaction hash. |
-
-### 7. Advance Anvil one day → care available again
-
-| | |
-|---|---|
-| **Steps** | In a terminal (Anvil still running): `cast rpc evm_increaseTime 86400 --rpc-url http://127.0.0.1:8545` then `cast rpc evm_mine --rpc-url http://127.0.0.1:8545`. Refresh `/pet`. Care again and approve. |
-| **Expected** | Cooldown clears. Second care confirms; growth +10 again. |
-| **Actual result** | NOT RUN — blocked by the missing injected wallet in the 22 September 2026 session; see the run record above. |
-| **Pass / Fail** | NOT RUN / BLOCKED (not a pass) |
-| **Notes / tx** | No browser wallet transaction; no transaction hash. |
-
-### 8. Switch accounts mid-session → previous wallet’s pet must NOT still be displayed
-
-| | |
-|---|---|
-| **Steps** | While viewing wallet A’s pet, switch the injected wallet to account B (no pet). Do not rely on a full reload unless the app requires it — note what you did. |
-| **Expected** | Wallet A’s pet disappears. UI shows B’s state (none / B’s pet). No stale A pet left on screen. |
-| **Actual result** | NOT RUN — blocked by the missing injected wallet in the 22 September 2026 session; see the run record above. |
-| **Pass / Fail** | NOT RUN / BLOCKED (not a pass) |
-| **Notes / tx** | No browser wallet transaction; no transaction hash. |
-
-### 9. Community total increments by exactly one per confirmed care
-
-| | |
-|---|---|
-| **Steps** | Note home `Care actions` before care. Complete one confirmed care. Refresh home. |
-| **Expected** | Community total increases by **exactly 1**. Failed/rejected care does not change the total. |
-| **Actual result** | NOT RUN — blocked by the missing injected wallet in the 22 September 2026 session; see the run record above. |
-| **Pass / Fail** | NOT RUN / BLOCKED (not a pass) |
-| **Notes / before → after** | No confirmed browser care; no before/after comparison. |
-
----
-
-## Out of scope for this sheet
-
-- X Layer broadcast / testnet deploy (see `docs/deploy/XLAYER_TESTNET.md`).
-- Editing `src/components/pet|landing|community/**` — Teammate A/B.
+The [acceptance checklist](../QA_CHECKLIST.md) also covers responsive layouts,
+keyboard/reduced-motion behavior and production 404 gates. Historical walkthrough
+prose is retained at the [pre-cleanup snapshot](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/BROWSER_WALKTHROUGH.md).
