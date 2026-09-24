@@ -1,43 +1,44 @@
 # MemePet submission film — production plan
 
-Task `DEMO-EQUAL-VOICE` · 23 September 2026 · script **MP-EQ-20260923-v1**.
-Creative direction selected by the team: **playful and polished**, a little Mochi humour and crisp product footage. This is the production brief, not a rendered film or evidence of successful wallet transactions.
+Task `DEMO-EQUAL-VOICE` · notes updated 25 September 2026 · script **MP-EQ-20260923-v1**, spoken lines unchanged.
+Creative direction selected by the team: **playful and polished**, a little Mochi humour and crisp product footage. This brief records the choices behind the completed film; actual results and export checks live in the [capture record](../qa/evidence/FINAL_CAPTURE_2026-09-24.md).
 
 ## The film
 
-**A tiny companion with a daily ritual, demonstrated through one verifiable journey.** The first image is Mochi and the actual MemePet identity. Begin the real rejection test around 0:20. Let viewers predict what happens when we decline, then answer with the real unchanged app state. Move through adoption, care, persistence, community and a concise explanation of X Layer's role. Finish with a personal invitation and useful links.
+**A tiny companion with a daily ritual, demonstrated through one verifiable journey.** Open with **The four musketeers** and the supplied portraits/names of **Deston, Kym, Larm and YeeWei**. YeeWei is introduced without narration. Move quickly into Mochi and the real overview, then the rejection test. Let viewers predict what happens when we decline, then answer with the real unchanged app state. Move through adoption, care, persistence, community and a concise explanation of X Layer's role. Finish with a personal invitation and useful links.
 
 The MP4 is a linear video. Its sense of interaction comes from the question, real cursor actions, state changes and clear visual cause and effect. Clickable app/repository links belong in the submission description; do not promise interactive buttons inside an MP4.
 
-Target **3:25 / 205 seconds**, 1920×1080, 30 fps. Nine narration blocks alternate Deston → Kym → Larm three times. Each voice has **130 words**, three turns, and a target of approximately **60 seconds of retained speech**. The remaining time is for the result to be read. After the MP3s arrive, measure each retained voice and aim for a spread of no more than two seconds, using natural retakes or small pause edits. Do not stretch voices unnaturally merely to hit a number. Word equality is verified before recording; equal recorded duration is still pending.
+Finished edit **3:05 / 185 seconds**, verified at 1920×1080, 30 fps; MP4 and 66-caption SRT delivered, with technical QC passed. Nine narration blocks alternate Deston → Kym → Larm three times. Each voice has **130 selected words** and three turns; **S08B** is selected. Kym's parts A/B form one voice. Natural delivery is preserved; selected clip durations are reported in the combined script and are not equal elapsed time.
 
 ## Shot-by-shot edit contract
 
-Times are assembly targets; final timing follows the recordings. The spoken text is maintained in [DEMO_SCRIPT.md](DEMO_SCRIPT.md), not duplicated here.
+Final scene times follow the received recordings and evidence captures. The spoken text is maintained in [DEMO_SCRIPT.md](DEMO_SCRIPT.md), not duplicated here.
 
-| Scene / time | Voice | Required picture and editorial treatment | Proof gate |
+| Scene | Voice | Required picture and editorial treatment | Proof gate |
 |---|---|---|---|
-| S01 · 0:00–0:20 | Deston | Mochi appears against black; one short title and the real overview. Introduce the product within the opening seconds. A small tilt or nod gives personality; keep the product legible. | Existing mascot artwork is illustration, never an adopted-pet claim. Rights must be confirmed before export. |
-| S02 · 0:20–0:44 | Kym | Begin on the genuine pet page/network/account. Ask the question, hold briefly, show the actual adoption request being declined and unchanged state after reread/refresh. | Same account, actual rejection, no pet/growth. No manufactured wallet popup. |
-| S03 · 0:44–1:09 | Larm | Approve adoption, retain a readable pending state, show successful receipt and confirmed pet reread. One editorial sequence label: Request → Pending → Read back. | Adoption hash, receipt success, matching wallet/registry/chain and resulting UI. |
-| S04 · 1:09–1:34 | Deston | Capture community baseline before care. Show actual care, pending, 0→10 points, then UTC cooldown and disabled care button. Hold the result. | Successful first care and reread. No value replacement or number animation over real counters. |
-| S05 · 1:34–1:56 | Kym | Hard refresh, same pet; open the public pet page. Use a clean match cut between the two genuine views. | Pet-bearing refresh and public page match the same wallet's chain state. |
-| S06 · 1:56–2:18 | Larm | Community view and legible before/after capture labels. Briefly underline the source of a value using an editorial callout. | Actual counter readings/timestamps; distinguish this care's event from other wallets' activity. |
-| S07 · 2:18–2:39 | Deston | A simple diagram: wallet → registry → confirmed reread → pet/community UI. Pair it with the real repository and deployment address. | Mark diagram as explanation; no invented latency, users, audits or explorer verification. |
-| S08 · 2:39–3:04 | Kym | **A:** actual later-UTC-day care, 10→20, Buddy, actual date label. **B:** stage artwork and rules, clearly labelled, over the equal-length alternate narration. | Choose A only with genuine second-care evidence. B never implies earned evolution. |
-| S09 · 3:04–3:25 | Larm | Return to Mochi; end on live app URL, repo URL, X Layer testnet label and readable contract reference. Leave a settled final card. | Roadmap labelled as future; no adoption metric or acceptance claim. |
+| Intro | None | The four musketeers; four supplied portraits and names, then product title. | User-provided roster; final portrait visibility checked. |
+| S01 | Deston | Mochi appears against black; one short title and the real overview. Introduce the product within the opening seconds. A small tilt or nod gives personality; keep the product legible. | Existing mascot artwork is illustration, never an adopted-pet claim. Rights must be confirmed before export. |
+| S02 | Kym | Begin on the genuine pet page/network/account. Ask the question, hold briefly, show the actual adoption request being declined and unchanged state after reread/refresh. | Same account, actual rejection, no pet/growth. No manufactured wallet popup. |
+| S03 | Larm | Approve adoption, retain a readable pending state, show successful receipt and confirmed pet reread. One editorial sequence label: Request → Pending → Read back. | Adoption hash, receipt success, matching wallet/registry/chain and resulting UI. |
+| S04 | Deston | Actual care request footage, followed by the original 10-point/cooldown result screenshot, persistently labelled **After confirmation · original browser still**. | Successful care and later observed result. No continuous 0→10 video claim, value replacement or invented UI. |
+| S05 | Kym | Original hard-refresh result still with its persistent label, then genuine disconnected public-page video. | Human-reported hard refresh and public page match the same wallet's chain state; refresh action itself is not claimed as continuous footage. |
+| S06 | Larm | Community view and legible before/after capture labels. Briefly underline the source of a value using an editorial callout. | Actual counter readings/timestamps; distinguish this care's event from other wallets' activity. |
+| S07 | Deston | A simple diagram: wallet → registry → confirmed reread → pet/community UI. Pair it with the real repository and deployment address. | Mark diagram as explanation; no invented latency, users, audits or explorer verification. |
+| S08B | Kym | Stage artwork and rules, clearly labelled, over the selected alternate narration. | Never implies earned evolution; S08A is unused. |
+| S09 | Larm | Return to Mochi; end on live app URL, repo URL, X Layer testnet label and readable contract reference. Leave a settled final card. | Roadmap labelled as future; no adoption metric or acceptance claim. |
 
 The central stretch S02–S06 should mostly remain genuine product capture, with no full-screen decorative interruption hiding the evidence. Keep at least roughly two thirds of the finished picture on the product and its proof. Final footage determines the measured fraction; this is an editorial target, not an organizer rule.
 
 ## Visual and sound direction
 
 - Reuse the site's actual palette: black `#000000`, panel `#111111`, lime `#c6ff00`, white `#fafafa`, secondary text `#b3b3b3`. Use Geist/Geist Mono when available with verified redistribution rights; otherwise a clean system sans/mono. MemePet remains the brand; avoid suggesting OKX endorsement.
-- Give each first voice entry a matching name card: **Deston**, **Kym**, **Larm**. Same size, placement and time. Roles describe the narration, not unverified employment titles.
+- Introduce all four names/portraits at the start. During each spoken block, place the active speaker's portrait in a circular bottom-left frame, with waves driven by that clip's actual audio amplitude. Use the same size/style for Deston, Kym and Larm; YeeWei has no invented voice or lines.
 - Use restrained 0.2–0.4 second moves and clean cuts. Hold headlines and evidence long enough to read. Gentle push-ins may guide attention; keep chain, status, relevant value and action visible together. Never crop away context that changes meaning.
 - Captions: accurate human speech, two lines maximum, high contrast, consistent bottom safe area. Shift callouts away from captions and app controls. Avoid word-by-word bouncing text over a wallet prompt.
 - One playful beat in the hook, one anticipatory pause before rejection, one earned payoff. No invented testimonials, founder biography, “first ever” claim or overstated financial angle.
 - Human voices lead. Begin with clean speech; add a quiet, rights-cleared instrumental only after licensing is documented. Brief subtle clicks may underline actual cursor actions; no synthetic wallet-success chime before confirmation. Duck the bed under speech; avoid constantly pulsing backgrounds.
-- Working mix target: approximately −16 LUFS integrated and at most −1 dBTP, subject to listening checks. These are production targets, not OKX specifications. Match the three voices by perceived loudness and preserve their natural character.
+- Final mix measured **−20.67 LUFS integrated / −1.28 dBTP**, with no clipping detected. This preserves headroom and the speakers' natural character; these are production measurements, not OKX requirements. Human listening review remains a team step.
 - Select an honest, settled thumbnail from the finished film. Export a separate poster if the host supports it; don't assume changing frame zero controls every platform's thumbnail.
 
 ## What we adopted from `brag`
@@ -74,4 +75,7 @@ Research checked 23 September Singapore. No competitor footage, audio or brandin
 3. A reviewed 2–4 minute MP4, a caption file, a poster and a clean video description with app/repo/contract links.
 4. Actual export metadata and logged-out playback checks recorded in [SUBMISSION_NOTES.md](SUBMISSION_NOTES.md).
 
-The three MP3s, core transaction footage, rights confirmation and final eligibility answers are still missing. The final video cannot yet be truthfully called complete or submission-ready. See [TEAM_READINESS.md](TEAM_READINESS.md).
+The four MP3 files and four portraits are incorporated into the finished MP4.
+Technical export QC, sampled visuals and 66-caption sidecar checks passed.
+Human full playback, public upload, remaining release QA and form answers are
+still open. See [TEAM_READINESS.md](TEAM_READINESS.md).
