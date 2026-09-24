@@ -89,7 +89,7 @@ Deston reports no organizer confirmation yet. Acceptance, testnet-only track
 eligibility, route, exact roster/form declarations and reference-input rights
 remain unresolved. Deston confirms creating Mochi in ChatGPT, Kym finalizing
 it, and all three members agreeing to submit their contributions. See current
-[team readiness](../../demo/TEAM_READINESS.md) and [art provenance](../../pet-assets.md).
+[submission rights](../../SUBMISSION.md#rights) and [art provenance](../../pet-assets.md).
 The official, identical Geist/Geist Mono OFL notices were fetched from the
 Google Fonts project and preserved at `public/licenses/geist-OFL.txt`; this
 does not select a licence for the team's own project.

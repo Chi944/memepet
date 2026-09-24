@@ -1,67 +1,49 @@
 # Connect a browser wallet to MemePet
 
-“Injected wallet” means a browser extension makes a wallet provider available to the site. It is not a field where you paste an address. An address-only/watch-only account cannot approve adoption or care transactions.
+An injected wallet is a browser extension exposing a provider to the site.
+Pasting a public address does not connect a signing account. Address-only/watch-only
+accounts cannot approve adoption or care.
 
-## Current status — 23 September 2026 (Singapore)
+## Setup
 
-The user reports only connection and network-switch approvals, with no signed transaction. The local Chrome page independently displayed `0x2ec8471290793FeB64792861Ce3102d291ce1CA1` and chain `31337` after those approvals. On follow-up, the hosted page also displayed that address and X Layer testnet chain `1952`; this observes an existing connection, not the original permission prompt. The same address means the existing wallet was imported; it is not a new, isolated demo wallet.
+1. Install a wallet from its official source, such as [OKX Wallet](https://web3.okx.com/download)
+   or [MetaMask](https://support.metamask.io/start/getting-started-with-metamask/).
+2. Create a separate demo wallet privately in the extension, or use an existing
+   test wallet you control. Keep recovery information and passwords private.
+3. Unlock the extension in the same browser profile as [MemePet](https://memepet.vercel.app/pet).
+   Reload after installing it, then select Connect wallet.
+4. Approve only the intended site/account connection. Keep security alerts enabled;
+   leave any warning unapproved rather than bypassing it.
+5. Verify **X Layer testnet, chain 1952**, and the account shown in the app.
+   Review any add/switch-network prompt. Adoption/care use testnet OKB for gas.
 
-The supplied screenshot showed MetaMask's **“Malicious—flagged as unsafe”** warning for `memepet.vercel.app`. [Review request #296216](https://github.com/MetaMask/eth-phishing-detect/issues/296216#issuecomment-5782692269) was submitted and closed on 22 September at 19:31 UTC: the reviewer said the domain did not appear flagged anymore. A fresh wallet prompt remains unverified. Keep alerts enabled; leave any prompt that still warns unapproved and follow up on the review. See [the warning evidence record](evidence/METAMASK_WARNING_2026-09-22.md). Neither closure nor connection proves adoption/care works or guarantees safety.
+A password may unlock data in its original wallet installation, but a public
+address plus password cannot reconstruct a wallet in a fresh extension. Use
+only the wallet's supported private recovery/import procedure. Never enter a
+seed, private key, keystore or password into MemePet or send it in chat.
 
-## Disconnect the current site
+If no wallet is found, check the browser profile, installation and unlocked
+state, then reload. An external Chrome wallet is not automatically available
+inside an embedded browser. The app currently uses injected providers, not
+QR/WalletConnect pairing. It prefers `window.ethereum` and falls back to
+`window.okxwallet` when Ethereum injection is absent; automated compatibility
+tests are separate from genuine wallet verification.
 
-**Completed for the hosted origin:** The deployed app's corrected Disconnect button was clicked in real Chrome. It confirmed account-access revocation and remained disconnected after reload and a fresh wallet-account check. [Evidence and screenshot](evidence/RELEASE_AUDIT_2026-09-23.md#production-release-and-real-disconnect--22-september-2111-utc). The manual instructions below remain available for another origin or an unsupported wallet; the local origin's permissions were not changed.
+## Disconnect
 
-Cancel any pending transaction or signature prompt. In MetaMask's account view, open the top-right menu, choose **Dapp connections**, select `memepet.vercel.app`, then **Disconnect**. Older versions may call the menu **Connected sites**. Remove `http://127.0.0.1:3400` separately if you also want to end the local test connection. The current user report includes no spending approval; disconnecting would not undo any previously signed token allowance. [Official instructions](https://support.metamask.io/more-web3/dapps/disconnect-wallet-from-a-dapp/).
+Cancel any pending signature/transaction request, then use MemePet's Disconnect
+control. Verify the resulting status: supported wallets can revoke account
+access; unsupported wallets require removal through their site/dapp connection
+settings. For MetaMask, see [official disconnect instructions](https://support.metamask.io/more-web3/dapps/disconnect-wallet-from-a-dapp/).
+Each hosted/local origin is a separate permission. Disconnecting does not
+reverse a confirmed transaction or revoke an existing token allowance.
 
-## Chrome setup
+MemePet adoption/care request zero transferred value and no token allowance;
+check the actual account, network and registry for each prompt. Current wallet
+results belong in [the walkthrough evidence](BROWSER_WALKTHROUGH.md), not a
+permanent statement that an account is always connected or disconnected.
 
-1. Install the Chrome extension using the [official OKX Wallet download page](https://web3.okx.com/download).
-2. Open the extension. Create a separate demo wallet, or import a wallet you control privately inside the official extension. Set the password and back up recovery information yourself; never enter it into MemePet or send it in chat. See [OKX's setup guide](https://web3.okx.com/help/how-do-i-create-import-an-okx-wallet).
-3. Unlock the wallet and open [MemePet's pet page](https://memepet.vercel.app/pet) in that same Chrome profile. Reload after installing/unlocking.
-4. Click **Connect wallet**, select the intended account and approve the connection prompt in the extension.
-5. If MemePet shows the wrong network, click **Switch network** and review the wallet prompt. This deployment uses **X Layer testnet, chain ID 1952**, with testnet OKB for gas. Use testnet assets for the demo.
-
-If using the previously supplied address, verify that the extension's selected account is `0x2ec8471290793FeB64792861Ce3102d291ce1CA1`. Knowing that public address does not grant signing access. A phone wallet alone does not install a Chrome extension; MemePet currently uses browser-injected providers and has no QR/WalletConnect pairing flow.
-
-If the site still says no wallet was found, confirm that the extension is installed in the browser profile containing MemePet, open/unlock it, and reload the page. A wallet in a different profile or in an external Chrome window is not shared with an embedded app browser.
-
-## I have an address and a password
-
-The password may unlock wallet data already saved in the original wallet app or extension. Open that original installation and unlock it there. A public address plus password alone cannot reconstruct a wallet in a fresh extension. Restoring requires the wallet's supported recovery method or the original saved wallet data; an OKX exchange login is separate from a self-custody wallet. Do not send passwords, recovery words, keys or wallet backup files in chat.
-
-If the original wallet is unavailable, a separate new demo wallet can be created privately in the extension. It will have a different address and needs its own testnet gas; it does not restore the old address.
-
-## Import the existing Foundry demo wallet
-
-The deployment screenshot supplied on 22 September 2026 shows `--account memepet-xlayer-testnet` and a keystore password prompt. The corresponding file was confirmed to exist at `%USERPROFILE%\.foundry\keystores\memepet-xlayer-testnet`. Only file existence was checked; its contents were not opened or decrypted. The screenshot records a contract deployment, not a browser connection, adoption or care action.
-
-MetaMask Extension documents encrypted JSON-file import. This provides a route for importing the Foundry keystore locally without exporting its private key into a terminal or chat:
-
-1. Install MetaMask from its [official installation guide](https://support.metamask.io/start/getting-started-with-metamask/) in the Chrome profile used for MemePet. Complete initial setup privately if needed; keep any recovery information offline.
-2. Open MetaMask's account selector, choose **Add wallet**, then **Import an account**.
-3. On the import page, change **Select Type** to **JSON File** and choose the keystore file above. The Foundry filename may have no `.json` extension; use the full path in the file picker or its all-files filter if available.
-4. Enter the keystore password used by Foundry, then click **Import**. This is the password protecting the file, which may differ from MetaMask's own unlock password. Enter it only in the official extension.
-5. Verify the imported account's full address against `0x2ec8471290793FeB64792861Ce3102d291ce1CA1`. The local and hosted pages have displayed this address, but the extension's import process was not independently inspected. Importing this account reuses the same wallet.
-6. Once the current security warning has been resolved, select and unlock the intended account, reload MemePet in the same Chrome profile, click **Connect wallet**, and review the connection prompt. If prompted by MemePet, use **Switch network** for X Layer testnet (1952).
-
-Source: [MetaMask's account and JSON-file import instructions](https://support.metamask.io/start/use-an-existing-wallet), checked 22 September 2026. If the extension reports an import error, share only the error text; keep the wallet file and password private. A successful import alone does not mark any transaction walkthrough step as passed.
-
-## Provider compatibility
-
-The app keeps the existing `window.ethereum` provider as first choice and falls back to OKX's documented `window.okxwallet` provider when it is absent. If both are present, the existing browser-default Ethereum provider is used. No address, signature, or transaction is synthesized by this fallback.
-
-References: [OKX extension detection](https://web3.okx.com/onchainos/dev-docs/wallet/dapp-connect/web-detect-okx-wallet), [OKX EVM provider documentation](https://web3.okx.com/onchainos/dev-docs/wallet/dapp-connect/chains/evm/introduce).
-
-## Verification boundary
-
-Automated provider tests use mocks. They do not count as a real wallet walkthrough. The earlier independently observed browser attempt returned **No injected wallet was found**; its dated results below remain valid history. The subsequent local connection/network display and hosted existing connection are now observed, as described above. Adoption, care, signature rejection, account switching and confirmed-pet refresh persistence remain unverified. See [the separate local run](evidence/LOCAL_ANVIL_2026-09-22.md); its runtime has stopped, so it must be recreated before continuing.
-
-### Compatibility update checks — 22 September 2026
-
-- `npm run lint` — passed.
-- `npm test` — passed, 79 tests across 16 files. Five new provider-selection tests cover OKX-only detection and connection, account/chain events and listener cleanup, network switching, Ethereum-provider precedence, and the missing-wallet error. These use mocked providers.
-- `npm run build`, followed by `npm run typecheck` — passed using the existing public X Layer testnet deployment settings.
-- Real Chrome inspection of the local production build at `http://127.0.0.1:3300/pet` — setup notice and official OKX download link rendered. Clicking **Connect wallet** genuinely returned **No injected wallet was found**. No wallet account or transaction was fabricated.
-- Desktop screenshot visually inspected; at a 390px viewport, DOM measurements showed equal document client and scroll widths (375px), with no horizontal overflow. The viewport override was reset afterward.
-- Independent code review — no actionable findings. No dependencies, deployment settings, or contract changes.
+The earlier MetaMask warning and review closure are preserved in the
+[dated audit trail](evidence/README.md). Review closure and successful connection
+do not establish zero security risk. Original setup history is available in the
+[pinned snapshot](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/qa/WALLET_SETUP.md).

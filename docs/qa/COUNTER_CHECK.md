@@ -1,8 +1,8 @@
 # Counter check — proving the +1 is ours
 
-For **S06 · A shared total**, and the Larm task in `docs/demo/TEAM_READINESS.md`:
-*"Record/check the shared counter before and after care … Keep exact
-observations rather than assuming a global +1 proves only our action."*
+Use this repeatable read-only check to attribute a community increment to a
+specific care receipt. Retain the before/after blocks and matching events in the
+[dated evidence](evidence/README.md).
 
 A total going from `n` to `n+1` does not prove *our* care caused it — another
 wallet could care in the same window. This checks the chain directly, so the

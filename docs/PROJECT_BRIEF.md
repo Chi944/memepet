@@ -1,4 +1,4 @@
-# MemePet — frozen working brief v1
+# MemePet product scope
 
 ## Product
 
@@ -6,7 +6,7 @@ A meme-community companion app on X Layer. A user adopts a wallet-linked pet, co
 
 **Core user story:** connect → adopt → care → see confirmed progress → refresh and recover the same pet.
 
-## Proposed rules
+## Rules
 
 One pet per wallet. One care per UTC calendar day. Each confirmed care gives 10 personal growth points and increments the community care total by one. Hatchling begins at 0 points, Buddy at 20, Guardian at 50. No missed-day penalty. The lead owns the contract and UI mapping of these rules.
 
@@ -14,11 +14,11 @@ Show progression earned from participation, not token spending. No token approva
 
 ## Commit scope
 
-One community, one mascot with three stage assets, a landing/adoption entry, pet home, daily care, persistent state and a community-progress panel. The actual community token/network identity is lead-verified, not inferred from a ticker or generated artwork. A read-only holder indicator may be added by the lead after the core loop works.
+One community, one mascot with three stage assets, a landing/adoption entry, pet home, daily care, persistent state, a community-progress panel, and read-only public pet/share-image pages. The actual community token/network identity is lead-verified, not inferred from a ticker or generated artwork. A read-only holder indicator may be added by the lead after the core loop works.
 
 ## Stretch scope
 
-Accessory saving, multiple communities, public profile pages, generated share images, market data. No marketplace, launchpad, breeding, trading, staking, chatbot, real-time 3D engine or in-app social feed.
+Accessory saving, multiple communities and market data. No marketplace, launchpad, breeding, trading, staking, chatbot, real-time 3D engine or in-app social feed.
 
 ## Architecture boundary
 

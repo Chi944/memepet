@@ -113,5 +113,12 @@ export function useCommunityStats({
     setRefreshToken((value) => value + 1);
   }, []);
 
-  return { community, refresh };
+  // Recover a failed read without clearing the receipt block. A retry must
+  // never fall back to a potentially older "latest" result after confirmed care.
+  const retry = useCallback(() => {
+    setCommunity(unknownCommunityViewModel({ isLoading: true }));
+    setRefreshToken((value) => value + 1);
+  }, []);
+
+  return { community, refresh, retry };
 }

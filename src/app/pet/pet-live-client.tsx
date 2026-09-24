@@ -142,7 +142,7 @@ export function PetLiveClient() {
           </div>
           <div>
             <dt>Community cares</dt>
-            <dd>
+            <dd aria-live="polite">
               {community.community.isLoading
                 ? "Reading…"
                 : community.community.totalCareActions === null
@@ -151,6 +151,11 @@ export function PetLiveClient() {
             </dd>
           </div>
         </dl>
+        {community.community.errorMessage && !wallet.wrongChain ? (
+          <p className="status-note" role="status">
+            {community.community.errorMessage} Retry only reads the chain; it does not send a transaction.
+          </p>
+        ) : null}
         {!wallet.installed ? (
           <div className="wallet-setup">
             <p>Connect with a browser wallet.</p>
@@ -164,6 +169,11 @@ export function PetLiveClient() {
           </div>
         ) : null}
         <div className="pet-gate-actions">
+          {community.community.errorMessage && !wallet.wrongChain ? (
+            <Button tone="secondary" onClick={community.retry}>
+              Retry community total
+            </Button>
+          ) : null}
           {wallet.address || wallet.connecting || wallet.disconnectStatus === "pending" ? (
             <Button
               tone="secondary"
