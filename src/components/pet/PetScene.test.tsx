@@ -3,11 +3,6 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { petFixtures } from "@/fixtures/ui-fixtures";
 import { PetScene } from "./PetScene";
 
-const hatchlingWithoutArt = {
-  ...petFixtures.hatchling,
-  artSrc: null,
-};
-
 describe("PetScene", () => {
   afterEach(() => vi.unstubAllGlobals());
 
@@ -42,7 +37,7 @@ describe("PetScene", () => {
   });
 
   it("renders an accessible placeholder when art is missing", () => {
-    render(<PetScene pet={hatchlingWithoutArt} celebrate={false} />);
+    render(<PetScene pet={petFixtures.missingArt} celebrate={false} />);
 
     expect(screen.getByRole("heading", { name: "Mochi" })).toBeInTheDocument();
     expect(screen.getByText("Stage: Hatchling")).toBeInTheDocument();

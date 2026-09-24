@@ -41,6 +41,7 @@ export function PetPreview() {
             <option value="hatchling">Hatchling</option>
             <option value="buddy">Buddy</option>
             <option value="guardian">Guardian</option>
+            <option value="missingArt">Missing artwork</option>
           </select>
         </label>
 
