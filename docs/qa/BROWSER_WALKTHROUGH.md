@@ -23,13 +23,21 @@ viewing, including read failures and explicit capture gaps. Neither record
 upgrades a step that it did not actually exercise. [Earlier evidence](evidence/README.md)
 remains dated and separately accessible.
 
-Current follow-up evidence records account switching and care, including a failed
-post-care community read that recovered after reload. Reduced-motion and
-missing-art/unknown-total previews passed; normal-motion foreground playback is
-**NOT RUN by user preference**. The cleanup/retry change passed 123 application
-tests, 15 contract tests, 8 counter checks, typecheck, lint and production build
-locally; `/` returned 200 and all three development routes returned 404. These
-checks do not establish a fresh wallet pass on the pending deployment.
+The current tested product revision is **af886a75**, deployed successfully as
+**6644949897** on 24 September at 18:17:39 UTC. Account 3 genuinely rejected,
+adopted and cared: the pet automatically reached 10 points/cooldown, but the
+community header became Unknown. **Retry community total** recovered 4 without
+a reload or another transaction. Manual read-only recovery and a subsequent
+normal reload passed; automatic community refresh failed. A separate unconnected
+browser displayed the correct Account 3 address, read-only live Hatchling and
+10 points with no care action: PASS. Network away/back and disconnect
+persistence remain in progress.
+
+Reduced-motion and missing-art/unknown-total previews passed; normal-motion
+foreground playback is **NOT RUN by user preference**. Release CI passed 123
+application tests, 15 contract tests, 8 counter checks, typecheck, lint, build and
+production-route checks (`/` 200; all three development routes 404). These
+checks remain separate from each actual browser-wallet result.
 
 ## Repeatable test matrix
 
@@ -42,6 +50,7 @@ checks do not establish a fresh wallet pass on the pending deployment.
 | Adopt | Human approves a zero-value request to the registry. Retain the successful receipt and matching Adopted event; verify the same account's Hatchling at zero points after a fresh read. Record any read error/recovery. |
 | Care | Capture the baseline first. Human approves zero-value care to the registry; verify successful receipt, Cared event, fresh pet count and ten-point increment. A transaction does not pass merely because a button was clicked. |
 | Community increment | Pin reads before and at the receipt block and attribute matching Cared events with [the counter helper](COUNTER_CHECK.md). Independently record whether the browser updates promptly, remains stale or shows Unknown. |
+| Read-only counter recovery | If a confirmed care leaves the total Unknown, use Retry community total. Verify it rereads the same receipt block, preserves growth/cooldown and recovers the confirmed total without a reload or another wallet transaction. Record recovery separately from automatic refresh. |
 | Same-day cooldown | Observe disabled care and the explicit next UTC-day time. Do not submit a duplicate just to prove a disabled control. Contract rejection is covered separately by tests. |
 | Refresh | Human performs the chosen normal/hard refresh; after reads settle, verify the same account, pet, growth, cooldown and total. Record which refresh was actually performed. |
 | Switch account | Switch in the wallet with the page open; verify the old account's pet is cleared and the new account's real state appears without a reload. No adoption/care is needed. |

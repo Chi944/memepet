@@ -18,6 +18,7 @@ required; network gas applies.
 | Registry | [0xe844152262D243a7B90F6e07FF7A67F1d7FeD216](https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216) |
 | Video | **185 seconds / 3:05**, 1080p30 MP4 and 66-caption SRT; technical QC passed |
 | Public video link | **UNVERIFIED — VIDEO_URL**; upload/logged-out playback remain |
+| Verified product release | `af886a75`; production deployment **6644949897**, 24 September 18:17:39 UTC. Later documentation commits are separate |
 | Final submission revision | **UNVERIFIED — FINAL_COMMIT_AND_DEPLOYMENT** |
 | Submission receipt | **UNVERIFIED — SUBMISSION_RECEIPT** |
 
@@ -28,6 +29,14 @@ YeeWei is introduced without narration. Original care/refresh result stills
 are explicitly labelled; no continuous successful 0→10 video or live evolution
 is claimed. Export hashes, actual transaction evidence and QC limits are in the
 [capture record](qa/evidence/FINAL_CAPTURE_2026-09-24.md).
+
+Latest browser evidence includes real Account 3 rejection, adoption, care,
+automatic 10-point pet/cooldown read-back and a normal reload. Automatic community
+refresh showed Unknown; read-only Retry recovered 4 without reloading or another
+transaction. Preserve that limitation when describing the working integration.
+A separate unconnected browser also verified Account 3's read-only public pet.
+Network/disconnect follow-up is still in progress; see
+[current status](STATUS.md) and [latest-release QA](qa/evidence/LATEST_RELEASE_QA_2026-09-24.md).
 
 ## Official requirements and open form details
 
@@ -62,7 +71,7 @@ licence; none has been selected. Do not put ID documents or credentials in Git.
 - All four watch/listen to the finished film and confirm names, portraits and claims.
 - Deston confirms exact roster details, route, attendance, project origin and remaining form declarations; each member confirms their details/permissions.
 - Kym resolves the remaining artwork-input provenance questions; Larm checks public app/repository/video/technical links while logged out.
-- Complete the remaining release QA in [current status](STATUS.md). Preserve actual failures and unrun rows.
+- Review the final release evidence and documented limitations in [current status](STATUS.md); finish the still-pending browser rows without upgrading failures or unrun checks.
 - Upload the FINAL MP4 and corrected SRT, verify playback through the last frame, submit before the deadline, and retain the receipt.
 
 The combined/individual scripts and editing notes are preserved with the private

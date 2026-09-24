@@ -268,8 +268,11 @@ with success claims.
 
 ## Source manifest
 
-Originals are local production media under `memepet-video/media/capture/`, not
-uploaded to the public source repository by this draft.
+Originals were captured under `memepet-video/media/capture/`. The complete
+workspace was subsequently moved, with matching hashes, to the private local
+`Projects/archive/memepet-submission-2026/video-production/media/capture/`
+archive. Original paths in historical manifests remain provenance. No raw
+production media was uploaded to the public source repository by this cleanup.
 
 | Source | SHA-256 / purpose |
 |---|---|
