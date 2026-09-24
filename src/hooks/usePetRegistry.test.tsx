@@ -1,6 +1,6 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { Address, WalletClient } from "viem";
+import { BlockNotFoundError, ResourceUnavailableRpcError, type Address, type WalletClient } from "viem";
 import type { Deployment } from "@/lib/deployment";
 
 const rpc = vi.hoisted(() => ({
@@ -107,6 +107,65 @@ describe("usePetRegistry confirmed reads and wallet sessions", () => {
     expect(result.current.readStatus).toBe("error");
     expect(result.current.readErrorMessage).toMatch(/Adoption confirmed on chain/);
     expect(result.current.confirmedBlockNumber).toBe(block.number);
+    expect(result.current.pet).toBeNull();
+  });
+
+  it.each(["block", "pet"])("recovers a temporarily unavailable receipt %s read without another write", async (failedRead) => {
+    const { result } = mountRegistry();
+    await waitFor(() => expect(result.current.readStatus).toBe("ready"));
+    rpc.readContract.mockResolvedValue(adoptedPet);
+    if (failedRead === "block") {
+      rpc.getBlock.mockRejectedValueOnce(new BlockNotFoundError({ blockNumber: block.number }));
+    } else {
+      rpc.readContract.mockRejectedValueOnce(new ResourceUnavailableRpcError(new Error("Receipt state not available yet")));
+    }
+
+    let write!: Promise<void>;
+    act(() => { write = result.current.adopt(); });
+    await waitFor(() => expect(result.current.txPhase).toBe("pending"));
+    expect(result.current.pet).toBeNull();
+    await act(async () => { await write; });
+
+    expect(result.current.txPhase).toBe("success");
+    expect(result.current.readStatus).toBe("ready");
+    expect(result.current.pet?.growthPoints).toBe(0);
+    expect(rpc.writeContract).toHaveBeenCalledOnce();
+    const receiptReads = rpc.getBlock.mock.calls.filter(([args]) => args.blockNumber !== undefined);
+    expect(receiptReads).toHaveLength(2);
+    for (const [args] of receiptReads) expect(args.blockNumber).toBe(block.number);
+    for (const [args] of rpc.readContract.mock.calls) expect(args.blockNumber).toBe(block.number);
+  });
+
+  it("stops after three unavailable receipt reads and keeps confirmed-but-stale wording", async () => {
+    const { result } = mountRegistry();
+    await waitFor(() => expect(result.current.readStatus).toBe("ready"));
+    rpc.getBlock.mockRejectedValue(new BlockNotFoundError({ blockNumber: block.number }));
+    await act(async () => { await result.current.adopt(); });
+
+    expect(rpc.getBlock.mock.calls.filter(([args]) => args.blockNumber !== undefined)).toHaveLength(3);
+    expect(rpc.writeContract).toHaveBeenCalledOnce();
+    expect(result.current.txPhase).toBe("success");
+    expect(result.current.readStatus).toBe("error");
+    expect(result.current.readErrorMessage).toMatch(/Adoption confirmed on chain/);
+    expect(result.current.pet).toBeNull();
+  });
+
+  it("cancels the delayed receipt retry when the connected account changes", async () => {
+    const { result, rerender } = mountRegistry();
+    await waitFor(() => expect(result.current.readStatus).toBe("ready"));
+    rpc.getBlock.mockRejectedValueOnce(new BlockNotFoundError({ blockNumber: block.number }));
+    let write!: Promise<void>;
+    act(() => { write = result.current.adopt(); });
+    await waitFor(() => expect(rpc.getBlock).toHaveBeenCalledWith({ blockNumber: block.number }));
+
+    rerender({ address: walletB });
+    await waitFor(() => expect(result.current.readStatus).toBe("ready"));
+    await act(async () => { await write; });
+
+    expect(rpc.getBlock.mock.calls.filter(([args]) => args.blockNumber !== undefined)).toHaveLength(1);
+    expect(rpc.writeContract).toHaveBeenCalledOnce();
+    expect(result.current.txPhase).toBe("idle");
+    expect(result.current.confirmedBlockNumber).toBeUndefined();
     expect(result.current.pet).toBeNull();
   });
 
