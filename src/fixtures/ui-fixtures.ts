@@ -33,6 +33,15 @@ export const petFixtures = {
     artSrc: "/pets/guardian.png",
     dataMode: "fixture",
   },
+  missingArt: {
+    displayName: "Mochi",
+    communityName: "Example Community — UI fixture",
+    stage: "hatchling",
+    growthPoints: 10,
+    nextStageAt: 20,
+    artSrc: null,
+    dataMode: "fixture",
+  },
 } as const satisfies Record<string, PetViewModel>;
 
 export const careFixtures = {
@@ -93,6 +102,14 @@ export const communityFixtures = {
     name: "Example Community — UI fixture",
     totalCareActions: 7,
     milestoneTarget: null,
+    isLoading: false,
+    errorMessage: null,
+    dataMode: "fixture",
+  },
+  unknownTotal: {
+    name: "Example Community — UI fixture",
+    totalCareActions: null,
+    milestoneTarget: 20,
     isLoading: false,
     errorMessage: null,
     dataMode: "fixture",

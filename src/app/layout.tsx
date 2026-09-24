@@ -37,6 +37,8 @@ function resolveSiteUrl(): string {
 }
 
 const siteUrl = resolveSiteUrl();
+const description =
+  "Adopt a meme-community mascot. A little daily care grows your pet and brings your community's shared habitat to life.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -44,21 +46,18 @@ export const metadata: Metadata = {
     default: "MemePet — adopt the meme, grow the community",
     template: "%s · MemePet",
   },
-  description:
-    "Adopt a meme-community mascot, care for it once a day, and add to shared habitat progress. Growth comes from participation, not from spending a token.",
+  description,
   applicationName: "MemePet",
   openGraph: {
     type: "website",
     siteName: "MemePet",
     title: "MemePet — adopt the meme, grow the community",
-    description:
-      "Adopt a meme-community mascot, care for it once a day, and add to shared habitat progress.",
+    description,
   },
   twitter: {
     card: "summary_large_image",
     title: "MemePet — adopt the meme, grow the community",
-    description:
-      "Adopt a meme-community mascot, care for it once a day, and add to shared habitat progress.",
+    description,
   },
 };
 

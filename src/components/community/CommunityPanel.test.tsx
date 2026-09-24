@@ -16,14 +16,7 @@ describe("CommunityPanel", () => {
   });
 
   it("treats a null total as unknown, not zero", () => {
-    render(
-      <CommunityPanel
-        community={{
-          ...communityFixtures.growing,
-          totalCareActions: null,
-        }}
-      />,
-    );
+    render(<CommunityPanel community={communityFixtures.unknownTotal} />);
 
     expect(screen.getByText("Care actions: Unknown")).toBeInTheDocument();
     expect(screen.queryByText("0")).not.toBeInTheDocument();

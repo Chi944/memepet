@@ -15,6 +15,7 @@ const fixtureLabels: Record<CommunityFixtureKey, string> = {
   reached: "Achieved",
   error: "Unavailable",
   unknownTarget: "Unknown target",
+  unknownTotal: "Unknown total",
 };
 
 export function CommunityPreview() {
@@ -28,7 +29,7 @@ export function CommunityPreview() {
         <h1>Community component preview</h1>
         <p>
           Select a centralized fixture to inspect loading, zero, progress,
-          achieved, unavailable, and unknown-target meanings.
+          achieved, unavailable, unknown-target, and unknown-total meanings.
         </p>
       </header>
 

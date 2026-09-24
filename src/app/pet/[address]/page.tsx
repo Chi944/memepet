@@ -24,10 +24,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Public pet" };
   }
 
+  const title = `Pet of ${shortenAddress(owner)}`;
+  const description =
+    "A read-only look at a wallet's MemePet. Visitors cannot care for someone else's pet.";
+
   return {
-    title: `Pet of ${shortenAddress(owner)}`,
-    description:
-      "A read-only look at a wallet's MemePet. Visitors cannot care for someone else's pet.",
+    title,
+    description,
+    openGraph: {
+      type: "website",
+      siteName: "MemePet",
+      title: `${title} · MemePet`,
+      description,
+      url: `/pet/${owner}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} · MemePet`,
+      description,
+    },
   };
 }
 
