@@ -123,8 +123,44 @@ a transaction or a passed recovery.
 - Network away/back and disconnect persistence: NOT RUN on `af886a75` at this
   checkpoint. The human was asked to select another existing network without
   signing or sending; the page still displayed 1952 at the last observation.
-  It remains connected so the requested network check can continue. Earlier
-  disconnect evidence is not relabelled as a pass on this revision.
+  Earlier disconnect evidence was not relabelled as a pass on this revision.
+  The subsequent disconnect check is recorded below.
+
+### Completed disconnect follow-up — 18:41 UTC
+
+The user requested automation finish the remaining checks and supplied MetaMask
+**Manage networks** screenshots showing Local Anvil and X Layer testnet configured.
+Those settings screenshots do not prove an active network switch. The hosted
+app still displayed Account 3, chain 1952, 10 points/cooldown and community total 4.
+
+Automation clicked the app's **Disconnect** control. After the transient
+Disconnecting state completed, the fresh DOM displayed **Not connected**,
+**Connect to view** and the explicit completed status **Wallet account access
+was revoked for this site**. The live pet and write controls were removed;
+the labelled invitation mascot remained. The independently readable community
+total stayed 4: **PASS** for completed app-reported revocation.
+
+A normal browser reload then settled to the same disconnected state and
+revocation message, with total 4 and no wallet pet or care/adopt action:
+**PASS** for disconnect persistence. The initial hydration frame was not used
+as the result. No transaction, signature, new wallet connection, network edit
+or token-approval action was performed during this follow-up.
+
+The reload was against public production deployment **6645345099**, successful
+at **18:37:56 UTC**, commit **edae08a02754b27848c389c6df0d778e99bfedef**.
+Git changes from tested runtime `af886a75` to this commit are six documentation
+files only; application/contract/configuration sources did not change. The
+loaded page before disconnect was the previously verified runtime.
+
+**Network away/back remains NOT RUN**: the automation interface cannot operate
+MetaMask's protected extension controls. The site was left disconnected after
+the completed check. Configured networks and automated regression coverage are
+not substitutes for an observed `chainChanged` transition and return.
+
+Original DOM observations and the post-reload screenshot are retained privately
+as `disconnect-followup-before.txt`, `disconnect-followup-completed.txt`,
+`disconnect-followup-after-reload.txt` and `disconnect-followup-after-reload.png`
+under the existing latest-release evidence archive.
 
 ## Visual follow-up
 

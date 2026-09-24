@@ -30,9 +30,17 @@ community header became Unknown. **Retry community total** recovered 4 without
 a reload or another transaction. Manual read-only recovery and a subsequent
 normal reload passed; automatic community refresh failed. A separate unconnected
 browser displayed the correct Account 3 address, read-only live Hatchling and
-10 points with no care action: PASS. Network away/back and disconnect
-persistence are NOT RUN on this revision, awaiting the human network-selection
-step before disconnecting.
+10 points with no care action: PASS. Hosted Disconnect then completed with the
+account-access revocation notice, Not connected, no live pet/write actions and
+total 4. A normal reload preserved that state: PASS. The action used the loaded
+`af886a75` runtime; the reload used documentation-only **edae08a**, deployment
+**6645345099** (18:37:56 UTC), with no runtime source difference. The site was
+left disconnected and no new connection request was issued.
+
+Network away/back remains **NOT RUN**. The wallet screenshots showed network
+management settings, and the app still showed 1952 before disconnect. Automation
+could not operate extension controls; configured networks alone do not prove a
+site network switch.
 
 Reduced-motion and missing-art/unknown-total previews passed; normal-motion
 foreground playback is **NOT RUN by user preference**. Release CI passed 123

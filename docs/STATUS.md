@@ -15,8 +15,12 @@ separate evidence; see [latest-release QA](qa/evidence/LATEST_RELEASE_QA_2026-09
 - A separate unconnected browser displayed Account 3's public page with the correct address, Read only, Live Hatchling, 10 points and no care action: PASS.
 - On release **af886a75**, Account 3 genuinely rejected adoption, then adopted and cared. The pet automatically reached **10 points / cooldown**. The community header became **Unknown**, then **Retry community total** recovered **4** without reloading or another transaction. Manual read-only recovery passed; automatic community refresh failed. A normal reload retained Account 3, 10 points, cooldown and total 4.
 
+- Hosted **Disconnect** at approximately 24 September 18:41 UTC completed with account-access revocation, Not connected, no live pet or write actions, and total 4. A normal reload preserved the disconnected state and revocation notice: PASS. The site was left disconnected; no new connection request was issued.
+
 The tested product revision is **af886a75** (PR #51), separate from later
-documentation-only revisions. Production deployment **6644949897** succeeded at
+documentation-only revisions. Disconnect ran on this loaded runtime; the following
+normal reload used documentation-only **edae08a**, deployment **6645345099**
+(18:37:56 UTC), with no runtime source difference. Production deployment **6644949897** succeeded at
 **24 September, 18:17:39 UTC**; the public app served the new recovery control.
 [Post-merge CI](https://github.com/Chi944/memepet/actions/runs/36040157500)
 passed **123 app tests / 21 files, 15 contract tests, 8 counter checks,
@@ -29,7 +33,7 @@ observed automatic counter-refresh failure.
 
 | Work | Owner / evidence needed |
 |---|---|
-| Latest-release browser follow-up | Network away/back and disconnect persistence are NOT RUN on af886a75, awaiting the human network-selection step before disconnecting. Public viewing, genuine Account 3 adoption/care, read-only counter recovery and normal reload passed |
+| Latest-release browser follow-up | Network away/back is NOT RUN: the wallet showed network-management settings and the page remained on 1952 before disconnect. Extension controls were unavailable to automation. Genuine adoption/care, manual recovery, public viewing and disconnect/reload passed; the site remains disconnected |
 | Remaining visual QA | Reduced-motion and missing-art/unknown-total fixtures passed in the follow-up run; normal-motion foreground playback is NOT RUN because the user prefers to keep reduced motion enabled. Four viewport layouts and keyboard checks passed in Larm's audit |
 | Team video review and upload | All four watch/listen, confirm names/portraits/claims, then upload FINAL MP4 + corrected SRT and check logged-out playback |
 | Submission | Deston completes exact roster/route/origin/declarations and retains receipt; Kym resolves asset-input provenance; Larm verifies public links |
