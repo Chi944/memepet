@@ -30,17 +30,20 @@ Growth comes from confirmed care. No MemePet token to buy; network gas applies.
 |---|---|
 | **Event** | OKX Dev Day 2026 |
 | **Intended track** | Build a Market — meme application; deployed on X Layer testnet |
-| **Team** | **The four musketeers** — Deston, Kym, Larm and YeeWei; exact names for the form remain unverified |
+| **Team** | **The four musketeers** — Deston, Kym, Larm and YeeWei |
 | **Live demo** | [memepet.vercel.app](https://memepet.vercel.app) |
-| **Demo video** | ✅ 3:05 MP4 and captions complete; technical QC passed. Public link **UNVERIFIED — VIDEO_URL** |
+| **Demo video** | [Watch the 3:05 demo](https://youtu.be/ofPOony4nys) · uploaded; **currently Private, judge access pending** |
 | **Contract** | [`0xe844152262D243a7B90F6e07FF7A67F1d7FeD216`](https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216) |
 | **Network** | X Layer testnet · chain **1952** · gas currency **OKB** |
 | **Repository** | [github.com/Chi944/memepet](https://github.com/Chi944/memepet) |
 
-The core implementation is merged. The latest release has genuine wallet
-adoption/care and read-only counter recovery evidence. The remaining work is
-the final unrun checks, team video review and the submission package. Current evidence is summarized below;
-remaining acceptance work is tracked in [current status](docs/STATUS.md).
+### Review in 60 seconds — no wallet needed
+
+1. Open the [live overview](https://memepet.vercel.app) to see Mochi's three stage designs and the shared care counter.
+2. Visit the [verified demo pet](https://memepet.vercel.app/pet/0xb7E6D789c39D468CfE3c5dA37C29Bd9852247B3a). This public page reads the registry without a wallet connection; the checked run showed a live Hatchling with 10 growth points.
+3. Inspect its [confirmed care transaction](https://www.okx.com/web3/explorer/xlayer-test/tx/0xa340d65b2e59276568c8ff364ea01ec4cf1cc995b6e0ce720ddd1477906e1a55) and [browser/receipt evidence](docs/qa/evidence/LATEST_RELEASE_QA_2026-09-24.md): one real care added ten points and exactly one community care.
+
+To try adoption and care yourself, use the [wallet walkthrough](docs/qa/BROWSER_WALKTHROUGH.md) with an injected wallet and X Layer testnet gas. Browsing and public sharing require neither.
 
 ---
 
@@ -96,45 +99,29 @@ allowances or token transfers; wallet approval and network gas are still require
 <a id="honest-status"></a>
 ## 🚦 Honest status
 
-Updated **25 September 2026 (Singapore)**. Implementation and verified browser
-results are listed separately.
+Verified **25 September 2026 (Singapore)**. Product runtime: `af886a75`;
+later documentation-only releases retain the same application source.
 
-| Capability | Current state |
+| Area | Verified result |
 |---|---|
-| Landing, how-it-works and community panel | ✅ Merged |
-| Pet scene, three stages and care-state panel | ✅ Merged, including corrected artwork and evolution presentation |
-| Black/lime design, responsive layouts and reduced-motion styles | ✅ Implemented; four viewport layouts and keyboard navigation checked. Reduced-motion preview passed; normal-motion foreground playback is unrun by user preference |
-| Wallet connection, network switch and account-access revocation | ✅ Hosted connection and real Disconnect/reload verified. Account access remained revoked after reload; the site was left disconnected. Network away/back remains NOT RUN |
-| Adoption, care, receipts and confirmed read-back | ✅ Account 3 genuinely rejected, adopted and cared on `af886a75`; the pet automatically reached 10 points/cooldown. Normal reload preserved the state. Automatic counter refresh failed; read-only Retry recovered the total without a reload or new transaction |
-| Public pet page and generated share images | ✅ Merged; a separate unconnected browser displayed Account 3's correct address, read-only live Hatchling and 10 points with no care action |
-| X Layer testnet deployment | ✅ Deployed; executable runtime comparison documented |
-| Automated checks | ✅ Release `af886a75`: **123 app tests / 21 files**, **15 contract tests**, **8 counter checks**, typecheck, lint, build and production-route checks passed. Production deployment verified |
-| Final demo video and submission | ✅ Video/captions complete with technical QC passed; care/refresh result stills labelled. Team playback, public upload and form completion remain |
+| Wallet flow | Genuine rejection → adoption → care; automatic 10-point pet read-back, UTC cooldown and reload persistence |
+| Read recovery | Automatic community refresh showed Unknown; **Retry community total** recovered the receipt-block total without a reload or second transaction |
+| Sharing and disconnect | Public pet displayed correct live state without connecting; Disconnect revoked site access and persisted after reload |
+| Interface | Four viewport layouts, keyboard navigation, reduced-motion preview and missing/unknown-state previews checked |
+| Automated checks | **123 app tests / 21 files · 15 contract tests · 8 counter checks**; typecheck, lint, build and production preview gates passed |
 
-[CI for `af886a75`](https://github.com/Chi944/memepet/actions/runs/36040157500)
-passed after merge. Production deployment **6644949897** succeeded at
-**24 September, 18:17:39 UTC**; the public app served the new recovery control.
-This is the tested product revision. A later documentation-only deployment,
-`edae08a` (**6645345099**, 18:37:56 UTC), retained the same runtime source;
-the final disconnect persisted after a normal reload onto that deployment.
-See [latest-release QA](docs/qa/evidence/LATEST_RELEASE_QA_2026-09-24.md).
-Lint passed with one existing image-element warning and no errors.
-The [24 September capture record](docs/qa/evidence/FINAL_CAPTURE_2026-09-24.md)
-separates actual wallet actions, chain receipts, observed app states and usable
-video. Account 2's care confirmed on chain, but reads failed during the flow;
-human refresh recovered the same pet and total. In the latest Account 3 run,
-care automatically updated the pet to 10 points/cooldown but the community header
-became Unknown. **Retry community total** recovered **4** without a reload or
-new transaction. Manual recovery passed; automatic community refresh did not.
-The recorded take cannot establish an uninterrupted successful care/refresh sequence.
+[Release CI](https://github.com/Chi944/memepet/actions/runs/36040157500) and
+[latest browser QA](docs/qa/evidence/LATEST_RELEASE_QA_2026-09-24.md) retain the
+actual results, read failures and unrun checks. Lint has one existing image-element
+warning and no errors. The 3:05 film passed technical QC; original care/refresh
+result stills are labelled, and no live evolution or uninterrupted successful
+care/refresh recording is claimed. [Capture evidence](docs/qa/evidence/FINAL_CAPTURE_2026-09-24.md)
+records the exact footage boundaries.
 
-**Confirmed data drives the interface:**
-
-- Unknown values stay explicitly unknown; a confirmed zero is displayed as zero.
-- Data badges distinguish live reads, fictional previews and unavailable values.
-- Development fixtures never replace failed live reads.
-- Growth requires a successful receipt and a fresh registry read.
-- The community total counts **care actions**, not people, adopted pets or wallets.
+**Confirmed data drives the interface.** Growth requires a successful receipt
+and fresh registry read. Unknown totals stay unknown; fictional previews never
+replace failed live reads. The shared total counts **care actions**, not users
+or adopted pets.
 
 ---
 
@@ -148,8 +135,10 @@ flowchart LR
     C -->|Care once per UTC day| D{Transaction}
     D -->|Rejected or reverted| E[No growth awarded]
     D -->|Receipt confirmed| F[Fresh registry read]
-    F --> G[10 growth points per care]
-    F --> H[Community care total]
+    F -->|Read succeeds| G[10 growth points per care]
+    F -->|Read succeeds| H[Community care total]
+    F -->|Read fails| I[Explicit unavailable state]
+    I -->|Read-only recovery| F
     E --> C
     G --> C
 ```
@@ -175,31 +164,15 @@ care count; they are not a separate saved balance.
 <a id="architecture"></a>
 ## 🏗️ Architecture
 
-Presentation receives display values and callbacks. Wallet access, reads and
-transaction state live in the integration layer.
+| Layer | Responsibility |
+|---|---|
+| Presentation · `src/components/` | Pet, care and community views consume display values and callbacks |
+| Integration · `src/hooks/`, `src/lib/` | Wallet sessions, explicit transactions, receipts, same-block reads and UI mapping |
+| Registry · `contracts/src/PetRegistry.sol` | One pet per wallet, permitted community, UTC-day care limit and shared care count |
 
-```text
-┌──────────────────────────────────────────────────────────┐
-│ Presentation · src/components/**                         │
-│ PetScene · CarePanel · LandingHero · CommunityPanel       │
-│ View models in; action callbacks out                     │
-└──────────────────────────▲───────────────────────────────┘
-                           │
-┌──────────────────────────┴───────────────────────────────┐
-│ Integration · src/hooks/** · src/lib/**                  │
-│ useWallet · usePetRegistry · care-action-machine          │
-│ map-pet · pet-progress · deployment · share-image mapping │
-└──────────────────────────▲───────────────────────────────┘
-                           │ viem
-┌──────────────────────────┴───────────────────────────────┐
-│ Chain · contracts/src/PetRegistry.sol                    │
-│ adopt() · care() · petOf() · communityStats()             │
-└──────────────────────────────────────────────────────────┘
-```
-
-[`src/lib/deployment.ts`](src/lib/deployment.ts) records the declared deployment.
-Validated public environment overrides support local Anvil work. Signing
-credentials never belong in client configuration.
+[`deployment.ts`](src/lib/deployment.ts) declares the public testnet configuration.
+Signing credentials never belong in client configuration. Development fixtures
+are isolated from live reads; preview routes return **404 in production**.
 
 ### Built with
 
@@ -226,10 +199,9 @@ Four runtime dependencies: `next`, `react`, `react-dom`, `viem`.
 [Deployment transaction](https://www.okx.com/web3/explorer/xlayer-test/tx/0x2ff191a789d48bc58f19e018dfee82aad4cba2ad50212d942e8e1e002fd593f9)
 · block **41,543,244**. No mainnet deployment is claimed.
 
-The executable runtime matches the deployed contract; compiler metadata differs
-after the SPDX comment change. Bytecode comparison does not establish explorer
-source verification or an independent security audit. See
-[deployment evidence](docs/deploy/XLAYER_TESTNET.md).
+The executable runtime was compared with the deployed contract; compiler metadata
+differs after an SPDX comment change. [Deployment evidence](docs/deploy/XLAYER_TESTNET.md)
+details the comparison; explorer source verification is not claimed.
 
 ---
 
@@ -308,32 +280,19 @@ and the three `/dev/*` pages return 404. Automated passes are separate from the
 ## 📁 Project structure
 
 ```text
-contracts/
-  src/PetRegistry.sol       Wallet-linked pet registry
-  test/PetRegistry.t.sol    Contract and UTC-day tests
-src/
-  app/                     Routes, public pet/share images, layout, previews
-  components/
-    pet/                   PetScene, CarePanel
-    landing/               LandingHero, HowItWorks
-    community/             CommunityPanel
-    ui/                    Button, Card, Badge, AppShell
-  hooks/                   useWallet, usePetRegistry, useCommunityStats
-  lib/                     Deployment, reads, mappings, progression, share art
-  types/view-models.ts      UI contract between layers
-  fixtures/                Fictional preview/test data only
-public/pets/               Stage artwork and share backgrounds
-docs/
-  PROJECT_BRIEF.md          Scope and core user story
-  OWNERSHIP.md              Integration responsibilities
-  STATUS.md                 Current delivery and acceptance status
-  SUBMISSION.md            Entry details, media delivery and final checklist
-  qa/                      Walkthroughs and dated evidence
+contracts/          Solidity registry, deployment script and contract tests
+src/app/            Routes, public pet/share images and gated previews
+src/components/     Pet, care, landing, community and shared presentation
+src/hooks/          Wallet, pet registry and community integration
+src/lib/            Deployment, reads, progression and view-model mapping
+src/fixtures/       Fictional preview/test data only
+public/pets/        Three stage illustrations and share backgrounds
+docs/               Setup, scope, deployment, acceptance and dated evidence
 ```
 
-Production sources, recordings and exports are preserved in the private
-submission archive. This repository retains product code, tests, operational
-guides and dated evidence; media caches and raw recordings are not submitted in Git.
+Raw media, editable video sources and exports are preserved in the private
+submission archive. Product code, tests, operational guides and evidence remain
+in this repository.
 
 ---
 
@@ -350,42 +309,25 @@ and a read-only holder indicator remain optional future work.
 <a id="known-limitations"></a>
 ## ⚠️ Known limitations
 
-- **Testnet deployment.** No mainnet deployment or organizer approval is claimed.
-  Checked kit/form material does not state a separate written testnet approval
-  requirement; remaining form declarations still need review.
-- **Automatic community refresh can fail.** The latest care updated the pet
-  correctly, but the counter became Unknown. A genuine read-only retry recovered
-  the receipt-block total without another transaction. This is a verified
-  recovery path, not a pass for automatic refresh. The remaining browser rows
-  are listed in [current status](docs/STATUS.md).
-- **Normal-motion playback remains unrun.** Reduced-motion and missing-art/unknown-total
-  previews passed in the follow-up run. The user prefers to keep reduced motion
-  enabled, so normal-motion foreground playback has not been observed.
-- **Wallet warning follow-up.** The MetaMask review issue was closed and the
-  user reported no warning on a fresh approval. Automation did not independently
-  inspect that extension prompt. Follow the
-  [wallet setup guidance](docs/qa/WALLET_SETUP.md); leave any warning unapproved.
-- **No independent security audit.** The dated dependency audit found zero known
-  vulnerabilities at that time; it cannot establish zero risk.
-- **Rights and licensing.** The contract has an MIT SPDX identifier. The repository
-  has no project-wide licence yet, and asset permissions still require confirmation.
-  See [pet asset provenance](docs/pet-assets.md).
+- **Testnet prototype:** one community, one mascot; no mainnet deployment, organic usage metrics or organizer acceptance is claimed.
+- **Community reads:** automatic refresh can return Unknown. A real read-only Retry recovered the confirmed total; automatic refresh itself did not pass that run.
+- **Unrun browser checks:** network away/back and normal-motion foreground playback remain **NOT RUN**. The user kept reduced motion enabled. Real later-day evolution is also unverified; stage artwork is illustrative.
+- **Wallet warnings:** a fresh approval was reported without a warning; automation did not inspect the extension prompt. Leave any warning unapproved and follow [wallet setup](docs/qa/WALLET_SETUP.md).
+- **Security:** no independent security audit. A dated dependency scan cannot establish zero risk.
+- **Rights:** no repository-wide licence has been selected; artwork-input permissions still need confirmation. See [asset provenance](docs/pet-assets.md).
 
 <a id="roadmap"></a>
 ## 🔭 Roadmap
 
-**The core implementation is merged.** The immediate work is verification
-and delivery. See [current status](docs/STATUS.md) for the remaining acceptance checks.
+The core implementation is merged and the demo is uploaded. Before
+submission, the team still needs to review the film, make its link accessible to judges and verify signed-out playback,
+finish form/rights declarations and retain the submission receipt. Remaining
+browser checks and the automatic-refresh limitation stay explicit in
+[current status](docs/STATUS.md).
 
-| Next step | Completion evidence |
-|---|---|
-| Remaining wallet QA | Network away/back remains NOT RUN. Disconnect/reload and public viewing passed; preserve the automatic community-refresh failure and verified manual recovery |
-| Final release QA | Deployment verified; normal-motion foreground playback remains unrun by user preference |
-| Demo video | Genuine product footage and a reviewed 2–4 minute export |
-| Submission | Eligibility/rights and form answers confirmed; app/repo/video links checked; receipt retained |
-
-The exported video passed technical QC and awaits team playback/upload. Every demonstrated result must match actual wallet
-and chain evidence; illustrations alone do not prove adoption, care or evolution.
+Future product work may explore multiple communities and accessories after the
+core daily ritual is evaluated with real users. There are no verified retention
+or demand claims yet.
 
 ---
 

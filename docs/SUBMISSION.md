@@ -17,7 +17,7 @@ required; network gas applies.
 | Network | X Layer testnet, chain **1952**, gas currency **OKB** |
 | Registry | [0xe844152262D243a7B90F6e07FF7A67F1d7FeD216](https://www.okx.com/web3/explorer/xlayer-test/address/0xe844152262D243a7B90F6e07FF7A67F1d7FeD216) |
 | Video | **185 seconds / 3:05**, 1080p30 MP4 and 66-caption SRT; technical QC passed |
-| Public video link | **UNVERIFIED — VIDEO_URL**; upload/logged-out playback remain |
+| Video link | [YouTube demo](https://youtu.be/ofPOony4nys) — upload observed in Studio on 25 September; **Private**, judge access and signed-out playback remain unverified |
 | Verified product release | `af886a75`; production deployment **6644949897**, 24 September 18:17:39 UTC. Later documentation commits are separate |
 | Final submission revision | **UNVERIFIED — FINAL_COMMIT_AND_DEPLOYMENT** |
 | Submission receipt | **UNVERIFIED — SUBMISSION_RECEIPT** |
@@ -75,7 +75,7 @@ licence; none has been selected. Do not put ID documents or credentials in Git.
 - Deston confirms exact roster details, route, attendance, project origin and remaining form declarations; each member confirms their details/permissions.
 - Kym resolves the remaining artwork-input provenance questions; Larm checks public app/repository/video/technical links while logged out.
 - Review the final release evidence and documented limitations in [current status](STATUS.md); finish the still-pending browser rows without upgrading failures or unrun checks.
-- Upload the FINAL MP4 and corrected SRT, verify playback through the last frame, submit before the deadline, and retain the receipt.
+- Set the uploaded video to Unlisted (or Public if required), add the corrected SRT and prepared thumbnail, verify signed-out playback through the last frame, submit before the deadline, and retain the receipt.
 
 The combined/individual scripts and editing notes are preserved with the private
 video production archive; their [pinned source snapshot](https://github.com/Chi944/memepet/blob/19c3fac1f097955f2b6e409ab2f4ab988abc0cee/docs/demo/DEMO_SCRIPT.md)

@@ -10,6 +10,7 @@ separate evidence; see [latest-release QA](qa/evidence/LATEST_RELEASE_QA_2026-09
 - Responsive black/lime overview, pet home, stage artwork, read-only public pet and share images; development previews return 404 in production.
 - Genuine Account 2 rejection/adoption/care, receipts, later pet read-back, cooldown, manual refresh and disconnected public viewing. [Capture evidence](qa/evidence/FINAL_CAPTURE_2026-09-24.md) retains read failures and capture limitations.
 - Completed **185-second 1080p30 video**, four portraits, three 130-word voices and 66-caption SRT. Technical decode/audio/caption and bounded visual checks passed; human full playback is not claimed.
+- [Video upload](https://youtu.be/ofPOony4nys) observed in YouTube Studio on 25 September: saved as **Private**, processing/checks complete with no issues reported. This is not a rights clearance or a signed-out playback pass. Thumbnail and square team portrait are prepared in the private submission pack.
 - Reduced-motion preview passed with the effective preference enabled: Buddy, success and celebration states kept visible artwork with computed animation disabled. Missing-art and unknown-total previews passed. Normal-motion foreground playback remains NOT RUN by user preference.
 - Account switching cleared the previous account's pet without a reload. Earlier Account 1 care confirmed with 10 points/cooldown but left the community header **Unknown**; this failure remains in the evidence.
 - A separate unconnected browser displayed Account 3's public page with the correct address, Read only, Live Hatchling, 10 points and no care action: PASS.
@@ -35,7 +36,7 @@ observed automatic counter-refresh failure.
 |---|---|
 | Latest-release browser follow-up | Network away/back is NOT RUN: the wallet showed network-management settings and the page remained on 1952 before disconnect. Extension controls were unavailable to automation. Genuine adoption/care, manual recovery, public viewing and disconnect/reload passed; the site remains disconnected |
 | Remaining visual QA | Reduced-motion and missing-art/unknown-total fixtures passed in the follow-up run; normal-motion foreground playback is NOT RUN because the user prefers to keep reduced motion enabled. Four viewport layouts and keyboard checks passed in Larm's audit |
-| Team video review and upload | All four watch/listen, confirm names/portraits/claims, then upload FINAL MP4 + corrected SRT and check logged-out playback |
+| Team video review and access | All four watch/listen and confirm names/portraits/claims. MP4 is uploaded privately; add corrected SRT/thumbnail, make it judge-accessible and check signed-out playback |
 | Submission | Deston completes exact roster/route/origin/declarations and retains receipt; Kym resolves asset-input provenance; Larm verifies public links |
 
 [Submission details and checklist](SUBMISSION.md) contain only current form,
