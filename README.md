@@ -172,7 +172,7 @@ care count; they are not a separate saved balance.
 
 [`deployment.ts`](src/lib/deployment.ts) declares the public testnet configuration.
 Signing credentials never belong in client configuration. Development fixtures
-are isolated from live reads and return **404 in production**.
+are isolated from live reads; preview routes return **404 in production**.
 
 ### Built with
 
